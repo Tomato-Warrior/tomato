@@ -1,24 +1,13 @@
-# README
+# Tomato
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+請大家發PR時記得不要使用master分支
 
-Things you may want to cover:
+## 提交方式
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. git clone 到自己的電腦上
+`git clone git@github.com:Tomato-Warrior/tomato.git`
+2. 回本地端記得`bundle` -> `db:migrate`
+3. 每個任務請開 branch 開發，命名方式依照到時候發的issue數字，ex: `issue-1`
+4. `git push origin issue-2`(數字要記得換喔！)
+5. 找組員討論完後再merge
+6. 結束後自己電腦記得切回`master`再`git pull`更新本地端 master branch

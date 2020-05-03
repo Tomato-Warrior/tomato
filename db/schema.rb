@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_065855) do
+ActiveRecord::Schema.define(version: 2020_05_03_122739) do
+
+  create_table "counters", force: :cascade do |t|
+    t.string "status"
+    t.string "reason", default: "Without specific reason!"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

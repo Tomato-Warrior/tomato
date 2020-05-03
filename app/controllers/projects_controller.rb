@@ -34,7 +34,7 @@ class ProjectsController < ActionController::Base
   end
 
   def destroy
-    @project.destory
+    @project.destroy
     redirect_to project_path, notice: 'Project deleted!'
   end
 

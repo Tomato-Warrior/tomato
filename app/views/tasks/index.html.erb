@@ -1,0 +1,11 @@
+<h1>任務列表</h1>
+<%= link_to "新增", new_task_path %>
+
+
+
+
+<ul>
+    <% @tasks.each do |task| %>
+        <li><%= task.task_name %></li>
+    <% end %>   
+</ul>   

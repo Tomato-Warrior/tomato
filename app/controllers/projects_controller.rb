@@ -1,4 +1,4 @@
-class ProjectsController < ActionController::Base
+class ProjectsController < ApplicationController
   before_action :find_project, only: [:edit, :update, :destroy]
   def index
     @projects = Project.all

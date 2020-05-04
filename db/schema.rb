@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 2020_05_03_145900) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
-  create_table "tag_to_tasks", force: :cascade do |t|
+  create_table "tagging", force: :cascade do |t|
     t.integer "tag_id", null: false
     t.integer "task_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["tag_id"], name: "index_tag_to_tasks_on_tag_id"
-    t.index ["task_id"], name: "index_tag_to_tasks_on_task_id"
+    t.index ["tag_id"], name: "index_tagging_on_tag_id"
+    t.index ["task_id"], name: "index_tagging_on_task_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 2020_05_03_145900) do
   end
 
   add_foreign_key "projects", "users"
-  add_foreign_key "tag_to_tasks", "tags"
-  add_foreign_key "tag_to_tasks", "tasks"
+  add_foreign_key "tagging", "tags"
+  add_foreign_key "tagging", "tasks"
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "users"
 end

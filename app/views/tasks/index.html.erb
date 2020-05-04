@@ -6,6 +6,15 @@
 
 <ul>
     <% @tasks.each do |task| %>
-        <li><%= task.task_name %></li>
+        <div>
+            <%= link_to task.task_name, task_path(task.id) %>
+            <%= link_to '編輯', edit_task_path(task.id) %>
+            <%= 
+                link_to '刪除', 
+                task_path(task.id),
+                method:'delete',
+                data: {confirm: '真的要刪除喵?'} 
+            %>
+        </div>
     <% end %>   
 </ul>   

@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to project_path, notice: 'Project deleted!'
+    redirect_to projects_path, notice: 'Project deleted!'
   end
 
   private

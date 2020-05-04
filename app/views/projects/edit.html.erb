@@ -1,0 +1,8 @@
+<h1>Edit Project</h1>
+<%= form_for(@project) do |f| %>
+  <div>
+    <%= f.label :project_name %>
+    <%= f.text_field :project_name %>
+  </div>
+  <%= f.submit %>
+<% end %>

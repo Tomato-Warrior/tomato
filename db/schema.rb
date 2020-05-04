@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_145900) do
+ActiveRecord::Schema.define(version: 2020_05_03_122739) do
 
   create_table "counters", force: :cascade do |t|
     t.string "status"
@@ -20,44 +20,6 @@ ActiveRecord::Schema.define(version: 2020_05_03_145900) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "projects", force: :cascade do |t|
-    t.string "project_name"
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_projects_on_user_id"
-  end
-
-  create_table "tag_to_tasks", force: :cascade do |t|
-    t.integer "tag_id", null: false
-    t.integer "task_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["tag_id"], name: "index_tag_to_tasks_on_tag_id"
-    t.index ["task_id"], name: "index_tag_to_tasks_on_task_id"
-  end
-
-  create_table "tags", force: :cascade do |t|
-    t.string "tag_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "tasks", force: :cascade do |t|
-    t.string "task_name"
-    t.string "project_name"
-    t.integer "tomato_num"
-    t.datetime "task_date"
-    t.text "description"
-    t.text "note"
-    t.integer "user_id", null: false
-    t.integer "project_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_tasks_on_project_id"
-    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -72,9 +34,4 @@ ActiveRecord::Schema.define(version: 2020_05_03_145900) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "projects", "users"
-  add_foreign_key "tag_to_tasks", "tags"
-  add_foreign_key "tag_to_tasks", "tasks"
-  add_foreign_key "tasks", "projects"
-  add_foreign_key "tasks", "users"
 end

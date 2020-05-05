@@ -13,7 +13,7 @@ export default class extends Controller {
     const timeDisplay = document.querySelector('.display_time_left');
     const buttons = document.querySelectorAll('[data-time]');
 
-    function counter(seconds) {
+    function counter(seconds, status="work") {
       clearInterval(countdown);
       const now = Date.now();
       const then = now + seconds * 1000;
@@ -21,8 +21,11 @@ export default class extends Controller {
       countdown = setInterval(() => {
         const secondsLeft = Math.round((then - Date.now()) / 1000);
 
-        if (secondsLeft < 0) {
+        if (secondsLeft <= 0 && status === "work") {
           clearInterval(countdown);
+          relaxTime()
+        }else if(secondsLeft < 0 && status === "relax") {
+          clearInterval(countdown)
           return;
         }
         displayTimeLeft(secondsLeft);
@@ -54,6 +57,9 @@ export default class extends Controller {
         const start5 = document.querySelector('.start5');
         start5.classList.remove('fa-play-circle');
         start5.classList.add('fa-stop-circle');
+    }
+    function relaxTime() {
+      counter(300,"relax")
     }
   }
 }

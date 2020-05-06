@@ -6,12 +6,16 @@ class User < ApplicationRecord
   has_many :counters
   has_many :projects
   # callback
-  after_create :default_project_create
+  after_commit :default_project_create
   
 
+<<<<<<< HEAD
+=======
+  private
+>>>>>>> add default project
   def default_project_create
-    @project = Project.new(project_name: 'Default Box')
-    @project.save
+    project = self.projects.build(project_name: 'Default Box')
+    project.save
   end
 
 end

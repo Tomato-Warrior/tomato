@@ -5,7 +5,7 @@
     </div>
     <div>
         <%= f.label :project %>
-        <%= f.collection_select :project_id, Project.all, :id, :project_name %>
+        <%= f.collection_select :project_id, current_user.projects, :id, :project_name %>
     </div>
     <div>
         <%= f.label :tomato_num %>

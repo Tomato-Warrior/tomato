@@ -4,16 +4,18 @@ export default class extends Controller {
   static targets = [ "count", "timerbtn" ]
   
   initialize(){
-    this.clicked = false;
+    this.clicked = false
   }
   count(e) {
     e.preventDefault();
     
     let countdown;
     const timeDisplay = document.querySelector('.display_time_left');
-    const buttons = document.querySelectorAll('[data-time]');
-
-    function counter(seconds, status="work") {
+    const startbtn = document.querySelector('.starttimer')
+    const relaxbtn = document.querySelector('.relaxtimer')
+    const stopbtn = document.querySelector('.stoptimer')
+    
+    function counter(seconds) {
       clearInterval(countdown);
       const now = Date.now();
       const then = now + seconds * 1000;
@@ -23,45 +25,64 @@ export default class extends Controller {
 
         if (secondsLeft <= 0 && status === "work") {
           clearInterval(countdown);
-          relaxTime()
-        }else if(secondsLeft < 0 && status === "relax") {
+          relaxbtn.classList.remove("d-none")
+          stopbtn.classList.add("d-none")
+        }else if(secondsLeft <= 0 && status === "relax") {
           clearInterval(countdown)
-        }else if(secondsLeft < 0 && status === "stop"){
-          clearInterval(countdown)
+          startbtn.classList.remove("d-none")
+          stopbtn.classList.add("d-none")
         }
         displayTimeLeft(secondsLeft);
       }, 1000);
     }
+
     function displayTimeLeft(seconds) {
       const minutes = Math.floor(seconds / 60);
       const remainSeconds = seconds % 60;
       const display = `${minutes}:${remainSeconds < 10 ? 0 : ''}${remainSeconds}`
       timeDisplay.textContent = display;
     }
-    function startCounter() {
+
+
+    startbtn.addEventListener('click', function(){
       const seconds = parseInt(this.dataset.time);
       counter(seconds);
-    }
-  
-    buttons.forEach(button => button.addEventListener('click', function() {
-         $(i)
-    }));
-    function relaxTime() {
-      counter(300,"relax")
-    }
-    function start() {
-      startCounter
-      startbtn = document.querySelector('a .fa-play-circle')
-      startbtn.classList.remove('fa-play-circle');
-      startbtn.classList.add('fa-stop-circle');
-    }
-    function stop(){
-      startbtn = document.querySelector('a .fa-stop-circle')
-      startbtn.classList.remove('fa-stop-circle');
-      startbtn.classList.add('fa-play-circle');
-      if  (window.confirm("Do you really want to stop?")) { 
-          counter(0, "stop")
+      status = "work"
+    })
+    relaxbtn.addEventListener('click', function(){
+      const seconds = parseInt(this.dataset.time);
+      counter(seconds);
+      status = "relax"
+    })
+
+    stopbtn.addEventListener('click', function(){
+      
+      if (status === "work") {
+        var check = confirm("確定要中斷番茄?")
+      }else{
+        var check = confirm("確定要中斷休息?")
       }
+      
+      if(check === true){
+        const seconds = parseInt(this.dataset.time);
+        counter(seconds);
+        stopbtn.classList.add("d-none")
+        if (status === "work") {
+          startbtn.classList.add("d-none")
+        }else if (status === "relax") {
+          relaxbtn.classList.add("d-none")
+        }
+      }else{
+        return
+      }
+      
+    })
+    if (status === "work") {
+      startbtn.classList.add("d-none")
+      stopbtn.classList.remove("d-none")
+    }else if (status === "relax") {
+      relaxbtn.classList.add("d-none")
+      stopbtn.classList.remove("d-none")
     }
   }
 }

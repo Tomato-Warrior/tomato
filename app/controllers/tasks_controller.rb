@@ -12,7 +12,7 @@ class TasksController < ApplicationController
         @task.user = current_user
         if @task.save
             
-            redirect_to tasks_path, notice: "成功喵~任務新增成功"
+          redirect_to tasks_path, notice: "成功喵~任務新增成功"
         else
             render :new
         end

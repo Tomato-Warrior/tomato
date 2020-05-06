@@ -19,10 +19,11 @@ class TasksController < ApplicationController
     end
 
     def show
-        
     end
+
     def edit
     end
+    
     def update
         if @task.update(task_params)
             redirect_to tasks_path, notice: '成功編輯喵'

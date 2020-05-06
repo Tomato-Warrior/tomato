@@ -1,13 +1,19 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+<<<<<<< HEAD
 
   # ralationship
+=======
+  # relationship
+>>>>>>> fix task/project view
   has_many :counters
   has_many :projects
+  has_many :task
+  has_many :tasks, through: :projects
+
   # callback
-  after_commit :default_project_create
-  
+  after_create :default_project_create
 
 <<<<<<< HEAD
 =======

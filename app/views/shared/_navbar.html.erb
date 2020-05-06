@@ -1,8 +1,4 @@
 <nav class="navbar navbar-light bg-light">
-  <span class="navbar-brand mb-0 h1">Navbar</span>
-  <% if user_signed_in? %>
-    <%= link_to 'Sign out' , destroy_user_session_path, method: 'delete' %>
-  <% else %>
-    <%= link_to 'Sign in', new_user_session_path %>
-  <% end %>
+  <span class="navbar-brand mb-0 h1">TomaTokei</span>
+  <%= link_to "Sign In with Google", user_google_oauth2_omniauth_authorize_path%>  
 </nav>

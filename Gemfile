@@ -31,7 +31,8 @@ gem 'foreman', '~> 0.87.1'
 # 
 gem 'devise', '~> 4.7', '>= 4.7.1'
 
-
+# google calendar
+gem 'omniauth-google-oauth2', '~> 0.4.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

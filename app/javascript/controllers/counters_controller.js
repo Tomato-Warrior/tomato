@@ -26,7 +26,8 @@ export default class extends Controller {
           relaxTime()
         }else if(secondsLeft < 0 && status === "relax") {
           clearInterval(countdown)
-          return;
+        }else if(secondsLeft < 0 && status === "stop"){
+          clearInterval(countdown)
         }
         displayTimeLeft(secondsLeft);
       }, 1000);
@@ -42,24 +43,25 @@ export default class extends Controller {
       counter(seconds);
     }
   
-    buttons.forEach(button => button.addEventListener('click', startCounter));
-
-    const button25 = document.querySelector('.timer25');
-    const button5 = document.querySelector('.timer5');
-    button25.addEventListener('click', c25Button);
-    button5.addEventListener('click', c5Button);
-    function c25Button() {
-        const start25 = document.querySelector('.start25');
-        start25.classList.remove('fa-play-circle');
-        start25.classList.add('fa-stop-circle');
-    }
-    function c5Button() {
-        const start5 = document.querySelector('.start5');
-        start5.classList.remove('fa-play-circle');
-        start5.classList.add('fa-stop-circle');
-    }
+    buttons.forEach(button => button.addEventListener('click', function() {
+         $(i)
+    }));
     function relaxTime() {
       counter(300,"relax")
+    }
+    function start() {
+      startCounter
+      startbtn = document.querySelector('a .fa-play-circle')
+      startbtn.classList.remove('fa-play-circle');
+      startbtn.classList.add('fa-stop-circle');
+    }
+    function stop(){
+      startbtn = document.querySelector('a .fa-stop-circle')
+      startbtn.classList.remove('fa-stop-circle');
+      startbtn.classList.add('fa-play-circle');
+      if  (window.confirm("Do you really want to stop?")) { 
+          counter(0, "stop")
+      }
     }
   }
 }

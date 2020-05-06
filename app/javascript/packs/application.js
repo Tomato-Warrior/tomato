@@ -19,3 +19,7 @@ import "bootstrap";
 import "./script/main.scss";
 import "controllers"
 import '@fortawesome/fontawesome-free/js/all'
+import 'jquery'
+import $ from 'jquery'
+window.$ = $
+

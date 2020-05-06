@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2020_05_03_145900) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "task_name"
+    t.string "task_name", default: "Anonymous Task"
     t.string "project_name"
     t.integer "tomato_num"
     t.datetime "task_date"

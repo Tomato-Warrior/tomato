@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
   before_action :find_project, only: [:edit, :update, :destroy]
   def index
     @projects = current_user.projects
-
   end
 
   def new

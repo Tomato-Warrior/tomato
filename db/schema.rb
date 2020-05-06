@@ -17,9 +17,12 @@ ActiveRecord::Schema.define(version: 2020_05_03_145900) do
     t.string "reason", default: "Without specific reason!"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.integer "user_id"
+    t.integer "user_id", null: false
+    t.integer "task_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_id"], name: "index_counters_on_task_id"
+    t.index ["user_id"], name: "index_counters_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -72,6 +75,8 @@ ActiveRecord::Schema.define(version: 2020_05_03_145900) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "counters", "tasks"
+  add_foreign_key "counters", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "tagging", "tags"
   add_foreign_key "tagging", "tasks"

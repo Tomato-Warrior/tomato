@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   #project
   resources :projects
 
-  
+
   root "tasks#index"
+
 end

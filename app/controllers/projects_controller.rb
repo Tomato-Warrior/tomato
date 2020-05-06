@@ -1,7 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :find_project, only: [:edit, :update, :destroy]
   def index
-    @projects = Project.all
+    @projects = current_user.projects
+
   end
 
   def new
@@ -9,8 +10,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params)
-    @project.user = current_user 
+    @project = current_user.projects.build(project_params)
 
     if @project.save
       redirect_to projects_path, notice: 'Project created!'

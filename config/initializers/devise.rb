@@ -298,8 +298,8 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   # google api
-  config.omniauth :google_oauth2, ENV['575679888254-1ba41hre1i1vke50pgt8rdekgl5thb9h.apps.googleusercontent.com'],
-  ENV['7AY8765O6cuAPEfOVnDZ3uLS'],
+  config.omniauth :google_oauth2, ENV['ID'],
+  ENV['PASSWORD'],
   { access_type: "offline", 
     prompt: "consent",
     select_account: true,

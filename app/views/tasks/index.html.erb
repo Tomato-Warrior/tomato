@@ -3,18 +3,19 @@
   <% if user_signed_in? %>
     <ul>
       <% @tasks.each do |task| %>
-        <div>
-          <%= link_to counters_path, method: 'post' do %>
-            start
-          <% end %>
-          <%= link_to task.task_name, task_path(task.id) %>
-          <%= link_to '編輯', edit_task_path(task.id) %>
-          <%= 
-              link_to '刪除', 
-              task_path(task.id),
-              method:'delete',
-              data: {confirm: '真的要刪除喵?'} 
-          %>
+      <div>
+        <%= link_to counters_path, method: 'post' do %>
+          <i class="far fa-play-circle"></i>
+        <% end %>
+        <%= link_to task.task_name, task_path(task.id) %>
+        <%= task.tomato_num %>
+        <%= link_to '編輯', edit_task_path(task.id) %>
+        <%= 
+          link_to '刪除', 
+          task_path(task.id),
+          method:'delete',
+          data: {confirm: '真的要刪除喵?'} 
+        %>
         </div>
       <% end %>   
     </ul>   

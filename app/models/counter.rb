@@ -1,3 +1,5 @@
 class Counter < ApplicationRecord
-    belongs_to :user
+  #relationship
+  belongs_to :user
+  belongs_to :task
 end

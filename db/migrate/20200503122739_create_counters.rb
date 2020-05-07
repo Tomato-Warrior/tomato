@@ -5,8 +5,9 @@ class CreateCounters < ActiveRecord::Migration[6.0]
       t.string :reason, default: "Without specific reason!"
       t.datetime :start_at
       t.datetime :end_at
-      t.integer :user_id
-
+      t.belongs_to :user, null: false, foreign_key: true
+      t.belongs_to :task, foreign_key: true
+      
       t.timestamps
     end
   end

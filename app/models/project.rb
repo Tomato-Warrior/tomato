@@ -5,6 +5,6 @@ class Project < ApplicationRecord
 
   #validates
   validates :project_name, presence: true,
-                           length: { minimum: 4, maximum: 20 }
+                           length: { minimum: 1, maximum: 20 }
 
 end

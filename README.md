@@ -11,3 +11,5 @@
 4. `git push origin issue-2`(數字要記得換喔！)
 5. 找組員討論完後再merge
 6. 結束後自己電腦記得切回`master`再`git pull`更新本地端 master branch
+7. `git checkout newbranch`
+8. 將本地端的新分支rebase到剛才更新的master branch`git rebase master`

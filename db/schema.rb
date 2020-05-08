@@ -10,20 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_145900) do
-
-  create_table "counters", force: :cascade do |t|
-    t.string "status"
-    t.string "reason", default: "Without specific reason!"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.integer "user_id", null: false
-    t.integer "task_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["task_id"], name: "index_counters_on_task_id"
-    t.index ["user_id"], name: "index_counters_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 2020_05_08_081731) do
 
   create_table "projects", force: :cascade do |t|
     t.string "project_name"
@@ -63,6 +50,19 @@ ActiveRecord::Schema.define(version: 2020_05_03_145900) do
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
+  create_table "tictacs", force: :cascade do |t|
+    t.string "status"
+    t.string "reason", default: "Without specific reason!"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer "user_id", null: false
+    t.integer "task_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_id"], name: "index_tictacs_on_task_id"
+    t.index ["user_id"], name: "index_tictacs_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -75,11 +75,11 @@ ActiveRecord::Schema.define(version: 2020_05_03_145900) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "counters", "tasks"
-  add_foreign_key "counters", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "tagging", "tags"
   add_foreign_key "tagging", "tasks"
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "users"
+  add_foreign_key "tictacs", "tasks"
+  add_foreign_key "tictacs", "users"
 end

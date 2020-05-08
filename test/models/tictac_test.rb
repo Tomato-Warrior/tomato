@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CounterTest < ActiveSupport::TestCase
+class TictacTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -4,7 +4,7 @@
     <ul>
       <% @tasks.each do |task| %>
       <div>
-        <%= link_to counters_path(task_id: task.id), method: 'post' do %>
+        <%= link_to tictacs_path(task_id: task.id), method: 'post' do %>
           <i class="far fa-play-circle"></i>
         <% end %>
         <%= link_to task.task_name, task_path(task.id) %>

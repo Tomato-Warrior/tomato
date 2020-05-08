@@ -32,7 +32,7 @@ class TasksController < ApplicationController
     @task.destroy   
     redirect_to tasks_path, notice: '成功刪除 喵'
   end
-  
+
   private
 
   def task_params
@@ -40,7 +40,8 @@ class TasksController < ApplicationController
                                 :description,
                                 :tomato_num,
                                 :task_date,
-                                :project_id
+                                :project_id,
+                             
                                 )
   end
   def find_task
@@ -49,5 +50,6 @@ class TasksController < ApplicationController
   def task_list
     @tasks = current_user.tasks
   end
+
 
 end

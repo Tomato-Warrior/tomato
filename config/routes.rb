@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   #counter
-  resources :counters
+  resources :tictacs
   #task
   resources :tasks
   #project

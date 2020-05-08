@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CountersControllerTest < ActionDispatch::IntegrationTest
+class TictacsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

@@ -3,7 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # relationship
-  has_many :counters
+  has_many :tictacs
   has_many :projects
   has_many :task
   has_many :tasks, through: :projects

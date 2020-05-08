@@ -2,7 +2,7 @@ class Task < ApplicationRecord
   #relationship
   has_many :tag_to_tasks
   has_many :tags, through: :tag_to_tasks
-  has_many :counters
+  has_many :tictacs
 
   belongs_to :project
   belongs_to :user

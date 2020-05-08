@@ -1,19 +1,22 @@
-<div class="display">
-  <h1 class="display_time_left"></h1>
-</div>
-
 <div class="timer_controls" data-controller="counters">
-
-  25 s
-  <a href='#' class="btn25" data-time="25" data-action="click->counters#count click->counters#change25Btn">
-    <i class="far fa-play-circle fa-8x icon25"></i>
-  </a>
-<div class="display">
-  <h1 class="display_time_left2"></h1>
-</div>
-
-  5 s
-  <a href='#' class="btn5" data-time="5" data-action="click->counters#count5 click->counters#change5Btn">
-    <i class="far fa-play-circle fa-8x icon5"></i>
-  </a>
+  <div class="clock d-flex justify-content-center align-items-center">
+    <div class="display">
+      <h1 class="display_time_left"></h1>
+    </div>
+  
+    <a href='#' class="btn25" data-time="25" data-action="click->counters#count click->counters#change25Btn">
+      <i class="far fa-play-circle fa-8x icon25"></i>
+    </a>
+     <span>25 s</span>
+  </div>
+  <div class="clock d-flex justify-content-center align-items-center">
+    <div class="display">
+      <h1 class="display_time_left2"></h1>
+    </div>
+  
+    <a href='#' class="btn5" data-time="5" data-action="click->counters#count5 click->counters#change5Btn">
+      <i class="far fa-play-circle fa-8x icon5"></i>
+    </a>
+    <p>5 s</p>
+  </div>
 </div>

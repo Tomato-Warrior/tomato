@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("projects")
 require("tictacs")
+require("counters")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

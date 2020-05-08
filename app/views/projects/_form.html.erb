@@ -7,12 +7,12 @@
     </ul>
   <% end %>
   <div>
-    <%#= f.label :project_cover %>
-    <%#= f.select(:project_cover) do %>
-      <%# [["blue", "bg-primary"], ["red", "bg-danger"],["green", "bg-success"],["black", "bg-dark"],["yellow", "bg-warning"],["gray", "bg-secondary"]].each do |c| -%>
-        <%#= content_tag(:option, c.first, value: c.last) %>
-      <%# end %>
-    <%# end %>
+    <%= f.label :project_cover %>
+    <%= f.select(:project_cover) do %>
+      <% [["blue", "bg-primary"], ["red", "bg-danger"],["green", "bg-success"],["black", "bg-dark"],["yellow", "bg-warning"],["gray", "bg-secondary"]].each do |c| -%>
+        <%= content_tag(:option, c.first, value: c.last) %>
+      <% end %>
+    <% end %>
   </div>
   <div>
     <%= f.label :project_name %>

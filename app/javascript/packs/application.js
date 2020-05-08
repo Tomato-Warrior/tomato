@@ -15,7 +15,10 @@ require("projects")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
 import "bootstrap";
 import "./script/main.scss";
 import "controllers"
 import '@fortawesome/fontawesome-free/js/all'
+
+import "./counters.scss"

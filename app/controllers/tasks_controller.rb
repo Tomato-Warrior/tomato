@@ -5,7 +5,7 @@ class TasksController < ApplicationController
     task_list if current_user
   end
   def new
-      @task = Task.new
+    @task = Task.new
   end
   def create
     @task = current_user.task.build(task_params)
@@ -23,9 +23,9 @@ class TasksController < ApplicationController
   end
   def update
     if @task.update(task_params)
-        redirect_to tasks_path, notice: '成功編輯喵'
+      redirect_to tasks_path, notice: '成功編輯喵'
     else
-        render :edit
+      render :edit
     end
   end
   def destroy
@@ -36,18 +36,18 @@ class TasksController < ApplicationController
   private
 
   def task_params
-      params.require(:task).permit(:task_name, 
-                                  :description,
-                                  :tomato_num,
-                                  :task_date,
-                                  :project_id
-                                  )
+    params.require(:task).permit(:task_name, 
+                                :description,
+                                :tomato_num,
+                                :task_date,
+                                :project_id
+                                )
   end
   def find_task
-      @task = Task.find(params[:id])
+    @task = Task.find(params[:id])
   end
   def task_list
-      @tasks = current_user.tasks
+    @tasks = current_user.tasks
   end
 
 end

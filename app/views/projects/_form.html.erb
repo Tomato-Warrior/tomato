@@ -1,0 +1,22 @@
+<%= form_for(project) do |f| %>
+  <% if project.errors.any? %>
+    <ul>
+      <% project.errors.full_messages.each do |message|%>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div>
+    <%= f.label :project_cover %>
+    <%= f.select(:project_cover) do %>
+      <% [["blue", "bg-primary"], ["red", "bg-danger"],["green", "bg-success"],["black", "bg-dark"],["yellow", "bg-warning"],["gray", "bg-secondary"]].each do |c| -%>
+        <%= content_tag(:option, c.first, value: c.last) %>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :project_name %>
+    <%= f.text_field :project_name %>
+  </div>
+  <%= f.submit %>
+<% end %>

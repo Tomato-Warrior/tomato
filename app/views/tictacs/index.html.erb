@@ -3,6 +3,7 @@
     <div class="display">
       <h1 class="display_time_left"></h1>
     </div>
+    
     <%= link_to tictacs_path, method: 'post', class: 'startbtn', data: { time: '25', action: 'click->tictacs#start' }, remote: true do %>
       <i class="far fa-play-circle fa-8x startbtn"></i>
     <% end %>

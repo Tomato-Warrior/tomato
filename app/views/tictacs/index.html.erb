@@ -6,11 +6,19 @@
     <%= link_to tictacs_path, method: 'post', class: 'startbtn', data: { time: '25', action: 'click->tictacs#start' }, remote: true do %>
       <i class="far fa-play-circle fa-8x startbtn"></i>
     <% end %>
-    <a href='#' class="stopbtn d-none" data-action="click->tictacs#stop ">
-      <i class="far fa-stop-circle fa-8x stopbtn"></i>
-    </a>
+
+    <%= link_to cancel_tictac_path(@tictac), method: 'patch', class: 'stopbtn', data: { action: 'click->tictacs#stop' }, remote: true do  %>
+      <I class="far fa-stop-circle fa-8x stopbtn"></I>
+    <% end %>
+
+    <%= link_to finish_tictac_path(@tictac), method: ‘patch’, remote: true do  %>
+      STOP
+    <% end %>
+
+
     <a href='#' class="relaxbtn d-none" data-action="click->tictacs#relax ">
       <i class="far fa-play-circle fa-8x relaxbtn"></i>
     </a>
+    
   </div>
 </div>

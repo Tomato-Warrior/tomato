@@ -8,8 +8,8 @@ class TasksController < ApplicationController
     @task = Task.new
   end
   def create
-    @task = current_user.task.build(task_params)
-
+    @task = current_user.tasks.build(task_params)
+    
     if @task.save
       redirect_to tasks_path, notice: "成功喵~任務新增成功"
     else
@@ -41,12 +41,8 @@ class TasksController < ApplicationController
                                 :tomato_num,
                                 :task_date,
                                 :project_id,
-                                tag_items: [])
-                                # :tag_items
-                                # ).tap do |ps|
-                                #   split_method = ps[:tag_items].match(',') ? ',' : ' '
-                                #   ps[:tag_items] = ps[:tag_items].split(split_method)
-                                # end
+                                :user_id
+                                )
   end
   def find_task
     @task = Task.find(params[:id])

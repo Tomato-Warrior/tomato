@@ -5,6 +5,7 @@ class User < ApplicationRecord
   # relationship
   has_many :tictacs
   has_many :projects
+  has_many :task
   has_many :tasks, through: :projects
 
   # callback

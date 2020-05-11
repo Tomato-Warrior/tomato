@@ -41,8 +41,12 @@ class TasksController < ApplicationController
                                 :tomato_num,
                                 :task_date,
                                 :project_id,
-                             
-                                )
+                                tag_items: [])
+                                # :tag_items
+                                # ).tap do |ps|
+                                #   split_method = ps[:tag_items].match(',') ? ',' : ' '
+                                #   ps[:tag_items] = ps[:tag_items].split(split_method)
+                                # end
   end
   def find_task
     @task = Task.find(params[:id])

@@ -16,5 +16,15 @@
       <%= yield %>
       <%= render "shared/footer" %>
     </div>
+    <script>
+      $(document).ready(function() {
+        $(".js-tag-tokenizer").select2({
+            tags: true,
+            multiple: 'true',
+            tokenSeparators: [',', ' ']
+        })
+      })  
+      
+    </script>
   </body>
 </html>

@@ -1,7 +1,9 @@
 class TictacsController < ApplicationController
-  before_action :find_tictac, only: [:edit, :update, :cancel, :finish]
+  # before_action :current_tictac, only: [:cancel, :finish]
+  
   def index
     @tictacs = current_user.tictacs
+    @tictac = current_user.tictacs.last
   end
 
   def create
@@ -20,26 +22,23 @@ class TictacsController < ApplicationController
   end
  
   def cancel
-    if @tictac.update
-      @tictac.cancel!
-      redirect_to tasks_path, notice: 'Tictac cancelled!'
+    @tictac = current_user.tictacs.last
+
+    if @tictac.cancel!
+      redirect_to tictacs_path, notice: 'Tictac cancelled!'
     else
       redirect_to tasks_path, notice: 'Tictac failed!'
     end
   end
 
   def finish
-    if @tictac.update
-      @tictac.finish!
-      redirect_to tasks_path, notice: 'Tictac finished!'
+    @tictac = current_user.tictacs.last
+    if @tictac.finish!
+      redirect_to tictacs_path, notice: 'Tictac finished!'
     else
       redirect_to tasks_path, notice: 'Tictac failed!'
     end
   end
 
 
-  private
-  def find_tictac
-    @tictac = Tictac.find(params[:id])
-  end
 end

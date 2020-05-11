@@ -4,9 +4,11 @@ class TasksController < ApplicationController
   def index
     task_list if current_user
   end
+  
   def new
     @task = Task.new
   end
+
   def create
     @task = current_user.task.build(task_params)
     
@@ -19,8 +21,10 @@ class TasksController < ApplicationController
 
   def show
   end
+  
   def edit
   end
+
   def update
     if @task.update(task_params)
       redirect_to tasks_path, notice: '成功編輯喵'

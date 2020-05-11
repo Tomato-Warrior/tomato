@@ -6,6 +6,20 @@ export default class extends Controller {
   initialize(){
     this.clicked = false;
     const timeDisplay = document.querySelector('.display_time_left');
+    const relaxbtn = document.querySelector('.relaxbtn')
+    let relax_num = 0
+
+    relaxbtn.addEventListener("click", function(){
+      relax_num += 1
+      if (relax_num % 4 === 0){
+        relaxbtn.dataset.time = "15"
+      }else{
+        relaxbtn.dataset.time = "5"
+      }
+    })
+
+    
+
   }
  
   start(e) {
@@ -75,8 +89,8 @@ export default class extends Controller {
     const timeDisplay = document.querySelector('.display_time_left');
     const startbtn = document.querySelector('.startbtn');
     const stopbtn = document.querySelector(".stopbtn");
-    const relaxbtn = document.querySelector(".relaxbtn")
-    const seconds = 5
+    const relaxbtn = document.querySelector(".relaxbtn");
+    const seconds = parseInt(relaxbtn.dataset.time);
     let isRunning = true;
     
     

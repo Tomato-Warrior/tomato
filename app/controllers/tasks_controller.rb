@@ -21,6 +21,7 @@ class TasksController < ApplicationController
   end
   def edit
   end
+  
   def update
     if @task.update(task_params)
       redirect_to tasks_path, notice: '成功編輯喵'
@@ -28,6 +29,7 @@ class TasksController < ApplicationController
       render :edit
     end
   end
+
   def destroy
     @task.destroy   
     redirect_to tasks_path, notice: '成功刪除 喵'

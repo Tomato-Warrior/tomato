@@ -1,27 +1,32 @@
 <%= form_for(@task) do |f|%>
-    <div>
-        <%= f.label :task_name %>
-        <%= f.text_field :task_name %>
-    </div>
-    <div>
-        <%= f.label :project %>
-        <%= f.collection_select :project_id, current_user.projects, :id, :project_name %>
-    </div>
-    <div>
-        <%= f.label :tomato_num %>
-        <%= f.number_field :tomato_num %>
-    </div>
-    <div>
-        <%= f.label :tag_list %>
-        <%= f.text_field :tag_list %>
-    </div>
-    <div>
-        <%= f.label :description %>
-        <%= f.text_area :description %>
-    </div>
-    <div>
-        <%= f.label :task_date %>
-        <%= f.text_field :task_date %>
-    </div>
-    <%= f.submit %>
+   <div class="field form-group">
+    <%= f.label :task_name %>
+    <%= f.text_field :task_name, class: 'form-control' %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :project %>
+    <%= f.collection_select :project_id, current_user.projects, :id, :project_name, class: 'form-control' %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :tomato_num %>
+    <%= f.number_field :tomato_num, class: 'form-control' %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :tag_items %>
+    <%= f.text_field :tag_items, class: 'form-control' %>
+
+    <select name="task[tag_items][]", class='form-control js-tag-tokenizer', multiple='multiple'>
+        <%= options_for_select(f.object.tag_items, f.object.tag_items) %>
+    </select>
+  </div>
+  <div class="field form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :task_date %>
+    <%= f.text_field :task_date, class: 'form-control' %>
+  </div>
+  <%= f.submit :Submit, class: "btn btn-primary" %>
+
 <% end %>

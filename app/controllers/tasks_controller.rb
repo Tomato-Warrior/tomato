@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     @task = Task.new
   end
   def create
-    @task = current_user.tasks.build(task_params)
+    @task = current_user.task.build(task_params)
     
     if @task.save
       redirect_to tasks_path, notice: "成功喵~任務新增成功"

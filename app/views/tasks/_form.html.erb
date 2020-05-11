@@ -1,4 +1,12 @@
 <%= form_for(@task) do |f|%>
+  <% if @task.errors.any? %>
+    <ul>
+      <% @task.errors.full_messages.each do |message|%>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
    <div class="field form-group">
     <%= f.label :task_name %>
     <%= f.text_field :task_name, class: 'form-control' %>
@@ -29,5 +37,4 @@
     <%= f.text_field :task_date, class: 'form-control' %>
   </div>
   <%= f.submit :Submit, class: "btn btn-primary" %>
-
 <% end %>

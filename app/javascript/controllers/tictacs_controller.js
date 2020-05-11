@@ -1,4 +1,5 @@
 import { Controller } from "stimulus"
+import ax from "axios"
 
 export default class extends Controller {
   static targets = [ "count" ]
@@ -10,6 +11,14 @@ export default class extends Controller {
  
   start(e) {
     e.preventDefault();
+
+    ax.post('/api/tictacs/1/start')
+    .then(function(resp){
+      console.log(resp.data);
+    })
+    .catch(function(resp){
+      console.log(resp);
+    })
     
     const timeDisplay = document.querySelector('.display_time_left');
     const startbtn = document.querySelector('.startbtn');

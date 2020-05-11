@@ -10,6 +10,11 @@ require("channels")
 require("projects")
 require("tictacs")
 require("counters")
+require("select2")
+
+
+import $ from 'jquery'
+window.$ = $
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -21,5 +26,7 @@ require("counters")
 
 import "bootstrap";
 import "./script/main.scss";
-import "controllers"
-import '@fortawesome/fontawesome-free/js/all'
+import "controllers";
+import '@fortawesome/fontawesome-free/js/all';
+import "select2/dist/css/select2.min.css"
+import "select2/dist/js/select2.full.min.js"

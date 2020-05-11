@@ -13,8 +13,8 @@ require("counters")
 require("select2")
 
 
-// import $ from 'jquery'
-// window.$ = $
+import $ from 'jquery'
+window.$ = $
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

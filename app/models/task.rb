@@ -9,27 +9,29 @@ class Task < ApplicationRecord
   #validates
   validates :task_name, presence: true
 
-  # def tag_list=(name)
-  #   self.tags = name.split(',').map do |item|
-  #     Tag.where(tag_name: item.strip).first_or_create!
-  #   end
+  def self.tagged_with(name)
+    Tag.find_by!(tag_name: name).tasks
+  end
 
-  # end
-  # def tag_list
-  #   tags.map(&:tag_name).join(',')
-  # end
+  def tag_list=(names)
+    self.tags = names.split(',').map do |item|
+      Tag.where(tag_name: item.strip).first_or_create!
+    end
+  end
 
-  def tag_items=(name)
-    self.tags = name.map{ |item| 
-      Tag.where(tag_name: item.strip).first_or_crate! unless item.blank?}.compact!
+  def tag_list
+    tags.map(&:tag_name).join(',')
+  end
+
+  def tag_items=(names)
+    cur_tags = names.map do |item| 
+      Tag.where(tag_name: item.strip).first_or_create! unless item.blank?
+    end.compact
+    self.tags = cur_tags
   end
 
   def tag_items
     tags.map(&:tag_name)
   end
-
-  # def self.tagged_with(name)
-  #   Tag.find_by!(tag_name: name).tasks
-  # end
 
 end

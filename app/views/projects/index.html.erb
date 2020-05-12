@@ -1,29 +1,29 @@
-<h1>Project List</h1>
+<div class="container">
+  <h1>Project List</h1>
 
-<% if user_signed_in? %>
+  <% if user_signed_in? %>
   <%= link_to 'New Project', new_project_path  %>
-  <div class="container">
-    <table class="table table-borderless table-hover">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Project Name</th>
-          <th colspan="2">Action</th>
-        </tr>
-      </thead>
+  <table class="table table-borderless table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Project Name</th>
+        <th colspan="2">Action</th>
+      </tr>
+    </thead>
 
-      <tbody>   
-        <% @projects.each do |project| %>
-          <tr> 
-            <td class="project_color"><div id="project_cover" class="project_color" style="background-color: <%= project.project_cover%>;"></div></td>
-            <td><%= project.project_name %></td>
-            <td><%= link_to 'Edit', edit_project_path(project) %></td>
-            <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>               
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-<% else %>
+    <tbody>   
+      <% @projects.each do |project| %>
+        <tr> 
+          <td class="project_color"><div id="project_cover" class="project_color" style="background-color: <%= project.project_cover%>;"></div></td>
+          <td><%= project.project_name %></td>
+          <td><%= link_to 'Edit', edit_project_path(project) %></td>
+          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>               
+      <% end %>
+    </tbody>
+  </table>
+  <% else %>
   <%= link_to "New Project", new_user_session_path %>
-<% end %>
+  <% end %>
+</div>

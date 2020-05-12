@@ -3,9 +3,9 @@
     <div class="display">
       <h1 class="display_time_left"></h1>
     </div>
-    <%= link_to tictacs_path, method: 'post', class: 'startbtn', data: { time: '25', action: 'click->tictacs#start' }, remote: true do %>
+    <a class='startbtn' data-time="25" data-action="click->tictacs#start ">
       <i class="far fa-play-circle fa-8x startbtn"></i>
-    <% end %>
+    <a>
     <a href='#' class="stopbtn d-none" data-action="click->tictacs#stop ">
       <i class="far fa-stop-circle fa-8x stopbtn"></i>
     </a>

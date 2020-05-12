@@ -8,6 +8,7 @@ export default class extends Controller {
     this.clicked = false;
     const timeDisplay = document.querySelector('.display_time_left');
     const relaxbtn = document.querySelector('.relaxbtn')
+    const startbtn = document.querySelector('.startbtn');
     let relax_num = 0
 
     relaxbtn.addEventListener("click", function(){
@@ -18,9 +19,14 @@ export default class extends Controller {
         relaxbtn.dataset.time = "5"
       }
     })
-
     
-
+    displayTimeLeft(parseInt(startbtn.dataset.time))
+    function displayTimeLeft(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const remainSeconds = seconds % 60;
+      const display = `${minutes}:${remainSeconds < 10 ? 0 : ''}${remainSeconds}`;
+      timeDisplay.textContent = display;
+    }
   }
  
   start(e) {
@@ -38,48 +44,62 @@ export default class extends Controller {
     const startbtn = document.querySelector('.startbtn');
     const stopbtn = document.querySelector(".stopbtn");
     const relaxbtn = document.querySelector(".relaxbtn")
-    const seconds = 25
+    const seconds = startbtn.dataset.time
     let isRunning = true;
-    
+    let setCounter
     
     /*設定計時器*/ 
-    const now = Date.now();
-    const end_time = now + seconds * 1000;
-    const setCounter = setInterval(() =>{
-      const secondsLeft = Math.round((end_time - Date.now()) / 1000);
-          
-      if (secondsLeft <= 0) {
-        clearInterval(setCounter);
-        isRunning = false
-        relaxbtn.classList.remove("d-none")
-      }
-      /*按鈕顯示*/ 
-      if (isRunning === true){
-        startbtn.classList.add("d-none");
-        stopbtn.classList.remove("d-none");
-      }else if(isRunning === false && relaxbtn.classList.contains("d-none") === false){
-        relaxbtn.classList.remove("d-none")
-        stopbtn.classList.add("d-none")
-      }else{
-        startbtn.classList.remove("d-none");
-        stopbtn.classList.add("d-none");
-      }
-      displayTimeLeft(secondsLeft); 
-    },1000)
+    let now = Date.now();
+    let end_time = now + seconds * 1000;
+    let secondsLeft = Math.round((end_time - Date.now()) / 1000);
+    counter()
+
+    function counter() {
+        setCounter = setInterval(() =>{
+        secondsLeft = Math.round((end_time - Date.now()) / 1000);
+        displayTimeLeft(secondsLeft);    
+        console.log(secondsLeft)
+        if (secondsLeft <= 0) {
+          clearInterval(setCounter);
+          isRunning = false
+          relaxbtn.classList.remove("d-none")
+        }
+        /*按鈕顯示*/ 
+        if (isRunning === true){
+          startbtn.classList.add("d-none");
+          stopbtn.classList.remove("d-none");
+        }else if(isRunning === false && relaxbtn.classList.contains("d-none") === false){
+          relaxbtn.classList.remove("d-none")
+          stopbtn.classList.add("d-none")
+        }else{
+          startbtn.classList.remove("d-none");
+          stopbtn.classList.add("d-none");
+        }
+         
+      },1000)
+    }
     
-     
-
-
-
     /*中止計時*/ 
     stopbtn.addEventListener('click', stop);
 
 
     function stop(){
       clearInterval(setCounter);
-      displayTimeLeft(0);
-      isRunning = false;
-      stopbtn.removeEventListener('click',stop);
+      const stopTime = Date.now()
+      let check = confirm("確定要放棄番茄?")
+      
+      if (check){
+        clearInterval(setCounter);
+        isRunning = false;
+        displayTimeLeft(seconds)
+        stopbtn.removeEventListener('click',stop);
+      }else{
+        end_time += (Date.now() - stopTime) ;
+        
+        counter()
+      }
+
+    
     }
 
     /*顯示時間*/

@@ -10,12 +10,12 @@
   </head>
 
   <body>
-    <div class="container">
-      <%= render "shared/navbar" %>
-      <%= render "shared/flash" %>
-      <%= yield %>
-      <%= render "shared/footer" %>
-    </div>
+ 
+    <%= render "shared/navbar" %>
+    <%= render "shared/flash" %>
+    <%= yield %>
+    <%= render "shared/footer" %>
+    
     <script>
       $(document).ready(function() {
         $(".tag-select2").select2({

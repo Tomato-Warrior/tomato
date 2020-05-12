@@ -8,11 +8,11 @@ class TictacsController < ApplicationController
   end
 
   def create
-    @tictac = current_user.tictacs.build
-    @tictac.update(task_id: params[:task_id])
+    @tictac = current_user.tictacs.build(task_id: params[:task_id])
+    # @tictac.update(task_id: params[:task_id])
 
-    if @tictac.save
-      @tictac.start!
+    if @tictac.start!
+      # @tictac.start!
       redirect_to tictac_path(@tictac), notice: 'Tictac created!'
     else
       redirect_to tasks_path, notice: 'Tictac failed!'

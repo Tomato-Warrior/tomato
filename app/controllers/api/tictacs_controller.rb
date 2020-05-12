@@ -3,7 +3,7 @@ class Api::TictacsController < ApplicationController
 
   def start
     tictac = Tictac.find(params[:id])
-    render json: {status: 'process', start_at: Time.now}
+    render json: {status: 'active', start_at: Time.now}
   end
 
   def cancel

@@ -31,10 +31,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 # foreman
 gem 'foreman', '~> 0.87.1'
-
-# 
+# devise
 gem 'devise', '~> 4.7', '>= 4.7.1'
-
+#aasm
+gem 'aasm', '~> 5.0', '>= 5.0.8'
 
 
 # Reduces boot times through caching; required in config/boot.rb

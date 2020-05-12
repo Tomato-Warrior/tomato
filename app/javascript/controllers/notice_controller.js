@@ -6,11 +6,5 @@ export default class extends Controller {
 
   close() {
    this.messageTarget.remove();
-
-  
+  }
 }
-
-
-
-
- 

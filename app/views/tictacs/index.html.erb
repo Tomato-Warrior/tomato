@@ -3,6 +3,18 @@
     <div class="display">
       <h1 class="display_time_left"></h1>
     </div>
+    
+    <%= link_to tictacs_path, method: 'post', class: 'startbtn', data: { time: '25', action: 'click->tictacs#start' }, remote: true do %>
+      <i class="far fa-play-circle fa-8x startbtn"></i>
+    <% end %>
+
+    <%= link_to cancel_tictac_path(@tictac), method: 'patch', class: 'stopbtn', data: { action: 'click->tictacs#stop' }, remote: true do  %>
+      <I class="far fa-stop-circle fa-8x stopbtn"></I>
+    <% end %>
+
+    <%= link_to finish_tictac_path(@tictac), method: 'patch', remote: true do  %>
+      STOP
+    <% end %>
 
     <a class='startbtn' data-time="25" data-action="click->tictacs#start ">
       <i class="far fa-play-circle fa-8x startbtn"></i>

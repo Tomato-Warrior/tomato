@@ -9,7 +9,7 @@
         <% end %>
         <%= link_to task.task_name, task_path(task.id) %>
         <%= task.tomato_num %>
-        <%=display_tag task.tag_items %>
+        <%= display_tag task.tag_items %>
         <%= link_to '編輯', edit_task_path(task.id) %>
         <%= 
           link_to '刪除', 

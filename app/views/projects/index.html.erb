@@ -12,10 +12,10 @@
       <tbody>   
         <% @projects.each do |project| %>
           <tr> 
-          <td class="project_color"><div class=<%= project.project_cover%> id="project_cover"></div></td>
-          <td><%= project.project_name %></td>
-          <td><%= link_to 'Edit', edit_project_path(project) %></td>
-          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class="project_color"><div id="project_cover" class="project_color" style="background-color: <%= project.project_cover%>;"></div></td>
+            <td><%= project.project_name %></td>
+            <td><%= link_to 'Edit', edit_project_path(project) %></td>
+            <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>               
         <% end %>
       </tbody>

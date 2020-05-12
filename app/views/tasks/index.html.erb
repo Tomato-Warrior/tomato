@@ -1,6 +1,6 @@
 <h1>任務列表</h1>
-  <%= link_to "新增任務", new_task_path %>
   <% if user_signed_in? %>
+    <%= link_to "新增任務", new_task_path %>
     <ul>
       <% @tasks.each do |task| %>
       <div>
@@ -20,4 +20,6 @@
         </div>
       <% end %>   
     </ul>   
+  <% else %>
+    <%= link_to "新增任務", new_user_session_path %>
   <% end %>

@@ -1,12 +1,14 @@
 <h1>Project List</h1>
+
 <% if user_signed_in? %>
   <%= link_to 'New Project', new_project_path  %>
-  <div>
-    <table class="table table-hover">
+  <div class="container">
+    <table class="table table-borderless table-hover">
       <thead>
         <tr>
           <th></th>
-          <th colspan="3">Project Name</th>
+          <th>Project Name</th>
+          <th colspan="2">Action</th>
         </tr>
       </thead>
 
@@ -22,4 +24,6 @@
       </tbody>
     </table>
   </div>
+<% else %>
+  <%= link_to "New Project", new_user_session_path %>
 <% end %>

@@ -1,1 +1,15 @@
-<%= render 'clock' %>
+<div class="timer_controls" data-controller="tictacs">
+  <div class="clock d-flex justify-content-center align-items-center">
+    <div class="display">
+      <h1 class="display_time_left"></h1>
+    </div>
+    <%= link_to cancel_tictac_path(@tictac), method: 'patch', class: 'stopbtn', data: { action: 'click->tictacs#stop' }, remote: true do  %>
+      <i class="far fa-stop-circle fa-8x stopbtn"></i>
+    <% end %>
+    <span>25 s</span>
+
+    <%= link_to finish_tictac_path(@tictac), method: 'patch', remote: true do  %>
+      STOP
+    <% end %>
+  </div>
+</div>

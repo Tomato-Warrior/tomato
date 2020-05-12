@@ -13,7 +13,7 @@ class TictacsController < ApplicationController
 
     if @tictac.save
       @tictac.start!
-      redirect_to tictacs_path, notice: 'Tictac created!'
+      redirect_to tictac_path(@tictac), notice: 'Tictac created!'
     else
       redirect_to tasks_path, notice: 'Tictac failed!'
     end
@@ -21,7 +21,7 @@ class TictacsController < ApplicationController
  
   def cancel
     if @tictac.cancel!
-      redirect_to tictacs_path, notice: 'Tictac cancelled!'
+      redirect_to tasks_path, notice: 'Tictac cancelled!'
     else
       redirect_to tasks_path, notice: 'Tictac failed!'
     end
@@ -29,7 +29,7 @@ class TictacsController < ApplicationController
 
   def finish
     if @tictac.finish!
-      redirect_to tictacs_path, notice: 'Tictac finished!'
+      redirect_to tasks_path, notice: 'Tictac finished!'
     else
       redirect_to tasks_path, notice: 'Tictac failed!'
     end

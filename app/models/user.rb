@@ -11,6 +11,8 @@ class User < ApplicationRecord
   # callback
   after_create :default_project_create
 
+  
+
   private
 
   def default_project_create

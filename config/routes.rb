@@ -16,11 +16,13 @@ Rails.application.routes.draw do
 
   #Api
   namespace :api do
-    resources :tictacs, only: [] do
-      member do
-        post :start
-        post :cancel
-        post :finish
+    namespace :v1 do
+      resources :tictacs, only: [] do
+        member do
+          post :start
+          post :cancel
+          post :finish
+        end
       end
     end
   end

@@ -26,6 +26,8 @@ class Tictac < ApplicationRecord
 
   end
 
+  
+
   private
   
   def status_start

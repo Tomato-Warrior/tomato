@@ -7,20 +7,20 @@ class Tictac < ApplicationRecord
   #aasm
   aasm column: 'status' do
     state :pending, initial: true
-    state :processing, :cancelled, :finished
+    state :active, :cancelled, :finished
   
     event :start do
-      transitions from: :pending, to: :processing
+      transitions from: :pending, to: :active
       after_transaction :status_start
     end
   
     event :cancel do
-      transitions from: :processing, to: :cancelled
+      transitions from: :active, to: :cancelled
       after_transaction :status_cancel
     end
 
     event :finish do
-      transitions from: :processing, to: :finished
+      transitions from: :active, to: :finished
       after_transaction :status_finish
     end
 
@@ -29,7 +29,7 @@ class Tictac < ApplicationRecord
   private
   
   def status_start
-    update(status: 'processing', start_at: Time.now)
+    update(status: 'active', start_at: Time.now)
   end
   def status_cancel
     update(status: 'cancelled', end_at: Time.now)

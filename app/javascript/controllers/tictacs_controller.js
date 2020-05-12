@@ -50,10 +50,11 @@ export default class extends Controller {
         setCounter = setInterval(() =>{
         secondsLeft = Math.round((end_time - Date.now()) / 1000);
         displayTimeLeft(secondsLeft);    
-        console.log(secondsLeft)
+        
         if (secondsLeft <= 0) {
           clearInterval(setCounter);
           isRunning = false
+          window.alert("該休息了")
           relaxbtn.classList.remove("d-none")
         }
         /*按鈕顯示*/ 
@@ -120,10 +121,11 @@ export default class extends Controller {
     const end_time = now + seconds * 1000;
     const setCounter = setInterval(() =>{
       const secondsLeft = Math.round((end_time - Date.now()) / 1000);
-          
+      displayTimeLeft(secondsLeft)    
       if (secondsLeft <= 0) {
         clearInterval(setCounter);
         isRunning = false
+        window.alert("休息結束")
       }
       /*按鈕顯示*/ 
       if (isRunning == true){
@@ -134,7 +136,7 @@ export default class extends Controller {
         relaxbtn.classList.add("d-none")
         stopbtn.classList.add("d-none")
       }
-      displayTimeLeft(secondsLeft); 
+      ; 
     },1000)
     
      

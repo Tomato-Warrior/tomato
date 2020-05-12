@@ -45,7 +45,7 @@ class TasksController < ApplicationController
                                 :tomato_num,
                                 :task_date,
                                 :project_id,
-                                :user_id
+                                tag_items: []
                                 )
   end
   def find_task

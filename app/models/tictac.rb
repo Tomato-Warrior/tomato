@@ -30,7 +30,7 @@ class Tictac < ApplicationRecord
 
   private
   
-  def status_start
+  def status_start 
     update(status: 'active', start_at: Time.now)
   end
   def status_cancel

@@ -19,12 +19,26 @@
     <a class='startbtn' data-time="25" data-action="click->tictacs#start">
       <i class="far fa-play-circle fa-8x startbtn"></i>
     <a>
+
     <a href='#' class="stopbtn d-none" data-action="click->tictacs#stop ">
       <i class="far fa-stop-circle fa-8x stopbtn"></i>
     </a>
 
-    <a href='#' class="relaxbtn d-none" data-action="click->tictacs#relax ">
+    <a href='#' class="relaxbtn d-none" data-action="click->tictacs#relax" data-target="">
       <i class="far fa-play-circle fa-8x relaxbtn"></i>
     </a>
-  </div>
+
+    <%# API測試controller %>
+    <div class="testtt" data-controller="text">
+      <a href="#" data-action="text#startBtn" data-target="text.resp">Start text</a>
+    </div>
+
+    <div class="testtt" data-controller="text">
+      <a href="#" data-action="text#cancelBtn" data-target="text.resp" data-id="<%= @tictac.id %>">Cancel text</a>
+    </div>
+
+    <div class="testtt" data-controller="text">
+      <a href="#" data-action="text#finishBtn" data-target="text.resp" data-id="<%= @tictac.id %>">Finish text</a>
+    </div>
+
 </div>  

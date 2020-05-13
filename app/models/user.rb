@@ -11,7 +11,7 @@ class User < ApplicationRecord
   # callback
   after_create :default_project_create
 
-  
+  # scope :find_expired_tictac, -> { where(start_at:) }
 
   private
 

@@ -10,26 +10,24 @@ class Api::V1::TictacsController < ApplicationController
       # @tictac.start!
       render json: {user_id: @tictac.user_id, status: @tictac.status, start_at: @tictac.start_at, task_id: @tictac.task_id }
     else
-      render json: {
-              error: "No such user; check the submitted email address"}, status: 400
-
+      render json: { error: "nonoooooo" }, status: 400
     end
 
   end
 
   def cancel
     if @tictac.cancel!
-      render json: {status: 'failed', end_at: Time.now}
+      render json: { status: @tictac.status, end_at: @tictac.end_at }
     else
-      redirect_to tasks_path, notice: 'Tictac failed!'
+      render json: { error: "nonoooooo" }, status: 400
     end
   end
 
   def finish
     if @tictac.finish!
-      render json: {status: 'finished', end_at: Time.now}
+      render json: { status: @tictac.status, end_at: @tictac.end_at }
     else
-      redirect_to tasks_path, notice: 'Tictac failed!'
+      render json: { error: "nonoooooo" }, status: 400
     end
   end
 

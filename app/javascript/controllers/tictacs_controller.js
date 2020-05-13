@@ -39,6 +39,8 @@ export default class extends Controller {
     const seconds = startbtn.dataset.time
     let isRunning = true;
     let setCounter
+
+    /* ajax Test */
     
     /*設定計時器*/ 
     let now = Date.now();

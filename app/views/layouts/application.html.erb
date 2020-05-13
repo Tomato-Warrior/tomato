@@ -10,15 +10,15 @@
   </head>
 
   <body>
-    <div class="container">
-      <%= render "shared/navbar" %>
-      <%= render "shared/flash" %>
-      <%= yield %>
-      <%= render "shared/footer" %>
-    </div>
+ 
+    <%= render "shared/navbar" %>
+    <%= render "shared/flash" %>
+    <%= yield %>
+    <%= render "shared/footer" %>
+    
     <script>
       $(document).ready(function() {
-        $(".js-tag-tokenizer").select2({
+        $(".tag-select2").select2({
             tags: true,
             multiple: 'true',
             tokenSeparators: [',', ' ']

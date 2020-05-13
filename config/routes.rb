@@ -2,12 +2,7 @@ Rails.application.routes.draw do
   root "tasks#index"
   devise_for :users
   #counter
-  resources :tictacs do
-    member do
-      patch :cancel
-      patch :finish
-    end
-  end
+  resources :tictacs
   
   #task
   resources :tasks
@@ -16,11 +11,15 @@ Rails.application.routes.draw do
 
   #Api
   namespace :api do
-    resources :tictacs, only: [] do
-      member do
-        post :start
-        post :cancel
-        post :finish
+    namespace :v1 do
+      resources :tictacs, only: [] do
+        collection do
+          post :start
+        end
+        member do
+          post :cancel
+          post :finish
+        end
       end
     end
   end

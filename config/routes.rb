@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "tasks#index"
   devise_for :users
   #counter
-  resources :tictacs
+  resources :tictacs, only: [:index, :show]
   
   #task
   resources :tasks

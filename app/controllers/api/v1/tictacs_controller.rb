@@ -1,5 +1,6 @@
 class Api::V1::TictacsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :last_tictac, only: [:cancel, :finish]
 
   def start
     @tictac = current_user.tictacs.build(task_id: params[:task_id])
@@ -14,10 +15,25 @@ class Api::V1::TictacsController < ApplicationController
   end
 
   def cancel
-    render json: {status: 'failed', end_at: Time.now}
+    if @tictac.cancel!
+      render json: { status: @tictac.status, end_at: @tictac.end_at }
+    else
+      render json: { error: "nonoooooo" }, status: 400
+    end
   end
 
   def finish
-    render json: {status: 'finished', end_at: Time.now}
+    if @tictac.finish!
+      render json: { status: @tictac.status, end_at: @tictac.end_at }
+    else
+      render json: { error: "nonoooooo" }, status: 400
+    end
   end
+
+  private 
+
+  def last_tictac
+    @tictac = current_user.tictacs.last    
+  end
+
 end

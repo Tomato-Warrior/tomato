@@ -39,41 +39,38 @@
     </tbody>   
   </table>
 
-  <div>
-    <ul class="d-flex justify-content-around">
-      <li class="d-inline"></li>
-      <li class="d-inline">Project Name</li>
-      <li class="d-inline">Task Name</li>
-      <li class="d-inline">Tomato number</li>
-      <li class="d-inline">Tag</li>
-      <li class="d-inline">Action</li>
-    </ul>
+  <div class="row p-2">
+    <div class="col-2"></div>
+    <div class="col-2">Project Name</div>
+    <div class="col-2">Task Name</div>
+    <div class="col-2">Tomato number</div>
+    <div class="col-2">Tag</div>
+    <div class="col-2">Action</div>
   </div>
-  
-  <div data-controller="drag">
-    <% @tasks.each do |task| %>
-      <div>
-        <ul class="d-flex justify-content-around">
-          <li class="d-inline">
-            <%= link_to tictacs_path do %>
-              <i class="far fa-play-circle"></i>
-            <% end %>
-          </li>
-            <li class="d-inline"><%= task.project.project_name %></li>
-            <li class="d-inline"><%= link_to task.task_name, task_path(task.id) %></li>
-            <li class="d-inline"><%= task.tomato_num %></li>
-            <li class="d-inline"><%= display_tag task.tag_items %></li>
-            <li class="d-inline"><%= link_to '編輯', edit_task_path(task.id) %></li>
-            <li class="d-inline"><%= 
-              link_to '刪除', 
-              task_path(task.id),
-              method:'delete',
-              data: {confirm: '真的要刪除喵?'} 
-            %></li>
-        </ul>
+
+   <div data-controller="drag" data-drag-url="/tasks/:id/drag">
+    <% @tasks.order(position: :asc).each do |task| %>
+      <div class="row p-2" data-id="<%= task.id %>">
+        <div class="col-2">
+          <%= link_to tictacs_path do %>
+            <i class="far fa-play-circle"></i>
+          <% end %>
+        </div>
+        <div class="col-2"><%= task.project.project_name %></div>
+        <div class="col-2"><%= link_to task.task_name, task_path(task.id) %></div>
+        <div class="col-2"><%= task.tomato_num %></div>
+        <div class="col-2"><%= display_tag task.tag_items %></div>
+        <div class="col-1"><%= link_to '編輯', edit_task_path(task.id) %></div>
+        <div class="col-1"><%= 
+          link_to '刪除', 
+          task_path(task.id),
+          method:'delete',
+          data: {confirm: '真的要刪除喵?'} 
+        %></div>
       </div>
     <% end %> 
   </div>
+
 <% else %>
   <%= link_to "New Task", new_user_session_path %>
 <% end %>

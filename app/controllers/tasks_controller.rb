@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: [:edit, :update, :destroy]
+  before_action :find_task, only: [:edit, :update, :destroy, :drag]
 
   def index
     task_list if current_user    
@@ -37,6 +37,12 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy   
     redirect_to tasks_path, notice: '成功刪除 喵'
+  end
+
+  # drag tasks' items
+  def drag
+    @task.insert_at(params[:position].to_i)
+    head :ok
   end
 
   private

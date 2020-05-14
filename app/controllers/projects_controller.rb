@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :find_project, only: [:edit, :update, :destroy]
+  before_action :find_project, only: [:edit, :update, :destroy, :show]
   
   def index
     project_list if current_user

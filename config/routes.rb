@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root "tasks#index"
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   #counter
-  resources :tictacs
+  resources :tictacs, only: [:index, :show]
   
   #task
   resources :tasks

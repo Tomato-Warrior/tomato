@@ -39,6 +39,8 @@ gem 'omniauth-google-oauth2'
 gem 'figaro'
 #aasm
 gem 'aasm', '~> 5.0', '>= 5.0.8'
+#paranoid
+gem 'paranoia', '~> 2.4', '>= 2.4.2'
 
 
 # Reduces boot times through caching; required in config/boot.rb

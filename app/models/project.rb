@@ -1,4 +1,6 @@
 class Project < ApplicationRecord
+  acts_as_paranoid
+  
   #relationship
   belongs_to :user
   has_many :tasks

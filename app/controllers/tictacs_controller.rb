@@ -3,6 +3,7 @@ class TictacsController < ApplicationController
   
   
   def index
+    @tictacs = current_user.tictacs
   end
 
   def show

@@ -1,5 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
+
 .navname {
+<<<<<<< HEAD
     background-color: #F27F6B;
     a {
         color: #FFF;
@@ -16,3 +18,13 @@ body {
     color: #434343;
     background-color: #ffcb78;
 }
+=======
+    color: #FBDB14;
+    background-color: #1E3F63;
+}
+
+
+h1,h2,h3,h4{
+    margin-bottom: 0;
+  }
+>>>>>>> 加入scss

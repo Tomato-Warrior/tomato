@@ -1,20 +1,17 @@
-<div class="timer_controls" data-controller="tictacs">
-  <div class="clock d-flex justify-content-center align-items-center">
-    <div class="display">
-      <h1 class="display_time_left"></h1>
-    </div>
-
-    <a class='startbtn' data-time="25" data-action="click->tictacs#start" data-target="tictacs.startbtn">
-      <i class="far fa-play-circle fa-8x startbtn"></i>
-    <a>
-
-    <a href='#' class="stopbtn d-none" data-action="click->tictacs#stop" data-target="tictacs.stopbtn" data-id="<%= @tictac.id %>">
-      <i class="far fa-stop-circle fa-8x stopbtn"></i>
-    </a>
-
-    <a href='#' class="relaxbtn d-none" data-action="click->tictacs#relax" data-target="tictacs.relaxbtn" data-id="<%= @tictac.id %>">
-      <i class="far fa-play-circle fa-8x relaxbtn"></i>
-    </a>
-
-
-</div>  
+<div class="tomato_bg">
+  <div class="timer_controler" data-controller="tictacs">
+    <div class="clock d-flex flex-column justify-content-center align-items-center">
+      <div class="display d-flex justify-content-center align-items-center">
+        <h1 class="display_time_left pending start relax d-flex justify-content-center align-items-center"></h1>
+      </div>
+      <a class='startbtn' data-time="25" data-action="click->tictacs#start" data-target="tictacs.startbtn">
+        <span><i class="fas fa-play startbtn"></i></span>
+      <a>
+      <a href='#' class="stopbtn d-none" data-action="click->tictacs#stop" data-target="tictacs.stopbtn" data-id="<%= @tictac.id %>">
+        <i class="far fa-stop-circle fa-8x stopbtn"></i>
+      </a>
+      <a href='#' class="relaxbtn d-none" data-action="click->tictacs#relax" data-target="tictacs.relaxbtn" data-id="<%= @tictac.id %>">
+        <i class="far fa-play-circle fa-8x relaxbtn"></i>
+      </a>
+  </div>  
+</div>

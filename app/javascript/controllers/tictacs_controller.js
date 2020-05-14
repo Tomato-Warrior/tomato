@@ -1,6 +1,5 @@
 import { Controller } from "stimulus"
-import ax from "axios"
-
+import Rails from "@rails/ujs"
 export default class extends Controller {
   static targets = [ "count" ]
   
@@ -11,6 +10,7 @@ export default class extends Controller {
     const startbtn = document.querySelector('.startbtn')
     let relax_num = 0
 
+    //每4次休息
     relaxbtn.addEventListener("click", function(){
       relax_num += 1
       if (relax_num % 4 === 0){
@@ -28,7 +28,139 @@ export default class extends Controller {
       timeDisplay.textContent = display
     }
   }
+
+
+    
+  //開始api
+  startWorkApiPromise(){
+    let that = this
+    return new Promise(function(resolve, reject) {
+      Rails.ajax({
+        url: `/api/v1/tictacs/start`, 
+        type: 'POST', 
+        dataType: 'json',
+        success: resp => {
+          resolve(resp)
+        }, 
+        error: err => {
+          console.log(err);
+        } 
+      })
+    })
+  }
+  //開始計時
+  startWorkPromise(){
+    const timeDisplay = document.querySelector('.display_time_left')
+    const startbtn = document.querySelector('.startbtn')
+    const stopbtn = document.querySelector(".stopbtn")
+    const seconds = startbtn.dataset.time
+    let isRunning = true
+    let setCounter
+    
+   /*設定計時器*/ 
+    let now = Date.now()
+    let end_time = now + seconds * 1000
+    let secondsLeft = Math.round((end_time - Date.now()) / 1000)
+
+    return new Promise(function(resolve, reject) {
+      startbtn.classList.add("d-none")
+      stopbtn.classList.remove("d-none")
+
+      setCounter = setInterval(() =>{
+        secondsLeft = Math.round((end_time - Date.now()) / 1000)
+        displayTimeLeft(secondsLeft)    
+      
+        if (secondsLeft <= 0) {
+          clearInterval(setCounter)
+          resolve("timeup")
+        }
+      },1000)
+
+      //中斷事件
+      stopbtn.addEventListener('click', stop)
+      function stop () {
+        return new Promise(function(yes, no) {
+          clearInterval(setCounter);
+          const stopTime = Date.now()
+          let check = confirm("確定要放棄番茄?")
+      
+          if (check){
+              clearInterval(setCounter);
+              isRunning = false;
+              displayTimeLeft(seconds)
+              stopbtn.removeEventListener('click',stop)
+              yes("")
+          }else{
+            end_time += (Date.now() - stopTime) 
+            counter()
+          }
+        })
+      }
+    })
+    function displayTimeLeft(seconds) {
+      const minutes = Math.floor(seconds / 60)
+      const remainSeconds = seconds % 60
+      const display = `${minutes}:${remainSeconds < 10 ? 0 : ''}${remainSeconds}`
+      timeDisplay.textContent = display
+    }
+  }
+//計時結束
+finishWorkApiPromise(){
+  return new Promise(function(resolve, reject) {
+    
+    
+    Rails.ajax({
+      url: `/api/v1/tictacs/1/finish`, 
+      type: 'POST', 
+      dataType: 'json',
+      success: resp => {
+        resolve(resp)
+      }, 
+      error: err => {
+        console.log(err);
+      } 
+    })
+  }) 
+}
+//開始休息計時
+startRelaxPromise(){
+  const timeDisplay = document.querySelector('.display_time_left')
+  const stopbtn = document.querySelector(".stopbtn")
+  const relaxbtn = document.querySelector(".relaxbtn")
+  const seconds = relaxbtn.dataset.time
+  const BG = document.querySelector(".clock")
+  let isRunning = true
+  let setCounter
+   
  
+  let now = Date.now()
+  let end_time = now + seconds * 1000
+  let secondsLeft = Math.round((end_time - Date.now()) / 1000)
+
+  let that = this
+  return new Promise(function(resolve, reject) {
+    relaxbtn.classList.add("d-none")
+    stopbtn.classList.remove("d-none")
+
+    setCounter = setInterval(() =>{
+      secondsLeft = Math.round((end_time - Date.now()) / 1000)
+      displayTimeLeft(secondsLeft)    
+    
+      if (secondsLeft < 0) {
+        clearInterval(setCounter)
+        resolve("relaxtime over")
+      }
+    },1000)
+  })
+  function displayTimeLeft(seconds) {
+    const minutes = Math.floor(seconds / 60)
+    const remainSeconds = seconds % 60
+    const display = `${minutes}:${remainSeconds < 10 ? 0 : ''}${remainSeconds}`
+    timeDisplay.textContent = display
+  }
+}
+
+
   start(e) {
     e.preventDefault()
     
@@ -40,81 +172,28 @@ export default class extends Controller {
     const BG = document.querySelector(".clock")
     let isRunning = true
     let setCounter
-
-    /* ajax Test */
     
-    /*設定計時器*/ 
+   /*設定計時器*/ 
     let now = Date.now()
     let end_time = now + seconds * 1000
     let secondsLeft = Math.round((end_time - Date.now()) / 1000)
-     /* promise */
-    /*按下開始 打api create一個tomato 並得到新tomato的id status */
-    let pressStartBtn = new Promise((resolve, reject) => {
-      ax.post('/api/v1/tictacs/1/start')
-      .then(function(resp){
-        resolve(resp)   /*得到id status.... */
-        
-      })
-      .catch(function(resp){
-        console.log(resp)
-      })
-    })
-    /*按下中止 打api 帶著id去更新tomato status end_at */
-    let pressStopBtn = new Promise((resolve, reject) => {
-      ax.post('/api/v1/tictacs/1/cancel')
-      .then(function(resp){
-        resolve(resp)   /*得到id status.... */
-      })
-      .catch(function(resp){
-        console.log(resp)
-      })
+    
+   
+    this.startWorkApiPromise().then((data) => {
+      console.log(data)
+      return this.startWorkPromise()
+    }).then((data) => {
+      console.log(data)
       
-    })
-    /*時間倒數結束 打api 帶著id 去更新tomato status end_at */
-    let timeUp = new Promise((resolve, reject) => {
-      ax.post('/api/v1/tictacs/1/finish')
-      .then(function(resp){
-        resolve(resp)   /*得到id status.... */
-        
-      })
-      .catch(function(resp){
-        console.log(resp);
-      })
+      return this.finishWorkApiPromise()
+    }).then((data) => {
+      console.log(data)
+      stopbtn.classList.add("d-none")
+      relaxbtn.classList.remove("d-none")
+      window.alert("休息一下~")
+      displayTimeLeft(relaxbtn.dataset.time)
     })
 
-    pressStartBtn.then((startdata) => {
-      console.log(startdata)
-      counter()
-    })
-
-    function counter() {
-        setCounter = setInterval(() =>{
-          secondsLeft = Math.round((end_time - Date.now()) / 1000)
-        displayTimeLeft(secondsLeft)    
-        
-        if (secondsLeft <= 0) {
-          return timeUp.then((finishdata) => {
-            console.log(finishdata)
-            clearInterval(setCounter)
-            isRunning = false
-            relaxbtn.classList.remove("d-none")
-            stopbtn.classList.add("d-none")
-            BG.style.backgroundColor = "green"
-          })
-          
-        }/*按鈕顯示*/ 
-        if (isRunning === true){
-          startbtn.classList.add("d-none")
-          stopbtn.classList.remove("d-none")
-        }else if(isRunning === false && relaxbtn.classList.contains("d-none") === false){
-          relaxbtn.classList.remove("d-none")
-          stopbtn.classList.add("d-none")
-        }else{
-          startbtn.classList.remove("d-none")
-          stopbtn.classList.add("d-none")
-        }
-      },1000)
-    }
     
     /*中止計時*/ 
     stopbtn.addEventListener('click', stop)
@@ -168,33 +247,15 @@ export default class extends Controller {
     /*設定計時器*/ 
     const now = Date.now()
     const end_time = now + seconds * 1000
-    const setCounter = setInterval(() =>{
-      const secondsLeft = Math.round((end_time - Date.now()) / 1000)
-      displayTimeLeft(secondsLeft)    
-      if (secondsLeft <= 0) {
-        clearInterval(setCounter)
-        isRunning = false
-        BG.style.backgroundColor = "red"
-        window.alert("休息結束")
-        
-      }
-      /*按鈕顯示*/ 
-      if (isRunning == true){
-        relaxbtn.classList.add("d-none")
-        stopbtn.classList.remove("d-none")
-      }else{
-        startbtn.classList.remove("d-none")
-        relaxbtn.classList.add("d-none")
-        stopbtn.classList.add("d-none")
-        
-      }
-      
-    },1000)
-    
-     
 
-
-
+    this.startRelaxPromise().then((data) => {
+      console.log(data)
+      stopbtn.classList.add("d-none")
+      startbtn.classList.remove("d-none")
+      window.alert("該開始下一顆番茄了")
+      displayTimeLeft(startbtn.dataset.time)
+    })
+ 
     /*中止計時*/ 
     stopbtn.addEventListener('click', stop)
 

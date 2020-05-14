@@ -19,7 +19,7 @@ export default class extends Controller {
         relaxbtn.dataset.time = "5"
       }
     })
-    
+
     displayTimeLeft(parseInt(startbtn.dataset.time))
     function displayTimeLeft(seconds) {
       const minutes = Math.floor(seconds / 60)
@@ -29,8 +29,6 @@ export default class extends Controller {
     }
   }
 
-
-    
   //開始api
   startWorkApiPromise(){
     let that = this
@@ -48,6 +46,7 @@ export default class extends Controller {
       })
     })
   }
+
   //開始計時
   startWorkPromise(){
     const timeDisplay = document.querySelector('.display_time_left')
@@ -57,7 +56,7 @@ export default class extends Controller {
     let isRunning = true
     let setCounter
     
-   /*設定計時器*/ 
+  //設定計時器
     let now = Date.now()
     let end_time = now + seconds * 1000
     let secondsLeft = Math.round((end_time - Date.now()) / 1000)
@@ -75,7 +74,6 @@ export default class extends Controller {
           resolve("timeup")
         }
       },1000)
-
       //中斷事件
       stopbtn.addEventListener('click', stop)
       function stop () {
@@ -107,8 +105,6 @@ export default class extends Controller {
 //計時結束
 finishWorkApiPromise(){
   return new Promise(function(resolve, reject) {
-    
-    
     Rails.ajax({
       url: `/api/v1/tictacs/1/finish`, 
       type: 'POST', 
@@ -131,17 +127,14 @@ startRelaxPromise(){
   const BG = document.querySelector(".clock")
   let isRunning = true
   let setCounter
-   
- 
   let now = Date.now()
   let end_time = now + seconds * 1000
   let secondsLeft = Math.round((end_time - Date.now()) / 1000)
-
   let that = this
+
   return new Promise(function(resolve, reject) {
     relaxbtn.classList.add("d-none")
     stopbtn.classList.remove("d-none")
-
     setCounter = setInterval(() =>{
       secondsLeft = Math.round((end_time - Date.now()) / 1000)
       displayTimeLeft(secondsLeft)    
@@ -160,7 +153,6 @@ startRelaxPromise(){
   }
 }
 
-
   start(e) {
     e.preventDefault()
     
@@ -172,19 +164,16 @@ startRelaxPromise(){
     const BG = document.querySelector(".clock")
     let isRunning = true
     let setCounter
-    
    /*設定計時器*/ 
     let now = Date.now()
     let end_time = now + seconds * 1000
     let secondsLeft = Math.round((end_time - Date.now()) / 1000)
-    
-   
+
     this.startWorkApiPromise().then((data) => {
       console.log(data)
       return this.startWorkPromise()
     }).then((data) => {
       console.log(data)
-      
       return this.finishWorkApiPromise()
     }).then((data) => {
       console.log(data)
@@ -202,7 +191,6 @@ startRelaxPromise(){
       clearInterval(setCounter);
       const stopTime = Date.now()
       let check = confirm("確定要放棄番茄?")
-      
       if (check){
         pressStopBtn.then((stopdata) => {
           console.log(stopdata)
@@ -216,20 +204,12 @@ startRelaxPromise(){
         counter()
       }
     }
-
-    /*顯示時間*/
     function displayTimeLeft(seconds) {
       const minutes = Math.floor(seconds / 60)
       const remainSeconds = seconds % 60
       const display = `${minutes}:${remainSeconds < 10 ? 0 : ''}${remainSeconds}`
       timeDisplay.textContent = display
     }
-    
-   
-
-
-
-    
   }
 
   relax(e){
@@ -242,9 +222,6 @@ startRelaxPromise(){
     const seconds = parseInt(relaxbtn.dataset.time)
     const BG = document.querySelector(".clock")
     let isRunning = true
-    
-    
-    /*設定計時器*/ 
     const now = Date.now()
     const end_time = now + seconds * 1000
 
@@ -259,7 +236,6 @@ startRelaxPromise(){
     /*中止計時*/ 
     stopbtn.addEventListener('click', stop)
 
-
     function stop(){
       clearInterval(setCounter)
       displayTimeLeft(0)
@@ -268,7 +244,6 @@ startRelaxPromise(){
       stopbtn.removeEventListener('click',stop)
     }
 
-    /*顯示時間*/
     function displayTimeLeft(seconds) {
       const minutes = Math.floor(seconds / 60)
       const remainSeconds = seconds % 60
@@ -286,16 +261,11 @@ startRelaxPromise(){
     const stopbtn = document.querySelector(".stopbtn")
     let isRunning = false
 
-
-
-    /*按鈕顯示*/ 
     if (isRunning == false){
       stopbtn.classList.add("d-none")
       startbtn.classList.remove("d-none")
     }
   }
-
-  
 }
 
 

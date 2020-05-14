@@ -41,8 +41,8 @@ gem 'figaro'
 gem 'aasm', '~> 5.0', '>= 5.0.8'
 #paranoid
 gem 'paranoia', '~> 2.4', '>= 2.4.2'
-
-
+# drag
+gem 'acts_as_list'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 

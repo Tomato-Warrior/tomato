@@ -56,12 +56,13 @@ class TasksController < ApplicationController
                                  tag_items: []
                                 )
   end
+
   def find_task
     @task = Task.find(params[:id])
   end
+
   def task_list
     @tasks = current_user.tasks.includes(:user)
   end
-
 
 end

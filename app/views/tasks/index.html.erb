@@ -1,43 +1,7 @@
 <h1>Task List</h1>
 <% if user_signed_in? %>
-  <%= link_to "New Task", new_task_path %>
-  <%= link_to 'Projects', projects_path %>
-  
-  <table class="table table-borderless table-hover">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Project Name</th>
-        <th>Task Name</th>
-        <th>Tomato number</th>
-        <th>Tag</th>
-        <th colspan="2">Action</th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <% @tasks.each do |task| %>
-        <tr>
-          <td>
-            <%= link_to tictacs_path do %>
-              <i class="far fa-play-circle"></i>
-            <% end %>
-          </td>
-          <td><%= task.project.project_name %></td>
-          <td><%= link_to task.task_name, task_path(task.id) %></td>
-          <td><%= task.tomato_num %></td>
-          <td><%= display_tag task.tag_items %></td>
-          <td><%= link_to '編輯', edit_task_path(task.id) %></td>
-          <td><%= 
-            link_to '刪除', 
-            task_path(task.id),
-            method:'delete',
-            data: {confirm: '真的要刪除喵?'} 
-          %></td>
-        </tr>
-      <% end %>   
-    </tbody>   
-  </table>
+  <%= link_to "New Task", new_task_path, class: "badge-pill p-2 path-color" %>
+  <%= link_to 'Projects', projects_path, class: "badge-pill p-2 path-color" %>
 
   <div class="row p-2">
     <div class="col-2"></div>
@@ -60,9 +24,9 @@
         <div class="col-2"><%= link_to task.task_name, task_path(task.id) %></div>
         <div class="col-2"><%= task.tomato_num %></div>
         <div class="col-2"><%= display_tag task.tag_items %></div>
-        <div class="col-1"><%= link_to '編輯', edit_task_path(task.id) %></div>
+        <div class="col-1"><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_task_path(task.id) %></div>
         <div class="col-1"><%= 
-          link_to '刪除', 
+          link_to '<i class="fas fa-trash-alt"></i>'.html_safe, 
           task_path(task.id),
           method:'delete',
           data: {confirm: '真的要刪除喵?'} 

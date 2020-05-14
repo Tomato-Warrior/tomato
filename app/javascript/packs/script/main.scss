@@ -1,5 +1,18 @@
 @import "~bootstrap/scss/bootstrap";
 .navname {
-    color: #FBDB14;
-    background-color: #1E3F63;
+    background-color: #F27F6B;
+    a {
+        color: #FFF;
+    }
+}
+body {
+    color: #434343;
+    background-color: #F7F7F7;
+    .path-color {
+        background-color: #ffcb78;
+    }
+}
+.tag-color {
+    color: #434343;
+    background-color: #ffcb78;
 }

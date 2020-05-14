@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: [:edit, :update, :destroy]
+  before_action :find_task, only: [:edit, :update, :destroy, :drag]
 
   def index
     task_list if current_user    
@@ -39,6 +39,12 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice: '成功刪除 喵'
   end
 
+  # drag tasks' items
+  def drag
+    @task.insert_at(params[:position].to_i)
+    head :ok
+  end
+
   private
   def task_params
     params.require(:task).permit(:task_name, 
@@ -50,12 +56,13 @@ class TasksController < ApplicationController
                                  tag_items: []
                                 )
   end
+
   def find_task
     @task = Task.find(params[:id])
   end
+
   def task_list
     @tasks = current_user.tasks.includes(:user)
   end
-
 
 end

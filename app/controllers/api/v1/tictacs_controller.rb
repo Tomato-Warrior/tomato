@@ -4,8 +4,7 @@ class Api::V1::TictacsController < ApplicationController
 
   def start
     @tictac = current_user.tictacs.build(task_id: params[:task_id])
-    # @tictac.update()
-
+    
     if @tictac.start!
       # @tictac.start!
       render json: {user_id: @tictac.user_id, status: @tictac.status, start_at: @tictac.start_at, task_id: @tictac.task_id }

@@ -31,12 +31,11 @@ export default class extends Controller {
     this.displayTimeLeft(parseInt(this.startbtnTarget.dataset.time))
   }
 
-  //sweetalert
+  //sweetalert-alert_message
   autoCloseAlert(message){
     let timerInterval
     Swal.fire({
       title: message,
-      html: '休息~~~~~~~~~',
       timer: 2000,
       timerProgressBar: false,
       showClass: {
@@ -45,6 +44,19 @@ export default class extends Controller {
       hideClass: {
         popup: 'animate__animated animate__fadeOutUp'
       }
+    })
+  }
+
+  //sweetalert-confirm drop or not
+  confirmDropOrNot(){
+    Swal.fire({
+      title: '確定定要捨棄番茄嗎?',
+      html: '請輸入原因',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true
     })
   }
   //開始api
@@ -96,10 +108,12 @@ export default class extends Controller {
 
       function stop () {
         return new Promise(function(yes, no) {
+          
           clearInterval(setCounter);
           const stopTime = Date.now()
-          let check = confirm("確定要放棄番茄?")
-      
+
+          let check = prompt("確定要捨棄番茄嗎?","請輸入捨棄原因")
+          
           if (check){
             clearInterval(setCounter);
             isRunning = false;
@@ -114,9 +128,10 @@ export default class extends Controller {
             setCounter = setInterval(() => {
               secondsLeft = Math.round((end_time - Date.now()) / 1000)
               that.displayTimeLeft(secondsLeft)    
-            
+              
               if (secondsLeft <= 0) {
                 clearInterval(setCounter)
+                that.stopbtnTarget.removeEventListener('click', stop)
                 resolve("return to work")
               }
             },1000)
@@ -165,6 +180,7 @@ startRelaxPromise(){
     
       if (secondsLeft < 0) {
         clearInterval(setCounter)
+        that.stopbtnTarget.removeEventListener('click', stop)
         resolve("relaxtime over")
       }
     },1000)
@@ -177,6 +193,7 @@ startRelaxPromise(){
           clearInterval(setCounter)
           that.displayTimeLeft(that.startbtnTarget.dataset.time)
           reject("relaxstop")
+          that.stopbtnTarget.removeEventListener('click', stop)
         })
       }
   })

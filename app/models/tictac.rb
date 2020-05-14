@@ -26,10 +26,7 @@ class Tictac < ApplicationRecord
 
   end
 
-  
-
   private
-  
   def status_start 
     update(status: 'active', start_at: Time.now)
   end
@@ -39,5 +36,6 @@ class Tictac < ApplicationRecord
   def status_finish
     update(status: 'finished', end_at: Time.now)
   end
+
 
 end

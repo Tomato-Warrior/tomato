@@ -2,7 +2,6 @@ class Api::V1::TictacsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def start
-<<<<<<< HEAD
     @tictac = current_user.tictacs.build(task_id: params[:task_id])
     
     if @tictac.start!
@@ -12,10 +11,6 @@ class Api::V1::TictacsController < ApplicationController
       render json: { error: "nonoooooo" }, status: 400
     end
 
-=======
-    tictac = Tictac.find(params[:id])
-    render json: {status: 'active', start_at: Time.now}
->>>>>>> fix conflict
   end
 
   def cancel

@@ -80,6 +80,7 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     childprocess (3.0.0)
+    coderay (1.1.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     devise (4.7.1)
@@ -162,6 +163,11 @@ GEM
     pg (1.2.3)
     pg (1.2.3-x64-mingw32)
     pg (1.2.3-x86-mingw32)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     public_suffix (4.0.5)
     puma (4.3.3)
       nio4r (~> 2.0)
@@ -293,6 +299,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   paranoia (~> 2.4, >= 2.4.2)
   pg (~> 1.2, >= 1.2.3)
+  pry-rails
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.2)
   sass-rails (>= 6)

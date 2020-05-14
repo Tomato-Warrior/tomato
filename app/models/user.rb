@@ -25,4 +25,5 @@ class User < ApplicationRecord
     project.save
   end
 
+
 end

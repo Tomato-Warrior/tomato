@@ -9,6 +9,8 @@ class Task < ApplicationRecord
   #validates
   validates :task_name, presence: true
 
+
+  #tag
   def self.tagged_with(name)
     Tag.find_by!(tag_name: name).tasks
   end
@@ -33,5 +35,7 @@ class Task < ApplicationRecord
   def tag_items
     tags.map(&:tag_name)
   end
+
+  private
 
 end

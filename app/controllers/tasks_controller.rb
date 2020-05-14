@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: [:show, :edit, :update, :destroy]
+  before_action :find_task, only: [:edit, :update, :destroy]
 
   def index
-    task_list if current_user
+    task_list if current_user    
   end
   
   def new
@@ -20,6 +20,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    @project = @task.project.project_name
   end
   
   def edit
@@ -39,21 +40,21 @@ class TasksController < ApplicationController
   end
 
   private
-
   def task_params
     params.require(:task).permit(:task_name, 
-                                :description,
-                                :tomato_num,
-                                :task_date,
-                                :project_id,
-                                tag_items: []
+                                 :description,
+                                 :tomato_num,
+                                 :task_date,
+                                 :project_name,
+                                 :project_id,
+                                 tag_items: []
                                 )
   end
   def find_task
     @task = Task.find(params[:id])
   end
   def task_list
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.includes(:user)
   end
 
 

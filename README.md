@@ -13,3 +13,11 @@
 6. 結束後自己電腦記得切回`master`再`git pull`更新本地端 master branch
 7. `git checkout newbranch`
 8. 將本地端的新分支rebase到剛才更新的master branch`git rebase master`
+
+## 命名方式
+1. Branch
+    - feat/ add_features
+    - fix/ fix_bug
+2. PR
+    - 條列大概做了哪些事
+    - 加上issue number #tag

@@ -4,29 +4,17 @@
       <h1 class="display_time_left"></h1>
     </div>
 
-    <a class='startbtn' data-time="25" data-action="click->tictacs#start">
+    <a class='startbtn' data-time="25" data-action="click->tictacs#start" data-target="tictacs.startbtn">
       <i class="far fa-play-circle fa-8x startbtn"></i>
     <a>
 
-    <a href='#' class="stopbtn d-none" data-action="click->tictacs#stop ">
+    <a href='#' class="stopbtn d-none" data-action="click->tictacs#stop" data-target="tictacs.stopbtn" data-id="<%= @tictac.id %>">
       <i class="far fa-stop-circle fa-8x stopbtn"></i>
     </a>
 
-    <a href='#' class="relaxbtn d-none" data-action="click->tictacs#relax" data-target="">
+    <a href='#' class="relaxbtn d-none" data-action="click->tictacs#relax" data-target="tictacs.relaxbtn" data-id="<%= @tictac.id %>">
       <i class="far fa-play-circle fa-8x relaxbtn"></i>
     </a>
 
-    <%# API測試controller %>
-    <div class="testtt" data-controller="text">
-      <a href="#" data-action="text#startBtn" data-target="text.resp">Start text</a>
-    </div>
-
-    <div class="testtt" data-controller="text">
-      <a href="#" data-action="text#cancelBtn" data-target="text.resp" data-id="<%= @tictac.id %>">Cancel text</a>
-    </div>
-
-    <div class="testtt" data-controller="text">
-      <a href="#" data-action="text#finishBtn" data-target="text.resp" data-id="<%= @tictac.id %>">Finish text</a>
-    </div>
 
 </div>  

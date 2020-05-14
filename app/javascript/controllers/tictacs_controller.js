@@ -1,5 +1,6 @@
 import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
+
 export default class extends Controller {
   static targets = [ "count", "startbtn", "stopbtn", "relaxbtn", "show_time_left" ]
 
@@ -28,9 +29,24 @@ export default class extends Controller {
 
     //顯示時間
     this.displayTimeLeft(parseInt(this.startbtnTarget.dataset.time))
-    
   }
 
+  //sweetalert
+  autoCloseAlert(message){
+    let timerInterval
+    Swal.fire({
+      title: message,
+      html: '休息~~~~~~~~~',
+      timer: 2000,
+      timerProgressBar: false,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
+  }
   //開始api
   startWorkApiPromise(){
     let that = this
@@ -89,8 +105,8 @@ export default class extends Controller {
             isRunning = false;
             that.displayTimeLeft(seconds)
             that.stopbtnTarget.removeEventListener('click',stop)
-            startbtnTarget.classList.remove("d-none")
-            stopbtnTarget.classList.add("d-none")
+            that.startbtnTarget.classList.remove("d-none")
+            that.stopbtnTarget.classList.add("d-none")
             reject("stop~~")
           }else{ 
             end_time += (Date.now() - stopTime) 
@@ -113,9 +129,10 @@ export default class extends Controller {
 
 //計時結束
 finishWorkApiPromise(){
+  const tictac_id = this.stopbtnTarget.dataset.id
   return new Promise(function(resolve, reject) {
     Rails.ajax({
-      url: `/api/v1/tictacs/1/finish`, 
+      url: `/api/v1/tictacs/${tictac_id}/finish`, 
       type: 'POST', 
       dataType: 'json',
       success: resp => {
@@ -168,9 +185,10 @@ startRelaxPromise(){
 
 // 中斷 api
 breakWorkApiPromise(){
+  const tictac_id = this.stopbtnTarget.dataset.id
   return new Promise(function(resolve, reject) {
     Rails.ajax({
-      url: `/api/v1/tictacs/1/cancel`, 
+      url: `/api/v1/tictacs/${tictac_id}/cancel`, 
       type: 'POST', 
       dataType: 'json',
       success: resp => {
@@ -186,7 +204,6 @@ breakWorkApiPromise(){
     e.preventDefault()
     
     const seconds = this.startbtnTarget.dataset.time
-    let isRunning = true
     let setCounter
     /*設定計時器*/ 
     let now = Date.now()
@@ -203,14 +220,14 @@ breakWorkApiPromise(){
       console.log(data)
       this.stopbtnTarget.classList.add("d-none")
       this.relaxbtnTarget.classList.remove("d-none")
-      window.alert("休息一下~")
+      this.autoCloseAlert("休息一下~")
       this.displayTimeLeft(this.relaxbtnTarget.dataset.time)
     }).catch((data) => {
       console.log(data)
       return this.breakWorkApiPromise()
+    }).then((data) => {
+      console.log(data)
     })
-     
-    
   }
 
   relax(e){
@@ -218,18 +235,17 @@ breakWorkApiPromise(){
     
     const seconds = parseInt(this.relaxbtnTarget.dataset.time)
 
-
     this.startRelaxPromise().then((data) => {
       console.log(data)
       this.stopbtnTarget.classList.add("d-none")
       this.startbtnTarget.classList.remove("d-none")
-      window.alert("該開始下一顆番茄了")
+      this.autoCloseAlert("該開始下一顆番茄了")
       this.displayTimeLeft(this.startbtnTarget.dataset.time)
     }).catch((data) => {
       this.startbtnTarget.classList.remove("d-none")
       this.relaxbtnTarget.classList.add("d-none")
       this.stopbtnTarget.classList.add("d-none")
-      window.alert("該開始下一顆番茄了")
+      this.autoCloseAlert("該開始下一顆番茄了")
     })
  
     

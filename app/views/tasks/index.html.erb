@@ -1,7 +1,7 @@
-<div class="container">
-  <h1>Task List</h1>
-  <% if user_signed_in? %>
+<h1>Task List</h1>
+<% if user_signed_in? %>
   <%= link_to "New Task", new_task_path %>
+  <%= link_to 'Projects', projects_path %>
   
   <table class="table table-borderless table-hover">
     <thead>
@@ -38,7 +38,42 @@
       <% end %>   
     </tbody>   
   </table>
-  <% else %>
-    <%= link_to "New Task", new_user_session_path %>
-  <% end %>
-</div>
+
+  <div>
+    <ul class="d-flex justify-content-around">
+      <li class="d-inline"></li>
+      <li class="d-inline">Project Name</li>
+      <li class="d-inline">Task Name</li>
+      <li class="d-inline">Tomato number</li>
+      <li class="d-inline">Tag</li>
+      <li class="d-inline">Action</li>
+    </ul>
+  </div>
+  
+  <div data-controller="drag">
+    <% @tasks.each do |task| %>
+      <div>
+        <ul class="d-flex justify-content-around">
+          <li class="d-inline">
+            <%= link_to tictacs_path do %>
+              <i class="far fa-play-circle"></i>
+            <% end %>
+          </li>
+            <li class="d-inline"><%= task.project.project_name %></li>
+            <li class="d-inline"><%= link_to task.task_name, task_path(task.id) %></li>
+            <li class="d-inline"><%= task.tomato_num %></li>
+            <li class="d-inline"><%= display_tag task.tag_items %></li>
+            <li class="d-inline"><%= link_to '編輯', edit_task_path(task.id) %></li>
+            <li class="d-inline"><%= 
+              link_to '刪除', 
+              task_path(task.id),
+              method:'delete',
+              data: {confirm: '真的要刪除喵?'} 
+            %></li>
+        </ul>
+      </div>
+    <% end %> 
+  </div>
+<% else %>
+  <%= link_to "New Task", new_user_session_path %>
+<% end %>

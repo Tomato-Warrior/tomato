@@ -4,6 +4,7 @@
 .navname {
     background-color: $mainRed;
     height: 60px;
+    box-shadow: -1px 4px 5px -2px rgba(66,66,66,0.14);
     a {
         color: #FFF;
     }
@@ -14,6 +15,9 @@
         background-image: url(../../../../public/tomato-logo.png);
         background-repeat: no-repeat;
         background-size: cover;
+    }
+    .nav-href{
+        padding-left: 15px;
     }
 }
 body {

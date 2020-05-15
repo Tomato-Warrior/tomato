@@ -62,7 +62,7 @@ class TasksController < ApplicationController
   end
 
   def task_list
-    @tasks = current_user.tasks.includes(:user)
+    @tasks = current_user.tasks.includes(:user).order(project_id: :desc)
   end
 
 end

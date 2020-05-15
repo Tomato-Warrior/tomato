@@ -77,7 +77,7 @@ export default class extends Controller {
     let isRunning = true
     let setCounter
     let that = this
-  //設定計時器
+    //設定計時器
     let now = Date.now()
     let end_time = now + seconds * 1000
     let secondsLeft = Math.round((end_time - now) / 1000)
@@ -85,13 +85,15 @@ export default class extends Controller {
     return new Promise(function(resolve, reject) {
       that.startbtnTarget.classList.add("d-none")
       that.stopbtnTarget.classList.remove("d-none")
-
+      //=============================================變換時鐘顏色(進行)
       setCounter = setInterval(() => {
         secondsLeft = Math.round((end_time - Date.now()) / 1000)
         that.displayTimeLeft(secondsLeft)    
       
         if (secondsLeft <= 0) {
           clearInterval(setCounter)
+          //=====================================================這裡要加提示聲音(工作結束)
+          //=====================================================這裡要加更換背景顏色(工作結束)
           that.stopbtnTarget.removeEventListener('click',stop)
           resolve("timeup")
         }
@@ -102,7 +104,6 @@ export default class extends Controller {
 
       function stop () {
         return new Promise(function(yes, no) {
-          
           clearInterval(setCounter);
           const stopTime = Date.now()
 
@@ -110,11 +111,11 @@ export default class extends Controller {
           
           if (check){
             clearInterval(setCounter);
-            isRunning = false;
             that.displayTimeLeft(seconds)
             that.stopbtnTarget.removeEventListener('click',stop)
             that.startbtnTarget.classList.remove("d-none")
             that.stopbtnTarget.classList.add("d-none")
+            //==========================================提示聲音(=======這裡可加放棄放棄)
             reject("stop~~")
           }else{ 
             end_time += (Date.now() - stopTime) 
@@ -125,15 +126,16 @@ export default class extends Controller {
               
               if (secondsLeft <= 0) {
                 clearInterval(setCounter)
+                resolve("timeup")
                 that.stopbtnTarget.removeEventListener('click', stop)
-                resolve("return to work")
+                //===================================================這裡要加變背景顏色(工作結束)
+                //===================================================這裡要加提示聲音(工作結束)
               }
             },1000)
           }
         })
       }
     })
-    
   }
 
 //計時結束
@@ -156,7 +158,6 @@ finishWorkApiPromise(){
 
 //開始休息計時
 startRelaxPromise(){
-  let isRunning = true
   let setCounter
   let seconds = this.relaxbtnTarget.dataset.time
   let now = Date.now()
@@ -175,13 +176,15 @@ startRelaxPromise(){
       if (secondsLeft < 0) {
         clearInterval(setCounter)
         that.stopbtnTarget.removeEventListener('click', stop)
+        //========================================================這裡要加提示聲音(休息的)
+        //========================================================這裡要加更換背景(休息->工作)
         resolve("relaxtime over")
       }
     },1000)
 
     //中斷事件
     that.stopbtnTarget.addEventListener('click', stop)
-
+    
       function stop () {
         return new Promise(function(yes, no) {
           clearInterval(setCounter)
@@ -258,19 +261,10 @@ breakWorkApiPromise(){
       this.stopbtnTarget.classList.add("d-none")
       this.autoCloseAlert("該開始下一顆番茄了")
     })
- 
-    
-
-    
-
-    
-
   }
 
   stop(e){
     e.preventDefault();
-    
-    
   }
 }
 

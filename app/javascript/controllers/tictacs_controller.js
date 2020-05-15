@@ -37,13 +37,7 @@ export default class extends Controller {
     Swal.fire({
       title: message,
       timer: 2000,
-      timerProgressBar: false,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+      timerProgressBar: false
     })
   }
 

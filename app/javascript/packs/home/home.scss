@@ -1,0 +1,74 @@
+.main_container{
+  display: flex;
+  .project_group{
+    background-color: #F9F9F9;
+    width: 20vw;
+    height: 100vh;
+    .todo{
+      display: flex;
+      padding: 10px 10px 10px 10px;
+      .icon{
+        width: 15%;
+        text-align: center;
+      }
+      .title{
+        width: 70%;
+      }
+      .total_time{
+        text-align: right;
+        width: 15%;
+      }
+    }
+    .divider{
+      width: 80%;
+      display: block;
+      border: 0.5px solid #aaa;
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .project{
+      display: flex;
+      padding: 10px 10px 10px 10px;
+      .project_cover{
+        width: 15%;
+        .project_color{
+          margin: auto;
+        }
+      }
+      .project_name{
+        width: 70%;
+      }
+      .project_time{
+        text-align: right;
+        width: 15%;
+      }
+    }
+  }
+  .task_group{
+    background-color: rgba(#6C6C6C, 0.16);
+    width: 100vw;
+    height: 100vh;
+    .task_list{
+      width: 100%;
+      .show_data{
+        margin: 12px 12px 8px 12px;
+        width: auto;
+        height: 150px;
+        background-color: #F9F9F9;
+        display: flex;
+        .data{
+          width: 100%;
+          text-align: center;
+          font-size: 20px;
+        }
+      }
+      .add_task{
+        margin: 12px 12px 8px 12px;
+        width: auto;
+        height: 75px;
+        background-color: #F9F9F9;
+      }
+    }
+  }
+}

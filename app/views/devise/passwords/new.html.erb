@@ -1,32 +1,26 @@
-<div class="container">
-  <div class="d-flex justify-content-center h-100">
-    <div class="card">
-      <div class="card-header">
-        <h2>Forgot your password?</h2>
-      </div>
-
-      <div class="card-body">
-        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-      
-        <%= render "devise/shared/error_messages", resource: resource %>
-      
-        <div class="field input-group form-group">
-          <%#= f.label :email %><br />
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-user"></i></span>
-          </div>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email" %>
+<div class="d-flex justify-content-center min-vh-100 align-items-center">
+  <div class="card">
+    <h2 class="text-center py-2">Forgot your password?</h2>
+    <div class="card-body">
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    
+      <%= render "devise/shared/error_messages", resource: resource %>
+    
+      <div class="field input-group form-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
         </div>
-      
-        <div class="actions">
-          <%= f.submit "Send me reset password instructions" %>
-        </div>
-        <% end %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email" %>
       </div>
-      
-      <div class="card-footer">
-        <%= render "devise/shared/links" %>
+    
+      <div class="actions d-flex justify-content-center">
+        <%= f.submit "Send me reset password instructions", class: "badge-pill px-5 py-2 path-color" %>
       </div>
+      <% end %>
+    </div>
+    
+    <div class="card-footer">
+      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>

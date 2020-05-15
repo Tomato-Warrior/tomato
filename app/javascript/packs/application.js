@@ -15,8 +15,9 @@ require("select2")
 
 import $ from 'jquery'
 window.$ = $
-
-
+// sewwtalert2
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+window.Swal = Swal
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
@@ -30,3 +31,4 @@ import "controllers";
 import '@fortawesome/fontawesome-free/js/all';
 import "select2/dist/css/select2.min.css"
 import "select2/dist/js/select2.full.min.js"
+import 'sweetalert2/src/sweetalert2.scss'

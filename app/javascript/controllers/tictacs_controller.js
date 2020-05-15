@@ -74,7 +74,6 @@ export default class extends Controller {
   //開始計時
   startWorkPromise(){
     const seconds = this.startbtnTarget.dataset.time
-    let isRunning = true
     let setCounter
     let that = this
     //設定計時器
@@ -92,8 +91,7 @@ export default class extends Controller {
       
         if (secondsLeft <= 0) {
           clearInterval(setCounter)
-          //=====================================================這裡要加提示聲音(工作結束)
-          //=====================================================這裡要加更換背景顏色(工作結束)
+          //===========================================提示聲音(工作結束)
           that.stopbtnTarget.removeEventListener('click',stop)
           resolve("timeup")
         }
@@ -115,7 +113,8 @@ export default class extends Controller {
             that.stopbtnTarget.removeEventListener('click',stop)
             that.startbtnTarget.classList.remove("d-none")
             that.stopbtnTarget.classList.add("d-none")
-            //==========================================提示聲音(=======這裡可加放棄放棄)
+            //==========================================提示聲音(放棄)
+            //==========================================更換時鐘背景
             reject("stop~~")
           }else{ 
             end_time += (Date.now() - stopTime) 
@@ -128,8 +127,6 @@ export default class extends Controller {
                 clearInterval(setCounter)
                 resolve("timeup")
                 that.stopbtnTarget.removeEventListener('click', stop)
-                //===================================================這裡要加變背景顏色(工作結束)
-                //===================================================這裡要加提示聲音(工作結束)
               }
             },1000)
           }
@@ -169,15 +166,14 @@ startRelaxPromise(){
   return new Promise(function(resolve, reject) {
     that.relaxbtnTarget.classList.add("d-none")
     that.stopbtnTarget.classList.remove("d-none")
+    //=================================================更換時鐘背景(進行)
     setCounter = setInterval(() =>{
       secondsLeft = Math.round((end_time - Date.now()) / 1000)
       that.displayTimeLeft(secondsLeft)    
     
       if (secondsLeft < 0) {
         clearInterval(setCounter)
-        that.stopbtnTarget.removeEventListener('click', stop)
-        //========================================================這裡要加提示聲音(休息的)
-        //========================================================這裡要加更換背景(休息->工作)
+        that.stopbtnTarget.removeEventListener('click', stop)  
         resolve("relaxtime over")
       }
     },1000)
@@ -234,6 +230,9 @@ breakWorkApiPromise(){
       console.log(data)
       this.stopbtnTarget.classList.add("d-none")
       this.relaxbtnTarget.classList.remove("d-none")
+      //============================================更換背景(工作->休息)
+      //============================================更換時鐘背景(停止狀態)
+      //============================================
       this.autoCloseAlert("休息一下~")
       this.displayTimeLeft(this.relaxbtnTarget.dataset.time)
     }).catch((data) => {
@@ -241,6 +240,8 @@ breakWorkApiPromise(){
       return this.breakWorkApiPromise()
     }).then((data) => {
       console.log(data)
+      
+
     })
   }
 
@@ -255,11 +256,19 @@ breakWorkApiPromise(){
       this.startbtnTarget.classList.remove("d-none")
       this.autoCloseAlert("該開始下一顆番茄了")
       this.displayTimeLeft(this.startbtnTarget.dataset.time)
+      //========================================================這裡要加提示聲音(休息的)
+      //========================================================這裡要加更換背景(休息->工作)
+      //========================================================更換時鐘背景(停止)
     }).catch((data) => {
       this.startbtnTarget.classList.remove("d-none")
       this.relaxbtnTarget.classList.add("d-none")
       this.stopbtnTarget.classList.add("d-none")
       this.autoCloseAlert("該開始下一顆番茄了")
+      this.displayTimeLeft(this.startbtnTarget.dataset.time)
+      //========================================================這裡要加提示聲音(休息的)
+      //========================================================這裡要加更換背景(休息->工作)
+      //========================================================更換時鐘背景(停止)
+      
     })
   }
 

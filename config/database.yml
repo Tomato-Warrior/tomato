@@ -10,13 +10,9 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-<<<<<<< HEAD
-  
-=======
-  host: localhost
   user: postgres
   password: kenaser12345
->>>>>>> add sweetalert2
+  host: localhost
 development:
   <<: *default
   # database: db/development.sqlite3

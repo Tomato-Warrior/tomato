@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = [ "count", "startbtn", "stopbtn", "relaxbtn", "show_time_left" ]
+  static targets = [ "count", "startbtn", "stopbtn", "relaxbtn", "show_time_left", "bgcolor" ]
 
   displayTimeLeft(seconds) {
     const minutes = Math.floor(seconds / 60)
@@ -84,7 +84,9 @@ export default class extends Controller {
     return new Promise(function(resolve, reject) {
       that.startbtnTarget.classList.add("d-none")
       that.stopbtnTarget.classList.remove("d-none")
-      //=============================================變換時鐘顏色(進行)
+      that.show_time_leftTarget.classList.remove("pending")
+      that.show_time_leftTarget.classList.add("start")
+      //=============================================變換時鐘顏色(進行) 
       setCounter = setInterval(() => {
         secondsLeft = Math.round((end_time - Date.now()) / 1000)
         that.displayTimeLeft(secondsLeft)    
@@ -93,6 +95,8 @@ export default class extends Controller {
           clearInterval(setCounter)
           //===========================================提示聲音(工作結束)
           that.stopbtnTarget.removeEventListener('click',stop)
+          that.show_time_leftTarget.classList.remove("start")
+          that.show_time_leftTarget.classList.add("relax")
           resolve("timeup")
         }
       },1000)
@@ -113,6 +117,8 @@ export default class extends Controller {
             that.stopbtnTarget.removeEventListener('click',stop)
             that.startbtnTarget.classList.remove("d-none")
             that.stopbtnTarget.classList.add("d-none")
+            that.show_time_leftTarget.classList.remove("start")
+            that.show_time_leftTarget.classList.add("pending")
             //==========================================提示聲音(放棄)
             //==========================================更換時鐘背景
             reject("stop~~")
@@ -230,6 +236,8 @@ breakWorkApiPromise(){
       console.log(data)
       this.stopbtnTarget.classList.add("d-none")
       this.relaxbtnTarget.classList.remove("d-none")
+      this.bgcolorTarget.classList.remove("tomato_bg")
+      this.bgcolorTarget.classList.add("tomato_relax_bg")
       //============================================更換背景(工作->休息)
       //============================================更換時鐘背景(停止狀態)
       //============================================

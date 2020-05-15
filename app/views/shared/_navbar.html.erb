@@ -1,6 +1,11 @@
 <nav class="navbar navname">
   <div class="container">
-    <h1 class="navbar-brand mb-0 h1"><%= link_to 'TomaTokei', root_path %></h1>
+    <h1 class="navbar-brand mb-0 h1">
+      <%= link_to root_path do %>
+        <span class="logo" >
+        </span>
+      <% end %>
+      </h1>
     <% if user_signed_in? %>
       <%= link_to current_user.email, edit_user_registration_path %>
       <%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %>

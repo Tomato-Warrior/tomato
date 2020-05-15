@@ -1,13 +1,29 @@
-<div>
-    <%= @task.task_name %>
-</div>
-<div>
-    <%= @task.tomato_num %>
-</div>
-<div>
-    <%= @task.description %>
-</div>
-<div>
-    <%= @task.task_date %>
-</div>
+<table class="table table-borderless table-hover">
+  <tr>
+    <td>Task</td>
+    <td><%= @task.task_name %></td>
+  </tr>
+  <tr>
+    <td>Project</td>
+    <td><%= @project %></td>
+  </tr>
+  <tr>
+    <td>Tomatoes</td>
+    <td><%= @task.tomato_num %></td>
+  </tr>
+  <tr>
+    <td>Tags</td>
+    <td><%= display_tag @task.tag_items %></td>
+  </tr>
+  <tr>
+    <td>Deadline</td>
+    <td><%= @task.task_date %></td>
+  </tr>
+  <tr>
+    <td>Description</td>
+    <td><%= @task.description %></td>
+  </tr>
+</table>
 
+<%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_task_path(@task.id) %>
+<%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, task_path(@task.id), method:'delete', data: {confirm: '真的要刪除喵?'} %>

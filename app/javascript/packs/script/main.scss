@@ -1,18 +1,38 @@
 @import "~bootstrap/scss/bootstrap";
+@import "_library.scss";
+
 .navname {
-    background-color: #F27F6B;
+    background-color: $mainRed;
     a {
         color: #FFF;
     }
 }
 body {
-    color: #434343;
-    background-color: #F7F7F7;
+    color: $normalFontColor;
+    background-color: $mainBackground;
     .path-color {
-        background-color: #ffcb78;
+        background-color: $mainYellow;
     }
 }
 .tag-color {
-    color: #434343;
-    background-color: #ffcb78;
+    color: $normalFontColor;
+    background-color: $mainYellow;
+}
+.login_width {
+    width: 250px;
+}
+.text-divider:before { 
+    content: " ";
+    display: block;
+    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid $mainBackground;
+}
+.text-divider {
+    margin: 1rem 0;
+    line-height: 0;
+    text-align: center;
+    span {
+        background-color: #fff;
+        padding: 1rem;
+    }
 }

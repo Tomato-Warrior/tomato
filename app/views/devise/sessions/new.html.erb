@@ -1,44 +1,50 @@
-<div class="container">
-  <div class="d-flex justify-content-center h-100">
-    <div class="card">
-      <div class="card-header">
-        <h2>Log in</h2>
-      </div>
+<div class="d-flex justify-content-center min-vh-100 align-items-center">
+  <div class="card">
+    <h2 class="text-center py-2">Log in with</h2>
+    <div class="card-body">
+      <div class="col-xs-6 col-xs-offset-3">
+        <%= link_to '<i class="fab fa-google"></i> Sign in with Google'.html_safe,
+          user_google_oauth2_omniauth_authorize_path,
+          class: "btn btn-lg btn-danger login_width" %>
+      </div><br />
+      <div class="col-xs-6 col-xs-offset-3">
+        <%= link_to '<i class="fab fa-facebook-square"></i> Sign in with Facebook'.html_safe,
+          user_facebook_omniauth_authorize_path,
+          class: "btn btn-lg btn-primary login_width" %>
+      </div><br />
+      <h3 class="text-center py-2 text-divider">
+        <span>Or</span>
+      </h3>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="input-group form-group d-flex justify-content-center">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          </div>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email" %>
+        </div>
       
-      <div class="card-body">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="field input-group form-group">
-            <%#= f.label :email %><br />
-            <div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-						</div>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email" %>
+        <div class="input-group form-group d-flex justify-content-center">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-key"></i></span>
           </div>
-        
-          <div class="field input-group form-group">
-            <%#= f.label :password %><br />
-            <div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-            <%= f.password_field :password, autocomplete: "current-password", placeholder: "password" %>
-          </div>
-        
-          <% if devise_mapping.rememberable? %>
-            <div class="field align-items-center">
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me %>
-            </div>
-          <% end %>
-        
-          <div class="actions">
-            <%= f.submit "Log in" %>
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "password" %>
+        </div>
+      
+        <% if devise_mapping.rememberable? %>
+          <div class="align-items-center text-center">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
           </div>
         <% end %>
-      </div>
       
-      <div class="card-footer">
-        <%= render "devise/shared/links" %>
-      </div>
+        <div class="actions d-flex justify-content-center">
+          <%= f.submit "Log in", class: "badge-pill px-5 py-2 path-color" %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="card-footer">
+      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>

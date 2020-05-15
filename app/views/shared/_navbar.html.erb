@@ -1,9 +1,12 @@
 <nav class="navbar navname">
-  <h1 class="navbar-brand mb-0 h1"><%= link_to 'TomaTokei', root_path %></h1>
-  <% if user_signed_in? %>
-    <%= link_to current_user.email, edit_user_registration_path %>
-    <%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %>
-  <% else %>
-    <%= link_to 'Sign in', new_user_session_path %>
-  <% end %>
+  <h1 class="navbar-brand mb-0 h1"><%= link_to 'TomeowTokei', root_path %></h1>
+  <div>
+    <% if user_signed_in? %>
+      <%= link_to current_user.email, edit_user_registration_path %> 
+      <span>|</span>
+      <%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %>
+    <% else %>
+      <%= link_to 'Sign in', new_user_session_path %>
+    <% end %>
+  </div>
 </nav>

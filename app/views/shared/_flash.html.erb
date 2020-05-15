@@ -1,5 +1,6 @@
 <%if notice %>
   <div class="alert alert-success" role="alert" data-controller="notice" data-target="notice.message">
+    <i class="fas fa-paw"></i>
     <%= notice %>
     <button type="button" class="close" data-action="notice#close">
       <span aria-hidden="true">&times;</span>
@@ -9,6 +10,7 @@
 
 <%if alert %>
   <div class="alert alert-danger" role="alert" data-controller="notice" data-target="notice.message">
+    <i class="fas fa-paw"></i> 
     <%= alert %>
       <button type="button" class="close" data-action="notice#close">
       <span aria-hidden="true">&times;</span>

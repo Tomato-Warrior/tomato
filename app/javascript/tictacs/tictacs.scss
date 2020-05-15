@@ -3,6 +3,25 @@
 a{
   color: $clockPending;
 }
+.timer_controler{
+  .task-list{
+    padding-top: 30px;
+    text-align: center;
+    h3{
+      margin: auto;
+      display: inline-block;
+      background-color: $mainYellow;
+      padding: 5px 10px;
+      font-size: 20px;
+      border-radius: 20px;
+    }
+    p{
+      color: #fff;
+      font-size: 28px;
+      margin: 10px;
+    }
+  }
+}
 
 .tomato_relax_bg{
   background-image: url(../../../public/pic-tomato-relax-bg.png);
@@ -12,7 +31,7 @@ a{
   height: 100vh;
     
   .display{
-    margin: 60px 0px;
+    margin: 20px 0px 40px 0px;
     width: 400px;
     height: 400px;
     border: 3px solid #fff;
@@ -73,7 +92,7 @@ a{
   height: 100vh;
 
     .display{
-      margin: 60px 0px;
+      margin: 20px 0px 40px 0px;
       width: 400px;
       height: 400px;
       border: 3px solid #fff;

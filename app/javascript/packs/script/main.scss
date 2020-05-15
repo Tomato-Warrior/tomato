@@ -1,8 +1,17 @@
 @import "~bootstrap/scss/bootstrap";
 .navname {
     background-color: #F27F6B;
+    height: 60px;
     a {
         color: #FFF;
+    }
+    .logo {
+        display: block;
+        width: 200px;
+        height: 30px;
+        background-image: url(../../../../public/tomato-logo.png);
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 }
 body {

@@ -1,2 +1,13 @@
-<%= link_to "新增任務", new_project_task_path(@project.id) %>
+<div class="container">
+  <%= link_to "新增任務", new_project_task_path(@project.id) %>
 
+  <ul>
+    <% @project.tasks.each do |task| %>
+      <li><%= link_to project_task_tictacs_path(task_id: task.id, project_id: task.project.id) do %>
+              <i class="far fa-play-circle"></i>
+          <% end %>
+          <%= link_to task.task_name, task_path(task.id) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -7,6 +7,12 @@
 </head>
 <body>
   <div class="main_container">
+    <div class="start_timer">
+      <div class="start_icon">
+        <i class="far fa-play-circle"></i>
+      </div>
+      <span>開始番茄鐘</span>
+    </div>
     <div class="project_group">
       <div class="todo">
         <div class="icon">
@@ -59,7 +65,19 @@
           </div>
           <input type="text" placeholder="建立任務給自己一個目標吧!">
         </div>
+
+        <% @uncoming_task.order(position: :asc).each do |task| %>
+        <div class="task">
+          <div class="start_task">
+            <%= link_to tictacs_path do %>
+              <i class="far fa-play-circle"></i>
+            <% end %>
+          </div>
+          <div class="task_name"><%= link_to task.task_name, task_path(task.id) %></div>
+        </div>
+      <% end %> 
       </div>
+      
     </div>
   </div>
 </body>

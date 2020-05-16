@@ -4,10 +4,26 @@
   color: #434343;
   font-family: 微軟正黑體;
   font-weight: 600;
+  position: relative;
+  .start_timer{
+    display: flex;
+    background-color: #F27F6B;
+    color: #ffffff;
+    padding: 15px 40px 15px 40px;
+    margin-bottom: 30px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    font-size: 20px;
+    .start_icon{
+      margin-right: 10px;
+    }
+  }
   .project_group{
     background-color: #ffffff;
     width: 20vw;
     height: 100vh;
+    position: relative;
     .todo{
       display: flex;
       padding: 10px 10px 10px 10px;
@@ -53,8 +69,11 @@
     .add_project{
       display: flex;
       padding: 10px 10px 10px 10px;
-      justify-content: center;
+      width: 100%;
       color: #F27F6B;
+      position: absolute;
+      justify-content: center;
+      bottom: 0;
       .plus_icon{
         margin-right: 5px;
       }
@@ -101,6 +120,22 @@
         input:focus{outline:none}
         ::-webkit-input-placeholder{
           color: $placeholder;
+        }
+      }
+      .task{
+        display: flex;
+        background-color: #ffffff;
+        margin: 12px 12px 8px 12px;
+        padding: 15px 15px 15px 25px;
+        font-size: large;
+        .task_name{
+          margin-left: 15px;
+          a{
+            color: $normalFontColor;
+          }
+        }
+        a{
+          color: #F27F6B;
         }
       }
     }

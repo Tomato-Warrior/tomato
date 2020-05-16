@@ -17,14 +17,22 @@
     <%= render "shared/footer" %>
     
     <script>
-      $(document).ready(function() {
-        $(".tag-select2").select2({
-            tags: true,
-            multiple: 'true',
-            tokenSeparators: [',', ' ']
-        })
-      })  
-      
+      $(".tag-select2").select2({
+        tags: true,
+        multiple: 'true',
+        tokenSeparators: [',', ' ']
+      })
+
+      $(function () {
+          $('#datetimepicker1').datetimepicker({
+            icons: {
+              time: "far fa-clock",
+              date: "far fa-calendar-alt",
+              up: "fa fa-arrow-up",
+              down: "fa fa-arrow-down"
+            }
+          });
+      });
     </script>
   </body>
 </html>

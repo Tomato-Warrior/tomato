@@ -20,7 +20,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    @project = @task.project.project_name
   end
   
   def edit

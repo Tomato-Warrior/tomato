@@ -18,11 +18,9 @@ Rails.application.routes.draw do
 
   #======確定路徑是否要這樣？
 
-  resources :projects do 
-    resources :tasks, only: [:new, :create, :index] do 
-      member do
-        patch :drag
-      end
+  resources :projects, only: [] do 
+    resources :tasks, only: [:new, :create, :index] do
+      resources :tictacs, only: [:index]
     end
   end
 

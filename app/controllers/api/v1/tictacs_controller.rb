@@ -3,6 +3,7 @@ class Api::V1::TictacsController < ApplicationController
   before_action :last_tictac, only: [:cancel, :finish]
 
   def start
+
     @tictac = current_user.tictacs.build(task_id: params[:task_id])
     
     if @tictac.start!

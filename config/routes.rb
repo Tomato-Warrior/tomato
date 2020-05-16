@@ -15,6 +15,18 @@ Rails.application.routes.draw do
   #project
   resources :projects
 
+
+  #======確定路徑是否要這樣？
+
+  resources :projects do 
+    resources :tasks, only: [:new, :create, :index] do 
+      member do
+        patch :drag
+      end
+    end
+  end
+
+
   #Api
   namespace :api do
     namespace :v1 do

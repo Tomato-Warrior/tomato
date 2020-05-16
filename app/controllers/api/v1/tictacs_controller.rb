@@ -7,7 +7,7 @@ class Api::V1::TictacsController < ApplicationController
     @tictac = current_user.tictacs.build(task_id: params[:task_id])
     
     if @tictac.start!
-      render json: {user_id: @tictac.user_id, status: @tictac.status, start_at: @tictac.start_at, task_id: @tictac.task_id }
+      render json: {user_id: @tictac.user_id, status: @tictac.status, start_at: @tictac.start_at, task_id: @tictac.task_id, id: @tictac.id }
     else
       render json: { error: "nonoooooo" }, status: 400
     end

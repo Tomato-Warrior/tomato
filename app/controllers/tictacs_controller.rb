@@ -9,8 +9,12 @@ class TictacsController < ApplicationController
 
   private 
 
-  def last_tictac
-    @tictac = current_user.tictacs.last    
+  def last_tictac  
+    if current_user.tictacs.count == 0
+      @tictac = Tictac.new
+    else
+      @tictac = current_user.tictacs.last
+    end 
+      
   end
-
 end

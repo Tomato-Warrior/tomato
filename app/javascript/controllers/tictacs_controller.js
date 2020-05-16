@@ -3,7 +3,8 @@ import Rails from "@rails/ujs"
 
 export default class extends Controller {
   static targets = [ "count", "startbtn", "stopbtn", "relaxbtn", "show_time_left", "bgcolor" ]
-
+  
+  
   displayTimeLeft(seconds) {
     const minutes = Math.floor(seconds / 60)
     const remainSeconds = seconds % 60
@@ -11,25 +12,7 @@ export default class extends Controller {
     this.show_time_leftTarget.textContent = display
   }
 
-  connect(){
-    this.clicked = false
-    let relax_num = 0
-
-    //每4次休息一次長休息
-
-    this.relaxbtnTarget.addEventListener("click", function(){
-      relax_num += 1
-      
-      if (relax_num % 4 === 0){
-        this.dataset.time = "15"
-      }else{
-        this.dataset.time = "5"
-      }
-    })
-
-    //顯示時間
-    this.displayTimeLeft(parseInt(this.startbtnTarget.dataset.time))
-  }
+  
 
   //sweetalert-alert_message
   autoCloseAlert(message){
@@ -216,9 +199,29 @@ breakWorkApiPromise(){
     })
   }) 
 }
+
+connect(){
+  this.clicked = false
+  let relax_num = 0
+
+  //每4次休息一次長休息
+
+  this.relaxbtnTarget.addEventListener("click", function(){
+    relax_num += 1
+    
+    if (relax_num % 4 === 0){
+      this.dataset.time = "15"
+    }else{
+      this.dataset.time = "5"
+    }
+  })
+
+  //顯示時間
+  this.displayTimeLeft(parseInt(this.startbtnTarget.dataset.time))
+}
+
   start(e) {
     e.preventDefault()
-    
     const seconds = this.startbtnTarget.dataset.time
     let setCounter
     /*設定計時器*/ 
@@ -227,7 +230,11 @@ breakWorkApiPromise(){
     let secondsLeft = Math.round((end_time - now) / 1000)
 
     this.startWorkApiPromise().then((data) => {
-      console.log(data)
+      console.log(data.id)
+      document.querySelector(".stopbtn").dataset.id = data.id
+      document.querySelector(".relaxbtn").dataset.id = data.id
+      
+      
       return this.startWorkPromise()
     }).then((data) => {
       console.log(data)

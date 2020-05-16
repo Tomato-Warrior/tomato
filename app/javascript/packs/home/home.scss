@@ -1,6 +1,9 @@
 @import "../script/library";
 .main_container{
   display: flex;
+  color: #434343;
+  font-family: 微軟正黑體;
+  font-weight: 600;
   .project_group{
     background-color: #ffffff;
     width: 20vw;
@@ -15,15 +18,16 @@
       .title{
         width: 70%;
       }
-      .total_time{
+      .project_time{
         text-align: right;
         width: 15%;
+        color: $leftNavTime;
       }
     }
     .divider{
       width: 80%;
       display: block;
-      border: 0.5px solid #aaa;
+      border: 1px solid #f9f9f9;
       margin: auto;
       margin-top: 20px;
       margin-bottom: 20px;
@@ -43,6 +47,7 @@
       .project_time{
         text-align: right;
         width: 15%;
+        color: $leftNavTime;
       }
     }
     .add_project{

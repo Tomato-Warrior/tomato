@@ -5,8 +5,7 @@
       <%= link_to 'New Project', new_project_path, class: "badge-pill p-2 path-color" %>
       <%= link_to "Tasks", tasks_path, class: "badge-pill p-2 path-color" %>
    </div>
-
-    <table class="table table-borderless table-hover">
+    <table class="table table-borderless table-hover w-auto">
       <thead>
         <tr>
           <th></th>
@@ -14,7 +13,6 @@
           <th colspan="2">Action</th>
         </tr>
       </thead>
-
       <tbody>   
         <% @projects.each do |project| %>
           <tr> 

@@ -1,29 +1,36 @@
-<table class="table table-borderless table-hover">
-  <tr>
-    <td>Task</td>
-    <td><%= @task.task_name %></td>
-  </tr>
-  <tr>
-    <td>Project</td>
-    <td><%= @project %></td>
-  </tr>
-  <tr>
-    <td>Tomatoes</td>
-    <td><%= @task.tomato_num %></td>
-  </tr>
-  <tr>
-    <td>Tags</td>
-    <td><%= display_tag @task.tag_items %></td>
-  </tr>
-  <tr>
-    <td>Deadline</td>
-    <td><%= @task.task_date %></td>
-  </tr>
-  <tr>
-    <td>Description</td>
-    <td><%= @task.description %></td>
-  </tr>
-</table>
-
-<%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_task_path(@task.id) %>
-<%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, task_path(@task.id), method:'delete', data: {confirm: '真的要刪除喵?'} %>
+<div class="container">
+  <table class="table table-borderless table-hover w-auto">
+    <tr>
+      <th>Task</th>
+      <td><%= @task.task_name %></td>
+    </tr>
+    <tr>
+      <th>Project</th>
+      <td><%= @project %></td>
+    </tr>
+    <tr>
+      <th>Tomatoes</th>
+      <td><%= @task.tomato_num %></td>
+    </tr>
+    <tr>
+      <th>Tags</th>
+      <td><%= display_tag @task.tag_items %></td>
+    </tr>
+    <tr>
+      <th>Deadline</th>
+      <td><%= @task.task_date %></td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td><%= @task.description %></td>
+    </tr>
+    <tr>
+      <td>
+        <%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_task_path(@task.id), class: "px-2" %>
+        <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, task_path(@task.id), method:'delete', data: {confirm: '真的要刪除喵?'}, class: "px-2" %>
+      </td>
+    </tr>
+  </table>
+  
+  
+</div>

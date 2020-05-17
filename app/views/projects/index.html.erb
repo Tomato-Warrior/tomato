@@ -3,13 +3,13 @@
   <% if user_signed_in? %>
    <div class="my-2">
       <%= link_to 'New Project', new_project_path, class: "badge-pill p-2 path-color" %>
-      <%#= link_to "Tasks", project_tasks_path(params[:project_id]), class: "badge-pill p-2 path-color" %>
    </div>
     <table class="table table-borderless table-hover w-auto">
       <thead>
         <tr>
           <th></th>
           <th>Project Name</th>
+          <th ></th>
           <th colspan="2">Action</th>
         </tr>
       </thead>
@@ -18,6 +18,7 @@
           <tr> 
             <td class="project_color"><div id="project_cover" class="project_color" style="background-color: <%=  project.project_cover %>;"></div></td>
             <td><%= link_to project.project_name, project_path(project) %></td>
+            <td><%= link_to " + 新增任務", new_project_task_path(project) %></td>
             <td><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_project_path(project) %></td>
             <td><%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>               

@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:edit, :update, :destroy, :drag, :show]
 
   def index
-    if current_user    
+    if current_user
       @tasks = current_user.tasks.includes(:user).order(project_id: :desc)
     end
   end
@@ -12,10 +12,11 @@ class TasksController < ApplicationController
   end
 
   def create
+
     @task = current_user.tasks.build(task_params)
     
     if @task.save
-      redirect_to project_tasks_path, notice: "成功喵~任務新增成功"
+      redirect_to project_path(params[:project_id]), notice: "成功喵~任務新增成功"
     else
       render :new
     end
@@ -29,7 +30,7 @@ class TasksController < ApplicationController
   
   def update
     if @task.update(task_params)
-      redirect_to project_tasks_path, notice: '成功編輯喵'
+      redirect_to project_path(@task.project_id), notice: '成功編輯喵'
     else
       render :edit
     end
@@ -37,7 +38,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy   
-    redirect_to project_tasks_path, notice: '成功刪除 喵'
+    redirect_to project_path(@task.project_id), notice: '成功刪除 喵'
   end
 
   # drag tasks' items

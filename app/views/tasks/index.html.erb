@@ -2,7 +2,7 @@
   <h1 class="py-3">Task List</h1>
   <% if user_signed_in? %>
     <div class="my-2">
-      <%= link_to "New Task", new_project_task_path(project), class: "badge-pill p-2 path-color" %>
+      <%= link_to "New Task", new_project_task_path(project_id: current_user.projects.first), class: "badge-pill p-2 path-color" %>
       <%= link_to 'Projects', projects_path, class: "badge-pill p-2 path-color" %>
     </div>
     <div class="row p-2 text-center">

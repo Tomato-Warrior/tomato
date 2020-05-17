@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="py-4">新增任務</h1>
 
-  <%= form_for @task, url: project_tasks_path do |f|%>
+  <%= form_for @task, url: project_tasks_path do |f| %>
     <% if @task.errors.any? %>
       <ul>
         <% @task.errors.full_messages.each do |message|%>

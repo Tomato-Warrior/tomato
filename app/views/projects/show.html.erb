@@ -3,10 +3,10 @@
 
   <ul>
     <% @project.tasks.each do |task| %>
-      <li><%= link_to project_task_tictacs_path(task_id: task.id, project_id: task.project.id) do %>
+      <li><%= link_to task_tictac_path(task_id: task.id) do %>
               <i class="far fa-play-circle"></i>
           <% end %>
-          <%= link_to task.task_name, task_path(task.id) %>
+          <%= link_to task.task_name, project_task_path(project_id: task.project.id) %>
       </li>
     <% end %>
   </ul>

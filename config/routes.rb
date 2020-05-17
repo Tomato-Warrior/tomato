@@ -3,25 +3,19 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   
   #counter
-  resources :tictacs, only: [:index, :show]
+  resources :tictacs, only: [:index]
   
-  #task
-  resources :tasks do
-    member do
-      patch :drag
+  #project
+  resources :projects do
+    resources :tasks do
+      member do
+        patch :drag
+      end
     end
   end
 
-  #project
-  resources :projects
-
-
-  #======確定路徑是否要這樣？
-
-  resources :projects, only: [] do 
-    resources :tasks, only: [:new, :create, :index] do
-      resources :tictacs, only: [:index]
-    end
+  resources :tasks, only: [] do
+    resource :tictac, only: [:show]
   end
 
 

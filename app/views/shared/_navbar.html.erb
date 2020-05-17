@@ -2,15 +2,15 @@
   <div class="container">
     <h1 class="navbar-brand mb-0 h1">
       <%= link_to root_path do %>
-        <span class="logo" >
+        <span class="logo">
         </span>
       <% end %>
       </h1>
     <% if user_signed_in? %>
-    <div>
-      <%= link_to current_user.email, edit_user_registration_path, class: 'nav-href' %>
-      <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'nav-href' %>
-    </div>
+      <div>
+        <%= link_to current_user.email, edit_user_registration_path, class: 'nav-href' %>
+        <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'nav-href' %>
+      </div>
     <% else %>
       <%= link_to 'Sign in', new_user_session_path %>
     <% end %>

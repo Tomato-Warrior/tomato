@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: [:edit, :update, :destroy, :drag]
+  before_action :find_task, only: [:edit, :update, :destroy, :drag, :show]
 
   def index
     task_list if current_user    

@@ -1,8 +1,9 @@
 <div class="timer_controler" data-controller="tictacs">
   <div class="tomato_bg" data-target="tictacs.bgcolor">
-    <div class="task-list">
+    <div class="task-list" data-id="<%= params[:task_id] %>" data-target="tictacs.task_list">
       <h3>任務</h3>
       <p>你今天進度怎樣rrrrrr</p>
+      <h1><%= params %></h1>
     </div>
 
   <div class="clock d-flex flex-column justify-content-center align-items-center">

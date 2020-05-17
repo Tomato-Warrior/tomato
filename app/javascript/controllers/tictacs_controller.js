@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = [ "count", "startbtn", "stopbtn", "relaxbtn", "show_time_left", "bgcolor" ]
+  static targets = [ "count", "startbtn", "stopbtn", "relaxbtn", "show_time_left", "bgcolor", "task_list" ]
   
   
   displayTimeLeft(seconds) {
@@ -39,9 +39,10 @@ export default class extends Controller {
   //開始api
   startWorkApiPromise(){
     let that = this
+    const task_id = this.task_listTarget.dataset.id
     return new Promise(function(resolve, reject) {
       Rails.ajax({
-        url: `/api/v1/tictacs/start`, 
+        url: `/api/v1/tictacs/start?task_id=${task_id}`,
         type: 'POST', 
         dataType: 'json',
         success: resp => {
@@ -230,7 +231,7 @@ connect(){
     let secondsLeft = Math.round((end_time - now) / 1000)
 
     this.startWorkApiPromise().then((data) => {
-      console.log(data.id)
+      console.log(data)
       document.querySelector(".stopbtn").dataset.id = data.id
       document.querySelector(".relaxbtn").dataset.id = data.id
       

@@ -3,7 +3,7 @@
   <% if user_signed_in? %>
    <div class="my-2">
       <%= link_to 'New Project', new_project_path, class: "badge-pill p-2 path-color" %>
-      <%= link_to "Tasks", tasks_path, class: "badge-pill p-2 path-color" %>
+      <%#= link_to "Tasks", project_tasks_path(params[:project_id]), class: "badge-pill p-2 path-color" %>
    </div>
     <table class="table table-borderless table-hover w-auto">
       <thead>

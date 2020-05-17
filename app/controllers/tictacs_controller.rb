@@ -1,5 +1,5 @@
 class TictacsController < ApplicationController
-  before_action :last_tictac, only: [:index]
+  before_action :last_tictac, only: [:index, :show]
   
   def index
   end
@@ -9,5 +9,4 @@ class TictacsController < ApplicationController
   def last_tictac
     @tictac = current_user.tictacs.last    
   end
-
 end

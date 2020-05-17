@@ -4,6 +4,10 @@ class TictacsController < ApplicationController
   def index
   end
 
+  def show
+    @task = current_user.tasks.find(params[:task_id])
+  end
+
   private 
 
   def last_tictac

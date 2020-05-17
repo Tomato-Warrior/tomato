@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "tasks#index"
+  root "projects#index"
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   
   #counter
@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   
   #project
   resources :projects do
-    resources :tasks do
+    resources :tasks, except: [:index] do
       member do
         patch :drag
       end
     end
   end
 
-  resources :tasks, only: [] do
+  resources :tasks, only: [:new, :index] do
     resource :tictac, only: [:show]
   end
 

@@ -121,7 +121,7 @@ export default class extends Controller {
             that.show_time_leftTarget.classList.remove("start")
             that.show_time_leftTarget.classList.add("pending")
             //Drop sound reminder
-            const audio = document.querySelector('.dropsound');
+            const audio = document.querySelector('.drop_sound');
             audio.currentTime = 0;
             audio.play();
             reject("stop~~")
@@ -244,7 +244,8 @@ startRelaxPromise(){
       this.show_time_leftTarget.classList.add("relax")
       this.show_time_leftTarget.classList.remove("start")
       //Finish work sound reminder
-      const audio = document.querySelector('.finishworksound');
+      const audio = document.querySelector('.finish_sound');
+      console.log(audio)
       audio.currentTime = 0;
       audio.play();
       //Break time reminder
@@ -268,7 +269,7 @@ startRelaxPromise(){
       this.stopbtnTarget.classList.add("d-none")
       this.startbtnTarget.classList.remove("d-none")
       //Finish relax sound reminder
-      const audio = document.querySelector('.finishworksound');
+      const audio = document.querySelector('.finish_sound');
       audio.currentTime = 0;
       audio.play();
       this.autoCloseAlert("該開始下一顆番茄了")
@@ -282,7 +283,7 @@ startRelaxPromise(){
       this.relaxbtnTarget.classList.add("d-none")
       this.stopbtnTarget.classList.add("d-none")
       //Finish relax sound reminder
-      const audio = document.querySelector('.finishworksound');
+      const audio = document.querySelector('.finish_sound');
       audio.currentTime = 0;
       audio.play();
       this.autoCloseAlert("該開始下一顆番茄了")

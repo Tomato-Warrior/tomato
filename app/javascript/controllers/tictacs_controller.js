@@ -2,8 +2,9 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = [ "count", "startbtn", "stopbtn", "relaxbtn", "show_time_left", "bgcolor" ]
-
+  static targets = [ "count", "startbtn", "stopbtn", "relaxbtn", "show_time_left", "bgcolor", "task_list" ]
+  
+  
   displayTimeLeft(seconds) {
     const minutes = Math.floor(seconds / 60)
     const remainSeconds = seconds % 60
@@ -11,25 +12,7 @@ export default class extends Controller {
     this.show_time_leftTarget.textContent = display
   }
 
-  connect(){
-    this.clicked = false
-    let relax_num = 0
-
-    //每4次休息一次長休息
-
-    this.relaxbtnTarget.addEventListener("click", function(){
-      relax_num += 1
-      
-      if (relax_num % 4 === 0){
-        this.dataset.time = "15"
-      }else{
-        this.dataset.time = "5"
-      }
-    })
-
-    //顯示時間
-    this.displayTimeLeft(parseInt(this.startbtnTarget.dataset.time))
-  }
+  
 
   //sweetalert-alert_message
   autoCloseAlert(message){
@@ -42,24 +25,26 @@ export default class extends Controller {
   }
 
   //sweetalert-confirm drop or not
-  confirmDropOrNot(){
+  confirmDropOrNot(callback){
     Swal.fire({
       title: '確定定要捨棄番茄嗎?',
       html: '請輸入原因',
       input: 'text',
+      position: 'top',
       inputAttributes: {
         autocapitalize: 'off'
       },
       showCancelButton: true
-    })
+    }).then(callback)
   }
 
   //開始api
   startWorkApiPromise(){
     let that = this
+    const task_id = this.task_listTarget.dataset.id
     return new Promise(function(resolve, reject) {
       Rails.ajax({
-        url: `/api/v1/tictacs/start`, 
+        url: `/api/v1/tictacs/start?task_id=${task_id}`,
         type: 'POST', 
         dataType: 'json',
         success: resp => {
@@ -110,35 +95,35 @@ export default class extends Controller {
           clearInterval(setCounter);
           const stopTime = Date.now()
 
-          let check = prompt("確定要捨棄番茄嗎?","請輸入捨棄原因")
-          
-          if (check){
-            clearInterval(setCounter);
-            that.displayTimeLeft(seconds)
-            that.stopbtnTarget.removeEventListener('click',stop)
-            that.startbtnTarget.classList.remove("d-none")
-            that.stopbtnTarget.classList.add("d-none")
-            that.show_time_leftTarget.classList.remove("start")
-            that.show_time_leftTarget.classList.add("pending")
-            //Drop sound reminder
-            const audio = document.querySelector('.drop_sound');
-            audio.currentTime = 0;
-            audio.play();
-            reject("stop~~")
-          }else{ 
-            end_time += (Date.now() - stopTime) 
 
-            setCounter = setInterval(() => {
-              secondsLeft = Math.round((end_time - Date.now()) / 1000)
-              that.displayTimeLeft(secondsLeft)    
-              
-              if (secondsLeft <= 0) {
-                clearInterval(setCounter)
-                resolve("timeup")
-                that.stopbtnTarget.removeEventListener('click', stop)
-              }
-            },1000)
-          }
+          //let check = prompt("確定要捨棄番茄嗎?","請輸入捨棄原因")
+          that.confirmDropOrNot(function(result){
+            if (result.dismiss == 'cancel'){
+              end_time += (Date.now() - stopTime) 
+
+              setCounter = setInterval(() => {
+                secondsLeft = Math.round((end_time - Date.now()) / 1000)
+                that.displayTimeLeft(secondsLeft)    
+                
+                if (secondsLeft <= 0) {
+                  clearInterval(setCounter)
+                  resolve("timeup")
+                  that.stopbtnTarget.removeEventListener('click', stop)
+                }
+              },1000)
+            } else {
+              clearInterval(setCounter);
+              that.displayTimeLeft(seconds)
+              that.stopbtnTarget.removeEventListener('click',stop)
+              that.startbtnTarget.classList.remove("d-none")
+              that.stopbtnTarget.classList.add("d-none")
+              that.show_time_leftTarget.classList.remove("start")
+              that.show_time_leftTarget.classList.add("pending")
+              //==========================================提示聲音(放棄)
+              //==========================================更換時鐘背景
+              reject(result.value)
+            }
+          })
         })
       }
     })
@@ -201,27 +186,48 @@ startRelaxPromise(){
   })
 }
 
-  // 中斷 api
-  breakWorkApiPromise(){
-    const tictac_id = this.stopbtnTarget.dataset.id
-    return new Promise(function(resolve, reject) {
-      Rails.ajax({
-        url: `/api/v1/tictacs/${tictac_id}/cancel`, 
-        type: 'POST', 
-        dataType: 'json',
-        success: resp => {
-          resolve(resp)
-        }, 
-        error: err => {
-          console.log(err);
-        } 
-      })
-    }) 
-  }
+
+// 中斷 api
+breakWorkApiPromise(data){
+  const tictac_id = this.stopbtnTarget.dataset.id
+  return new Promise(function(resolve, reject) {
+    Rails.ajax({
+      url: `/api/v1/tictacs/${tictac_id}/cancel`, 
+      type: 'POST',
+      dataType: 'json',
+      success: resp => {
+        resolve(resp)
+      }, 
+      error: err => {
+        console.log(err);
+      } 
+    })
+  }) 
+}
+
+connect(){
+  this.clicked = false
+  let relax_num = 0
+
+  //每4次休息一次長休息
+
+  this.relaxbtnTarget.addEventListener("click", function(){
+    relax_num += 1
+    
+    if (relax_num % 4 === 0){
+      this.dataset.time = "15"
+    }else{
+      this.dataset.time = "5"
+    }
+  })
+
+  //顯示時間
+  this.displayTimeLeft(parseInt(this.startbtnTarget.dataset.time))
+}
+
 
   start(e) {
     e.preventDefault()
-    
     const seconds = this.startbtnTarget.dataset.time
     let setCounter
     /*設定計時器*/ 
@@ -231,6 +237,10 @@ startRelaxPromise(){
 
     this.startWorkApiPromise().then((data) => {
       console.log(data)
+      document.querySelector(".stopbtn").dataset.id = data.id
+      document.querySelector(".relaxbtn").dataset.id = data.id
+      
+      
       return this.startWorkPromise()
     }).then((data) => {
       console.log(data)
@@ -253,7 +263,7 @@ startRelaxPromise(){
       this.displayTimeLeft(this.relaxbtnTarget.dataset.time)
     }).catch((data) => {
       console.log(data)
-      return this.breakWorkApiPromise()
+      return this.breakWorkApiPromise(data)
     }).then((data) => {
       console.log(data)
     })
@@ -301,3 +311,6 @@ startRelaxPromise(){
 }
 
 
+
+
+ 

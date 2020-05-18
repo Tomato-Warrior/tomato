@@ -34,4 +34,6 @@ Rails.application.routes.draw do
     end
   end
   
+  #homepage
+  resources :home, only: [:index]
 end

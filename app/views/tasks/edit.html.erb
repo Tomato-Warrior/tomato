@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="py-3">編輯</h1>
+  <h1 class="py-4">編輯</h1>
 
   <%= form_for @task, url: project_task_path(@task) do |f|%>
     <% if @task.errors.any? %>
@@ -10,33 +10,38 @@
       </ul>
     <% end %>
 
-    <div class="field form-group">
+    <div class="form-group">
       <%= f.label :task_name %>
       <%= f.text_field :task_name, class: 'form-control' %>
     </div>
-    <div class="field form-group">
+    <div class="form-group">
       <%= f.label :project %>
       <%= f.collection_select :project_id, current_user.projects, :id, :project_name, class: 'form-control' %>
     </div>
-    <div class="field form-group">
+    <div class="form-group">
       <%= f.label :tomato_num %>
       <%= f.number_field :tomato_num, class: 'form-control' %>
     </div>
-    <div class="field form-group">
+    <div class="form-group">
       <%= f.label :tag_items %>
       <select name="task[tag_items][]" class='form-control tag-select2' multiple='multiple'>
         <%= options_for_select(f.object.tag_items, f.object.tag_items) %>
       </select>
       
     </div>
-    <div class="field form-group">
+    <div class="form-group">
       <%= f.label :description %>
       <%= f.text_area :description, class: 'form-control' %>
     </div>
-    <div class="field form-group">
+    <div class="form-group">
       <%= f.label :task_date %>
-      <%= f.text_field :task_date, class: 'form-control' %>
+      <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+          <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+        </div>
+      </div>
     </div>
-    <%= f.submit :Submit, class: "btn btn-primary" %>
+    <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
   <% end %>
 </div>

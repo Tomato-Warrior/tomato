@@ -1,48 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
   <div class="main_container">
-    <div class="start_timer">
-      <div class="start_icon">
-        <i class="far fa-play-circle"></i>
-      </div>
-      <span>開始番茄鐘</span>
-    </div>
-    <div class="project_group">
-      <div class="todo">
-        <div class="icon">
-          <i class="fas fa-sun"></i>
-        </div>
-        <div class="title">今天</div>
-        <div class="project_time">666h</div>
-      </div>
-      <div class="todo">
-        <div class="icon">
-          <i class="fas fa-sun"></i>
-        </div>
-        <div class="title">待辦事項</div>
-        <div class="project_time">123h</div>
-      </div>
-      <span class="divider"></span>
-      <% @projects.each do |project| %>
-        <div class="project"> 
-          <div class="project_cover">
-            <div id="project_cover" class="project_color" style="background-color:<%= project.project_cover %>"></div>
-          </div>
-          <div class="project_name"><%= project.project_name %></div>
-          <div class="project_time">100h</div>
-        </div>               
-      <% end %>
-      <%= link_to '<div class="plus_icon"><i class="fas fa-plus"></i></div><span>新建專案</span>'.html_safe, new_project_path, class:"add_project" %>
-      <a class="add_project" >
-        
-      </a>
-    </div>
     <div class="task_group">
       <div class=" task_list">
         <div class="show_data">
@@ -80,5 +36,3 @@
       
     </div>
   </div>
-</body>
-</html>

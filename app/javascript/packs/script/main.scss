@@ -53,3 +53,10 @@ body {
 h1, h2, h3{
     margin-bottom: 0px;
 }
+
+// left_nav
+
+.main-container{
+    height: calc(100vh - 60px);
+    overflow-y: hidden;
+}

@@ -53,6 +53,7 @@ export default class extends Controller {
       showCancelButton: true
     })
   }
+
   //開始api
   startWorkApiPromise(){
     let that = this
@@ -119,8 +120,10 @@ export default class extends Controller {
             that.stopbtnTarget.classList.add("d-none")
             that.show_time_leftTarget.classList.remove("start")
             that.show_time_leftTarget.classList.add("pending")
-            //==========================================提示聲音(放棄)
-            //==========================================更換時鐘背景
+            //Drop sound reminder
+            const audio = document.querySelector('.dropsound');
+            audio.currentTime = 0;
+            audio.play();
             reject("stop~~")
           }else{ 
             end_time += (Date.now() - stopTime) 
@@ -196,26 +199,26 @@ startRelaxPromise(){
         })
       }
   })
-  
 }
 
-// 中斷 api
-breakWorkApiPromise(){
-  const tictac_id = this.stopbtnTarget.dataset.id
-  return new Promise(function(resolve, reject) {
-    Rails.ajax({
-      url: `/api/v1/tictacs/${tictac_id}/cancel`, 
-      type: 'POST', 
-      dataType: 'json',
-      success: resp => {
-        resolve(resp)
-      }, 
-      error: err => {
-        console.log(err);
-      } 
-    })
-  }) 
-}
+  // 中斷 api
+  breakWorkApiPromise(){
+    const tictac_id = this.stopbtnTarget.dataset.id
+    return new Promise(function(resolve, reject) {
+      Rails.ajax({
+        url: `/api/v1/tictacs/${tictac_id}/cancel`, 
+        type: 'POST', 
+        dataType: 'json',
+        success: resp => {
+          resolve(resp)
+        }, 
+        error: err => {
+          console.log(err);
+        } 
+      })
+    }) 
+  }
+
   start(e) {
     e.preventDefault()
     
@@ -240,9 +243,11 @@ breakWorkApiPromise(){
       this.bgcolorTarget.classList.add("tomato_relax_bg")
       this.show_time_leftTarget.classList.add("relax")
       this.show_time_leftTarget.classList.remove("start")
-      //============================================更換背景(工作->休息)
-      //============================================更換時鐘背景(停止狀態)
-      //============================================
+      //Finish work sound reminder
+      const audio = document.querySelector('.finishworksound');
+      audio.currentTime = 0;
+      audio.play();
+      //Break time reminder
       this.autoCloseAlert("休息一下~")
       this.displayTimeLeft(this.relaxbtnTarget.dataset.time)
     }).catch((data) => {
@@ -250,8 +255,6 @@ breakWorkApiPromise(){
       return this.breakWorkApiPromise()
     }).then((data) => {
       console.log(data)
-      
-
     })
   }
 
@@ -264,30 +267,30 @@ breakWorkApiPromise(){
       console.log(data)
       this.stopbtnTarget.classList.add("d-none")
       this.startbtnTarget.classList.remove("d-none")
+      //Finish relax sound reminder
+      const audio = document.querySelector('.finishworksound');
+      audio.currentTime = 0;
+      audio.play();
       this.autoCloseAlert("該開始下一顆番茄了")
       this.displayTimeLeft(this.startbtnTarget.dataset.time)
-
       this.bgcolorTarget.classList.add("tomato_bg")
       this.bgcolorTarget.classList.remove("tomato_relax_bg")
       this.show_time_leftTarget.classList.remove("relax")
       this.show_time_leftTarget.classList.add("pending")
-      //========================================================這裡要加提示聲音(休息的)
-      //========================================================這裡要加更換背景(休息->工作)
-      //========================================================更換時鐘背景(停止)
     }).catch((data) => {
       this.startbtnTarget.classList.remove("d-none")
       this.relaxbtnTarget.classList.add("d-none")
       this.stopbtnTarget.classList.add("d-none")
+      //Finish relax sound reminder
+      const audio = document.querySelector('.finishworksound');
+      audio.currentTime = 0;
+      audio.play();
       this.autoCloseAlert("該開始下一顆番茄了")
       this.displayTimeLeft(this.startbtnTarget.dataset.time)
       this.bgcolorTarget.classList.add("tomato_bg")
       this.bgcolorTarget.classList.remove("tomato_relax_bg")
       this.show_time_leftTarget.classList.remove("relax")
       this.show_time_leftTarget.classList.add("pending")
-      //========================================================這裡要加提示聲音(休息的)
-      //========================================================這裡要加更換背景(休息->工作)
-      //========================================================更換時鐘背景(停止)
-      
     })
   }
 

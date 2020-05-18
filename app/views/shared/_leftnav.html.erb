@@ -1,0 +1,49 @@
+  <%# 番茄鐘BTN %>
+  <div class="start_timer">
+    <%= link_to tictacs_path, class: "start_icon" do %>
+      <i class="far fa-play-circle"></i>
+      <span>開始番茄鐘</span>
+    <% end %>
+  </div>
+  
+    <section class="left-nav">
+      <div class="project_group">
+        <div class="todo-container">
+
+          <div class="todo-list">
+            <div class="icon">
+              <i class="fas fa-sun"></i>
+            </div>
+            <p class="title">今天</p>
+            <small class="project_time">666h</small>
+          </div>
+
+          <div class="todo-list">
+            <div class="icon">
+              <i class="fas fa-sun"></i>
+            </div>
+            <p class="title">待辦事項</p>
+            <small class="project_time">123h</small>
+          </div>
+
+        </div>
+
+      <span class="divider"></span>
+      <div class="project-container">
+        <% @projects.each do |project| %>
+          <div class="project-list"> 
+            <div class="project_cover">
+              <div id="project_cover" class="project_color" style="background-color:<%= project.project_cover %>"></div>
+            </div>
+            <div class="project_name"><%= project.project_name %></div>
+            <small class="project_time">100h</small>
+          </div>               
+        <% end %>
+      </div>
+      <div>
+        <%= link_to new_project_path, class:"add_project" do %>
+          <div class="plus_icon"><i class="fas fa-plus"></i></div><span>新建專案</span>
+        <% end %>
+      </div>
+
+    </section>

@@ -27,8 +27,5 @@ import 'tempusdominus-bootstrap-4'
 import 'tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css'
 import "select2/dist/css/select2.min.css";
 import "select2/dist/js/select2.full.min.js";
-<<<<<<< HEAD
 import './home/home.scss'
-=======
 
->>>>>>> a3168a7c13e014aa371d4593bc6ea3bc36de6b0f

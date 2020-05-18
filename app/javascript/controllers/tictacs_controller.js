@@ -8,7 +8,7 @@ export default class extends Controller {
   displayTimeLeft(seconds) {
     const minutes = Math.floor(seconds / 60)
     const remainSeconds = seconds % 60
-    const display = `${minutes}:${remainSeconds < 10 ? 0 : ''}${remainSeconds}`
+    const display = `${minutes < 10 ? 0 : ''}${minutes}:${remainSeconds < 10 ? 0 : ''}${remainSeconds}`
     this.show_time_leftTarget.textContent = display
   }
 

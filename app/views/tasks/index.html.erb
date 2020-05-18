@@ -16,7 +16,7 @@
     <div data-controller="drag" data-drag-url="/tasks/:id/drag" class="text-center">
       <% @tasks.order(position: :asc).each do |task| %>
         <div class="row p-2 task-hover" data-id="<%= task.id %>">
-          <div class="col-2">
+          <div class="col-1">
             <%= link_to task_tictac_path(task_id: task.id) do %>
               <i class="far fa-play-circle"></i>
             <% end %>
@@ -38,5 +38,4 @@
   <% else %>
     <%= link_to "New Task", new_user_session_path %>
   <% end %>
-
 </div>

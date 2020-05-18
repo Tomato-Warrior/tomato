@@ -23,16 +23,22 @@
     }
   }
 
+  .left-nav{
+    font-size: 15px;
+  }
+
   .project_group{
     background-color: #ffffff;
-    width: 20vw;
-    height: 100vh;
+    width: 18vw;
     position: sticky;
 
-
+    .todo-container{
+      padding-top: 20px;
+    }
     .todo-list{
       display: flex;
-      padding: 10px;
+      align-items: center;
+      padding: 10px 20px 10px 10px;
 
       .icon{
         width: 15%;
@@ -51,16 +57,17 @@
     }
 
     .project-container{
-      height: calc(100vh - 80px);
       overflow-y: auto;
-      padding: 10px 20px 10px 10px;
+      height: 585px;
+      // padding: 10px;
 
       .project-list{
         display: flex;
         align-items: center;
-        padding-bottom: 15px;
+        padding: 10px 20px 10px 20px ;
+
         .project_cover{
-          padding: 0 10px;
+          padding-right: 10px;
           #project_cover{
             width: 15px;
             height: 15px;
@@ -84,7 +91,7 @@
       padding: 10px 10px 10px 10px;
       width: 100%;
       color: #F27F6B;
-      background-color: #fff;
+      background-color: #f9f9f9 !important;
       bottom: 0;
       z-index: 5;
       .plus_icon{
@@ -92,7 +99,7 @@
       }
     }
     .add_project:hover{
-      background-color: #fff;
+      background-color: #f9f9f9;
     }
 
     .divider{

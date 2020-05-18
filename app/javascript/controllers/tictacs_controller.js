@@ -37,6 +37,7 @@ export default class extends Controller {
       showCancelButton: true
     }).then(callback)
   }
+
   //開始api
   startWorkApiPromise(){
     let that = this
@@ -94,6 +95,7 @@ export default class extends Controller {
           clearInterval(setCounter);
           const stopTime = Date.now()
 
+
           //let check = prompt("確定要捨棄番茄嗎?","請輸入捨棄原因")
           that.confirmDropOrNot(function(result){
             if (result.dismiss == 'cancel'){
@@ -122,31 +124,6 @@ export default class extends Controller {
               reject(result.value)
             }
           })
-          // if (check){
-          //   clearInterval(setCounter);
-          //   that.displayTimeLeft(seconds)
-          //   that.stopbtnTarget.removeEventListener('click',stop)
-          //   that.startbtnTarget.classList.remove("d-none")
-          //   that.stopbtnTarget.classList.add("d-none")
-          //   that.show_time_leftTarget.classList.remove("start")
-          //   that.show_time_leftTarget.classList.add("pending")
-          //   //==========================================提示聲音(放棄)
-          //   //==========================================更換時鐘背景
-          //   reject("stop~~")
-          // }else{ 
-          //   end_time += (Date.now() - stopTime) 
-
-          //   setCounter = setInterval(() => {
-          //     secondsLeft = Math.round((end_time - Date.now()) / 1000)
-          //     that.displayTimeLeft(secondsLeft)    
-              
-          //     if (secondsLeft <= 0) {
-          //       clearInterval(setCounter)
-          //       resolve("timeup")
-          //       that.stopbtnTarget.removeEventListener('click', stop)
-          //     }
-          //   },1000)
-          // }
         })
       }
     })
@@ -207,8 +184,8 @@ startRelaxPromise(){
         })
       }
   })
-  
 }
+
 
 // 中斷 api
 breakWorkApiPromise(data){
@@ -248,6 +225,7 @@ connect(){
   this.displayTimeLeft(parseInt(this.startbtnTarget.dataset.time))
 }
 
+
   start(e) {
     e.preventDefault()
     const seconds = this.startbtnTarget.dataset.time
@@ -275,9 +253,12 @@ connect(){
       this.bgcolorTarget.classList.add("tomato_relax_bg")
       this.show_time_leftTarget.classList.add("relax")
       this.show_time_leftTarget.classList.remove("start")
-      //============================================更換背景(工作->休息)
-      //============================================更換時鐘背景(停止狀態)
-      //============================================
+      //Finish work sound reminder
+      const audio = document.querySelector('.finish_sound');
+      console.log(audio)
+      audio.currentTime = 0;
+      audio.play();
+      //Break time reminder
       this.autoCloseAlert("休息一下~")
       this.displayTimeLeft(this.relaxbtnTarget.dataset.time)
     }).catch((data) => {
@@ -285,8 +266,6 @@ connect(){
       return this.breakWorkApiPromise(data)
     }).then((data) => {
       console.log(data)
-      
-
     })
   }
 
@@ -299,30 +278,30 @@ connect(){
       console.log(data)
       this.stopbtnTarget.classList.add("d-none")
       this.startbtnTarget.classList.remove("d-none")
+      //Finish relax sound reminder
+      const audio = document.querySelector('.finish_sound');
+      audio.currentTime = 0;
+      audio.play();
       this.autoCloseAlert("該開始下一顆番茄了")
       this.displayTimeLeft(this.startbtnTarget.dataset.time)
-
       this.bgcolorTarget.classList.add("tomato_bg")
       this.bgcolorTarget.classList.remove("tomato_relax_bg")
       this.show_time_leftTarget.classList.remove("relax")
       this.show_time_leftTarget.classList.add("pending")
-      //========================================================這裡要加提示聲音(休息的)
-      //========================================================這裡要加更換背景(休息->工作)
-      //========================================================更換時鐘背景(停止)
     }).catch((data) => {
       this.startbtnTarget.classList.remove("d-none")
       this.relaxbtnTarget.classList.add("d-none")
       this.stopbtnTarget.classList.add("d-none")
+      //Finish relax sound reminder
+      const audio = document.querySelector('.finish_sound');
+      audio.currentTime = 0;
+      audio.play();
       this.autoCloseAlert("該開始下一顆番茄了")
       this.displayTimeLeft(this.startbtnTarget.dataset.time)
       this.bgcolorTarget.classList.add("tomato_bg")
       this.bgcolorTarget.classList.remove("tomato_relax_bg")
       this.show_time_leftTarget.classList.remove("relax")
       this.show_time_leftTarget.classList.add("pending")
-      //========================================================這裡要加提示聲音(休息的)
-      //========================================================這裡要加更換背景(休息->工作)
-      //========================================================更換時鐘背景(停止)
-      
     })
   }
 

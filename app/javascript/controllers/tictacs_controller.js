@@ -187,14 +187,43 @@ startRelaxPromise(){
 }
 
 
-// 中斷 api
+
+ //中斷 api
 breakWorkApiPromise(data){
+   let submitData = {reason: data}
+   const tictac_id = this.stopbtnTarget.dataset.id
+   
+   return new Promise(function(resolve, reject) {
+     Rails.ajax({
+       url: `/api/v1/tictacs/${tictac_id}/cancel`, 
+       type: 'POST',
+       beforeSend(xhr, options) {
+         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+         options.data = JSON.stringify(submitData)
+         return true
+       },
+       dataType: 'json',
+       success: resp => {
+         resolve(resp)
+       }, 
+       error: err => {
+         console.log(err);
+       } 
+     })
+   }) 
+ }
+/*
+breakWorkApiPromise(data){
+  let submitData = {reason: data}
   const tictac_id = this.stopbtnTarget.dataset.id
+  // debugger
   return new Promise(function(resolve, reject) {
     Rails.ajax({
       url: `/api/v1/tictacs/${tictac_id}/cancel`, 
       type: 'POST',
+      data: JSON.stringify(submitData),
       dataType: 'json',
+      contentType: 'application/json; charset=UTF-8',
       success: resp => {
         resolve(resp)
       }, 
@@ -204,6 +233,7 @@ breakWorkApiPromise(data){
     })
   }) 
 }
+*/
 
 connect(){
   this.clicked = false

@@ -9,7 +9,7 @@ class Api::V1::TictacsController < ApplicationController
       @tictac = current_user.tictacs.build(task_id: params[:task_id])
     
     if @tictac.start!
-      render json: {user_id: @tictac.user_id, status: @tictac.status, start_at: @tictac.start_at, task_id: @tictac.task_id, id: @tictac.id, data: params }
+      render json: { user_id: @tictac.user_id, status: @tictac.status, start_at: @tictac.start_at, task_id: @tictac.task_id, id: @tictac.id, data: params}
     else
       render json: { error: "nonoooooo" }, status: 400
     end
@@ -17,8 +17,11 @@ class Api::V1::TictacsController < ApplicationController
   end
 
   def cancel
+    if params[:reason].length != 0
+      @tictac.update(reason: params[:reason])
+    end
     if @tictac.cancel!
-      render json: { state: 'ok' }
+      render json: { user_id: @tictac.user_id, status: @tictac.status, start_at: @tictac.start_at, task_id: @tictac.task_id, id: @tictac.id, data: params}
     else
       render json: { error: "nonoooooo" }, status: 400
     end

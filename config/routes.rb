@@ -1,19 +1,23 @@
 Rails.application.routes.draw do
-  root "tasks#index"
+  root "projects#index"
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   
   #counter
-  resources :tictacs, only: [:index, :show]
+  resources :tictacs, only: [:index]
   
-  #task
-  resources :tasks do
-    member do
-      patch :drag
+  #project
+  resources :projects do
+    resources :tasks, except: [:index] do
+      member do
+        patch :drag
+      end
     end
   end
 
-  #project
-  resources :projects
+  resources :tasks, only: [:new, :index] do
+    resource :tictac, only: [:show]
+  end
+
 
   #Api
   namespace :api do

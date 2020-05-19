@@ -16,7 +16,6 @@ export default class extends Controller {
 
   //sweetalert-alert_message
   autoCloseAlert(message){
-    let timerInterval
     Swal.fire({
       title: message,
       timer: 2000,
@@ -40,7 +39,6 @@ export default class extends Controller {
 
   //開始api
   startWorkApiPromise(){
-    let that = this
     const task_id = this.task_listTarget.dataset.id
     return new Promise(function(resolve, reject) {
       Rails.ajax({
@@ -95,12 +93,9 @@ export default class extends Controller {
           clearInterval(setCounter);
           const stopTime = Date.now()
 
-
-          //let check = prompt("確定要捨棄番茄嗎?","請輸入捨棄原因")
           that.confirmDropOrNot(function(result){
             if (result.dismiss == 'cancel'){
               end_time += (Date.now() - stopTime) 
-
               setCounter = setInterval(() => {
                 secondsLeft = Math.round((end_time - Date.now()) / 1000)
                 that.displayTimeLeft(secondsLeft)    
@@ -131,63 +126,47 @@ export default class extends Controller {
     })
   }
 
-//計時結束
-finishWorkApiPromise(){
-  const tictac_id = this.stopbtnTarget.dataset.id
-  return new Promise(function(resolve, reject) {
-    Rails.ajax({
-      url: `/api/v1/tictacs/${tictac_id}/finish`, 
-      type: 'POST', 
-      dataType: 'json',
-      success: resp => {
-        resolve(resp)
-      }, 
-      error: err => {
-        console.log(err);
-      } 
-    })
-  }) 
-}
+  //計時結束
+  finishWorkApiPromise(){
+    const tictac_id = this.stopbtnTarget.dataset.id
+    return new Promise(function(resolve, reject) {
+      Rails.ajax({
+        url: `/api/v1/tictacs/${tictac_id}/finish`, 
+        type: 'POST', 
+        dataType: 'json',
+        success: resp => {
+          resolve(resp)
+        }, 
+        error: err => {
+          console.log(err);
+        } 
+      })
+    }) 
+  }
 
-//開始休息計時
-startRelaxPromise(){
-  let setCounter
-  let seconds = this.relaxbtnTarget.dataset.time
-  let now = Date.now()
-  let end_time = now + seconds * 1000
-  let secondsLeft = Math.round((end_time - now) / 1000)
-  let that = this
-  
-
-  return new Promise(function(resolve, reject) {
-    that.relaxbtnTarget.classList.add("d-none")
-    that.stopbtnTarget.classList.remove("d-none")
-    //=================================================更換時鐘背景(進行)
-    setCounter = setInterval(() =>{
-      secondsLeft = Math.round((end_time - Date.now()) / 1000)
-      that.displayTimeLeft(secondsLeft)    
+  //開始休息計時
+  startRelaxPromise(){
+    let setCounter
+    let seconds = this.relaxbtnTarget.dataset.time
+    let now = Date.now()
+    let end_time = now + seconds * 1000
+    let secondsLeft = Math.round((end_time - now) / 1000)
+    let that = this
     
-      if (secondsLeft < 0) {
-        clearInterval(setCounter)
-        that.stopbtnTarget.removeEventListener('click', stop)  
-        resolve("relaxtime over")
-      }
-    },1000)
-
-    //中斷事件
-    that.stopbtnTarget.addEventListener('click', stop)
-    
-      function stop () {
-        return new Promise(function(yes, no) {
+    return new Promise(function(resolve, reject) {
+      that.relaxbtnTarget.classList.add("d-none")
+      that.stopbtnTarget.classList.remove("d-none")
+      //=================================================更換時鐘背景(進行)
+      setCounter = setInterval(() =>{
+        secondsLeft = Math.round((end_time - Date.now()) / 1000)
+        that.displayTimeLeft(secondsLeft)    
+      
+        if (secondsLeft < 0) {
           clearInterval(setCounter)
-          that.displayTimeLeft(that.startbtnTarget.dataset.time)
-          reject("relaxstop")
-          that.stopbtnTarget.removeEventListener('click', stop)
-        })
-      }
-  })
-}
-
+          that.stopbtnTarget.removeEventListener('click', stop)  
+          resolve("relaxtime over")
+        }
+      },1000)
 
 
  //中斷 api
@@ -237,25 +216,43 @@ breakWorkApiPromise(data){
 }
 */
 
-connect(){
-  this.clicked = false
-  let relax_num = 0
 
-  //每4次休息一次長休息
+  // 中斷 api
+  breakWorkApiPromise(data){
+    const tictac_id = this.stopbtnTarget.dataset.id
+    return new Promise(function(resolve, reject) {
+      Rails.ajax({
+        url: `/api/v1/tictacs/${tictac_id}/cancel`, 
+        type: 'POST',
+        dataType: 'json',
+        success: resp => {
+          resolve(resp)
+        }, 
+        error: err => {
+          console.log(err);
+        } 
+      })
+    }) 
+  }
 
-  this.relaxbtnTarget.addEventListener("click", function(){
-    relax_num += 1
-    
-    if (relax_num % 4 === 0){
-      this.dataset.time = "15"
-    }else{
-      this.dataset.time = "5"
-    }
-  })
+  connect(){
+    this.clicked = false
+    let relax_num = 0
 
-  //顯示時間
-  this.displayTimeLeft(parseInt(this.startbtnTarget.dataset.time))
-}
+    //每4次休息一次長休息
+    this.relaxbtnTarget.addEventListener("click", function(){
+      relax_num += 1
+      
+      if (relax_num % 4 === 0){
+        this.dataset.time = "15"
+      }else{
+        this.dataset.time = "5"
+      }
+    })
+
+    //顯示時間
+    this.displayTimeLeft(parseInt(this.startbtnTarget.dataset.time))
+  }
 
 
   start(e) {
@@ -271,8 +268,7 @@ connect(){
       console.log(data)
       document.querySelector(".stopbtn").dataset.id = data.id
       document.querySelector(".relaxbtn").dataset.id = data.id
-      
-      
+         
       return this.startWorkPromise()
     }).then((data) => {
       console.log(data)

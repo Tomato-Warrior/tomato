@@ -57,4 +57,6 @@ Rails.application.routes.draw do
 
   #charts
   resources :charts, only: [:index]
+  #trello
+  resources :trelloapi, only: [:index]
 end

@@ -25,6 +25,6 @@ class TictacsController < ApplicationController
     else
       @tictac = current_user.tictacs.last
     end 
-      
+    #@tictac = current_user.tictacs.last || Tictac.new
   end
 end

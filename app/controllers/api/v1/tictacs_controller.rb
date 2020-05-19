@@ -3,7 +3,7 @@ class Api::V1::TictacsController < ApplicationController
   before_action :last_tictac, only: [:cancel, :finish]
 
   def start
-    if current_user.tictacs.count != 0
+    if current_user.tictacs.count != 0  #current_user.tictacs.any?
       find_expired_tictac
     end
       @tictac = current_user.tictacs.build(task_id: params[:task_id])

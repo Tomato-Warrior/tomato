@@ -47,6 +47,8 @@ gem 'paranoia', '~> 2.4', '>= 2.4.2'
 gem 'acts_as_list'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+#trello api gem
+gem 'ruby-trello', '~> 1.5', '>= 1.5.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

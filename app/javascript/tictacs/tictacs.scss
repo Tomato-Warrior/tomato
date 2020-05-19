@@ -5,12 +5,14 @@ a{
 }
 .timer_controler{
   .task-list{
-    padding-top: 30px;
+    padding-top: 40px;
+    padding-bottom: 20px;
     text-align: center;
     h3{
       margin: auto;
       display: inline-block;
       background-color: $mainYellow;
+      margin: 10px;
       padding: 5px 10px;
       font-size: 20px;
       border-radius: 20px;

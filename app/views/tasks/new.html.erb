@@ -14,6 +14,7 @@
       <%= f.label :task_name %>
       <%= f.text_field :task_name, class: 'form-control' %>
     </div>
+	    <input type="hidden"  value=<%= params[:project_id] %> id= "task_project_id" name= "task[project_id]">
     <div class="field form-group">
       <%= f.label :tomato_num %>
       <%= f.number_field :tomato_num, class: 'form-control',min: 0 %>
@@ -38,6 +39,7 @@
         </div>
       </div>
     </div>
-    <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
+    <%= f.submit :Submit, class: "btn btn-primary" %>
+    
   <% end %>
 </div>

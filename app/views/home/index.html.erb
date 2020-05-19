@@ -1,37 +1,24 @@
   <div class="main_container">
     <div class="task_group">
       <div class=" task_list">
-        <div class="show_data">
+        
+        <div class="show-data">
           <div class="data">
             <h1><%= @tictacs.count %></h1>
-            <div>收集番茄</div>
+            <p>收集番茄</p>
           </div>
           <div class="data">
             <h1><%= @uncoming_task.count %></h1>
-            <div>待完成任務</div>
+            <p>待完成任務</p>
           </div>
           <div class="data">
             <h1><%= @finish_task.count %></h1>
-            <div>已完成任務</div>
+            <p>已完成任務</p>
           </div>
-        </div>
-        <div class="add_task">
-          <div>
-            <i class="fas fa-plus"></i>
-          </div>
-          <input type="text" placeholder="建立任務給自己一個目標吧!">
         </div>
 
-        <% @uncoming_task.order(position: :asc).each do |task| %>
-        <div class="task">
-          <div class="start_task">
-            <%= link_to tictacs_path do %>
-              <i class="far fa-play-circle"></i>
-            <% end %>
-          </div>
-          <div class="task_name"><%= link_to task.task_name, tasks_path(task.id) %></div>
-        </div>
-      <% end %> 
+        
+
       </div>
       
     </div>

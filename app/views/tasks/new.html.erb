@@ -1,26 +1,22 @@
 <div class="container">
   <h1 class="py-4">新增任務</h1>
-
+ 
   <%= form_for @task, url: project_tasks_path do |f| %>
     <% if @task.errors.any? %>
       <ul>
         <% @task.errors.full_messages.each do |message|%>
-          <li><%= message %></li>
         <% end %>
       </ul>
     <% end %>
+    <input type="hidden"  value=<%= params[:project_id] %> id= "task_project_id" name= "task[project_id]">
 
     <div class="field form-group">
       <%= f.label :task_name %>
       <%= f.text_field :task_name, class: 'form-control' %>
     </div>
     <div class="field form-group">
-      <%= f.label :project %>
-      <%= f.collection_select :project_id, current_user.projects, :id, :project_name, class: 'form-control' %>
-    </div>
-    <div class="field form-group">
       <%= f.label :tomato_num %>
-      <%= f.number_field :tomato_num, class: 'form-control' %>
+      <%= f.number_field :tomato_num, class: 'form-control',min: 0 %>
     </div>
     <div class="field form-group">
       <%= f.label :tag_items %>

@@ -156,6 +156,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     nokogiri (1.10.9-x86-mingw32)
       mini_portile2 (~> 2.4.0)
+    oauth (0.5.4)
     oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
@@ -249,16 +250,22 @@ GEM
       netrc (~> 0.8)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> trello api WIP
     ruby-trello (1.6.0)
       activemodel (>= 3.2.0)
       addressable (~> 2.3)
       json
       oauth (>= 0.4.5)
       rest-client (>= 1.8.0)
+<<<<<<< HEAD
 =======
 >>>>>>> rebase master
 =======
 >>>>>>> fix conflict
+=======
+>>>>>>> trello api WIP
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
@@ -356,7 +363,11 @@ DEPENDENCIES
   pg (~> 1.2, >= 1.2.3)
   puma (~> 4.3)
   rails (~> 6.0.2, >= 6.0.2.2)
+<<<<<<< HEAD
   rest-client (~> 2.1.0)
+=======
+  ruby-trello (~> 1.5, >= 1.5.1)
+>>>>>>> trello api WIP
   sass-rails (>= 6)
   selenium-webdriver
   spring

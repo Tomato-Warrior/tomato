@@ -7,7 +7,9 @@
 </head>
 <body>
   <h1>名字:<%= @me.full_name %></h1>
-  <h1><%= @me.boards.first.lists %></h1>
-  <%= pp @me.boards %>
+  
+  <%= @board.lists[0] %>
+
+
 </body>
 </html>

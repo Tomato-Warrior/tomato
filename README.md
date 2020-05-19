@@ -1,23 +1,26 @@
-# Tomato
+# TomeowTokei
 
-請大家發PR時記得不要使用master分支
+# 專案目的
+對時程很難掌握、專注力有限常常被其他事情打亂自己做事節奏、明明一堆做不完的事情卻不知道該從哪個開始、一件事情不知道花了多少時間在上面非常苦惱。
+因此構想了一個能夠協助安排每日瑣事，並且記錄所有擾亂你作業的事情的專案管理番茄鐘。
 
-## 提交方式
+# 產品亮點
+* 番茄鐘：讓你作業期間保持專注
+* 任務管理：讓你將一閃而過的靈感隨時記下
+* 提醒功能：時間到了我們提醒你
+* 圖表分析：呈現你的作業時程，紀錄中斷你作業的原因
 
-1. git clone 到自己的電腦上
-`git clone git@github.com:Tomato-Warrior/tomato.git`
-2. 回本地端記得`bundle` -> `db:migrate`
-3. 每個任務請開 branch 開發，命名方式依照到時候發的issue數字，ex: `issue-1`
-4. `git push origin issue-2`(數字要記得換喔！)
-5. 找組員討論完後再merge
-6. 結束後自己電腦記得切回`master`再`git pull`更新本地端 master branch
-7. `git checkout newbranch`
-8. 將本地端的新分支rebase到剛才更新的master branch`git rebase master`
 
-## 命名方式
-1. Branch
-    - feat/ add_features
-    - fix/ fix_bug
-2. PR
-    - 條列大概做了哪些事
-    - 加上issue number #tag
+# 使用技術
+* Ruby  version -- 2.6.5
+* Framework: Ruby on Rails -- 6.0.2
+* Frontend: HTML / CSS / Bootstraps / jQuery
+* Database: PostgreSQL
+* Third-Party Serivce: Google API, Facebook API, Trello API
+
+# 注意事項
+如需透過第三方，要再將正確的key貼到`config/application.yml`
+
+# 團隊
+蔡妤禪、吳亦翎、陳聖凱
+

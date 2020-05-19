@@ -337,8 +337,3 @@ connect(){
     e.preventDefault();
   }
 }
-
-
-
-
- 

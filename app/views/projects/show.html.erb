@@ -9,8 +9,8 @@
     <div class="col-3">Tag</div>
     <div class="col-2">Action</div>
   </div>
-  <div data-controller="drag" data-drag-url="/tasks/:id/drag" class="text-center">
-    <% @project.tasks.each do |task| %>
+  <div data-controller="drag" class="text-center" data-id="<%= @project.id %>" data-target="drag.project_id">
+    <% @project.tasks.order(position: :asc).each do |task| %>
       <div class="row p-2 task-hover" data-id="<%= task.id %>">
         <div class="col-1">
           <%= link_to task_tictac_path(task_id: task.id) do %>

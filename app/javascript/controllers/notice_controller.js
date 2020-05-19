@@ -5,6 +5,6 @@ export default class extends Controller {
   static targets = ['message']
 
   close() {
-   this.messageTarget.remove();
+    this.messageTarget.remove();
   }
 }

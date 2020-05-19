@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   
   #homepage
   resources :home, only: [:index]
-  #chart
+
+  #charts
   resources :charts, only: [:index]
 end

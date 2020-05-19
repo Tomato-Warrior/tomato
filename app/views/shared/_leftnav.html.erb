@@ -35,7 +35,9 @@
             <div class="project_cover">
               <div id="project_cover" class="project_color" style="background-color:<%= project.project_cover %>"></div>
             </div>
-            <div class="project_name"><%= project.project_name %></div>
+            <div class="project_name">
+              <%= link_to project.project_name, project_path(project) %>
+            </div>
             <small class="project_time">100h</small>
           </div>               
         <% end %>

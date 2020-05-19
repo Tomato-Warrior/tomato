@@ -13,8 +13,14 @@
  
     <%= render "shared/navbar" %>
     <%= render "shared/flash" %>
-      <%= yield %>
-    <%= render "shared/footer" %>
+    <section class="container-fluid overflow-hidden">
+      <div class="row flex-xl-nowrap">
+        <%= render "shared/leftnav" %>
+        <div class="main-container">
+          <%= yield %>
+        </div>
+      </div>
+    </section>
     
     <script>
       $(".tag-select2").select2({

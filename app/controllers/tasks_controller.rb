@@ -15,7 +15,6 @@ class TasksController < ApplicationController
   def create
 
     @task = current_user.tasks.build(task_params)
-    
     if @task.save
       redirect_to project_path(params[:project_id]), notice: "成功喵~任務新增成功"
     else

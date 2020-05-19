@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container">
   <h2 class="py-4"> <%= @project.project_name %> </h2>
 <<<<<<< HEAD
@@ -36,6 +37,24 @@
         <div class="col-1">
           <%= 
 =======
+=======
+<div class="wrap">
+
+  <div class="show-data">
+    <div class="data">
+      <h1><%= @tictacs.count %></h1>
+      <p>收集番茄</p>
+    </div>
+    <div class="data">
+      <h1><%= @uncoming_task.count %></h1>
+      <p>待完成任務</p>
+    </div>
+    <div class="data">
+      <h1><%= @finish_task.count %></h1>
+      <p>已完成任務</p>
+    </div>
+  </div>
+>>>>>>> 完成show頁面
 
   <%= form_for @task, url: project_tasks_path(@project) do |f| %>
     <% if @task.errors.any? %>
@@ -46,26 +65,30 @@
       </ul>
     <% end %>
 
-    <div class="field form-group">
-      <%= f.text_field :task_name, class: 'form-control' %>
+    <div class="add_task">
+      <div class="input-group mb-3">
+        <%= f.text_field :task_name, class: 'form-control', placeholder: "建立任務給自己一個目標吧!" %>
+        <input type="hidden" value=<%= params[:id] %> id= "task_project_id" name= "task[project_id]">
+        <div class="input-group-append">
+          <%= f.submit :Submit, class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
     </div>
-    <%= f.submit :Submit, class: "btn btn-primary" %>
   <% end %>
-</div>
 
-
-  <%#= link_to "新增任務", new_project_task_path(@project.id), class: "badge-pill p-2 path-color" %>
-  <ul class="my-4">
-    <div data-controller="drag" data-drag-url="/tasks/:id/drag">
-      <% @project.tasks.each do |task| %>
-        <div class="row p-2 task-hover" data-id="<%= task.id %>">
-          <div class="col-2">
-            <%= link_to task_tictac_path(task_id: task.id) do %>
+  <div>
+    <h2 class="py-2 project-title"> <%= @project.project_name %> </h2>
+    <ul class="project_task_container">
+      <div data-controller="drag" data-drag-url="/tasks/:id/drag">
+        <% @project.tasks.each do |task| %>
+        <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
+            <div class="col-1">
+            <%= link_to task_tictac_path(task_id: task.id), class: "px-3" do %>
               <i class="far fa-play-circle"></i>
             <% end %>
           </div>
-          <div class="col-2"><%= task.project.project_name %></div>
-          <div class="col-2"><%= link_to task.task_name, project_task_path(task.project_id, task.id) %></div>
+          <div class="col-2"><%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %></div>
+          <div class="col-3"></div>
           <div class="col-2"><%= task.tomato_num %></div>
           <div class="col-2"><%= display_tag task.tag_items %></div>
           <div class="col-1"><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_project_task_path(task.project_id, task.id) %></div>
@@ -75,9 +98,18 @@
             project_task_path(task.project_id, task.id),
             method:'delete',
             data: {confirm: '真的要刪除喵?'} 
+<<<<<<< HEAD
           %>
         </div>
       </div>
     <% end %>
 
+=======
+          %></div>
+        </li>
+        <% end %>
+      </div>
+    </ul>
+  </div>
+>>>>>>> 完成show頁面
 </div>

@@ -5,6 +5,7 @@
     background-color: $mainRed;
     height: 60px;
     box-shadow: -1px 4px 5px -2px rgba(66,66,66,0.14);
+    z-index: 4;
     a {
         color: #FFF;
     }
@@ -54,15 +55,19 @@ body {
 
 h1, h2, h3{
     margin-bottom: 0px;
+    text-align: center;
 }
 .alert{
     margin-bottom: 0px;
+}
+:-webkit-any(article,aside,nav,section) h1 {
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 // left_nav
 
 .main-container{
-    height: calc(100vh - 60px);
     width: 100%;
     box-sizing: border-box;
     overflow-y: hidden;

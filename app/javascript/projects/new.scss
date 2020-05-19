@@ -1,8 +1,45 @@
+@import '../packs/script/library.scss';
+
 #project_cover{
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
 }
 .project_color{
   width: 20px;
+}
+
+ul{
+    margin: 0px 15px 10px 15px;
+    padding-inline-start: 0px;
+    overflow: hidden;
+}
+
+.project-task-list{
+  background-color: #fff;
+  box-shadow: -1px 2px 5px -2px rgba(66,66,66,0.10);
+}
+
+.project-title{
+  text-align: left;
+  padding-top: 20px;
+  padding-left: 20px;
+  font-size: 22px;
+}
+
+.add_task{
+  margin: 10px 15px;
+}
+.btn-outline-secondary{
+  background-color: #fff;
+  border: transparent;
+  box-shadow: -1px 2px 5px -2px rgba(66,66,66,0.10);
+}
+.form-control{
+  border: none;
+  padding: 15px 20px;
+  box-shadow: -1px 2px 5px -2px rgba(66,66,66,0.10);
+}
+.list-font{
+  color: $normalFontColor;
 }

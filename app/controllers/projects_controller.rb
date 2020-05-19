@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.build(project_params)
     if @project.save
-      redirect_to projects_path, notice: 'Project created!'
+      redirect_to project_path(@project), notice: 'Project created!'
     else
       render :new
     end
@@ -31,6 +31,9 @@ class ProjectsController < ApplicationController
 
   def show
     @task = Task.new
+    @tictacs = current_user.tictacs
+    @uncoming_task = current_user.tasks.without_deleted
+    @finish_task = current_user.tasks.with_deleted
   end
 
   def destroy

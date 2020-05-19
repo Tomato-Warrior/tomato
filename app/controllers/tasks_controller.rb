@@ -5,6 +5,7 @@ class TasksController < ApplicationController
     if current_user
       @tasks = current_user.tasks.includes(:user).order(project_id: :desc)
     end
+    @projects = current_user.projects
   end
   
   def new
@@ -62,4 +63,5 @@ class TasksController < ApplicationController
   def find_task
     @task = Task.find(params[:id])
   end
+
 end

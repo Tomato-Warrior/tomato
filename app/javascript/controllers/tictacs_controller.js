@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = [ "count", "startbtn", "stopbtn", "relaxbtn", "show_time_left", "bgcolor", "task_list" ]
+  static targets = [ "count", "startbtn", "stopbtn", "relaxbtn", "show_time_left", "bgcolor", "task_list", "finish_sound", "drop_sound" ]
   
   
   displayTimeLeft(seconds) {
@@ -119,7 +119,9 @@ export default class extends Controller {
               that.stopbtnTarget.classList.add("d-none")
               that.show_time_leftTarget.classList.remove("start")
               that.show_time_leftTarget.classList.add("pending")
-              //==========================================提示聲音(放棄)
+              //放棄計時聲音
+              that.drop_soundTarget.currentTime = 0;
+              that.drop_soundTarget.play();
               //==========================================更換時鐘背景
               reject(result.value)
             }
@@ -254,10 +256,8 @@ connect(){
       this.show_time_leftTarget.classList.add("relax")
       this.show_time_leftTarget.classList.remove("start")
       //Finish work sound reminder
-      const audio = document.querySelector('.finish_sound');
-      console.log(audio)
-      audio.currentTime = 0;
-      audio.play();
+      this.finish_soundTarget.currentTime = 0;
+      this.finish_soundTarget.play();
       //Break time reminder
       this.autoCloseAlert("休息一下~")
       this.displayTimeLeft(this.relaxbtnTarget.dataset.time)
@@ -279,9 +279,8 @@ connect(){
       this.stopbtnTarget.classList.add("d-none")
       this.startbtnTarget.classList.remove("d-none")
       //Finish relax sound reminder
-      const audio = document.querySelector('.finish_sound');
-      audio.currentTime = 0;
-      audio.play();
+      this.finish_soundTarget.currentTime = 0;
+      this.finish_soundTarget.play();
       this.autoCloseAlert("該開始下一顆番茄了")
       this.displayTimeLeft(this.startbtnTarget.dataset.time)
       this.bgcolorTarget.classList.add("tomato_bg")
@@ -293,9 +292,8 @@ connect(){
       this.relaxbtnTarget.classList.add("d-none")
       this.stopbtnTarget.classList.add("d-none")
       //Finish relax sound reminder
-      const audio = document.querySelector('.finish_sound');
-      audio.currentTime = 0;
-      audio.play();
+      this.finish_soundTarget.currentTime = 0;
+      this.finish_soundTarget.play();
       this.autoCloseAlert("該開始下一顆番茄了")
       this.displayTimeLeft(this.startbtnTarget.dataset.time)
       this.bgcolorTarget.classList.add("tomato_bg")

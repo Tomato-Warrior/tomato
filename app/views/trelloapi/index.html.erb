@@ -1,4 +1,13 @@
-
-<div class="container" data-controller="trelloapi">
-    <%= link_to "匯入專案",import_selection_trelloapi_index_path %>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>名字:<%= @me.full_name %></h1>
+  <h1><%= @me.boards.first.lists %></h1>
+  <%= pp @me.boards %>
+</body>
+</html>

@@ -347,7 +347,10 @@ DEPENDENCIES
   pg (~> 1.2, >= 1.2.3)
   puma (~> 4.3)
   rails (~> 6.0.2, >= 6.0.2.2)
+<<<<<<< HEAD
   rest-client (~> 2.1.0)
+=======
+>>>>>>> trello api WIP
   ruby-trello (~> 1.5, >= 1.5.1)
   sass-rails (>= 6)
   selenium-webdriver

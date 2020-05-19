@@ -307,8 +307,3 @@ connect(){
     e.preventDefault();
   }
 }
-
-
-
-
- 

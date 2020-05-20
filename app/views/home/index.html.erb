@@ -18,6 +18,26 @@
         </div>
       </div>
 
+      <%= form_for @task, url: tasks_path do |f| %>
+        <% if @task.errors.any? %>
+          <ul>
+            <% @task.errors.full_messages.each do |message|%>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <div class="add_task">
+          <div class="input-group mb-3">
+            <%= f.text_field :task_name, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
+            <input type="hidden" value=<%= current_user.projects.first.id %> id= "task_project_id" name= "task[project_id]">
+            <div class="input-group-append">
+              <%= f.submit "", class: "btn btn-outline-secondary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
       <div>
         <ul class="project_task_container">
           <div data-controller="drag" data-drag-url="/tasks/:id/drag">
@@ -28,7 +48,7 @@
                     <i class="far fa-play-circle"></i>
                   <% end %>
                 </div>
-                <div class="col-2"><%#= task.project.project_name %></div>
+                <div class="col-2"><%= task.project.project_name %></div>
                 <div class="col-2"><%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %></div>
                 <div class="col-2"><%= task.tomato_num %></div>
                 <div class="col-2"><%= display_tag task.tag_items %></div>

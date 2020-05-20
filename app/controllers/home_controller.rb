@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     @tictacs = current_user.tictacs
     @today_tasks = current_user.tasks.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
     @finish_task = current_user.tasks.with_deleted
+    @task = Task.new
   end
   
 end

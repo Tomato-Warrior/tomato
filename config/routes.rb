@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tasks, only: [:new, :index] do
+  resources :tasks, only: [:create] do
     resource :tictac, only: [:show]
   end
 

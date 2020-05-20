@@ -41,18 +41,24 @@
       <h2 class="py-2 project-title"> <%= @project.project_name %> </h2>
     </div>
     <ul class="project_task_container">
-      <div data-controller="drag" data-drag-url="/tasks/:id/drag">
-        <% @project.tasks.each do |task| %>
+      <div data-controller="drag" data-id="<%= @project.id %>" data-target="drag.project_id">
+        <% @project.tasks.order(position: :asc).each do |task| %>
           <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
-              <div class="col-1">
-              <%= link_to task_tictac_path(task_id: task.id), class: "px-3" do %>
-                <i class="far fa-play-circle"></i>
-              <% end %>
+            <div class="col-1">
+                <%= link_to task_tictac_path(task_id: task.id), class: "px-3" do %>
+                  <i class="far fa-play-circle"></i>
+                <% end %>
             </div>
-            <div class="col-2"><%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %></div>
-            <div class="col-3"></div>
-            <div class="col-2"><%= task.tomato_num %></div>
-            <div class="col-2"><%= display_tag task.tag_items %></div>
+            <div class="col-2">
+              <%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-2">
+              <%= task.tomato_num %>
+            </div>
+            <div class="col-3">
+              <%= display_tag task.tag_items %>
+            </div>
             <div class="col-1">
               <%= link_to edit_project_task_path(task.project_id, task.id) do %>
                 <i class="fas fa-pencil-alt"></i>

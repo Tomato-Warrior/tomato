@@ -15,7 +15,6 @@ export default class extends Controller {
     let id = e.item.dataset.id;
     let data = new FormData();
     let project_id = this.project_idTarget.dataset.id
-    console.log(project_id)
     data.append("position", e.newIndex + 1);
 
     Rails.ajax({

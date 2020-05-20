@@ -15,6 +15,12 @@ class TasksController < ApplicationController
   def create
 
     @task = current_user.tasks.build(task_params)
+
+    @task.position = 0
+    while @task.position <= current_user.projects.find_by(id: params[:project_id]).tasks.count
+      @task.position += 1
+    end
+
     if @task.save
       redirect_to project_path(params[:project_id]), notice: "成功喵~任務新增成功"
     else

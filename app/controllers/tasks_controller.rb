@@ -22,7 +22,7 @@ class TasksController < ApplicationController
     end
 
     if @task.save
-      redirect_to project_path(params[:project_id]), notice: "成功喵~任務新增成功"
+      redirect_to project_path(params[:project_id]), notice: "任務新增成功喵"
     else
       render :new
     end
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
   
   def update
     if @task.update(task_params)
-      redirect_to project_path(@task.project_id), notice: '成功編輯喵'
+      redirect_to project_path(@task.project_id), notice: '任務成功編輯喵'
     else
       render :edit
     end
@@ -44,7 +44,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy   
-    redirect_to project_path(@task.project_id), notice: '成功刪除 喵'
+    redirect_to project_path(@task.project_id), notice: '任務成功刪除喵'
   end
 
   # drag tasks' items

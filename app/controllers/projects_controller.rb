@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.build(project_params)
     if @project.save
-      redirect_to project_path(@project), notice: 'Project created!'
+      redirect_to project_path(@project), notice: '專案建立成功喵'
     else
       render :new
     end
@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to project_path(@project), notice: 'Project updated!'
+      redirect_to project_path(@project), notice: '專案編輯成功喵'
     else
       render :edit
     end
@@ -37,7 +37,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to root_path, notice: 'Project deleted!'
+    redirect_to root_path, notice: '專案成功刪除喵'
   end
 
   private

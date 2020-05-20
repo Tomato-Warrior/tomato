@@ -10,13 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
+
 
 ActiveRecord::Schema.define(version: 2020_05_25_063043) do
 
-=======
-ActiveRecord::Schema.define(version: 2020_05_20_184416) do
->>>>>>> add select cards page WIP
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_05_20_184416) do
     t.integer "position"
     t.string "trello_status"
     t.integer "status", default: 0
+    t.string "trello_status"
     t.index ["deleted_at"], name: "index_tasks_on_deleted_at"
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"

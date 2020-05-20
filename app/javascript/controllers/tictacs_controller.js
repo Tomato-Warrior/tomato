@@ -16,6 +16,7 @@ export default class extends Controller {
 
   //sweetalert-alert_message
   autoCloseAlert(message){
+    let timerInterval
     Swal.fire({
       title: message,
       timer: 2000,
@@ -39,6 +40,7 @@ export default class extends Controller {
 
   //開始api
   startWorkApiPromise(){
+    let that = this
     const task_id = this.task_listTarget.dataset.id
     return new Promise(function(resolve, reject) {
       Rails.ajax({
@@ -93,9 +95,12 @@ export default class extends Controller {
           clearInterval(setCounter);
           const stopTime = Date.now()
 
+
+          //let check = prompt("確定要捨棄番茄嗎?","請輸入捨棄原因")
           that.confirmDropOrNot(function(result){
             if (result.dismiss == 'cancel'){
               end_time += (Date.now() - stopTime) 
+
               setCounter = setInterval(() => {
                 secondsLeft = Math.round((end_time - Date.now()) / 1000)
                 that.displayTimeLeft(secondsLeft)    
@@ -153,6 +158,7 @@ export default class extends Controller {
     let secondsLeft = Math.round((end_time - now) / 1000)
     let that = this
     
+
     return new Promise(function(resolve, reject) {
       that.relaxbtnTarget.classList.add("d-none")
       that.stopbtnTarget.classList.remove("d-none")
@@ -169,6 +175,21 @@ export default class extends Controller {
       },1000)
     })
   }
+
+      //中斷事件
+      that.stopbtnTarget.addEventListener('click', stop)
+      
+        function stop () {
+          return new Promise(function(yes, no) {
+            clearInterval(setCounter)
+            that.displayTimeLeft(that.startbtnTarget.dataset.time)
+            reject("relaxstop")
+            that.stopbtnTarget.removeEventListener('click', stop)
+          })
+        }
+    })
+  }
+
 
 
  //中斷 api
@@ -195,6 +216,7 @@ export default class extends Controller {
       })
     }) 
   }
+<<<<<<< HEAD
   /*
   breakWorkApiPromise(data){
     let submitData = {reason: data}
@@ -217,44 +239,50 @@ export default class extends Controller {
     }) 
   }
   */
-
-
-  // 中斷 api
-  breakWorkApiPromise(data){
-    const tictac_id = this.stopbtnTarget.dataset.id
-    return new Promise(function(resolve, reject) {
-      Rails.ajax({
-        url: `/api/v1/tictacs/${tictac_id}/cancel`, 
-        type: 'POST',
-        dataType: 'json',
-        success: resp => {
-          resolve(resp)
-        }, 
-        error: err => {
-          console.log(err);
-        } 
-      })
-    }) 
-  }
-
-  connect(){
-    this.clicked = false
-    let relax_num = 0
-
-    //每4次休息一次長休息
-    this.relaxbtnTarget.addEventListener("click", function(){
-      relax_num += 1
-      
-      if (relax_num % 4 === 0){
-        this.dataset.time = "15"
-      }else{
-        this.dataset.time = "5"
-      }
+=======
+/*
+breakWorkApiPromise(data){
+  let submitData = {reason: data}
+  const tictac_id = this.stopbtnTarget.dataset.id
+  // debugger
+  return new Promise(function(resolve, reject) {
+    Rails.ajax({
+      url: `/api/v1/tictacs/${tictac_id}/cancel`, 
+      type: 'POST',
+      data: JSON.stringify(submitData),
+      dataType: 'json',
+      contentType: 'application/json; charset=UTF-8',
+      success: resp => {
+        resolve(resp)
+      }, 
+      error: err => {
+        console.log(err);
+      } 
     })
+  }) 
+}
+*/
+>>>>>>> 匯入trello card
 
-    //顯示時間
-    this.displayTimeLeft(parseInt(this.startbtnTarget.dataset.time))
-  }
+connect(){
+  this.clicked = false
+  let relax_num = 0
+
+  //每4次休息一次長休息
+
+  this.relaxbtnTarget.addEventListener("click", function(){
+    relax_num += 1
+    
+    if (relax_num % 4 === 0){
+      this.dataset.time = "15"
+    }else{
+      this.dataset.time = "5"
+    }
+  })
+
+  //顯示時間
+  this.displayTimeLeft(parseInt(this.startbtnTarget.dataset.time))
+}
 
 
   start(e) {
@@ -270,7 +298,8 @@ export default class extends Controller {
       console.log(data)
       document.querySelector(".stopbtn").dataset.id = data.id
       document.querySelector(".relaxbtn").dataset.id = data.id
-         
+      
+      
       return this.startWorkPromise()
     }).then((data) => {
       console.log(data)

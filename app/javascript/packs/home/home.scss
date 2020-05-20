@@ -30,6 +30,14 @@ input{
     font-size: 15px;
     box-shadow: 2px 1px 5px 0px rgba(66,66,66,0.08);
   }
+
+  .drop-btn{
+    color: $placeholder;
+  }
+  .btn{
+    padding: 0px
+  }
+  
 // 
   .project_group{
     background-color: #ffffff;

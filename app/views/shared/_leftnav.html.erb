@@ -46,7 +46,7 @@
                 <%= link_to edit_project_path(project), class:'dropdown-item' do %>
                   <i class="fas fa-pencil-alt"></i><span class="pl-3">編輯</span>
                 <% end %>
-                <%= link_to project, method: :delete, data: { confirm: "Are you sure?" }, class:'dropdown-item' do %>
+                <%= link_to project, method: :delete, data: { confirm: "刪除專案後，該專案相關的資料將會消失，確定要刪除嗎？" }, class:'dropdown-item' do %>
                   <i class="fas fa-trash-alt"></i><span class="pl-3">刪除</span>
                 <% end %>
               </div>

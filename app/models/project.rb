@@ -3,7 +3,7 @@ class Project < ApplicationRecord
   
   #relationship
   belongs_to :user
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
 
   #validates
   validates :project_name, presence: true,

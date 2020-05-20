@@ -6,9 +6,26 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>名字:<%= @me.full_name %></h1>
-  
-  <%= @board.lists[0] %>
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <ul>
+      <% @project.errors.full_messages.each do |message|%>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :project_cover %>
+    <%= color_field(:project, :project_cover) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :project_name %>
+    <%= f.collection_select :project_name,@boards, :name, :name, class: 'form-control' %>
+  </div>
+  <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
+<% end %>
+
+
 
 
 </body>

@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to projects_path, notice: 'Project updated!'
+      redirect_to project_path(@project), notice: 'Project updated!'
     else
       render :edit
     end
@@ -31,14 +31,13 @@ class ProjectsController < ApplicationController
 
   def show
     @task = Task.new
-    @tictacs = current_user.tictacs
-    @uncoming_task = current_user.tasks.without_deleted
+    @tasks = current_user.tasks
     @finish_task = current_user.tasks.with_deleted
   end
 
   def destroy
     @project.destroy
-    redirect_to projects_path, notice: 'Project deleted!'
+    redirect_to root_path, notice: 'Project deleted!'
   end
 
   private

@@ -8,7 +8,7 @@
             <p>收集番茄</p>
           </div>
           <div class="data">
-            <h1><%= @uncoming_task.count %></h1>
+            <h1><%= @today_tasks.count %></h1>
             <p>待完成任務</p>
           </div>
           <div class="data">
@@ -16,9 +16,36 @@
             <p>已完成任務</p>
           </div>
         </div>
+      </div>
 
-        
-
+      <div>
+        <ul class="project_task_container">
+          <div data-controller="drag" data-drag-url="/tasks/:id/drag">
+            <% @today_tasks.each do |task| %>
+              <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
+                  <div class="col-1">
+                  <%= link_to task_tictac_path(task_id: task.id), class: "px-3" do %>
+                    <i class="far fa-play-circle"></i>
+                  <% end %>
+                </div>
+                <div class="col-2"><%#= task.project.project_name %></div>
+                <div class="col-2"><%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %></div>
+                <div class="col-2"><%= task.tomato_num %></div>
+                <div class="col-2"><%= display_tag task.tag_items %></div>
+                <div class="col-1">
+                  <%= link_to edit_project_task_path(task.project_id, task.id) do %>
+                    <i class="fas fa-pencil-alt"></i>
+                  <% end %>  
+                </div>
+                <div class="col-1">
+                  <%= link_to project_task_path(task.project_id, task.id), method:'delete', data: {confirm: '真的要刪除喵?'} do %>
+                    <i class="fas fa-trash-alt"></i>
+                  <% end %>
+                </div>
+              </li>
+            <% end %>
+          </div>
+        </ul>
       </div>
       
     </div>

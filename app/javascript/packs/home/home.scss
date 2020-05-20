@@ -6,6 +6,13 @@
 input{
   border: none;
 }
+a {
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: none;
+}
 
   .start_timer{
     position: fixed;
@@ -20,8 +27,10 @@ input{
     font-size: 18px;
     .start_icon{
       margin-right: 10px;
+      color: #fff;
       span {
         padding-left: 10px;
+        color: #fff;
       }
     }
   }

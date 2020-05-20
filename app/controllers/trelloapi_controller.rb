@@ -155,4 +155,9 @@ class TrelloapiController < ApplicationController
       i += 1
     end  
   end
+
+  def load_trello_board
+    Project.create!(project_name: @board.name,user_id: 1,
+                    tasks_attributes:@tasks_attr_data_trans)
+  end  
 end

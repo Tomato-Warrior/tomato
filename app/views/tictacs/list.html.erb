@@ -1,0 +1,25 @@
+<div class="container">
+  <h1 class="py-3">Tictac list</h1>
+	<div class="d-flex">
+		<div class="col-3">Status</div>
+		<div class="col-3">Reason</div>
+		<div class="col-3">Start time</div>
+		<div class="col-3">End time</div>
+	</div>
+  <% @tictacs.each do |tictac| %>
+    <div class="d-flex">
+			<div class="col-3">
+						<%= tictac.status %>
+					</div>
+			    <div class="col-3">
+						<%= tictac.reason %>
+					</div>
+			    <div class="col-3">
+						<%= tictac.start_at.strftime("%m/%d/%Y %I:%M%p") %>
+					</div>
+			    <div class="col-3">
+						<%= tictac.end_at.strftime("%m/%d/%Y %I:%M%p") %>
+					</div>
+		</div>
+  <% end %>
+</div>

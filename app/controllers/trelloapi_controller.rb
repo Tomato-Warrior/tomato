@@ -4,12 +4,12 @@ class TrelloapiController < ApplicationController
     @me = Trello::Member.find("user50720802")
     @project = Project.new
     @boards = @me.boards
-    @board = @boards.find { |board| board.name == "TomaTokei"}
-    @all_list = @board.lists.map{|list| list} #["許願池", "To Do", "In Progress", "Done"]
-    @all_card = @board.lists.map{|list| list.cards.map{ |card| card.name}}
-    @tasks_attr_data = @board.lists.map{|list| list.cards.map{|card|  "{task_name: '#{card.name}', trello_status: '#{list.name}', user_id: 1}"}}
-    @tasks_attr_data_trans = @tasks_attr_data.map{|list| list.map{|card| eval(card)}}.flatten 
-    load_trello_board()
+    #@board = @boards.find { |board| board.name == "TomaTokei"}
+    #@all_list = @board.lists.map{|list| list} #["許願池", "To Do", "In Progress", "Done"]
+    #@all_card = @board.lists.map{|list| list.cards.map{ |card| card.name}}
+    #@tasks_attr_data = @board.lists.map{|list| list.cards.map{|card|  "{task_name: '#{card.name}', trello_status: '#{list.name}', user_id: 1}"}}
+    #@tasks_attr_data_trans = @tasks_attr_data.map{|list| list.map{|card| eval(card)}}.flatten 
+    
   end
 
   private

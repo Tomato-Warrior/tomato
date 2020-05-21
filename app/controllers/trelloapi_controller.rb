@@ -1,6 +1,8 @@
 class TrelloapiController < ApplicationController
+  layout "trelloapi"
+
   def index
-    config_trelo_public_key()
+    
     @me = Trello::Member.find("user50720802")
     @project = Project.new
     @boards = @me.boards

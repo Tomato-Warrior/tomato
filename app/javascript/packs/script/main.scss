@@ -1,6 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
 @import "_library.scss";
 
+.navbar {
+    padding: 0.5rem 3rem;
+}
 .navname {
     background-color: $mainRed;
     height: 60px;
@@ -72,6 +75,8 @@ p {
 
 .main-container{
     width: 100%;
+    height: calc(100vh - 60px);
+    position: sticky;
     box-sizing: border-box;
-    overflow-y: hidden;
+    overflow-y: auto;
 }

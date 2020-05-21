@@ -19,12 +19,13 @@ a:hover{
     display: flex;
     background-color: #F27F6B;
     color: #ffffff;
-    padding: 15px 30px;
+    padding: 13px 25px;
     margin-bottom: 30px;
     border-radius: 5px;
     bottom: 0;
     left: 43%;
     font-size: 18px;
+    z-index: 20;
     .start_icon{
       margin-right: 10px;
       color: #fff;

@@ -27,6 +27,10 @@ ul{
   font-size: 22px;
 }
 
+.task-hover:hover {
+  background-color: #9ADDC6;
+}
+
 .add_task{
   margin: 10px 15px;
 }
@@ -38,8 +42,26 @@ ul{
 .form-control{
   border: none;
   padding: 15px 20px;
+  height: 48px;
   box-shadow: -1px 2px 5px -2px rgba(66,66,66,0.10);
 }
 .list-font{
   color: $normalFontColor;
+  line-height: 2;
+}
+.play-icon{
+  line-height: 1.5;
+  font-size: 20px;
+}
+.done-task{
+  background-color: $placeholder;
+  padding: 1px 10px;
+  font-size: 13px;
+  color: #fff;
+  margin-left: -20px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+.done-task:hover{
+  color: #fff;
 }

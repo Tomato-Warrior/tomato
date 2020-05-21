@@ -31,8 +31,9 @@ class ProjectsController < ApplicationController
 
   def show
     @task = Task.new
-    @tasks = current_user.tasks
-    @finish_task = current_user.tasks.with_deleted
+    @undone_tasks = @project.tasks.doing
+    @done_tasks = @project.tasks.done
+    # 用 counter cache 
   end
 
   def destroy

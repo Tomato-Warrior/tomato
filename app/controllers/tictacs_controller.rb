@@ -11,7 +11,6 @@ class TictacsController < ApplicationController
 
   def list
     @tictacs = current_user.tictacs
-    # @tictacs_start_time = "#{current_user.tictacs.start_at.year}" + "#{@tictacs.start_at.month}"
   end
 
   private 

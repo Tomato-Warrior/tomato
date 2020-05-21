@@ -1,3 +1,4 @@
+
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
@@ -7,6 +8,7 @@ require("tictacs")
 require("select2")
 require("chartkick")
 require("chart.js")
+
 
 import $ from 'jquery'
 window.$ = $

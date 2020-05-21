@@ -1,3 +1,4 @@
+
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
@@ -8,6 +9,7 @@ require("counters")
 require("select2")
 require("chartkick")
 require("chart.js")
+
 
 import $ from 'jquery'
 window.$ = $
@@ -20,16 +22,15 @@ import "bootstrap";
 import "./script/main.scss";
 import "./script/_library.scss";
 import "controllers";
-import 'sweetalert2/src/sweetalert2.scss';
+
+
+
 import '@fortawesome/fontawesome-free/js/all';
+import 'sweetalert2/src/sweetalert2.scss'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'tempusdominus-bootstrap-4';
 import 'tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css';
 import "select2/dist/css/select2.min.css";
-<<<<<<< HEAD
-=======
-
->>>>>>> 匯入trello card
 import "select2/dist/js/select2.full.min.js";
 import './home/home.scss';
 import './charts/charts.scss';

@@ -4,15 +4,15 @@
         
         <div class="show-data">
           <div class="data">
-            <h1><%= @tictacs.count %></h1>
+            <h1 class="tomato-num"><%= @tictacs.count %></h1>
             <p>收集番茄</p>
           </div>
           <div class="data">
-            <h1><%= @undone_today_tasks.count %></h1>
+            <h1 class="doing-task-num"><%= @undone_today_tasks.count %></h1>
             <p>待完成任務</p>
           </div>
           <div class="data">
-            <h1><%= @done_today_tasks.count %></h1>
+            <h1 class="done-data-num"><%= @done_today_tasks.count %></h1>
             <p>已完成任務</p>
           </div>
         </div>
@@ -39,7 +39,7 @@
       <% end %>
 
     <div class="project_cover d-flex align-items-center pl-3">
-      <h2 class="py-2 project-title"> <i class="fas fa-sun"></i> 今天</h2>
+      <h2 class="py-2 project-title"> <i class="fas fa-sun sun"></i> 今天</h2>
     </div>
 
       <div>
@@ -57,7 +57,10 @@
                 </div>
                 <div class="col-2 text-center"><span class="list-font"><%= task.project.project_name %></span></div>
                 <div class="col-2"><%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %></div>
-                <div class="col-2"><%= task.tomato_num %></div>
+                <div class="col-2 d-flex">
+                  <%= task.tictacs.where(status: 'finished').count %>
+                  <%= task.tictacs.where(status: 'cancelled').count %>
+                </div>
                 <div class="col-2"><%= display_tag task.tag_items %></div>
                 <div class="col-1">
                   <%= link_to edit_project_task_path(task.project_id, task.id) do %>
@@ -94,7 +97,10 @@
                 </div>
                 <div class="col-2 text-center"><span class="list-font"><%= task.project.project_name %></span></div>
                 <div class="col-2"><%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %></div>
-                <div class="col-2"><%= task.tomato_num %></div>
+                <div class="col-2 d-flex">
+                  <%= task.tictacs.where(status: 'finished').count %>
+                  <%= task.tictacs.where(status: 'cancelled').count %>
+                </div>
                 <div class="col-2"><%= display_tag task.tag_items %></div>
                 <div class="col-1">
                   <%= link_to edit_project_task_path(task.project_id, task.id) do %>

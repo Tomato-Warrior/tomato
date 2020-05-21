@@ -16,6 +16,15 @@ class Task < ApplicationRecord
   ## task = Task.find(1)
   ## task.done! if task.doing?
 
+
+  # def toggle_status
+  #   if self.status == self.doing 
+  #     self.done
+  #   else
+  #     self.doing
+  #   end
+  # end
+
   #tag
   def self.tagged_with(name)
     Tag.find_by!(tag_name: name).tasks

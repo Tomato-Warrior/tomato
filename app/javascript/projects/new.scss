@@ -24,8 +24,16 @@ ul{
   text-align: left;
   padding-top: 20px;
   padding-left: 10px;
-  font-size: 22px;
+  font-size: 20px;
+  color: $normalFontColor;
 }
+.fa-sun{
+  color: rgb(214, 136, 62);
+}
+.fa-circle, .fa-check-circle{
+  color: $leftNavTime;
+}
+
 
 .task-hover:hover {
   background-color: #9ADDC6;

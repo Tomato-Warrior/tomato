@@ -2,15 +2,15 @@
 
   <div class="show-data">
     <div class="data">
-      <h1><%= @tictacs %></h1>
+      <h1 class="tomato-num"><%= @tictac_count %></h1>
       <p>收集番茄</p>
     </div>
     <div class="data">
-      <h1><%= @undone_tasks.count %></h1>
+      <h1 class="doing-task-num"><%= @undone_tasks.count %></h1>
       <p>待完成任務</p>
     </div>
     <div class="data">
-      <h1><%= @done_tasks.count %></h1>
+      <h1 class="done-data-num"><%= @done_tasks.count %></h1>
       <p>已完成任務</p>
     </div>
   </div>
@@ -99,7 +99,8 @@
             <%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %>
           </div>
           <div class="col-2">
-            <%= task.tictacs.count %>
+            <%= task.tictacs.where(status: 'finished').count %>
+            <%= task.tictacs.where(status: 'cancelled').count %>
           </div>
           <div class="col-3">
             <%= display_tag task.tag_items %>

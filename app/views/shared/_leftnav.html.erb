@@ -29,29 +29,31 @@
 
       <span class="divider"></span>
       <div class="project-container">
-        <% @projects.each do |project| %>
-          <div class="project-list"> 
-            <div class="project_cover">
-              <div id="project_cover" class="project_color" style="background-color:<%= project.project_cover %>"></div>
-            </div>
-            <div class="project_name">
-              <%= link_to project.project_name, project_path(project) %>
-            </div>
-            <div class="btn-group">
-              <p class="pr-2 drop-btn btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ...
-              </p>
-              <div class="dropdown-menu">
-                <%= link_to edit_project_path(project), class:'dropdown-item' do %>
-                  <i class="fas fa-pencil-alt"></i><span class="pl-3">編輯</span>
-                <% end %>
-                <%= link_to project, method: :delete, data: { confirm: "刪除專案後，該專案相關的資料將會消失，確定要刪除嗎？" }, class:'dropdown-item' do %>
-                  <i class="fas fa-trash-alt"></i><span class="pl-3">刪除</span>
-                <% end %>
+      <% if user_signed_in? %>
+          <% @projects.each do |project| %>
+            <div class="project-list"> 
+              <div class="project_cover">
+                <div id="project_cover" class="project_color" style="background-color:<%= project.project_cover %>"></div>
               </div>
-            </div>
-            <small class="project_time">100h</small>
-          </div>               
+              <div class="project_name">
+                <%= link_to project.project_name, project_path(project) %>
+              </div>
+              <div class="btn-group">
+                <p class="pr-2 drop-btn btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ...
+                </p>
+                <div class="dropdown-menu">
+                  <%= link_to edit_project_path(project), class:'dropdown-item' do %>
+                    <i class="fas fa-pencil-alt"></i><span class="pl-3">編輯</span>
+                  <% end %>
+                  <%= link_to project, method: :delete, data: { confirm: "刪除專案後，該專案相關的資料將會消失，確定要刪除嗎？" }, class:'dropdown-item' do %>
+                    <i class="fas fa-trash-alt"></i><span class="pl-3">刪除</span>
+                  <% end %>
+                </div>
+              </div>
+              <small class="project_time">100h</small>
+            </div>               
+          <% end %>
         <% end %>
       </div>
       <div>

@@ -1,10 +1,4 @@
 class TrelloapiController < ApplicationController
-<<<<<<< HEAD
-
-  require 'trello'
-
-=======
->>>>>>> 可選擇Trello list新建任務
   
   layout "trelloapi"
   #全域變數  

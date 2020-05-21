@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   def index
     if current_user
-      @tasks = current_user.tasks.includes(:user).order(project_id: :desc)
+      @tasks = current_user.tasks.includes(:user)
     end
     @projects = current_user.projects
   end

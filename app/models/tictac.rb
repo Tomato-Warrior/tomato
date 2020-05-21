@@ -2,7 +2,7 @@ class Tictac < ApplicationRecord
   include AASM
   #relationship
   belongs_to :user
-  belongs_to :task , required: false, counter_cache: true
+  belongs_to :task , required: false
 
   #aasm
   aasm column: 'status' do

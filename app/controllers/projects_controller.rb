@@ -33,7 +33,6 @@ class ProjectsController < ApplicationController
     @task = Task.new
     @undone_tasks = @project.tasks.doing
     @done_tasks = @project.tasks.done
-    # 用 counter cache 
   end
 
   def destroy

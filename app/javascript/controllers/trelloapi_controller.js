@@ -2,6 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
+<<<<<<< HEAD
   static targets = ["select_board", "select_card", "select_list", "change_list"]
   trello_token = ""
   api_key = "f91cef06b7d1a94754eac87835224aeb"
@@ -10,11 +11,18 @@ export default class extends Controller {
   authenticationSuccess = function() {
     console.log('Successful authentication')
     
+=======
+  static targets = []
+
+  authenticationSuccess = function() {
+    console.log('Successful authentication')
+>>>>>>> datetimepicker problem
   }
   
   authenticationFailure = function() {
     console.log('Failed authentication')
   }
+<<<<<<< HEAD
   trelloAuthorize = function() {
     let that = this
     return new Promise(function(resolve, reject){
@@ -40,10 +48,22 @@ export default class extends Controller {
     window.Trello.authorize({
       type: 'popup',
       name: 'start',
+=======
+
+  connect(){
+  }
+
+  get(e){
+    e.preventDefault()
+    window.Trello.authorize({
+      type: 'popup',
+      name: 'Getting Started Application',
+>>>>>>> datetimepicker problem
       scope: {
         read: 'true',
         write: 'true' },
       expiration: 'never',
+<<<<<<< HEAD
       success:  () => {
                       this.authenticationSuccess()
                       this.trello_token = localStorage.trello_token
@@ -171,4 +191,12 @@ export default class extends Controller {
     .catch(err => console.error(err))
 
   }
+=======
+      success: authenticationSuccess,
+      error: authenticationFailure
+    })
+  }
+
+
+>>>>>>> datetimepicker problem
 }

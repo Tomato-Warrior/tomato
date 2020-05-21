@@ -10,7 +10,6 @@ require("chart.js")
 require("scripts")
 
 
-
 import $ from 'jquery'
 window.$ = $
 

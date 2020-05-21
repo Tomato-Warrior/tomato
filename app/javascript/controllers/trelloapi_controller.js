@@ -53,7 +53,7 @@ export default class extends Controller {
   connect(){
   }
 
-  get(e){
+  get_token(e){
     e.preventDefault()
     window.Trello.authorize({
       type: 'popup',
@@ -63,6 +63,7 @@ export default class extends Controller {
         read: 'true',
         write: 'true' },
       expiration: 'never',
+<<<<<<< HEAD
 <<<<<<< HEAD
       success:  () => {
                       this.authenticationSuccess()
@@ -194,6 +195,10 @@ export default class extends Controller {
 =======
       success: authenticationSuccess,
       error: authenticationFailure
+=======
+      success: this.authenticationSuccess,
+      error: this.authenticationFailure
+>>>>>>> add client.js
     })
   }
 

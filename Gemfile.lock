@@ -113,6 +113,8 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    jquery-ui-rails (6.0.1)
+      railties (>= 3.2.16)
     json (2.3.0)
     json (2.3.0-java)
     jwt (2.2.1)
@@ -334,6 +336,7 @@ DEPENDENCIES
   foreman (~> 0.87.1)
   groupdate
   jbuilder (~> 2.7)
+  jquery-ui-rails
   listen (>= 3.0.5, < 3.2)
   omniauth
   omniauth-facebook

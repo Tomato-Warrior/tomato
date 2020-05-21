@@ -12,18 +12,6 @@ class Task < ApplicationRecord
   #validates
   validates :task_name, presence: true
   enum status: {doing: 0 , done: 1 }
-  ## Task.doing # scope doing task
-  ## task = Task.find(1)
-  ## task.done! if task.doing?
-
-
-  # def toggle_status
-  #   if self.status == self.doing 
-  #     self.done
-  #   else
-  #     self.doing
-  #   end
-  # end
 
   #tag
   def self.tagged_with(name)

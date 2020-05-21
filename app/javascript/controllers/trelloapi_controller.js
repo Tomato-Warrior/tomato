@@ -2,9 +2,6 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   static targets = ["select_board", "select_card", "select_list", "change_list"]
   trello_token = ""
   api_key = "f91cef06b7d1a94754eac87835224aeb"
@@ -13,31 +10,11 @@ export default class extends Controller {
   authenticationSuccess = function() {
     console.log('Successful authentication')
     
-=======
-  static targets = []
-=======
-  static targets = ["select_board", "select_card"]
->>>>>>> add select cards page WIP
-=======
-  static targets = ["select_board", "select_card", "select_list"]
->>>>>>> add checkbox for card
-  trello_token = ""
-  api_key = "f91cef06b7d1a94754eac87835224aeb"
-  
-  authenticationSuccess = function() {
-    console.log('Successful authentication')
-<<<<<<< HEAD
->>>>>>> datetimepicker problem
-=======
-    
->>>>>>> get client data
   }
   
   authenticationFailure = function() {
     console.log('Failed authentication')
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
   trelloAuthorize = function() {
     let that = this
     return new Promise(function(resolve, reject){
@@ -63,38 +40,14 @@ export default class extends Controller {
     window.Trello.authorize({
       type: 'popup',
       name: 'start',
-=======
-
-  connect(){
-  }
-
-  get_token(e){
-    e.preventDefault()
-    window.Trello.authorize({
-      type: 'popup',
-      name: 'Getting Started Application',
->>>>>>> datetimepicker problem
-=======
-  trelloAuthorize = function() {
-<<<<<<< HEAD
-    window.Trello.authorize({
-      type: 'popup',
-      name: 'start',
->>>>>>> get client data
       scope: {
         read: 'true',
         write: 'true' },
       expiration: 'never',
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> get client data
       success:  () => {
                       this.authenticationSuccess()
                       this.trello_token = localStorage.trello_token
                       },
-<<<<<<< HEAD
       error: this.authenticationFailure
     })
     .then((text) => {
@@ -218,115 +171,4 @@ export default class extends Controller {
     .catch(err => console.error(err))
 
   }
-=======
-      success: authenticationSuccess,
-      error: authenticationFailure
-=======
-      success: this.authenticationSuccess,
-=======
->>>>>>> get client data
-      error: this.authenticationFailure
->>>>>>> add client.js
-=======
-    let that = this
-    return new Promise(function(resolve, reject){
-      window.Trello.authorize({
-        type: 'popup',
-        name: 'start',
-        scope: {
-          read: 'true',
-          write: 'true' },
-        expiration: 'never',
-        success:  (data) => {
-                        that.authenticationSuccess()
-                        that.trello_token = localStorage.trello_token
-                        resolve(data)
-                        },
-        error: that.authenticationFailure
-      })
->>>>>>> add select cards page WIP
-    })
-  }
-
-  connect(){
-    this.trelloAuthorize()
-    fetch(`https://api.trello.com/1/members/me/boards?key=${this.api_key}&token=${this.trello_token}`, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-    .then(response => {
-      console.log(
-        `Response: ${response.status} ${response.statusText}`
-      );
-      return response.text();
-    })
-    .then((text) => {
-      const submitData = {token: this.trello_token}
-      Rails.ajax({
-        url: `/trelloapi/get_boards`, 
-        type: 'POST', 
-        dataType: 'json',
-        beforeSend(xhr, options) {
-          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-          options.data = JSON.stringify(submitData)
-          return true
-        },
-        success: resp => {
-          console.log(resp)
-        }, 
-        error: err => {
-          console.log(err);
-        } 
-      })
-    })
-    .catch(err => console.error(err))    
-    
-  }
-
-<<<<<<< HEAD
->>>>>>> datetimepicker problem
-=======
-
-
-  select_board(e){
-    console.log(this.select_boardTarget.value)
-    const submitData = { board_id: this.select_boardTarget.value}
-    Rails.ajax({
-      url: `/trelloapi/get_cards`, 
-      type: 'POST', 
-      dataType: 'json',
-      beforeSend(xhr, options) {
-        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-        options.data = JSON.stringify(submitData)
-        return true
-      },
-      success: resp => {
-        console.log("get card!!!")
-        console.log(resp)    
-      }, 
-      error: err => {
-        console.log(err);
-      } 
-    })
-  } 
-<<<<<<< HEAD
->>>>>>> add select cards page WIP
-=======
-
-  select_list(){
-    let check_item = document.querySelectorAll("input.select_list")
-    for (let i = 0; i < check_item.length; i++){
-      if(check_item[i].checked === false){
-        document.querySelectorAll(`.select_card#${check_item[i].id}`).forEach((card)=>{card.classList.add("d-none")})
-        document.querySelectorAll(`li.select_card${check_item[i].name}`).forEach((card)=>{card.classList.add("d-none")})
-      }else{
-        document.querySelectorAll(`.select_card#${check_item[i].id}`).forEach((card)=>{card.classList.remove("d-none")})
-        document.querySelectorAll(`li.select_card${check_item[i].name}`).forEach((card)=>{card.classList.remove("d-none")})
-      }
-      
-    } 
-  }
->>>>>>> add checkbox for card
 }

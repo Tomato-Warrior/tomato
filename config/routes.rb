@@ -14,11 +14,15 @@ Rails.application.routes.draw do
     resources :tasks, except: [:index] do
       member do
         patch :drag
+        patch :toggle_status
       end
     end
   end
 
-  resources :tasks, only: [:create] do
+  resources :tasks, only: [] do
+    collection do
+      post :today_task
+    end
     resource :tictac, only: [:show]
   end
 

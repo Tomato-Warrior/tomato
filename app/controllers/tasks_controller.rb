@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: [:edit, :update, :destroy, :drag, :show]
+  before_action :find_task, only: [:edit, :update, :destroy, :drag, :show, :toggle_status]
 
   def index
     if current_user
@@ -29,6 +29,8 @@ class TasksController < ApplicationController
   end
 
   def show
+    @finished_tictac = Tictac.where('task_id = ?', params[:id] ).where(status: "finished").count
+    @cancel_tictac = Tictac.where('task_id = ?', params[:id] ).where(status: "cancelled").count
   end
   
   def edit
@@ -45,6 +47,33 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy   
     redirect_to project_path(@task.project_id), notice: '任務成功刪除喵'
+  end
+
+  # 首頁表單post
+  def today_task
+    @task = current_user.tasks.build(task_params)
+
+    @task.position = 0
+    while @task.position <= current_user.projects.find_by(id: params[:project_id]).tasks.count
+      @task.position += 1
+    end
+
+    if @task.save
+      redirect_to root_path, notice: "任務新增成功喵"
+    else
+      render :new
+    end  
+  end
+
+  # 切換任務狀態
+  def toggle_status
+    if @task.doing?
+      @task.done!
+      redirect_to project_path(@task.project_id)
+    else
+      @task.doing!
+      redirect_to project_path(@task.project_id)
+    end
   end
 
   # drag tasks' items

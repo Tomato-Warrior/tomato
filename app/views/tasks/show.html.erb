@@ -1,27 +1,35 @@
 <div class="container">
   <table class="table table-borderless table-hover w-auto">
     <tr>
-      <th>Task</th>
+      <th>任務</th>
       <td><%= @task.task_name %></td>
     </tr>
     <tr>
-      <th>Project</th>
+      <th>所屬專案</th>
       <td><%= @project %></td>
     </tr>
     <tr>
-      <th>Tomatoes</th>
+      <th>預期番茄數</th>
       <td><%= @task.tomato_num %></td>
+    </tr>
+    <tr>
+      <th>已完成番茄數</th>
+      <td><%= @finished_tictac %></td>
+    </tr>
+    <tr>
+      <th>已完成取消番茄數</th>
+      <td><%= @finished_tictac %></td>
     </tr>
     <tr>
       <th>Tags</th>
       <td><%= display_tag @task.tag_items %></td>
     </tr>
     <tr>
-      <th>Deadline</th>
+      <th>期限</th>
       <td><%= @task.task_date %></td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>填寫備註</th>
       <td><%= @task.description %></td>
     </tr>
     <tr>

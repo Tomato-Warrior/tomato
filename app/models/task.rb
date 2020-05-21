@@ -11,7 +11,10 @@ class Task < ApplicationRecord
   belongs_to :user
   #validates
   validates :task_name, presence: true
-
+  enum status: {doing: 0 , done: 1 }
+  ## Task.doing # scope doing task
+  ## task = Task.find(1)
+  ## task.done! if task.doing?
 
   #tag
   def self.tagged_with(name)

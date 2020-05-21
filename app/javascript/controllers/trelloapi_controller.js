@@ -34,19 +34,17 @@ export default class extends Controller {
     })
   }
 
-  connect(){
-    this.trelloAuthorize()
-    fetch(`https://api.trello.com/1/members/me/boards?key=${this.api_key}&token=${this.trello_token}`, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-    .then(response => {
-      console.log(
-        `Response: ${response.status} ${response.statusText}`
-      );
-      return response.text();
+  get_token(e){
+    e.preventDefault()
+    window.Trello.authorize({
+      type: 'popup',
+      name: 'Getting Started Application',
+      scope: {
+        read: 'true',
+        write: 'true' },
+      expiration: 'never',
+      success: this.authenticationSuccess,
+      error: this.authenticationFailure
     })
     .then((text) => {
       const submitData = {token: this.trello_token}

@@ -9,6 +9,9 @@ class TictacsController < ApplicationController
     @task = current_user.tasks.find(params[:task_id])
   end
 
+  def edit
+  end
+
   def list
     @tictacs_cancelled = current_user.tictacs.where(status: "cancelled")
     @tictacs_cancelled_task = current_user.tictacs.where(status: "cancelled")

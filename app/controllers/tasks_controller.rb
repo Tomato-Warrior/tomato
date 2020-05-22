@@ -54,7 +54,7 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
 
     @task.position = 0
-    while @task.position <= current_user.projects.find_by(id: params[:project_id]).tasks.count
+    while @task.position <= current_user.projects.first.tasks.count
       @task.position += 1
     end
 

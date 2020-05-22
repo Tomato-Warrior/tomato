@@ -30,7 +30,7 @@
       <span class="divider"></span>
       <div class="project-container">
       <% if user_signed_in? %>
-          <% @projects.each do |project| %>
+          <% @projects.order(id: :desc).each do |project| %>
             <div class="project-list"> 
               <div class="project_cover">
                 <div id="project_cover" class="project_color" style="background-color:<%= project.project_cover %>"></div>

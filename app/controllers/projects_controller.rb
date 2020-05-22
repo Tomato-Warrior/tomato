@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
 
   def show
     @task = Task.new
-    @undone_tasks = @project.tasks.doing
+    @undo_tasks = @project.tasks.doing
     @done_tasks = @project.tasks.done
     task_ids = @project.tasks.ids
     @tictac_count = Tictac.where(task_id: task_ids).where(status: 'finished').count

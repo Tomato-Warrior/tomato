@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     @projects = current_user.projects
     range = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
     @tictacs = current_user.tictacs.where(created_at: range).where(status: 'finished')
-    @undone_today_tasks = current_user.tasks.where(created_at: range).doing
+    @undo_today_tasks = current_user.tasks.where(created_at: range).doing
     @done_today_tasks = current_user.tasks.where(created_at: range).done
     @task = Task.new
   end

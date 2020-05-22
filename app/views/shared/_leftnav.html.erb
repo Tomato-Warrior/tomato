@@ -29,8 +29,13 @@
 
       <span class="divider"></span>
       <div class="project-container">
+<<<<<<< HEAD
       <% if user_signed_in? %>
           <% @projects.order(id: :desc).each do |project| %>
+=======
+        <% if user_signed_in? %>
+          <% @projects.each do |project| %>
+>>>>>>> refactor/charts
             <div class="project-list"> 
               <div class="project_cover">
                 <div id="project_cover" class="project_color" style="background-color:<%= project.project_cover %>"></div>

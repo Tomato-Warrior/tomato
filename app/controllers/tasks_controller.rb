@@ -52,7 +52,6 @@ class TasksController < ApplicationController
   # 首頁表單post
   def today_task
     @task = current_user.tasks.build(task_params)
-
     @task.position = 0
     while @task.position <= current_user.projects.first.tasks.count
       @task.position += 1

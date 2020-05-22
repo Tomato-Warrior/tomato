@@ -1,25 +1,75 @@
 <div class="container">
-  <h1 class="py-3">Tictac list</h1>
-	<div class="d-flex">
-		<div class="col-3">Status</div>
-		<div class="col-3">Reason</div>
-		<div class="col-3">Start time</div>
-		<div class="col-3">End time</div>
-	</div>
-  <% @tictacs.each do |tictac| %>
-    <div class="d-flex">
-			<div class="col-3">
+	<h1 class="py-3">Tictac list</h1>
+	<nav>
+	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Cancelled Tictacs</a>
+	    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Finished Tictacs</a>
+	  </div>
+	</nav>
+	<div class="tab-content" id="nav-tabContent">
+	  <div class="tab-pane chartbg fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+			<div class="d-flex">
+				<div class="py-2 col-1">Status</div>
+				<div class="py-2 col-2">Task</div>
+				<div class="py-2 col-3">Reason</div>
+				<div class="py-2 col-3">Start time</div>
+				<div class="py-2 col-3">End time</div>
+			</div>
+			<% @tictacs_cancelled.each do |tictac| %>
+				<div class="d-flex">
+					<div class="py-2 col-1">
 						<%= tictac.status %>
 					</div>
-			    <div class="col-3">
+					<div class="py-2 col-2">
+						<% if tictac.task %>
+							<%= tictac.task.task_name %>
+						<% else %>
+							<%= "No Task" %>
+						<% end %>
+					</div>
+					<div class="py-2 col-3">
 						<%= tictac.reason %>
 					</div>
-			    <div class="col-3">
+					<div class="py-2 col-3">
 						<%= tictac.start_at.strftime("%m/%d/%Y %I:%M%p") %>
 					</div>
-			    <div class="col-3">
+					<div class="py-2 col-3">
 						<%= tictac.end_at.strftime("%m/%d/%Y %I:%M%p") %>
 					</div>
+				</div>
+			<% end %>
 		</div>
-  <% end %>
+	  <div class="tab-pane chartbg fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+			<div class="d-flex">
+				<div class="py-2 col-1">Status</div>
+				<div class="py-2 col-2">Task</div>
+				<div class="py-2 col-3">Reason</div>
+				<div class="py-2 col-3">Start time</div>
+				<div class="py-2 col-3">End time</div>
+			</div>
+			<% @tictacs_finished.each do |tictac| %>
+				<div class="d-flex">
+					<div class="py-2 col-1">
+						<%= tictac.status %>
+					</div>
+					<div class="py-2 col-2">
+						<% if tictac.task %>
+							<%= tictac.task.task_name %>
+						<% else %>
+							<%= "No Task" %>
+						<% end %>
+					</div>
+					<div class="py-2 col-3">
+						<%= tictac.reason %>
+					</div>
+					<div class="py-2 col-3">
+						<%= tictac.start_at.strftime("%m/%d/%Y %I:%M%p") %>
+					</div>
+					<div class="py-2 col-3">
+						<%= tictac.end_at.strftime("%m/%d/%Y %I:%M%p") %>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
 </div>

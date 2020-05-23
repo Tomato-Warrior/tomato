@@ -2,10 +2,9 @@ class TrelloapiController < ApplicationController
   layout "trelloapi"
 
   def index
-    
-    @me = Trello::Member.find("user50720802")
+    #@me = Trello::Member.find("user50720802")
     @project = Project.new
-    @boards = @me.boards
+    #@boards = @me.boards
     #@board = @boards.find { |board| board.name == "TomaTokei"}
     #@all_list = @board.lists.map{|list| list} #["許願池", "To Do", "In Progress", "Done"]
     #@all_card = @board.lists.map{|list| list.cards.map{ |card| card.name}}
@@ -23,7 +22,7 @@ class TrelloapiController < ApplicationController
   end
 
   def load_trello_board
-    Project.create!(project_name: @board.name,user_id: 1,
+    Project.create!(project_name: @board.name,
                     tasks_attributes:@tasks_attr_data_trans)
   end  
 end

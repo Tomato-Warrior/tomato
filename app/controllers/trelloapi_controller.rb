@@ -97,7 +97,8 @@ class TrelloapiController < ApplicationController
   end
 
   def load_trello_board
-    current_user.projects.create!(title: @param_board_name,
-                    tasks_attributes:@tasks_attr_data)
+    current_user.projects.create!(project_name: @param_board_name,
+                                  tasks_attributes:@tasks_attr_data)
+
   end  
 end

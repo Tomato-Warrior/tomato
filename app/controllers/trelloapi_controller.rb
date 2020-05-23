@@ -156,7 +156,6 @@ class TrelloapiController < ApplicationController
   def import_trello_board(board_name, tasks_attr_data)
     current_user.projects.create!(title: board_name,
                     tasks_attributes: tasks_attr_data)
-  end  
 
   def get_assigned_cards_data(member_id, board_id, list_name, api_key, token)
     @assigned_cards = JSON.parse(GetLists.new.get_assigned_cards(member_id, board_id, list_name, api_key, token)).values_at("cards").flatten

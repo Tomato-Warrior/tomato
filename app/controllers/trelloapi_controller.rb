@@ -104,7 +104,12 @@ class TrelloapiController < ApplicationController
   end
 
   def load_trello_board
+<<<<<<< HEAD
     current_user.projects.create!(project_name: @param_board_name,
                     tasks_attributes:@tasks_attr_data)
+=======
+    Project.create!(project_name: @board.name,
+                    tasks_attributes:@tasks_attr_data_trans)
+>>>>>>> get client data
   end  
 end

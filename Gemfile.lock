@@ -355,7 +355,6 @@ DEPENDENCIES
   foreman (~> 0.87.1)
   groupdate
   jbuilder (~> 2.7)
-  jquery-ui-rails
   listen (>= 3.0.5, < 3.2)
   omniauth
   omniauth-facebook

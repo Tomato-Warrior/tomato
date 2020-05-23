@@ -13,15 +13,22 @@ export default class extends Controller {
     
 =======
   static targets = []
-
+  trello_token = ""
+  api_key = "f91cef06b7d1a94754eac87835224aeb"
+  
   authenticationSuccess = function() {
     console.log('Successful authentication')
+<<<<<<< HEAD
 >>>>>>> datetimepicker problem
+=======
+    
+>>>>>>> get client data
   }
   
   authenticationFailure = function() {
     console.log('Failed authentication')
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   trelloAuthorize = function() {
     let that = this
@@ -59,16 +66,26 @@ export default class extends Controller {
       type: 'popup',
       name: 'Getting Started Application',
 >>>>>>> datetimepicker problem
+=======
+  trelloAuthorize = function() {
+    window.Trello.authorize({
+      type: 'popup',
+      name: 'start',
+>>>>>>> get client data
       scope: {
         read: 'true',
         write: 'true' },
       expiration: 'never',
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> get client data
       success:  () => {
                       this.authenticationSuccess()
                       this.trello_token = localStorage.trello_token
                       },
+<<<<<<< HEAD
       error: this.authenticationFailure
     })
     .then((text) => {
@@ -197,11 +214,44 @@ export default class extends Controller {
       error: authenticationFailure
 =======
       success: this.authenticationSuccess,
+=======
+>>>>>>> get client data
       error: this.authenticationFailure
 >>>>>>> add client.js
     })
   }
 
+  connect(){
+  }
+
+  get_token(e){
+    e.preventDefault()
+    this.trelloAuthorize() 
+  }
+
+  add_task(e){
+    e.preventDefault()
+    fetch(`https://api.trello.com/1/members/me/boards?key=${this.api_key}&token=${this.trello_token}`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log(
+        `Response: ${response.status} ${response.statusText}`
+      );
+      return response.text();
+    })
+    .then(text => console.log(text))
+    .catch(err => console.error(err));
+
+  
+    /*const boards = window.Trello.get('/members/me/boards');
+    console.log(boards)
+    console.log(boards)*/
+    
+  }
 
 >>>>>>> datetimepicker problem
 }

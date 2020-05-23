@@ -73,6 +73,37 @@ export default class extends Controller {
     
   }
 
+  connect(){
+  }
+
+  get_token(e){
+    e.preventDefault()
+    this.trelloAuthorize() 
+  }
+
+  add_task(e){
+    e.preventDefault()
+    fetch(`https://api.trello.com/1/members/me/boards?key=${this.api_key}&token=${this.trello_token}`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log(
+        `Response: ${response.status} ${response.statusText}`
+      );
+      return response.text();
+    })
+    .then(text => console.log(text))
+    .catch(err => console.error(err));
+
+  
+    /*const boards = window.Trello.get('/members/me/boards');
+    console.log(boards)
+    console.log(boards)*/
+    
+  }
 
 
   select_board(e){

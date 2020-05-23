@@ -38,12 +38,15 @@ export default class extends Controller {
     e.preventDefault()
     window.Trello.authorize({
       type: 'popup',
-      name: 'Getting Started Application',
+      name: 'start',
       scope: {
         read: 'true',
         write: 'true' },
       expiration: 'never',
-      success: this.authenticationSuccess,
+      success:  () => {
+                      this.authenticationSuccess()
+                      this.trello_token = localStorage.trello_token
+                      },
       error: this.authenticationFailure
     })
     .then((text) => {
@@ -69,6 +72,37 @@ export default class extends Controller {
     
   }
 
+  connect(){
+  }
+
+  get_token(e){
+    e.preventDefault()
+    this.trelloAuthorize() 
+  }
+
+  add_task(e){
+    e.preventDefault()
+    fetch(`https://api.trello.com/1/members/me/boards?key=${this.api_key}&token=${this.trello_token}`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log(
+        `Response: ${response.status} ${response.statusText}`
+      );
+      return response.text();
+    })
+    .then(text => console.log(text))
+    .catch(err => console.error(err));
+
+  
+    /*const boards = window.Trello.get('/members/me/boards');
+    console.log(boards)
+    console.log(boards)*/
+    
+  }
 
 
   select_board(e){

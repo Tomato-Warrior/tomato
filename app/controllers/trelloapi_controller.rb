@@ -8,6 +8,7 @@ class TrelloapiController < ApplicationController
     $token = params[:token]
   end
 
+<<<<<<< HEAD
   def get_cards
     $board_id = params[:board_id]
     render json: { cards_data: params[:cards_data] }, status: 200
@@ -58,6 +59,12 @@ class TrelloapiController < ApplicationController
     #@me = Trello::Member.find(@username)
     #@boards = @me.boards
     #@boards_name = @boards.map{|board| board.name}
+=======
+  def index
+    #@me = Trello::Member.find("user50720802")
+    @project = Project.new
+    #@boards = @me.boards
+>>>>>>> get client data
     #@board = @boards.find { |board| board.name == "TomaTokei"}
     #@all_list = @board.lists.map{|list| list} #["許願池", "To Do", "In Progress", "Done"]
     #@all_card = @board.lists.map{|list| list.cards.map{ |card| card.name}}

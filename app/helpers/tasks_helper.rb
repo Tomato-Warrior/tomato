@@ -16,4 +16,28 @@ module TasksHelper
     end
   end
 
+  def display_finished_tictac( tictac_num )
+    if tictac_num != nil
+      i = 0
+      finished_tictac = ''
+      while i < tictac_num
+        i += 1
+        finished_tictac << "<img src='/finish_tictac.png' style='max-width:20px'>"
+      end
+      finished_tictac.html_safe
+    end
+  end
+
+  def display_cancelled_tictac( tictac_num )
+    if tictac_num != nil
+      i = 0
+      cancelled_tictac = ''
+      while i < tictac_num
+        i += 1
+        cancelled_tictac << "<img src='/cancel_tictac.png' style='max-width:20px'>"
+      end
+      cancelled_tictac.html_safe
+    end
+  end
+
 end

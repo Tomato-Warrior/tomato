@@ -19,7 +19,6 @@ window.Swal = Swal
 
 import "bootstrap";
 import "controllers";
-
 import '@fortawesome/fontawesome-free/js/all';
 import 'sweetalert2/src/sweetalert2.scss'
 import '@fortawesome/fontawesome-free/css/all.min.css';

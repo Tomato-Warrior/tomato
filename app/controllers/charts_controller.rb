@@ -4,7 +4,7 @@ class ChartsController < ApplicationController
 
     @week_tictac = current_user.tictacs.where(status: "finished").where('end_at BETWEEN ? AND ?', Time.zone.now.beginning_of_week, Time.zone.now.end_of_week).count
 
-    @month_tictac = current_user.tictacs.where(status: "finished").where('end_at BETWEEN ? AND ?', Time.zone.now.beginning_of_week, Time.zone.now.end_of_week).count
+    @month_tictac = current_user.tictacs.where(status: "finished").where('end_at BETWEEN ? AND ?', Time.zone.now.beginning_of_month, Time.zone.now.end_of_month).count
     
     @daily_tictac = current_user.tictacs.group(:status).group_by_day(:end_at).count
     

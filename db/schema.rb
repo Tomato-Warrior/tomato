@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2020_06_01_054811) do
 
 
@@ -54,8 +55,8 @@ ActiveRecord::Schema.define(version: 2020_06_01_054811) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
     t.integer "position"
-    t.integer "status", default: 0
     t.string "trello_status"
+    t.integer "status", default: 0
     t.index ["deleted_at"], name: "index_tasks_on_deleted_at"
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"

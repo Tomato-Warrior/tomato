@@ -73,35 +73,40 @@ export default class extends Controller {
   }
 
   connect(){
-  }
-
-  get_token(e){
-    e.preventDefault()
-    this.trelloAuthorize() 
-  }
-
-  add_task(e){
-    e.preventDefault()
+    this.trelloAuthorize()
     fetch(`https://api.trello.com/1/members/me/boards?key=${this.api_key}&token=${this.trello_token}`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
     .then(response => {
       console.log(
         `Response: ${response.status} ${response.statusText}`
       );
       return response.text();
     })
-    .then(text => console.log(text))
-    .catch(err => console.error(err));
-
+    .then((text) => {
+      const submitData = {token: this.trello_token, boards_data: text}
+      Rails.ajax({
+        url: `/trelloapi/get_boards`, 
+        type: 'POST', 
+        dataType: 'json',
+        beforeSend(xhr, options) {
+          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+          options.data = JSON.stringify(submitData)
+          return true
+        },
+        success: resp => {
+          console.log(resp)
+        }, 
+        error: err => {
+          console.log(err);
+        } 
+      })
+    })
+    .catch(err => console.error(err))    
   
-    /*const boards = window.Trello.get('/members/me/boards');
-    console.log(boards)
-    console.log(boards)*/
-    
   }
 
 

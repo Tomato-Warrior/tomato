@@ -1,31 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-<%= form_for(@project) do |f| %>
-  <% if @project.errors.any? %>
-    <ul>
-      <% @project.errors.full_messages.each do |message|%>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <div class="form-group">
-    <%= f.label :project_cover %>
-    <%= color_field(:project, :project_cover) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :project_name %>
-    <%= f.collection_select :project_name,@boards, :name, :name, class: 'form-control' %>
-  </div>
-  <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
-<% end %>
-
-
 
     <a href="#" data-action="trelloapi#get_token">
       <span>驗證</span>
@@ -34,4 +6,4 @@
     <a href="#" data-action="trelloapi#add_task">
       <span>加任務</span>
     </a>
-</div>
+

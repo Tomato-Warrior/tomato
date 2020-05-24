@@ -1,4 +1,5 @@
 class TrelloapiController < ApplicationController
+<<<<<<< HEAD
   
   layout "trelloapi"
   #全域變數  
@@ -43,6 +44,26 @@ class TrelloapiController < ApplicationController
     @param_board_name = boards_name[name_index] #拿到board name
     #create project and tasks
     load_trello_board()
+=======
+  require 'trello'
+  layout "trelloapi"
+  #全域變數
+  $boards_data 
+  $lists_data 
+  $cards_data  
+  def get_boards
+    $boards_data = params[:boards_data]
+  end
+
+  def get_cards
+    $cards_data = params[:cards_data]
+    render json: { cards_data: params[:cards_data] }, status: 200
+  end
+
+  def get_lists
+    $lists_data = params[:lists_data]
+    render json: { lists_data: params[:lists_data] }, status: 200
+>>>>>>> add select cards page WIP
   end
 
   def index
@@ -50,8 +71,12 @@ class TrelloapiController < ApplicationController
 
   def import_selection
     @project = Project.new
+<<<<<<< HEAD
     boards_data = GetBoards.new.get_boards(ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
     boards = JSON.parse(boards_data)
+=======
+    boards = JSON.parse($boards_data)
+>>>>>>> add select cards page WIP
     boards_id = boards.map{|board| board.values_at("id")}.flatten
     boards_name = boards.map{|board| board.values_at("name")}.flatten
     @boards_name_id = boards_name.zip(boards_id)
@@ -86,7 +111,7 @@ class TrelloapiController < ApplicationController
   def config_trelo_public_key
     Trello.configure do |config|
       config.developer_public_key = ENV['TRELLO_DEVELOPER_PUBLIC_KEY']
-      config.member_token = ENV['TRELLO_MEMBER_TOKEN']
+      config.member_token = $token
     end
   end
 

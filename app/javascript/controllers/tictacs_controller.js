@@ -211,7 +211,6 @@ export default class extends Controller {
     }) 
   }
 
-
   // 中斷 api
   breakWorkApiPromise(data){
     const tictac_id = this.stopbtnTarget.dataset.id

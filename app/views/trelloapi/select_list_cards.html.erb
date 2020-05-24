@@ -1,0 +1,14 @@
+<div class="container" data-controller="trelloapi">
+    
+
+  <%= @lists %>
+  
+  <ul>
+    <% @lists.each do |list| %>
+        <li>
+          <%= check_box_tag list.values_at("name"), list.values_at("id") %>
+          <%= list.values_at("name").join %>
+        </li>
+    <% end %>
+  </ul>
+</div>

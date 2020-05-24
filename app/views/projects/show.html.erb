@@ -44,7 +44,7 @@
       <div data-controller="drag" data-id="<%= @project.id %>" data-target="drag.project_id">
         <% @undo_tasks.order(position: :asc).each do |task| %>
           <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
-            <div class="col-1 d-flex mr-5">
+            <div class="col-1 d-flex">
                 <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
                   <i class="far fa-circle"></i>
                 <% end %>
@@ -52,9 +52,13 @@
                   <i class="far fa-play-circle"></i>
                 <% end %>
             </div>
-            <div class="col-3 d-flex align-items-center">
+            <div class="col-2 align-items-center text-center">
               <%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %>
+            </div>
+            <div class="col-2 d-flex align-items-center">
               <%= display_expect_tictac task.tomato_num %>
+              <%= display_finished_tictac task.tictacs.where(status: 'finished').count %>
+              <%= display_cancelled_tictac task.tictacs.where(status: 'cancelled').count %>
             </div>
             <div class="col-2 d-flex align-items-center">
               <small class="pr-2">已完成時鐘: <%= task.tictacs.where(status: 'finished').count %></small>
@@ -88,7 +92,7 @@
       <ul class="project_task_container">
         <% @done_tasks.order(position: :asc).each do |task| %>
           <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
-            <div class="col-1 d-flex mr-5">
+            <div class="col-1 d-flex">
                 <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
                   <i class="far fa-check-circle"></i>
                 <% end %>
@@ -96,8 +100,13 @@
                   <i class="far fa-play-circle"></i>
                 <% end %>
             </div>
-            <div class="col-3 d-flex align-items-center">
+            <div class="col-2 align-items-center text-center">
               <%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %>
+            </div>
+            <div class="col-2 d-flex align-items-center">
+              <%= display_expect_tictac task.tomato_num %>
+              <%= display_finished_tictac task.tictacs.where(status: 'finished').count %>
+              <%= display_cancelled_tictac task.tictacs.where(status: 'cancelled').count %>
             </div>
             <div class="col-2 d-flex align-items-center">
               <small class="pr-2">已完成時鐘: <%= task.tictacs.where(status: 'finished').count %></small>

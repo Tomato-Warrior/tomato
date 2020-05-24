@@ -82,61 +82,111 @@ export default class extends Controller {
   add_task(e){
     e.preventDefault()
     fetch(`https://api.trello.com/1/members/me/boards?key=${this.api_key}&token=${this.trello_token}`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
     .then(response => {
       console.log(
         `Response: ${response.status} ${response.statusText}`
       );
       return response.text();
     })
-    .then(text => console.log(text))
-    .catch(err => console.error(err));
-
+    .then((text) => {
+      const submitData = {token: this.trello_token, boards_data: text}
+      Rails.ajax({
+        url: `/trelloapi/get_boards`, 
+        type: 'POST', 
+        dataType: 'json',
+        beforeSend(xhr, options) {
+          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+          options.data = JSON.stringify(submitData)
+          return true
+        },
+        success: resp => {
+          console.log(resp)
+        }, 
+        error: err => {
+          console.log(err);
+        } 
+      })
+    })
+    .catch(err => console.error(err))    
   
-    /*const boards = window.Trello.get('/members/me/boards');
-    console.log(boards)
-    console.log(boards)*/
-    
   }
+
 
 
   select_board(e){
     console.log(this.select_boardTarget.value)
-    const submitData = { board_id: this.select_boardTarget.value}
-    Rails.ajax({
-      url: `/trelloapi/get_cards`, 
-      type: 'POST', 
-      dataType: 'json',
-      beforeSend(xhr, options) {
-        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-        options.data = JSON.stringify(submitData)
-        return true
-      },
-      success: resp => {
-        console.log("get card!!!")
-        console.log(resp)    
-      }, 
-      error: err => {
-        console.log(err);
-      } 
+    fetch(`https://api.trello.com/1/boards/${this.select_boardTarget.value}/cards?key=${this.api_key}&token=${this.trello_token}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+    .then(response => {
+      console.log(
+        `Response: ${response.status} ${response.statusText}`
+      );
+      return response.text();
     })
+    .then((text) => {
+      const submitData = {token: this.trello_token, cards_data: text}
+      Rails.ajax({
+        url: `/trelloapi/get_cards`, 
+        type: 'POST', 
+        dataType: 'json',
+        beforeSend(xhr, options) {
+          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+          options.data = JSON.stringify(submitData)
+          return true
+        },
+        success: resp => {
+          console.log("get card!!!")
+          console.log(resp)
+          
+        }, 
+        error: err => {
+          console.log(err);
+        } 
+      })
+    })
+    .catch(err => console.error(err))
+    fetch(`https://api.trello.com/1/boards/${this.select_boardTarget.value}/lists?key=${this.api_key}&token=${this.trello_token}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+    .then(response => {
+      console.log(
+        `Response: ${response.status} ${response.statusText}`
+      );
+      return response.text();
+    }) 
+    .then((text) => {
+      const submitData = {token: this.trello_token, lists_data: text}
+      Rails.ajax({
+        url: `/trelloapi/get_lists`, 
+        type: 'POST', 
+        dataType: 'json',
+        beforeSend(xhr, options) {
+          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+          options.data = JSON.stringify(submitData)
+          return true
+        },
+        success: resp => {
+          console.log("get list!!!")
+          console.log(resp)
+          
+        }, 
+        error: err => {
+          console.log(err);
+        } 
+      })
+    })
+    .catch(err => console.error(err))   
   } 
-
-  select_list(){
-    let check_item = document.querySelectorAll("input.select_list")
-    for (let i = 0; i < check_item.length; i++){
-      if(check_item[i].checked === false){
-        document.querySelectorAll(`.select_card#${check_item[i].id}`).forEach((card)=>{card.classList.add("d-none")})
-        document.querySelectorAll(`li.select_card${check_item[i].name}`).forEach((card)=>{card.classList.add("d-none")})
-      }else{
-        document.querySelectorAll(`.select_card#${check_item[i].id}`).forEach((card)=>{card.classList.remove("d-none")})
-        document.querySelectorAll(`li.select_card${check_item[i].name}`).forEach((card)=>{card.classList.remove("d-none")})
-      }
-      
-    } 
-  }
 }

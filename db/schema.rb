@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_054811) do
     t.string "trello_status"
     t.integer "status", default: 0
     t.string "trello_status"
+    t.integer "status", default: 0
     t.index ["deleted_at"], name: "index_tasks_on_deleted_at"
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"

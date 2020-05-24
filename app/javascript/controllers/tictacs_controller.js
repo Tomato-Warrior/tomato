@@ -173,6 +173,8 @@ export default class extends Controller {
           resolve("relaxtime over")
         }
       },1000)
+    })
+  }
 
       //中斷事件
       that.stopbtnTarget.addEventListener('click', stop)
@@ -214,6 +216,7 @@ export default class extends Controller {
       })
     }) 
   }
+<<<<<<< HEAD
 /*
 breakWorkApiPromise(data){
   let submitData = {reason: data}
@@ -236,6 +239,30 @@ breakWorkApiPromise(data){
   }) 
 }
 */
+=======
+  /*
+  breakWorkApiPromise(data){
+    let submitData = {reason: data}
+    const tictac_id = this.stopbtnTarget.dataset.id
+    // debugger
+    return new Promise(function(resolve, reject) {
+      Rails.ajax({
+        url: `/api/v1/tictacs/${tictac_id}/cancel`, 
+        type: 'POST',
+        data: JSON.stringify(submitData),
+        dataType: 'json',
+        contentType: 'application/json; charset=UTF-8',
+        success: resp => {
+          resolve(resp)
+        }, 
+        error: err => {
+          console.log(err);
+        } 
+      })
+    }) 
+  }
+  */
+>>>>>>> add select cards page WIP
 
 connect(){
   this.clicked = false

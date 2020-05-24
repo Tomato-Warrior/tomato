@@ -48,5 +48,13 @@ Rails.application.routes.draw do
   #charts
   resources :charts, only: [:index]
   #trello
-  resources :trelloapi, only: [:index]
+  resources :trelloapi, only: [:index] do
+    collection do
+      post :get_boards
+      post :get_lists
+      post :get_cards
+      get :import_selection
+      get :select_list_cards
+    end
+  end
 end

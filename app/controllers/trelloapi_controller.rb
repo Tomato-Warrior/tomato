@@ -1,5 +1,4 @@
 class TrelloapiController < ApplicationController
-
   
   layout "trelloapi"
   #全域變數  
@@ -53,14 +52,6 @@ class TrelloapiController < ApplicationController
     @project = Project.new
     boards_data = GetBoards.new.get_boards(ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
     boards = JSON.parse(boards_data)
-    boards_id = boards.map{|board| board.values_at("id")}.flatten
-    boards_name = boards.map{|board| board.values_at("name")}.flatten
-    @boards_name_id = boards_name.zip(boards_id)
-    #@me = Trello::Member.find(@username)
-    #@boards = @me.boards
-    #@boards_name = @boards.map{|board| board.name}
-    @project = Project.new
-    boards = JSON.parse($boards_data)
     boards_id = boards.map{|board| board.values_at("id")}.flatten
     boards_name = boards.map{|board| board.values_at("name")}.flatten
     @boards_name_id = boards_name.zip(boards_id)

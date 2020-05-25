@@ -2,15 +2,15 @@
   <table class="table table-borderless table-hover w-auto">
     <tr>
       <th>任務</th>
-      <td><%= @task.task_name %></td>
+      <td><%= @task.title %></td>
     </tr>
     <tr>
       <th>所屬專案</th>
-      <td><%= @task.project.project_name %></td>
+      <td><%= @task.project.title %></td>
     </tr>
     <tr>
       <th>預期番茄數</th>
-      <td><%= @task.tomato_num %></td>
+      <td><%= @task.expect_tictacs %></td>
     </tr>
     <tr>
       <th>已完成番茄數</th>
@@ -26,7 +26,7 @@
     </tr>
     <tr>
       <th>期限</th>
-      <td><%= @task.task_date %></td>
+      <td><%= @task.date %></td>
     </tr>
     <tr>
       <th>填寫備註</th>
@@ -34,8 +34,12 @@
     </tr>
     <tr>
       <td>
-        <%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_project_task_path(@task.project_id, @task.id), class: "px-2" %>
-        <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, project_task_path(@task.project_id, @task.id), method:'delete', data: {confirm: '真的要刪除喵?'}, class: "px-2" %>
+        <%= link_to edit_project_task_path(@task.project_id, @task.id), class: "px-2" do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        <%= link_to project_task_path(@task.project_id, @task.id), method:'delete', data: {confirm: '真的要刪除喵?'}, class: "px-2" do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
       </td>
     </tr>
   </table> 

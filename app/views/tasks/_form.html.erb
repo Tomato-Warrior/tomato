@@ -8,16 +8,16 @@
   <% end %>
 
    <div class="form-group">
-    <%= f.label :task_name %>
-    <%= f.text_field :task_name, class: 'form-control' %>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :project %>
-    <%= f.collection_select :project_id, current_user.projects, :id, :project_name, class: 'form-control' %>
+    <%= f.collection_select :project_id, current_user.projects, :id, :title, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :tomato_num %>
-    <%= f.number_field :tomato_num, class: 'form-control' %>
+    <%= f.label :expect_tictacs %>
+    <%= f.number_field :expect_tictacs, class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :tag_items %>
@@ -31,7 +31,7 @@
     <%= f.text_area :description, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :task_date %>
+    <%= f.label :date %>
     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
       <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
       <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">

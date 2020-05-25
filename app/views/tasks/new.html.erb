@@ -11,13 +11,13 @@
     <input type="hidden"  value=<%= params[:project_id] %> id= "task_project_id" name= "task[project_id]">
 
     <div class="form-group">
-      <%= f.label :task_name %>
-      <%= f.text_field :task_name, class: 'form-control' %>
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %>
     </div>
 	    <input type="hidden"  value=<%= params[:project_id] %> id= "task_project_id" name= "task[project_id]">
     <div class="field form-group">
-      <%= f.label :tomato_num %>
-      <%= f.number_field :tomato_num, class: 'form-control',min: 0 %>
+      <%= f.label :expect_tictacs %>
+      <%= f.number_field :expect_tictacs, class: 'form-control',min: 0 %>
     </div>
     <div class="form-group">
       <%= f.label :tag_items %>
@@ -31,7 +31,7 @@
       <%= f.text_area :description, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :task_date %>
+      <%= f.label :date %>
       <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
         <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
         <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">

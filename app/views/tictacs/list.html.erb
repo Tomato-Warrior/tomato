@@ -19,14 +19,16 @@
 			<% @tictacs_cancelled.each do |tictac| %>
 				<div class="d-flex">
 					<div class="py-2 col-1 text-center">
-						<%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_tictac_path(:id) %>
+						<%= link_to edit_tictac_path(:id) do %>
+							<i class="fas fa-pencil-alt"></i>
+						<% end %>
 					</div>
 					<div class="py-2 col-1">
 						<%= tictac.status %>
 					</div>
 					<div class="py-2 col-2">
 						<% if tictac.task %>
-							<%= tictac.task.task_name %>
+							<%= tictac.task.title %>
 						<% else %>
 							<%= "No Task" %>
 						<% end %>
@@ -54,14 +56,16 @@
 			<% @tictacs_finished.each do |tictac| %>
 				<div class="d-flex">
 					<div class="py-2 col-1 text-center">
-						<%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_tictac_path(:id) %>
+						<%= link_to edit_tictac_path(:id) do %>
+							<i class="fas fa-pencil-alt"></i>
+						<% end %>
 					</div>
 					<div class="py-2 col-2">
 						<%= tictac.status %>
 					</div>
 					<div class="py-2 col-3">
 						<% if tictac.task %>
-							<%= tictac.task.task_name %>
+							<%= tictac.task.title %>
 						<% else %>
 							<%= "No Task" %>
 						<% end %>

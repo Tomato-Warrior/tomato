@@ -46,7 +46,11 @@
           $('.dropdown-menu li a.dropdown-item.active').removeClass('active');
           $(this).parent('li').addClass('active');
         })
-      }); 
+      });
+
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      });
     </script>
   </body>
 </html>

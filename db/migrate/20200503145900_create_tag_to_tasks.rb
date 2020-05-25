@@ -1,6 +1,6 @@
-class CreateTagging < ActiveRecord::Migration[6.0]
+class CreateTagToTasks < ActiveRecord::Migration[6.0]
   def change
-    create_table :tagging do |t|
+    create_table :tag_to_task do |t|
       t.references :tag, null: false, foreign_key: true
       t.references :task, null: false, foreign_key: true
 
@@ -8,3 +8,5 @@ class CreateTagging < ActiveRecord::Migration[6.0]
     end
   end
 end
+
+

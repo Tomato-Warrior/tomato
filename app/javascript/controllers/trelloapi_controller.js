@@ -107,7 +107,7 @@ export default class extends Controller {
       })
     })
     .catch(err => console.error(err))    
-  
+    
   }
 
 
@@ -183,4 +183,16 @@ export default class extends Controller {
     })
     .catch(err => console.error(err))   
   } 
+
+  select_list(){
+    let check_item = document.querySelectorAll("input.select_list")
+    for (let i = 0; i < check_item.length; i++){
+      if(check_item[i].checked === false){
+        document.querySelectorAll(`.select_card#${check_item[i].id}`).forEach((card)=>{card.classList.add("d-none")})
+      }else{
+        document.querySelectorAll(`.select_card#${check_item[i].id}`).forEach((card)=>{card.classList.remove("d-none")})
+      }
+      
+    } 
+  }
 }

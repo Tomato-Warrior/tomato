@@ -14,5 +14,12 @@ class ChartsController < ApplicationController
 
     @tasks = current_user.tasks
 
+    tags = current_user.tags
+    tag_arr = []
+    tags.each do |tag|
+      tag_arr << tag
+    end
+    @tags = tag_arr.uniq
+
   end
 end

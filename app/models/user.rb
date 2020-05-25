@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :tictacs
   has_many :projects
   has_many :tasks
+  has_many :taggings, through: :tasks
+  has_many :tags, through: :tasks 
 
   # callback
   after_create :default_project_create

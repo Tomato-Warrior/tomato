@@ -4,7 +4,7 @@ import Rails from "@rails/ujs"
 export default class extends Controller {
   static targets = [ "count", "startbtn", "stopbtn", "relaxbtn", "show_time_left", "bgcolor", "task_list", "finish_sound", "drop_sound" ]
   
-  
+
   displayTimeLeft(seconds) {
     const minutes = Math.floor(seconds / 60)
     const remainSeconds = seconds % 60

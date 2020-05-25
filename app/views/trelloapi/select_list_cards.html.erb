@@ -1,18 +1,15 @@
 <div class="container" data-controller="trelloapi"> 
-  <ul>
-    <% @lists.each do |list| %>
-        <li>
-          <%= check_box_tag list.values_at("id"), list.values_at("name"), {:controller=>"trelloapi"},"data-action"=>"click->trelloapi#select_list", "data-target"=>"trelloapi.select_list",class:"select_list" %>
-          <%= list.values_at("name").join %>
-        </li>
-    <% end %>
-  </ul>
-  <ul>
-    <% @cards.each do |card| %>
-        <li>
-          <%= check_box_tag card.values_at("idList"), card.values_at("name"),nil ,class:"select_card"%>
-          <span class="select_card"><%= card.values_at("name").join %></span>
-        </li>
-    <% end %>
-  </ul>
+
+  <%= form_tag({controller: "trelloapi", action: "get_selection"}, method: "post") do %>
+    <ul>
+      <% @lists.each do |list| %>
+          <li>
+            <%= check_box_tag list.values_at("id"), list.values_at("name"),nil,:name => list.values_at("name"),"data-action"=>"click->trelloapi#select_list", "data-target"=>"trelloapi.select_list",class:"select_list" %>
+            <%= list.values_at("name").join %>
+          </li>
+      <% end %>
+    </ul>
+    
+    <%= submit_tag "Submit" %>
+  <% end %>
 </div>

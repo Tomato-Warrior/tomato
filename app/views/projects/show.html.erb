@@ -56,15 +56,15 @@
               <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
             </div>
             <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
-              <img src='/expect_tictac.png' style='max-width:20px'>
+              <img src='/expect_tictac.png' class='task_tictac'>
               <small><%= task.expect_tictacs %></small>
             </div>
             <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
-              <img src='/finish_tictac.png' style='max-width:20px'>
+              <img src='/finish_tictac.png' class='task_tictac'>
               <small><%= task.tictacs.finished.count %></small>
             </div>
             <div class="col-1 d-flex align-items-center"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
-              <img src='/cancel_tictac.png' style='max-width:20px'>
+              <img src='/cancel_tictac.png' class='task_tictac'>
               <small><%= task.tictacs.cancelled.count %></small>
             </div>
             <div class="col-3 d-flex align-items-center">
@@ -107,15 +107,15 @@
               <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
             </div>
             <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
-              <img src='/expect_tictac.png' style='max-width:20px'>
+              <img src='/expect_tictac.png' class='task_tictac'>
               <small><%= task.expect_tictacs %></small>
             </div>
             <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
-              <img src='/finish_tictac.png' style='max-width:20px'>
+              <img src='/finish_tictac.png' class='task_tictac'>
               <small><%= task.tictacs.finished.count %></small>
             </div>
             <div class="col-1 d-flex align-items-center"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
-              <img src='/cancel_tictac.png' style='max-width:20px'>
+              <img src='/cancel_tictac.png' class='task_tictac'>
               <small><%= task.tictacs.cancelled.count %></small>
             </div>
             <div class="col-3 d-flex align-items-center">

@@ -1,24 +1,32 @@
 <div class="container">
-  <div class="display_data d-flex text-center flex-wrap">
-    <h1 class="col-12 p-2 my-2">Tictac Dashboard</h1>
-    <h3 class="col-12 p-2 my-2 chartbg">完成番茄數量</h3>
-    <div class="day_data col-4 p-2 my-2 chartbg">
-      <h1>
+  <div class="display_data d-flex text-center flex-wrap chartbg my-4 border">
+    <h1 class="col-12 p-2 my-2">Dashboard</h1>
+    <div class="day_data col-4 p-2">
+      <h2>
         <%= @today_tictac %>
-        <small class="text-muted">/ Day</small>
-      </h1>
+        <small class="text-muted">
+          <img src='/finish_tictac.png' class='dashboard_tictac'>
+          / Day
+        </small>
+      </h2>
     </div>
-    <div class="day_data col-4 p-2 my-2 chartbg">
-      <h1>
+    <div class="day_data col-4 p-2">
+      <h2>
         <%= @week_tictac %>
-        <small class="text-muted">/ Week</small>
-      </h1>
+        <small class="text-muted">
+          <img src='/finish_tictac.png' class='dashboard_tictac'>
+          / Week
+        </small>
+      </h2>
     </div>
-    <div class="month_data col-4 p-2 my-2 chartbg">
-      <h1>
+    <div class="month_data col-4 p-2">
+      <h2>
         <%= @month_tictac %>
-        <small class="text-muted">/ Month</small>
-      </h1>
+        <small class="text-muted">
+          <img src='/finish_tictac.png' class='dashboard_tictac'>
+          / Month
+        </small>
+      </h2>
     </div>
   </div>
   
@@ -47,7 +55,33 @@
   <div class="chartbg p-4 border-right border-left border-bottom">
     <div class="btn-group">
       <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
-        Select Task <span class="caret"></span>
+        選擇一項標籤 <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <% @tags.each do |tag| %>
+          <li><a href="<%= '#'"tag-chart-#{tag.id}" %>" data-toggle="tab" class="dropdown-item" ><%= tag.name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  
+    <div class="tab-content">
+      <div id="Home" class="tab-pane active">
+        <h1><%= @tags.first.name %></h1>
+        <%= column_chart @tags.first.tictacs.finished.group_by_day(:end_at).count %>
+      </div>
+      <% @tags.each do |tag| %>
+        <div id="<%= "tag-chart-#{tag.id}" %>" class="tab-pane">
+          <h1><%= tag.name %></h1>
+          <%= column_chart tag.tictacs.finished.group_by_day(:end_at).count %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="chartbg p-4 border-right border-left border-bottom">
+    <div class="btn-group">
+      <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
+        選擇一項任務 <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
         <% @tasks.each do |task| %>
@@ -68,10 +102,5 @@
         </div>
       <% end %>
     </div>
-  </div>
-
-  <div>
-    <%= column_chart current_user.tictacs.group(:status).count %>
-    <%= pie_chart current_user.tictacs.group(:status).count %>
   </div>
 </div>

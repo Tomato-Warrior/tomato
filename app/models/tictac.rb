@@ -31,13 +31,13 @@ class Tictac < ApplicationRecord
   private
   
   def status_start 
-    update(status: 'active', start_at: Time.now)
+    update(start_at: Time.now)
   end
   def status_cancel
-    update(status: 'cancelled', end_at: Time.now)
+    update(end_at: Time.now)
   end
   def status_finish
-    update(status: 'finished', end_at: Time.now)
+    update(end_at: Time.now)
   end
 
 end

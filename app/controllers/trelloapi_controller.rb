@@ -40,8 +40,8 @@ class TrelloapiController < ApplicationController
 
   def select_list_cards
     @cards = JSON.parse($cards_data)
-    @lists = @cards.map{|card| card.values_at("idList")}.flatten
-
+    @cards_name = @cards.map{|card| card.values_at("name")}.flatten
+    @cards_list_id = @cards.map{|card| card.values_at("idList")}.flatten
     @lists = JSON.parse($lists_data)
     @lists_name = @lists.map{|list| list.values_at("name")}.flatten
     @lists_id = @lists.map{|list| list.values_at("id")}.flatten

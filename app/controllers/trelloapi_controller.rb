@@ -39,7 +39,7 @@ class TrelloapiController < ApplicationController
   end
 
   def select_list_cards
-<<<<<<< HEAD
+
     lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     @lists = JSON.parse(lists_data)
     lists_name = @lists.map{|list| list.values_at("name")}.flatten
@@ -50,12 +50,13 @@ class TrelloapiController < ApplicationController
   def select_assigned_cards_of_list
     lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     @lists = JSON.parse(lists_data)
-=======
-    @cards = JSON.parse($cards_data)
+    cards_data = GetCards.new.get_cards($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
+    @cards = JSON.parse(cards_data)
     @cards_name = @cards.map{|card| card.values_at("name")}.flatten
     @cards_list_id = @cards.map{|card| card.values_at("idList")}.flatten
-    @lists = JSON.parse($lists_data)
->>>>>>> add checkbox for card
+
+    lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
+    @lists = JSON.parse(lists_data)
     @lists_name = @lists.map{|list| list.values_at("name")}.flatten
     @lists_id = @lists.map{|list| list.values_at("id")}.flatten
   end
@@ -163,8 +164,22 @@ class TrelloapiController < ApplicationController
     end  
   end
 
+  def generate_tasks_attributes
+    i=0
+    @tasks_attr_data=[]
+
+    while i<@param_list_id.count
+      params = @param_card_name[i].map{ |card| "{task_name: '#{card}', trello_status: '#{@param_list_name[i]}', user_id: '#{current_user.id}'}"}
+      @tasks_attr_data.append(params)
+      i += 1
+    end
+    
+    @tasks_attr_data = @tasks_attr_data.map{|list| list.map{|card| eval(card)}}.flatten 
+    return @tasks_attr_data
+  end
+
   def load_trello_board
-    Project.create!(project_name: @board.name,
-                    tasks_attributes:@tasks_attr_data_trans)
+    current_user.projects.create!(project_name: @param_board_name,
+                    tasks_attributes:@tasks_attr_data)
   end  
 end

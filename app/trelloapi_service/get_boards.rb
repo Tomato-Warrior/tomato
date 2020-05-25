@@ -1,6 +1,5 @@
 class GetBoards
   require 'rest-client'
-
   def get_boards(api_key, token)
     begin
       RestClient.get "api.trello.com/1/members/me/boards?key=#{api_key}&token=#{token}"

@@ -26,7 +26,7 @@
 
     <div class="add_task">
       <div class="input-group mb-3">
-        <%= f.text_field :task_name, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
+        <%= f.text_field :title, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
         <input type="hidden" value=<%= params[:id] %> id= "task_project_id" name= "task[project_id]">
         <div class="input-group-append">
           <%= f.submit "", class: "btn btn-outline-secondary" %>
@@ -37,8 +37,8 @@
 
   <div>
     <div class="project_cover d-flex align-items-center pl-3">
-      <div id="project_cover" class="project_color" style="background-color:<%= @project.project_cover %>"></div>
-      <h2 class="py-2 project-title"> <%= @project.project_name %> </h2>
+      <div id="project_cover" class="project_color" style="background-color:<%= @project.cover %>"></div>
+      <h2 class="py-2 project-title"> <%= @project.title %> </h2>
     </div>
     <ul class="project_task_container">
       <div data-controller="drag" data-id="<%= @project.id %>" data-target="drag.project_id">
@@ -53,10 +53,10 @@
                 <% end %>
             </div>
             <div class="col-2 align-items-center text-center">
-              <%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %>
+              <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
             </div>
             <div class="col-2 d-flex align-items-center">
-              <%= display_expect_tictac task.tomato_num %>
+              <%= display_expect_tictac task.expect_tictacs %>
               <%= display_finished_tictac task.tictacs.where(status: 'finished').count %>
               <%= display_cancelled_tictac task.tictacs.where(status: 'cancelled').count %>
             </div>
@@ -101,10 +101,10 @@
                 <% end %>
             </div>
             <div class="col-2 align-items-center text-center">
-              <%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %>
+              <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
             </div>
             <div class="col-2 d-flex align-items-center">
-              <%= display_expect_tictac task.tomato_num %>
+              <%= display_expect_tictac task.expect_tictacs %>
               <%= display_finished_tictac task.tictacs.where(status: 'finished').count %>
               <%= display_cancelled_tictac task.tictacs.where(status: 'cancelled').count %>
             </div>

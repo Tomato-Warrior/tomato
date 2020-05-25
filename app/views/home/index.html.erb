@@ -28,7 +28,7 @@
 
         <div class="add_task">
           <div class="input-group mb-3">
-            <%= f.text_field :task_name, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
+            <%= f.text_field :title, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
             <input type="hidden" value=<%= current_user.projects.first.id %> id= "task_project_id" name= "task[project_id]">
             <div class="input-group-append">
               <%= f.submit "", class: "btn btn-outline-secondary" %>
@@ -54,8 +54,8 @@
                     <i class="far fa-play-circle"></i>
                   <% end %>
                 </div>
-                <div class="col-2 text-center"><span class="list-font"><%= task.project.project_name %></span></div>
-                <div class="col-2 d-flex align-items-center"><%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %></div>
+                <div class="col-2 text-center"><span class="list-font"><%= task.project.title %></span></div>
+                <div class="col-2 d-flex align-items-center"><%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %></div>
                 <div class="col-2 d-flex align-items-center">
                   <small class="pr-2">已完成時鐘: <%= task.tictacs.where(status: 'finished').count %></small>
                   <small>取消時鐘: <%= task.tictacs.where(status: 'cancelled').count %></small>
@@ -94,8 +94,8 @@
                       <i class="far fa-play-circle"></i>
                     <% end %>
                 </div>
-                <div class="col-2 text-center"><span class="list-font"><%= task.project.project_name %></span></div>
-                <div class="col-2 d-flex align-items-center"><%= link_to task.task_name, project_task_path(task.project_id, task.id), class: "list-font" %></div>
+                <div class="col-2 text-center"><span class="list-font"><%= task.project.title %></span></div>
+                <div class="col-2 d-flex align-items-center"><%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %></div>
                 <div class="col-2 d-flex align-items-center">
                   <small class="pr-2">已完成時鐘: <%= task.tictacs.where(status: 'finished').count %></small>
                   <small>取消時鐘: <%= task.tictacs.where(status: 'cancelled').count %></small>

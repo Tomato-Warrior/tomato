@@ -6,7 +6,7 @@ class Project < ApplicationRecord
   has_many :tasks, dependent: :destroy
 
   #validates
-  validates :project_name, presence: true,
+  validates :title, presence: true,
                            length: { minimum: 1, maximum: 20 }
 
 end

@@ -29,8 +29,8 @@ class TasksController < ApplicationController
   end
 
   def show
-    @finished_tictac = Tictac.where('task_id = ?', params[:id] ).finished.count
-    @cancel_tictac = Tictac.where('task_id = ?', params[:id] ).cancelled.count
+    @finished_tictac = Tictac.where('task_id = ?', params[:id] ).where(status: "finished").count
+    @cancel_tictac = Tictac.where('task_id = ?', params[:id] ).where(status: "cancelled").count
   end
   
   def edit
@@ -83,11 +83,11 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:title, 
+    params.require(:task).permit(:task_name, 
                                  :description,
-                                 :expect_tictacs,
-                                 :tdate,
-                                 :title,
+                                 :tomato_num,
+                                 :task_date,
+                                 :project_name,
                                  :project_id,
                                  tag_items: []
                                 )

@@ -17,11 +17,11 @@
         <% @projects.each do |project| %>
           <tr> 
             <td class="project_color">
-              <div id="project_cover" class="project_color" style="background-color: <%=  project.cover %>;">
+              <div id="project_cover" class="project_color" style="background-color: <%=  project.project_cover %>;">
               </div>
             </td>
             <td>
-              <%= link_to project.title, project_path(project) %>
+              <%= link_to project.project_name, project_path(project) %>
             </td>
             <td>
               <%= link_to " + 新增任務", new_project_task_path(project) %>

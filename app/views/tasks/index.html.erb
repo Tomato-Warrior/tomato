@@ -21,14 +21,12 @@
               <i class="far fa-play-circle"></i>
             <% end %>
           </div>
-          <div class="col-2"><%= task.project.title %></div>
-          <div class="col-2"><%= link_to task.title, project_task_path(task.project_id, task.id) %></div>
-          <div class="col-2"><%= task.expect_tictacs %></div>
+          <div class="col-2"><%= task.project.project_name %></div>
+          <div class="col-2"><%= link_to task.task_name, project_task_path(task.project_id, task.id) %></div>
+          <div class="col-2"><%= task.tomato_num %></div>
           <div class="col-3"><%= display_tag task.tag_items %></div>
-          <div class="col-1">
-            <%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_project_task_path(task.project_id, task.id) %></div>
-          <div class="col-1">
-            <%= 
+          <div class="col-1"><%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe, edit_project_task_path(task.project_id, task.id) %></div>
+          <div class="col-1"><%= 
             link_to '<i class="fas fa-trash-alt"></i>'.html_safe, 
             project_task_path(task.project_id, task.id),
             method:'delete',

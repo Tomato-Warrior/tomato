@@ -34,7 +34,10 @@ class ProjectsController < ApplicationController
     @undo_tasks = @project.tasks.doing
     @done_tasks = @project.tasks.done
     task_ids = @project.tasks.ids
-    @tictac_count = Tictac.where(task_id: task_ids).finished.count
+    @tictac_count = Tictac.where(task_id: task_ids).where(status: 'finished').count
+    # @expect_tictacs = current_user.tasks
+    # @expect_tictacs = current_user.tasks
+    # @finish_tictacs = current_user.tictacs.where(task_id: task_id).where(status: 'finished').count
   end
 
   def destroy
@@ -45,7 +48,7 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title, :cover)
+    params.require(:project).permit(:project_name, :project_cover)
   end
 
   def find_project

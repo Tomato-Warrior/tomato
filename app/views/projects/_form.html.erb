@@ -7,12 +7,12 @@
     </ul>
   <% end %>
   <div class="form-group">
-    <%= f.label :project_cover %>
-    <%= color_field(:project, :project_cover) %>
+    <%= f.label :cover %>
+    <%= color_field(:project, :cover) %>
   </div>
   <div class="form-group">
-    <%= f.label :project_name %>
-    <%= f.text_field :project_name %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
   </div>
   <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
 <% end %>

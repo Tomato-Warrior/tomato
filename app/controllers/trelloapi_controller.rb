@@ -1,12 +1,4 @@
 class TrelloapiController < ApplicationController
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-  require 'trello'
-
->>>>>>> add select cards page WIP
-  
   layout "trelloapi"
   #全域變數  
   $token
@@ -29,11 +21,8 @@ class TrelloapiController < ApplicationController
     list_id = params[:list_id]
     task_id = params[:task_id]
     response = UpdateCard.new.move_to_list(card_id, list_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], ENV['TRELLO_USER_TOKEN'])
-    
-<<<<<<< HEAD
     render json: {res: response}
     Task.find(task_id).trello_info.update(list_id: list_id)
-=======
     #製作巢狀參數                  
     generate_tasks_attributes()
 
@@ -45,27 +34,6 @@ class TrelloapiController < ApplicationController
     @param_board_name = boards_name[name_index] #拿到board name
     #create project and tasks
     load_trello_board()
-=======
-  require 'trello'
-  layout "trelloapi"
-  #全域變數
-  $boards_data 
-  $lists_data 
-  $cards_data  
-  def get_boards
-    $boards_data = params[:boards_data]
-  end
-
-  def get_cards
-    $cards_data = params[:cards_data]
-    render json: { cards_data: params[:cards_data] }, status: 200
-  end
-
-  def get_lists
-    $lists_data = params[:lists_data]
-    render json: { lists_data: params[:lists_data] }, status: 200
->>>>>>> add select cards page WIP
->>>>>>> add select cards page WIP
   end
 
   def index
@@ -171,7 +139,6 @@ class TrelloapiController < ApplicationController
 
 
   private
-<<<<<<< HEAD
 
   def generate_tasks_attributes(card_names, lists_num)
     i=0
@@ -181,12 +148,6 @@ class TrelloapiController < ApplicationController
                                           user_id: '#{current_user.id}'}"}
       @tasks_attr_data.append(params)
       i += 1
-=======
-  def config_trelo_public_key
-    Trello.configure do |config|
-      config.developer_public_key = ENV['TRELLO_DEVELOPER_PUBLIC_KEY']
-      config.member_token = $token
->>>>>>> add select cards page WIP
     end
     @tasks_attr_data = @tasks_attr_data.map{|list| list.map{|card| eval(card)}}.flatten 
     return @tasks_attr_data

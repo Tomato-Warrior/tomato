@@ -51,7 +51,7 @@ Rails.application.routes.draw do
   resources :trelloapi, only: [:index] do
     collection do
       post :get_boards
-      post :get_lists
+      post :get_selection
       post :get_cards
       get :import_selection
       get :select_list_cards

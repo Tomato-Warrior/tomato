@@ -50,6 +50,11 @@ class TrelloapiController < ApplicationController
   def select_assigned_cards_of_list
     lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     @lists = JSON.parse(lists_data)
+
+    @cards = JSON.parse($cards_data)
+    @cards_name = @cards.map{|card| card.values_at("name")}.flatten
+    @cards_list_id = @cards.map{|card| card.values_at("idList")}.flatten
+    @lists = JSON.parse($lists_data)
     @lists_name = @lists.map{|list| list.values_at("name")}.flatten
     @lists_id = @lists.map{|list| list.values_at("id")}.flatten
   end

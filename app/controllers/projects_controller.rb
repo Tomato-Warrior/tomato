@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :find_project, only: [:edit, :update, :destroy, :show]
   
   def index
-    current_user.projects.includes(:user) if current_user
+    current_user.projects.includes(:user) if user_signed_in?
   end
 
   def new

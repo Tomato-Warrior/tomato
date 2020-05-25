@@ -11,5 +11,8 @@ class ChartsController < ApplicationController
     @weekly_tictac = current_user.tictacs.group(:status).group_by_day(:end_at).count
 
     @monthly_tictac = current_user.tictacs.group(:status).group_by_day(:end_at).count
+
+    @tasks = current_user.tasks
+
   end
 end

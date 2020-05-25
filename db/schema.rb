@@ -16,11 +16,11 @@ ActiveRecord::Schema.define(version: 2020_05_20_080016) do
   enable_extension "plpgsql"
 
   create_table "projects", force: :cascade do |t|
-    t.string "project_name"
+    t.string "title"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "project_cover"
+    t.string "cover"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_projects_on_deleted_at"
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -36,16 +36,15 @@ ActiveRecord::Schema.define(version: 2020_05_20_080016) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "tag_name"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "task_name", default: "Anonymous Task"
-    t.string "project_name"
-    t.integer "tomato_num"
-    t.datetime "task_date"
+    t.string "title"
+    t.integer "expect_tictacs"
+    t.datetime "date"
     t.text "description"
     t.text "note"
     t.bigint "user_id", null: false
@@ -62,7 +61,7 @@ ActiveRecord::Schema.define(version: 2020_05_20_080016) do
 
   create_table "tictacs", force: :cascade do |t|
     t.string "status"
-    t.string "reason", default: "Without specific reason!"
+    t.string "reason", default: "尚未寫入原因"
     t.datetime "start_at"
     t.datetime "end_at"
     t.bigint "user_id", null: false

@@ -137,10 +137,8 @@ export default class extends Controller {
     for (let i = 0; i < check_item.length; i++){
       if(check_item[i].checked === false){
         document.querySelectorAll(`.select_card#${check_item[i].id}`).forEach((card)=>{card.classList.add("d-none")})
-        document.querySelectorAll(`li.select_card${check_item[i].name}`).forEach((card)=>{card.classList.add("d-none")})
       }else{
         document.querySelectorAll(`.select_card#${check_item[i].id}`).forEach((card)=>{card.classList.remove("d-none")})
-        document.querySelectorAll(`li.select_card${check_item[i].name}`).forEach((card)=>{card.classList.remove("d-none")})
       }
       
     } 

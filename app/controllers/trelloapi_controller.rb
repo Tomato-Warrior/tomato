@@ -91,6 +91,7 @@ class TrelloapiController < ApplicationController
   end
 
   def select_list_cards
+<<<<<<< HEAD
     cards_data = GetCards.new.get_cards($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
     @cards = JSON.parse(cards_data)
     @cards_name = @cards.map{|card| card.values_at("name")}.flatten
@@ -98,6 +99,12 @@ class TrelloapiController < ApplicationController
 
     lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
     @lists = JSON.parse(lists_data)
+=======
+    @cards = JSON.parse($cards_data)
+    @cards_name = @cards.map{|card| card.values_at("name")}.flatten
+    @cards_list_id = @cards.map{|card| card.values_at("idList")}.flatten
+    @lists = JSON.parse($lists_data)
+>>>>>>> add checkbox for card
     @lists_name = @lists.map{|list| list.values_at("name")}.flatten
     @lists_id = @lists.map{|list| list.values_at("id")}.flatten
   end

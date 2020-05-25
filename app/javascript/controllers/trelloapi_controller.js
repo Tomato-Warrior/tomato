@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["select_board", "select_card"]
+  static targets = ["select_board", "select_card", "select_list"]
   trello_token = ""
   api_key = "f91cef06b7d1a94754eac87835224aeb"
   
@@ -68,7 +68,7 @@ export default class extends Controller {
       })
     })
     .catch(err => console.error(err))    
-  
+    
   }
 
 
@@ -144,4 +144,16 @@ export default class extends Controller {
     })
     .catch(err => console.error(err))   
   } 
+
+  select_list(){
+    let check_item = document.querySelectorAll("input.select_list")
+    for (let i = 0; i < check_item.length; i++){
+      if(check_item[i].checked === false){
+        document.querySelectorAll(`.select_card#${check_item[i].id}`).forEach((card)=>{card.classList.add("d-none")})
+      }else{
+        document.querySelectorAll(`.select_card#${check_item[i].id}`).forEach((card)=>{card.classList.remove("d-none")})
+      }
+      
+    } 
+  }
 }

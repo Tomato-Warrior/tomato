@@ -13,9 +13,8 @@ class TictacsController < ApplicationController
   end
 
   def list
-    @tictacs_cancelled = current_user.tictacs.where(status: "cancelled")
-    @tictacs_cancelled_task = current_user.tictacs.where(status: "cancelled")
-    @tictacs_finished = current_user.tictacs.where(status: "finished")
+    @tictacs_cancelled = current_user.tictacs.cancelled
+    @tictacs_finished = current_user.tictacs.finished
   end
 
   private 

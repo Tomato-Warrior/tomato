@@ -3,8 +3,8 @@ class Task < ApplicationRecord
   acts_as_list
   
   #relationship
-  has_many :tag_to_tasks, dependent: :destroy
-  has_many :tags, through: :tag_to_tasks
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
   has_many :tictacs
 
   belongs_to :project
@@ -38,7 +38,5 @@ class Task < ApplicationRecord
   def tag_items
     tags.map(&:name)
   end
-
-  private
 
 end

@@ -93,7 +93,7 @@ export default class extends Controller {
       return response.text();
     })
     .then((text) => {
-      const submitData = {token: this.trello_token, boards_data: text}
+      const submitData = {token: this.trello_token}
       Rails.ajax({
         url: `/trelloapi/get_token`, 
         type: 'POST', 
@@ -188,7 +188,6 @@ export default class extends Controller {
         } 
       })
     })
-    .catch(err => console.error(err))   
   } 
   change_list(){
     console.log("123")

@@ -20,7 +20,7 @@ class User < ApplicationRecord
   private
 
   def default_project_create
-    project = self.projects.build(title: 'Default Box')
+    project = self.projects.build(project_name: 'Default Box')
     project.save
   end
 

@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :find_project, only: [:edit, :update, :destroy, :show]
   
   def index
-    project_list if current_user
+    current_user.projects.includes(:user) if current_user
   end
 
   def new
@@ -50,10 +50,6 @@ class ProjectsController < ApplicationController
 
   def find_project
     @project = Project.find(params[:id])
-  end
-
-  def project_list
-    @projects = current_user.projects
   end
 
 end

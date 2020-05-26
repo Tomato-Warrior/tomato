@@ -14,7 +14,7 @@
           <i class="fas fa-sun"></i>
         </div>
         <p class="title"><%= link_to "今天", root_path  %></p>
-        <small class="project_time">666h</small>
+        <small class="project_time"><%= @expect_time %> h</small>
       </div>
 
       <div class="todo-list">
@@ -51,7 +51,7 @@
               <% end %>
             </div>
           </div>
-          <small class="project_time">100h</small>
+          <small class="project_time"><%= ((project.tasks.sum(:expect_tictacs) * 1500.0) / 3600).round(1) %> h</small>
         </div>               
       <% end %>
     <% end %>

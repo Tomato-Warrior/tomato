@@ -94,7 +94,7 @@ class TrelloapiController < ApplicationController
     @tasks_attr_data=[]
 
     while i<@param_list_id.count
-      params = @param_card_name[i].map{ |card| "{task_name: '#{card}', trello_status: '#{@param_list_name[i]}', user_id: '#{current_user.id}'}"}
+      params = @param_card_name[i].map{ |card| "{title: '#{card}', trello_status: '#{@param_list_name[i]}', user_id: '#{current_user.id}'}"}
       @tasks_attr_data.append(params)
       i += 1
     end
@@ -104,7 +104,7 @@ class TrelloapiController < ApplicationController
   end
 
   def load_trello_board
-    current_user.projects.create!(project_name: @param_board_name,
+    current_user.projects.create!(title: @param_board_name,
                     tasks_attributes:@tasks_attr_data)
   end  
 end

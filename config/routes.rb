@@ -50,7 +50,11 @@ Rails.application.routes.draw do
   end
   
   #homepage
-  resources :home, only: [:index]
+  resources :home, only: [:index] do
+    collection do
+      get :todo
+    end
+  end
 
   #charts
   resources :charts, only: [:index]

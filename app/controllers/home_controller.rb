@@ -17,4 +17,11 @@ class HomeController < ApplicationController
     tictacs_hour.round(tictacs_hour % 10 == 0 ? 0 : 1)
   end
   
+  def todo
+    range = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
+    @tictacs = current_user.tictacs.where.not(end_at: range).finished
+    @undo_tasks = current_user.tasks.where.not(created_at: range).doing
+    @done_tasks = current_user.tasks.where.not(created_at: range).done
+  end
+
 end

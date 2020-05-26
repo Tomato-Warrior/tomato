@@ -1,19 +1,21 @@
 <div class="container">
   <h1 class="py-4">編輯</h1>
-
-  <%= form_for @tictac do |f|%>
-    <% if @tictac.errors.any? %>
+  <%= form_for @task, url: finished_tictac_tasks_path(@task) do |f| %>
+    <% if @task.errors.any? %>
       <ul>
-        <% @tictac.errors.full_messages.each do |message|%>
+        <% @task.errors.full_messages.each do |message|%>
           <li><%= message %></li>
         <% end %>
-      </ul>
     <% end %>
 
-    <div class="form-group">
-      <%= f.label :task %>
-      <%= f.collection_select :task_id, current_user.tasks, :id, :title, class: 'form-control' %>
+    <div class="add_task">
+      <div class="input-group mb-3">
+        <%= f.text_field :title, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
+        <input type="hidden" value=<%= current_user.projects.first.id %> name= "task[project_id]">
+        <input type="hidden" value=<%= @tictac.id %> name= "tictac_id">
+        <div class="input-group-append">
+          <%= f.submit "", class: "btn" %>
+      </div>
     </div>
-    <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
   <% end %>
 </div>

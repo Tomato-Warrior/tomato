@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     collection do
       get :list
     end
+    # tictac list edit
     member do
       get :cancelled
       get :finished
@@ -26,6 +27,8 @@ Rails.application.routes.draw do
   resources :tasks, only: [] do
     collection do
       post :today_task
+      post :cancelled_tictac
+      post :finished_tictac
     end
     resource :tictac, only: [:show]
   end

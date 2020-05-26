@@ -10,14 +10,11 @@ class TictacsController < ApplicationController
     @task = current_user.tasks.find(params[:task_id])
   end
 
-  def cancelled
-  end
-
   def update
     if @tictac.update(tictac_params)
       redirect_to list_tictacs_path, notice: '時鐘成功編輯喵'
     else
-      render edit_cancelled_tictac_path
+      render list_tictacs_path
     end
   end
 
@@ -25,6 +22,15 @@ class TictacsController < ApplicationController
     @tictacs_cancelled = current_user.tictacs.cancelled.order(created_at: :desc)
     @tictacs_finished = current_user.tictacs.finished.order(created_at: :desc)
   end
+
+  def cancelled
+    @task = Task.new
+  end
+
+  def finished
+    @task = Task.new
+  end
+
 
   private 
 
@@ -40,7 +46,8 @@ class TictacsController < ApplicationController
     params.require(:tictac).permit(:status,
                                    :reason,
                                    :start_at,
-                                   :end_at
+                                   :end_at,
+                                   :task_id
                                   )
   end
 

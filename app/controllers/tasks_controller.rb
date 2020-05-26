@@ -46,11 +46,6 @@ class TasksController < ApplicationController
   # 首頁表單post
   def today_task
     @task = current_user.tasks.build(task_params)
-    @task.position = 0
-    while @task.position <= current_user.projects.first.tasks.count
-      @task.position += 1
-    end
-
     if @task.save
       redirect_to root_path, notice: "任務新增成功喵"
     else
@@ -73,6 +68,18 @@ class TasksController < ApplicationController
   def drag
     @task.insert_at(params[:position].to_i)
     head :ok
+  end
+
+  # finished tictac add new task
+  def finished_tictac
+    @task = current_user.tasks.build(task_params)
+    if @task.save
+      @tictac = Tictac.find(params[:tictac_id])
+      @tictac.update(task_id: @task.id)
+      redirect_to list_tictacs_path
+    else
+      render finished_tictac_path(@tictac.id)
+    end
   end
 
   private

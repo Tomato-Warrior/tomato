@@ -14,10 +14,6 @@
       <%= f.label :task %>
       <%= f.collection_select :task_id, current_user.tasks, :id, :title, class: 'form-control' %>
     </div>
-    <div class="form-group">
-      <%= f.label :reason %>
-      <%= f.text_field :reason, class: 'form-control' %>
-    </div>
     <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
   <% end %>
 </div>

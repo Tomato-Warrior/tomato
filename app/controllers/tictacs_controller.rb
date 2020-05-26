@@ -1,7 +1,7 @@
 class TictacsController < ApplicationController
   before_action :last_tictac, only: [:index, :show]
-  before_action :find_tictac, only: [:edit, :update]
-  layout 'tictac', except: [:list, :edit]
+  before_action :find_tictac, only: [:cancelled, :finished, :update]
+  layout 'tictac', except: [:list, :cancelled, :finished]
   
   def index
   end
@@ -10,7 +10,7 @@ class TictacsController < ApplicationController
     @task = current_user.tasks.find(params[:task_id])
   end
 
-  def edit
+  def cancelled
   end
 
   def update

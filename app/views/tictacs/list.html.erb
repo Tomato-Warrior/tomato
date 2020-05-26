@@ -19,7 +19,7 @@
 			<% @tictacs_cancelled.each do |tictac| %>
 				<div class="d-flex">
 					<div class="py-2 col-1 text-center">
-						<%= link_to edit_cancelled_tictac_path(tictac.id) do %>
+						<%= link_to cancelled_tictac_path(tictac.id) do %>
 							<i class="fas fa-pencil-alt"></i>
 						<% end %>
 					</div>
@@ -56,7 +56,7 @@
 			<% @tictacs_finished.each do |tictac| %>
 				<div class="d-flex">
 					<div class="py-2 col-1 text-center">
-						<%= link_to edit_finished_tictac_path(tictac.id) do %>
+						<%= link_to finished_tictac_path(tictac.id) do %>
 							<i class="fas fa-pencil-alt"></i>
 						<% end %>
 					</div>

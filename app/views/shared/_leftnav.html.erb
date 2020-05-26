@@ -1,10 +1,11 @@
-<div class="start_timer">
-  <%= link_to tictacs_path, class: "start_icon" do %>
-    <i class="far fa-play-circle"></i>
-    <span>開始番茄鐘</span>
-  <% end %>
-</div>
-  
+<% if user_signed_in? %>
+  <div class="start_timer">
+    <%= link_to tictacs_path, class: "start_icon" do %>
+      <i class="far fa-play-circle"></i>
+      <span>開始番茄鐘</span>
+    <% end %>
+  </div>
+<% end %>  
 <section class="left-nav">
   <div class="project_group">
     <div class="todo-container">

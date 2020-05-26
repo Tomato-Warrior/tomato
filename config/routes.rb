@@ -8,6 +8,14 @@ Rails.application.routes.draw do
       get :list
     end
   end
+
+  scope 'cancelled' do
+    resources :tictacs, as: 'cancelled_tictacs', only: [:edit]
+  end
+
+  scope 'finished' do
+    resources :tictacs, as: 'finished_tictacs', only: [:edit]
+  end
   
   #project
   resources :projects do

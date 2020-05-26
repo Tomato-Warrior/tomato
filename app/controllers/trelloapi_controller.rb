@@ -55,14 +55,6 @@ class TrelloapiController < ApplicationController
     boards_id = boards.map{|board| board.values_at("id")}.flatten
     boards_name = boards.map{|board| board.values_at("name")}.flatten
     @boards_name_id = boards_name.zip(boards_id)
-    #@me = Trello::Member.find(@username)
-    #@boards = @me.boards
-    #@boards_name = @boards.map{|board| board.name}
-    #@board = @boards.find { |board| board.name == "TomaTokei"}
-    #@all_list = @board.lists.map{|list| list} #["許願池", "To Do", "In Progress", "Done"]
-    #@all_card = @board.lists.map{|list| list.cards.map{ |card| card.name}}
-    #@tasks_attr_data = @board.lists.map{|list| list.cards.map{|card|  "{task_name: '#{card.name}', trello_status: '#{list.name}', user_id: 1}"}}
-    #@tasks_attr_data_trans = @tasks_attr_data.map{|list| list.map{|card| eval(card)}}.flatten 
   end
 
   def select_list_cards
@@ -95,7 +87,7 @@ class TrelloapiController < ApplicationController
     @tasks_attr_data=[]
 
     while i<@param_list_id.count
-      params = @param_card_name[i].map{ |card| "{task_name: '#{card}', trello_status: '#{@param_list_name[i]}', user_id: '#{current_user.id}'}"}
+      params = @param_card_name[i].map{ |card| "{title: '#{card}', trello_status: '#{@param_list_name[i]}', user_id: '#{current_user.id}'}"}
       @tasks_attr_data.append(params)
       i += 1
     end
@@ -105,7 +97,7 @@ class TrelloapiController < ApplicationController
   end
 
   def load_trello_board
-    current_user.projects.create!(project_name: @param_board_name,
+    current_user.projects.create!(title: @param_board_name,
                     tasks_attributes:@tasks_attr_data)
   end  
 end

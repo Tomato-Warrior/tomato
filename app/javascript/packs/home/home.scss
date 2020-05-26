@@ -3,9 +3,11 @@
 * {
   font-family: 微軟正黑體;
 }
+
 input{
   border: none;
 }
+
 a {
     text-decoration: none;
 }
@@ -21,8 +23,8 @@ a:hover{
 .start_timer{
   position: fixed;
   display: flex;
-  background-color: #F27F6B;
-  color: #ffffff;
+  background-color: $mainRed;
+  color: $subBackground;
   padding: 13px 25px;
   margin-bottom: 30px;
   border-radius: 5px;
@@ -32,118 +34,76 @@ a:hover{
   z-index: 20;
   .start_icon{
     margin-right: 10px;
-    color: #fff;
+    color: $subBackground;
     span {
       padding-left: 10px;
-      color: #fff;
+      color: $subBackground;
     }
   }
 }
-// 
-  .left-nav{
-    font-size: 15px;
-    box-shadow: 2px 1px 5px 0px rgba(66,66,66,0.08);
-  }
 
-  .drop-btn{
-    color: $placeholder;
-  }
-  .btn{
-    padding: 0px
-  }
+.left-nav{
+  font-size: 15px;
+  box-shadow: 2px 1px 5px 0px rgba(66,66,66,0.08);
+}
+
+.drop-btn{
+  color: $placeholder;
+}
+
+.btn{
+  padding: 0px
+}
   
-// 
-  .project_group{
-    background-color: #ffffff;
-    width: 18vw;
-    position: sticky;
+.project_group{
+  background-color: $subBackground;
+  width: 18vw;
+  position: sticky;
 
-    a{
-      color: $normalFontColor;
+  a{
+    color: $normalFontColor;
+  }
+
+  .todo-container{
+    padding-top: 20px;
+  }
+
+  .todo-list{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px 10px 10px;
+
+    .icon{
+      width: 15%;
+      text-align: center;
     }
 
-    .todo-container{
-      padding-top: 20px;
+    p.title{
+      width: 70%;
+      margin-bottom: 0;
     }
-    .todo-list{
+    
+    .project_time{
+      text-align: right;
+      color: $leftNavTime;
+    }
+
+  }
+
+  .project-container{
+    overflow-y: auto;
+    height: calc(100vh - 210px);
+
+    .project-list{
       display: flex;
       align-items: center;
-      padding: 10px 20px 10px 10px;
+      padding: 5px 20px 5px 20px ;
 
-      .icon{
-        width: 15%;
-        text-align: center;
-      }
-      p.title{
-        width: 70%;
-        margin-bottom: 0;
-      }
-      .project_time{
-        text-align: right;
-        color: $leftNavTime;
-      }
-
-    }
-
-    .project-container{
-      overflow-y: auto;
-      height: calc(100vh - 210px);
-
-      .project-list{
-        display: flex;
-        align-items: center;
-        padding: 5px 20px 5px 20px ;
-
-        .project_cover{
-          padding-right: 10px;
-          #project_cover{
-            width: 15px;
-            height: 15px;
-          }
-        }
-        .project_name{
-          width: 70%;
-        }
-        .project_time{
-          text-align: right;
-          color: $leftNavTime;
-        }
-      }
-
-    }
-
-    .add_project{
-      display: flex;
-      justify-content: center;
-      padding: 10px 10px 10px 10px;
-      width: 100%;
-      color: #F27F6B;
-      background-color: #f9f9f9 !important;
-      bottom: 0;
-      z-index: 5;
-      .plus_icon{
-        margin-right: 5px;
-      }
-    }
-    .add_project:hover{
-      background-color: #f9f9f9;
-    }
-
-    .divider{
-      width: 80%;
-      display: block;
-      border: 1px solid #f9f9f9;
-      margin: auto;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-    .project{
-      display: flex;
-      padding: 10px 10px 10px 10px;
       .project_cover{
-        width: 15%;
-        .project_color{
-          margin: auto;
+        padding-right: 10px;
+        #project_cover{
+          width: 15px;
+          height: 15px;
         }
       }
       .project_name{
@@ -151,60 +111,107 @@ a:hover{
       }
       .project_time{
         text-align: right;
-        width: 15%;
         color: $leftNavTime;
       }
     }
+
+  }
+
+  .add_project{
+    display: flex;
+    justify-content: center;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    color: $mainRed;
+    background-color: #f9f9f9 !important;
+    bottom: 0;
+    z-index: 5;
+    .plus_icon{
+      margin-right: 5px;
+    }
+  }
+
+  .add_project:hover{
+    background-color: #f9f9f9;
+  }
+
+  .divider{
+    width: 80%;
+    display: block;
+    border: 1px solid #f9f9f9;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .project{
+    display: flex;
+    padding: 10px 10px 10px 10px;
+    .project_cover{
+      width: 15%;
+      .project_color{
+        margin: auto;
+      }
+    }
+    .project_name{
+      width: 70%;
+    }
+    .project_time{
+      text-align: right;
+      width: 15%;
+      color: $leftNavTime;
+    }
+  }
+}
+
+.add_project{
+  display: flex;
+  padding: 10px 10px 10px 10px;
+  width: 100%;
+  color: $mainRed;
+  position: absolute;
+  justify-content: center;
+  bottom: 0;
+  .plus_icon{
+    margin-right: 5px;
+  }
+}
+
+.add_project:hover{
+  background-color: $shadowColor;
+}
+
+// 顯示番茄數據
+.show-data{
+  background-color: $subBackground;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px 15px 15px 15px;
+  border-radius: 5px;
+  box-shadow: -1px 2px 5px -2px rgba(66,66,66,0.10);
+
+  .tomato-num{
+    font-size: 28px;
+    color: rgb(240, 86, 48);
+  }
+  .doing-task-num{
+    font-size: 28px;
+    color: rgb(65, 139, 168);
+  }
+  .done-data-num{
+    font-size: 28px;
+    color: rgb(72, 141, 118);
   }
 
 
-    .add_project{
-      display: flex;
-      padding: 10px 10px 10px 10px;
-      width: 100%;
-      color: #F27F6B;
-      position: absolute;
-      justify-content: center;
-      bottom: 0;
-      .plus_icon{
-        margin-right: 5px;
-      }
-    }
-    .add_project:hover{
-      background-color: $shadowColor;
-    }
+  p{
+    font-size: 14px;
+  }
 
-// 顯示番茄數據
-    .show-data{
-      background-color: #fff;
-      display: flex;
-      justify-content: space-evenly;
-      margin: 10px 15px 15px 15px;
-      border-radius: 5px;
-      box-shadow: -1px 2px 5px -2px rgba(66,66,66,0.10);
-
-      .tomato-num{
-        font-size: 28px;
-        color: rgb(240, 86, 48);
-      }
-      .doing-task-num{
-        font-size: 28px;
-        color: rgb(65, 139, 168);
-      }
-      .done-data-num{
-        font-size: 28px;
-        color: rgb(72, 141, 118);
-      }
-
-
-      p{
-        font-size: 14px;
-      }
-
-      .data{
-        padding-top: 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-    }
+  .data{
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

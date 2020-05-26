@@ -59,10 +59,17 @@
             <div class="col-3 d-flex align-items-center text-center">
               <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
             </div>
-            <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
-              <img src='/expect_tictac.png' class='task_tictac'>
-              <small><%= task.expect_tictacs %></small>
-            </div>
+            <% if task.expect_tictacs? %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small><%= task.expect_tictacs %></small>
+              </div>
+            <% else %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：0">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small>0</small>
+              </div>
+            <% end %>
             <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
               <img src='/finish_tictac.png' class='task_tictac'>
               <small><%= task.tictacs.finished.count %></small>
@@ -110,10 +117,17 @@
             <div class="col-3 d-flex align-items-center text-center">
               <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
             </div>
-            <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
-              <img src='/expect_tictac.png' class='task_tictac'>
-              <small><%= task.expect_tictacs %></small>
-            </div>
+            <% if task.expect_tictacs? %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small><%= task.expect_tictacs %></small>
+              </div>
+            <% else %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：0">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small>0</small>
+              </div>
+            <% end %>
             <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
               <img src='/finish_tictac.png' class='task_tictac'>
               <small><%= task.tictacs.finished.count %></small>

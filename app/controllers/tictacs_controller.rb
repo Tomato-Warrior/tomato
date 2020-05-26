@@ -1,6 +1,7 @@
 class TictacsController < ApplicationController
   before_action :last_tictac, only: [:index, :show]
-  layout 'tictac', except: [:list]
+  before_action :find_tictac, only: [:edit, :update]
+  layout 'tictac', except: [:list, :edit]
   
   def index
   end
@@ -12,9 +13,17 @@ class TictacsController < ApplicationController
   def edit
   end
 
+  def update
+    if @tictac.update(tictac_params)
+      redirect_to list_tictacs_path, notice: '時鐘成功編輯喵'
+    else
+      render edit_cancelled_tictac_path
+    end
+  end
+
   def list
-    @tictacs_cancelled = current_user.tictacs.cancelled
-    @tictacs_finished = current_user.tictacs.finished
+    @tictacs_cancelled = current_user.tictacs.cancelled.order(created_at: :desc)
+    @tictacs_finished = current_user.tictacs.finished.order(created_at: :desc)
   end
 
   private 
@@ -25,6 +34,18 @@ class TictacsController < ApplicationController
     else
       @tictac = current_user.tictacs.last
     end 
-      
   end
+
+  def tictac_params
+    params.require(:tictac).permit(:status,
+                                   :reason,
+                                   :start_at,
+                                   :end_at
+                                  )
+  end
+
+  def find_tictac
+    @tictac = Tictac.find(params[:id])
+  end
+
 end

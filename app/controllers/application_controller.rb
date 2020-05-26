@@ -6,13 +6,17 @@ class ApplicationController < ActionController::Base
   end
 
   def today_expect_time_of_tasks
-    @expect_time = expect_time
+    if user_signed_in?
+      @expect_time = expect_time
+    else
+      @expect_time = 0
+    end
   end
 
   def expect_time
-    range = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
-    tictac_hours = current_user.tasks.where(created_at: range).sum(:expect_tictacs) * 1500.0 / 3600
-    tictac_hours.round(tictac_hours % 10 == 0 ? 0 : 1)
+      range = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
+      tictac_hours = current_user.tasks.where(created_at: range).sum(:expect_tictacs) * 1500.0 / 3600 
+      tictac_hours.round(tictac_hours % 10 == 0 ? 0 : 1)
   end
 
 end

@@ -4,6 +4,7 @@ a{
   color: $clockPending;
 }
 .timer_controler{
+  height: 100vh;
   .task_list{
     padding-top: 40px;
     padding-bottom: 20px;
@@ -35,7 +36,7 @@ a{
   background-repeat: no-repeat;
   background-size: cover;
   background-color: $mainGreen;
-  height: 100vh;
+  height: 100%;
     
   .display{
     margin: 20px 0px 40px 0px;

@@ -35,6 +35,7 @@ class ProjectsController < ApplicationController
     @done_tasks = @project.tasks.done
     task_ids = @project.tasks.ids
     @tictac_count = Tictac.where(task_id: task_ids).finished.count
+    @expect_time = ((Task.where(project_id: @project).sum(:expect_tictacs) * 1500.0) / 3600).round(1)
   end
 
   def destroy
@@ -51,6 +52,6 @@ class ProjectsController < ApplicationController
   def find_project
     @project = Project.find(params[:id])
   end
-
+  
 end
 

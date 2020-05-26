@@ -3,18 +3,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   
   #counter
-  resources :tictacs, only: [:index, :edit, :update] do
+  resources :tictacs, only: [:index, :update] do
     collection do
       get :list
     end
-  end
-
-  scope 'cancelled' do
-    resources :tictacs, as: 'cancelled_tictacs', only: [:edit]
-  end
-
-  scope 'finished' do
-    resources :tictacs, as: 'finished_tictacs', only: [:edit]
+    member do
+      get :cancelled
+      get :finished
+    end
   end
   
   #project

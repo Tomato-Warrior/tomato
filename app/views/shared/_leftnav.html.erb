@@ -51,7 +51,7 @@
               <% end %>
             </div>
           </div>
-          <small class="project_time"><%= ((project.tasks.sum(:expect_tictacs) * 1500.0) / 3600).round(1) %> h</small>
+          <small class="project_time"><%= expect_time(project) %> h</small>
         </div>               
       <% end %>
     <% end %>

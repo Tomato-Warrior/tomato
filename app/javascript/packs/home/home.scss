@@ -14,27 +14,31 @@ a:hover{
     text-decoration: none;
 }
 
-  .start_timer{
-    position: fixed;
-    display: flex;
-    background-color: #F27F6B;
-    color: #ffffff;
-    padding: 13px 25px;
-    margin-bottom: 30px;
-    border-radius: 5px;
-    bottom: 0;
-    left: 43%;
-    font-size: 18px;
-    z-index: 20;
-    .start_icon{
-      margin-right: 10px;
+.project-list:focus{
+  background-color: #ccc;
+}
+
+.start_timer{
+  position: fixed;
+  display: flex;
+  background-color: #F27F6B;
+  color: #ffffff;
+  padding: 13px 25px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  bottom: 0;
+  left: 43%;
+  font-size: 18px;
+  z-index: 20;
+  .start_icon{
+    margin-right: 10px;
+    color: #fff;
+    span {
+      padding-left: 10px;
       color: #fff;
-      span {
-        padding-left: 10px;
-        color: #fff;
-      }
     }
   }
+}
 // 
   .left-nav{
     font-size: 15px;

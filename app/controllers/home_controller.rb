@@ -8,7 +8,13 @@ class HomeController < ApplicationController
     @undo_today_tasks = current_user.tasks.where(created_at: range).doing
     @done_today_tasks = current_user.tasks.where(created_at: range).done
     @task = Task.new
-    @expect_time = ((current_user.tasks.where(created_at: range).sum(:expect_tictacs) * 1500.0 ) / 3600).round(1)
+    @expect_time = expect_time
+  end
+
+  def expect_time
+    range = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
+    tictacs_hour = current_user.tasks.where(created_at: range).sum(:expect_tictacs) * 1500.0  / 3600
+    tictacs_hour.round(tictacs_hour % 10 == 0 ? 0 : 1)
   end
   
 end

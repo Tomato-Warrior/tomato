@@ -4,7 +4,7 @@ import Rails from "@rails/ujs"
 export default class extends Controller {
   static targets = ["select_board", "select_card", "select_list"]
   trello_token = ""
-  api_key = "f91cef06b7d1a94754eac87835224aeb"
+  api_key = "trello_api_key"
   
   authenticationSuccess = function() {
     console.log('Successful authentication')

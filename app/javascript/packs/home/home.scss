@@ -22,7 +22,6 @@ a:hover{
 
 .start_timer{
   position: fixed;
-  display: flex;
   background-color: $mainRed;
   color: $subBackground;
   padding: 13px 25px;
@@ -68,77 +67,44 @@ a:hover{
     padding-top: 20px;
   }
 
-  .todo-list{
-    display: flex;
-    align-items: center;
-    padding: 10px 20px 10px 10px;
-
-    .icon{
-      width: 15%;
-      text-align: center;
-    }
-
-    p.title{
-      width: 70%;
-      margin-bottom: 0;
-    }
-    
-    .project_time{
-      text-align: right;
-      color: $leftNavTime;
-    }
-
+  .project_time{
+    color: $leftNavTime;
   }
 
   .project-container{
     overflow-y: auto;
     height: calc(100vh - 210px);
 
-    .project-list{
-      display: flex;
-      align-items: center;
-      padding: 5px 20px 5px 20px ;
+    #project_cover{
+      width: 15px;
+      height: 15px;
+    }
 
-      .project_cover{
-        padding-right: 10px;
-        #project_cover{
-          width: 15px;
-          height: 15px;
-        }
-      }
-      .project_name{
-        width: 70%;
-      }
-      .project_time{
-        text-align: right;
-        color: $leftNavTime;
-      }
+    .project_name{
+      width: 60%;
+    }
+    .project_time{
+      color: $leftNavTime;
     }
 
   }
 
   .add_project{
-    display: flex;
-    justify-content: center;
-    padding: 10px 10px 10px 10px;
-    width: 100%;
     color: $mainRed;
     background-color: #f9f9f9 !important;
     bottom: 0;
     z-index: 5;
-    .plus_icon{
-      margin-right: 5px;
-    }
+    position: absolute;
   }
 
   .add_project:hover{
-    background-color: #f9f9f9;
+    background-color: $shadowColor;
   }
 
   .divider{
     width: 80%;
     display: block;
-    border: 1px solid #f9f9f9;
+    border: 1px solid $shadowColor;
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -162,23 +128,6 @@ a:hover{
       color: $leftNavTime;
     }
   }
-}
-
-.add_project{
-  display: flex;
-  padding: 10px 10px 10px 10px;
-  width: 100%;
-  color: $mainRed;
-  position: absolute;
-  justify-content: center;
-  bottom: 0;
-  .plus_icon{
-    margin-right: 5px;
-  }
-}
-
-.add_project:hover{
-  background-color: $shadowColor;
 }
 
 // 顯示番茄數據

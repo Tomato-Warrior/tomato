@@ -86,17 +86,17 @@
           <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
           <div class="col-1 d-flex align-items-center">
             <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
-              <i class="far fa-circle"></i>
+              <i class="far fa-check-circle"></i>
             <% end %>
             <%= link_to task_tictac_path(task_id: task.id), class: "px-3 play-icon" do %>
               <i class="far fa-play-circle"></i>
             <% end %>
           </div>
           <div class="col-2 d-flex align-items-center text-center">
-            <span class="list-font"><%= task.project.title %></span>
+            <span class="list-font"><del><%= task.project.title %></del></span>
           </div>
           <div class="col-2 d-flex align-items-center">
-            <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
+            <del><%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %></del>
           </div>
           <% if task.expect_tictacs? %>
             <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">

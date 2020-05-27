@@ -16,7 +16,7 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
 
     if @task.save
-      redirect_to project_path(params[:project_id]), notice: "任務新增成功喵"
+      redirect_to project_path(params[:project_id])
     else
       render :new
     end
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   
   def update
     if @task.update(task_params)
-      redirect_to project_path(@task.project_id), notice: '任務成功編輯喵'
+      redirect_to project_path(@task.project_id)
     else
       render :edit
     end
@@ -40,14 +40,14 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy   
-    redirect_to project_path(@task.project_id), notice: '任務成功刪除喵'
+    redirect_to project_path(@task.project_id)
   end
 
   # 首頁表單post
   def today_task
     @task = current_user.tasks.build(task_params)
     if @task.save
-      redirect_to root_path, notice: "任務新增成功喵"
+      redirect_to root_path
     else
       render :new
     end  

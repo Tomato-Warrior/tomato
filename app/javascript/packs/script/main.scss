@@ -12,6 +12,9 @@
     a {
         color: #FFF;
     }
+    a:hover {
+        color: #FFF;
+    }
     .logo {
         display: block;
         width: 200px;
@@ -40,7 +43,7 @@ body {
 }
 .btn-google{
     background-color: $mainRed;
-    box-shadow: -1px 4px 6px 0px rgba(66,66,66,0.14);
+    box-shadow: -1px 2px 5px -2px rgba(66,66,66,0.10);
     font-size: 18px;
     color: #fff;
 }
@@ -50,7 +53,7 @@ body {
 }
 .btn-facebook{
     background-color: #5793D8;
-    box-shadow: 0px 4px 6px 0px rgba(66,66,66,0.14);
+    box-shadow: -1px 2px 5px -2px rgba(66,66,66,0.10);
     color: #fff;
     font-size: 18px;
 }
@@ -121,6 +124,12 @@ h1, h2, h3{
 }
 p {
     margin-bottom: 10px;
+}
+a{
+    color: $mainRed;
+}
+a:hover{
+    color: $redBtnHover;
 }
 
 // left_nav

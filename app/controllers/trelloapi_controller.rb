@@ -36,6 +36,10 @@ class TrelloapiController < ApplicationController
     load_trello_board()
   end
 
+  def import_assigned_cards
+  
+  end
+
   def index
   end
 

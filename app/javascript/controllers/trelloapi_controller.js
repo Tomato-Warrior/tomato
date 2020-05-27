@@ -4,7 +4,7 @@ import Rails from "@rails/ujs"
 export default class extends Controller {
   static targets = ["select_board", "select_card", "select_list", "change_list"]
   trello_token = ""
-  api_key = "trello_api_key"
+  api_key = "f91cef06b7d1a94754eac87835224aeb"
   
   
   
@@ -112,7 +112,6 @@ export default class extends Controller {
       })
     })
     .catch(err => console.error(err))    
-    
   }
 
   select_board(e){
@@ -227,4 +226,5 @@ export default class extends Controller {
     .catch(err => console.error(err))
 
   }
+
 }

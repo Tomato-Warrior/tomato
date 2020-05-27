@@ -57,7 +57,7 @@
       <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
         選擇一項標籤 <span class="caret"></span>
       </a>
-      <% if @tags.any?%>
+      <% if @tags.any? %>
         <ul class="dropdown-menu">
           <% @tags.each do |tag| %>
             <li><a href="<%= '#'"tag-chart-#{tag.id}" %>" data-toggle="tab" class="dropdown-item" ><%= tag.name %></a></li>
@@ -71,7 +71,7 @@
     </div>
   
     <div class="tab-content">
-      <% if @tags.any?%>
+      <% if @tags.any? %>
         <div id="Home" class="tab-pane active">
           <h1><%= @tags.first.name %></h1>
           <%= column_chart @tags.first.tictacs.finished.group_by_day(:end_at).count %>
@@ -92,7 +92,7 @@
         選擇一項任務 <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
-        <% if @tasks.any?%>
+        <% if @tasks.any? %>
           <% @tasks.each do |task| %>
             <li><a href="<%= '#'"task-chart-#{task.id}" %>" data-toggle="tab" class="dropdown-item" ><%= task.title %></a></li>
           <% end %>

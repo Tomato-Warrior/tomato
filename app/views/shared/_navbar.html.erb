@@ -15,10 +15,10 @@
           <i class="fas fa-clipboard-list"></i>
         <% end %>
         <%= link_to current_user.email, edit_user_registration_path, class: 'nav-href' %>
-        <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'nav-href' %>
+        <%= link_to '登出', destroy_user_session_path, method: 'delete', class: 'nav-href' %>
       </div>
     <% else %>
-      <%= link_to 'Sign in', new_user_session_path %>
+      <%= link_to '登入 / 註冊', new_user_session_path %>
     <% end %>
   </div>
 </nav>

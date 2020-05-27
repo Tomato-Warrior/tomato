@@ -1,15 +1,19 @@
 <div class="task_group">
   <div class="show-data">
     <div class="data">
-      <h1 class="tomato-num"><%= @tictacs.count %></h1>
-      <p>收集番茄</p>
+      <h1 class="tomato-num"><%= @todo_expect_time %></h1>
+      <p>預計完成時間</p>
     </div>
     <div class="data">
-      <h1 class="doing-task-num"><%= @undo_tasks.count %></h1>
+      <h1 class="doing-task-num"><%= @todo_undo_tasks.count %></h1>
       <p>待完成任務</p>
     </div>
     <div class="data">
-      <h1 class="done-data-num"><%= @done_tasks.count %></h1>
+      <h1 class="tomato-num"><%= @todo_tictacs.count %></h1>
+      <p>收集番茄</p>
+    </div>
+    <div class="data">
+      <h1 class="done-data-num"><%= @todo_done_tasks.count %></h1>
       <p>已完成任務</p>
     </div>
   </div>
@@ -20,7 +24,7 @@
 
   <div>
     <ul class="project_task_container">     
-      <% @undo_tasks.each do |task| %>
+      <% @todo_undo_tasks.each do |task| %>
         <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
           <div class="col-1 d-flex align-items-center">
             <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
@@ -78,7 +82,7 @@
   </div>
   <div class="collapse" id="collapseExample">
       <ul class="project_task_container">
-        <% @done_tasks.each do |task| %>
+        <% @todo_done_tasks.each do |task| %>
           <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
           <div class="col-1 d-flex align-items-center">
             <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
@@ -132,5 +136,5 @@
 </div>
 
 <script>
-  $('.collapse').collapse('hide')
+  $('.collapse').collapse('show')
 </script>

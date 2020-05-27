@@ -8,8 +8,8 @@ input{
   border: none;
 }
 
-a {
-    text-decoration: none;
+a{
+  text-decoration: none;
 }
 
 a:hover{
@@ -83,15 +83,11 @@ a:hover{
     .project_name{
       width: 60%;
     }
-    .project_time{
-      color: $leftNavTime;
-    }
-
   }
 
   .add_project{
     color: $mainRed;
-    background-color: #f9f9f9 !important;
+    background-color: $newProjectNav !important;
     bottom: 0;
     z-index: 5;
     position: absolute;
@@ -108,25 +104,6 @@ a:hover{
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
-  }
-
-  .project{
-    display: flex;
-    padding: 10px 10px 10px 10px;
-    .project_cover{
-      width: 15%;
-      .project_color{
-        margin: auto;
-      }
-    }
-    .project_name{
-      width: 70%;
-    }
-    .project_time{
-      text-align: right;
-      width: 15%;
-      color: $leftNavTime;
-    }
   }
 }
 

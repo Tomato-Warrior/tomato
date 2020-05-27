@@ -23,8 +23,8 @@
         <i class="fas fa-list mr-2"></i>
         <p class="mb-0"><%= link_to "待辦事項", todo_home_index_path %></p>
         <div class="ml-auto">
-          <small class="project_time">123h</small>
-          <small class="project_time">0</small>
+          <small class="project_time"><%= @todo_expect_time %>h</small>
+          <small class="project_time"><%= @left_todo_undo_tasks %></small>
         </div>
       </div>
 

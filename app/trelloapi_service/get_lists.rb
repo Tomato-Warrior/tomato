@@ -19,4 +19,12 @@ class GetLists
       e.response
     end
   end
+
+  def get_assigned_cards
+    begin
+      RestClient.get "api.trello.com/1/lists/#{list_id}/cards?key=#{api_key}&token=#{token}"
+    rescue RestClient::ExceptionWithResponse => e
+      e.response
+    end
+  end
 end

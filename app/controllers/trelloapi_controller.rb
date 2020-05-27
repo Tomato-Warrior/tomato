@@ -13,7 +13,7 @@ class TrelloapiController < ApplicationController
     render json: { cards_data: params[:cards_data] }, status: 200
   end
 
-  def get_selection
+  def import_selected_list
     lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
     lists = JSON.parse(lists_data)
     lists_name = lists.map{|list| list.values_at("name")}.flatten
@@ -45,10 +45,14 @@ class TrelloapiController < ApplicationController
     load_trello_board()
   end
 
+  def import_assigned_cards
+  
+  end
+
   def index
   end
 
-  def import_selection
+  def select_board
     @project = Project.new
     boards_data = GetBoards.new.get_boards(ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
     boards = JSON.parse(boards_data)
@@ -69,7 +73,17 @@ class TrelloapiController < ApplicationController
     @lists_id = @lists.map{|list| list.values_at("id")}.flatten
   end
 
+  def select_assigned_cards
+    cards_data = GetCards.new.get_cards($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
+    @cards = JSON.parse(cards_data)
+    @cards_name = @cards.map{|card| card.values_at("name")}.flatten
+    @cards_list_id = @cards.map{|card| card.values_at("idList")}.flatten
 
+    lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
+    @lists = JSON.parse(lists_data)
+    @lists_name = @lists.map{|list| list.values_at("name")}.flatten
+    @lists_id = @lists.map{|list| list.values_at("id")}.flatten
+  end
 
 
 

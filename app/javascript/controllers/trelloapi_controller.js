@@ -4,7 +4,7 @@ import Rails from "@rails/ujs"
 export default class extends Controller {
   static targets = ["select_board", "select_card", "select_list"]
   trello_token = ""
-  api_key = "trello_api_key"
+  api_key = "f91cef06b7d1a94754eac87835224aeb"
   
   
   authenticationSuccess = function() {
@@ -74,17 +74,22 @@ export default class extends Controller {
   }
 
   connect(){
+   
+  }
+
+  get_token(e){
+    e.preventDefault()
     this.trelloAuthorize()
     fetch(`https://api.trello.com/1/members/me/boards?key=${this.api_key}&token=${this.trello_token}`, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
     .then(response => {
       console.log(
         `Response: ${response.status} ${response.statusText}`
-      );
+      )
       return response.text();
     })
     .then((text) => {
@@ -168,8 +173,7 @@ export default class extends Controller {
         return true
       },
       success: resp => {
-        console.log("get card!!!")
-        console.log(resp)    
+        console.log("get card!!!")   
       }, 
       error: err => {
         console.log(err);
@@ -187,7 +191,7 @@ export default class extends Controller {
         document.querySelectorAll(`.select_card#${check_item[i].id}`).forEach((card)=>{card.classList.remove("d-none")})
         document.querySelectorAll(`li.select_card${check_item[i].name}`).forEach((card)=>{card.classList.remove("d-none")})
       }
-      
     } 
   }
+
 }

@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <div class="start_timer">
+  <div class="start_timer d-flex">
     <%= link_to tictacs_path, class: "start_icon" do %>
       <i class="far fa-play-circle"></i>
       <span>開始番茄鐘</span>
@@ -10,33 +10,32 @@
   <div class="project_group">
     <div class="todo-container">
 
-      <div class="todo-list">
-        <div class="icon">
-          <i class="fas fa-sun"></i>
+      <div class="d-flex align-items-center px-3 py-3">
+        <i class="fas fa-sun mr-2"></i>
+        <p class="mb-0"><%= link_to "今天", root_path  %></p>
+        <div class="ml-auto">
+          <small class="project_time"><%= @expect_time %>h</small>
+          <small class="project_time"><%= @undo_tasks %></small>
         </div>
-        <p class="title"><%= link_to "今天", root_path  %></p>
-        <small class="project_time"><%= @expect_time %>h</small>
-        <small class="project_time pl-2"><%= @undo_tasks %></small>
       </div>
 
-      <div class="todo-list">
-        <div class="icon">
-          <i class="fas fa-list"></i>
+      <div class="d-flex align-items-center px-3 py-3">
+        <i class="fas fa-list mr-2"></i>
+        <p class="mb-0"><%= link_to "待辦事項", todo_home_index_path %></p>
+        <div class="ml-auto">
+          <small class="project_time">123h</small>
+          <small class="project_time">0</small>
         </div>
-        <p class="title"><%= link_to "待辦事項", todo_home_index_path %></p>
-        <small class="project_time">123h</small>
-        <small class="project_time pl-2">0</small>
       </div>
 
     </div>
 
   <span class="divider"></span>
   <div class="project-container">
-  <% if user_signed_in? %>
+    <% if user_signed_in? %>
       <% @projects.order(id: :desc).each do |project| %>
-        <div class="project-list"> 
-          <div class="project_cover">
-            <div id="project_cover" class="project_color" style="background-color:<%= project.cover %>"></div>
+        <div class="d-flex align-items-center px-3 py-3"> 
+          <div class="mr-2" id="project_cover" style="background-color:<%= project.cover %>"s>
           </div>
           <div class="project_name">
             <%= link_to project.title, project_path(project) %>
@@ -54,15 +53,17 @@
               <% end %>
             </div>
           </div>
-          <small class="project_time"><%= expect_time(project) %>h</small>
-          <small class="project_time pl-2"><%= project.tasks.doing.count %></small>
+          <div class="ml-auto">
+            <small class="project_time"><%= expect_time(project) %>h</small>
+            <small class="project_time"><%= project.tasks.doing.count %></small>
+          </div>
         </div>               
       <% end %>
     <% end %>
   </div>
   <div>
-    <%= link_to new_project_path, class:"add_project" do %>
-      <div class="plus_icon"><i class="fas fa-plus"></i></div><span>新建專案</span>
+    <%= link_to new_project_path, class:"add_project d-flex justify-content-center w-100 p-2" do %>
+      <div class="mr-2"><i class="fas fa-plus"></i></div><span>新建專案</span>
     <% end %>
   </div>
 

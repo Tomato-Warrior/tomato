@@ -15,7 +15,8 @@
           <i class="fas fa-sun"></i>
         </div>
         <p class="title"><%= link_to "今天", root_path  %></p>
-        <small class="project_time"><%= @expect_time %> h</small>
+        <small class="project_time"><%= @expect_time %>h</small>
+        <small class="project_time pl-2"><%= @undo_tasks %></small>
       </div>
 
       <div class="todo-list">
@@ -23,7 +24,8 @@
           <i class="fas fa-list"></i>
         </div>
         <p class="title">待辦事項</p>
-        <small class="project_time">123h</small>
+        <small class="project_time">0h</small>
+        <small class="project_time pl-2">0</small>
       </div>
 
     </div>
@@ -52,7 +54,8 @@
               <% end %>
             </div>
           </div>
-          <small class="project_time"><%= expect_time(project) %> h</small>
+          <small class="project_time"><%= expect_time(project) %>h</small>
+          <small class="project_time pl-2"><%= project.tasks.doing.count %></small>
         </div>               
       <% end %>
     <% end %>

@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.build(project_params)
     if @project.save
-      redirect_to project_path(@project), notice: '專案建立成功喵'
+      redirect_to project_path(@project)
     else
       render :new
     end
@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to project_path(@project), notice: '專案編輯成功喵'
+      redirect_to project_path(@project)
     else
       render :edit
     end

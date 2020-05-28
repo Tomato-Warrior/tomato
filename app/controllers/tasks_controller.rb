@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:edit, :update, :destroy, :drag, :show, :toggle_status]
 
   def index
-    if current_user
+    if user_signed_in?
       @tasks = current_user.tasks.includes(:user)
     end
     @projects = current_user.projects
@@ -94,7 +94,7 @@ class TasksController < ApplicationController
   end
 
   def find_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
 end

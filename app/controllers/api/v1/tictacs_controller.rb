@@ -23,7 +23,7 @@ class Api::V1::TictacsController < ApplicationController
     if @tictac.cancel!
       render json: { user_id: @tictac.user_id, status: @tictac.status, start_at: @tictac.start_at, task_id: @tictac.task_id, id: @tictac.id, data: params}
     else
-      render json: { error: "nonoooooo" }, status: 400
+      render json: { error: "no" }, status: 400
     end
   end
 
@@ -31,7 +31,7 @@ class Api::V1::TictacsController < ApplicationController
     if @tictac.finish!
       render json: { state: 'ok' }
     else
-      render json: { error: "nonoooooo" }, status: 400
+      render json: { error: "no" }, status: 400
     end
   end
 

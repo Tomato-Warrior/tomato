@@ -5,6 +5,7 @@ require("channels")
 require("select2")
 require("styles")
 require("chartkick")
+require("scripts")
 
 import $ from 'jquery'
 window.$ = $

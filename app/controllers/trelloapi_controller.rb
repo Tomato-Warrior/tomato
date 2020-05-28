@@ -34,14 +34,6 @@ class TrelloapiController < ApplicationController
     @param_board_name = boards_name[name_index] #拿到board name
     #create project and tasks
     load_trello_board()
-  end
-
-  def import_assigned_cards
-  
-  end
-
-  def index
-  end
 
   def select_board
     @project = Project.new

@@ -1,0 +1,6 @@
+import "./project.scss"
+import "./main.scss"
+import "./tictacs.scss"
+import "./home.scss"
+import "./left_nav.scss"
+import "./charts.scss"

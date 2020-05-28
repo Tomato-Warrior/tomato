@@ -1,24 +1,38 @@
-<nav class="navbar navname">
-  <div class="container-fluid">
-    <h1 class="navbar-brand mb-0 h1">
+<nav class="navbar navbar-expand-lg navname">
+    <h1 class="navbar-brand mb-0 h1"> 
       <%= link_to root_path do %>
         <span class="logo">
         </span>
       <% end %>
-      </h1>
+    </h1>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto align-items-center">
     <% if user_signed_in? %>
-      <div>
+      <li class="nav-item active pl-2">
         <%= link_to charts_path do %>
           <i class="far fa-chart-bar"></i>
         <% end %>
+      </li>
+      <li class="nav-item pl-3">
         <%= link_to list_tictacs_path, class: "pl-2" do %>
           <i class="fas fa-clipboard-list"></i>
         <% end %>
+      </li>
+      <li class="nav-item pl-2">
         <%= link_to current_user.email, edit_user_registration_path, class: 'nav-href' %>
+      </li>
+      <li class="nav-item pl-2">
         <%= link_to '登出', destroy_user_session_path, method: 'delete', class: 'nav-href' %>
-      </div>
+      </li>
     <% else %>
-      <%= link_to '登入 / 註冊', new_user_session_path %>
+      <li class="nav-item pl-2">
+        <%= link_to '登入 / 註冊', new_user_session_path %>
+      </li>
     <% end %>
+    </ul>
   </div>
 </nav>

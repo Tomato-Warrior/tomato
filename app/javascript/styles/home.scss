@@ -1,4 +1,4 @@
-@import "../script/library";
+@import "_library.scss";
 
 * {
   font-family: 微軟正黑體;
@@ -56,7 +56,8 @@ a:hover{
   
 .project_group{
   background-color: $subBackground;
-  width: 18vw;
+  width: 20vw;
+  height: calc(100vh - 66px);
   position: sticky;
 
   a{

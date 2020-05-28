@@ -1,4 +1,4 @@
-@import '../packs/script/library.scss';
+@import '_library.scss';
 
 #project_cover{
   width: 15px;
@@ -10,7 +10,7 @@
 }
 
 ul{
-    margin: 10px 15px 10px 15px;
+    margin: 0px 15px 10px 15px;
     padding-inline-start: 0px;
     overflow: hidden;
 }

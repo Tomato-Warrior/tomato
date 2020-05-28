@@ -114,14 +114,6 @@ export default class extends Controller {
   
   }
 
-  connect(){
-  }
-
-  get_token(e){
-    e.preventDefault()
-    this.trelloAuthorize() 
-  }
-
   add_task(e){
     e.preventDefault()
     fetch(`https://api.trello.com/1/members/me/boards?key=${this.api_key}&token=${this.trello_token}`, {

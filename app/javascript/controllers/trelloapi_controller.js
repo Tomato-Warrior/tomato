@@ -18,8 +18,8 @@ export default class extends Controller {
     let that = this
     return new Promise(function(resolve, reject){
       window.Trello.authorize({
-        type: 'popup',
-        name: 'start',
+        type: 'redirect',
+        name: 'TomaTokei',
         scope: {
           read: 'true',
           write: 'true' },
@@ -35,13 +35,12 @@ export default class extends Controller {
   }
 
   connect(){
-   
   }
 
   get_token(e){
     e.preventDefault()
     this.trelloAuthorize()
-    fetch(`https://api.trello.com/1/members/me/boards?key=${this.api_key}&token=${this.trello_token}`, {
+    fetch(`https://api.trello.com/1/members/me?key=${this.api_key}&token=${this.trello_token}`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json'
@@ -54,9 +53,9 @@ export default class extends Controller {
       return response.text();
     })
     .then((text) => {
-      const submitData = {token: this.trello_token}
+      const submitData = {token: this.trello_token, text}
       Rails.ajax({
-        url: `/trelloapi/get_boards`, 
+        url: `/trelloapi/get_token`, 
         type: 'POST', 
         dataType: 'json',
         beforeSend(xhr, options) {
@@ -126,7 +125,7 @@ export default class extends Controller {
     console.log(this.select_boardTarget.value)
     const submitData = { board_id: this.select_boardTarget.value}
     Rails.ajax({
-      url: `/trelloapi/get_cards`, 
+      url: `/trelloapi/get_board`, 
       type: 'POST', 
       dataType: 'json',
       beforeSend(xhr, options) {
@@ -155,5 +154,4 @@ export default class extends Controller {
       }
     } 
   }
-
 }

@@ -61,11 +61,11 @@ Rails.application.routes.draw do
   #trello
   resources :trelloapi, only: [:index] do
     collection do
-      post :get_boards
+      post :get_token
       post :import_selected_list
-      post :get_cards
+      post :get_board
       post :import_assigned_cards
-      get :select_assigned_cards
+      get :select_assigned_cards_of_list
       get :select_board
       get :select_list_cards
     end

@@ -4,13 +4,41 @@ class TrelloapiController < ApplicationController
   #全域變數  
   $token
   $board_id
-  def get_boards
+  $member_id
+  def get_token
     $token = params[:token]
+    $member_id = JSON.parse(params[:text]).values_at("id").join
   end
 
-  def get_cards
+  def get_board
     $board_id = params[:board_id]
     render json: { cards_data: params[:cards_data] }, status: 200
+  end
+
+  def index
+  end
+
+  def select_board
+    @project = Project.new
+    boards_data = GetBoards.new.get_boards(ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
+    boards = JSON.parse(boards_data)
+    boards_id = boards.map{|board| board.values_at("id")}.flatten
+    boards_name = boards.map{|board| board.values_at("name")}.flatten
+    @boards_name_id = boards_name.zip(boards_id)
+  end
+
+  def select_list_cards
+    lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
+    @lists = JSON.parse(lists_data)
+    @lists_name = @lists.map{|list| list.values_at("name")}.flatten
+    @lists_id = @lists.map{|list| list.values_at("id")}.flatten
+  end
+
+  def select_assigned_cards_of_list
+    lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
+    @lists = JSON.parse(lists_data)
+    @lists_name = @lists.map{|list| list.values_at("name")}.flatten
+    @lists_id = @lists.map{|list| list.values_at("id")}.flatten
   end
 
   def import_selected_list
@@ -18,14 +46,14 @@ class TrelloapiController < ApplicationController
     lists = JSON.parse(lists_data)
     lists_name = lists.map{|list| list.values_at("name")}.flatten
     lists_id = lists.map{|list| list.values_at("id")}.flatten
-    @param_list_name = [] #拿到list name
+    @param_list_names = [] #拿到list name
     lists_name.each{|list| 
                     if params[:"#{list}"] != nil
-                      @param_list_name.append(params[:"#{list}"])
+                      @param_list_names.append(params[:"#{list}"])
                     end
                   }
     name_id_chart = Hash[lists_name.zip(lists_id)]
-    @param_list_id = @param_list_name.map{|name| name_id_chart.values_at(name)}.flatten #拿到list name的id
+    @param_list_id = @param_list_names.map{|name| name_id_chart.values_at(name)}.flatten #拿到list name的id
     @param_card_name = []
     @param_list_id.each{|id| 
                         @param_card_name.append(JSON.parse(GetLists.new.get_list_cards(id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token )).flatten)
@@ -43,65 +71,35 @@ class TrelloapiController < ApplicationController
     @param_board_name = boards_name[name_index] #拿到board name
     #create project and tasks
     load_trello_board()
+
+    redirect_to root_path, notice: '專案成功匯入喵'
   end
 
   def import_assigned_cards
-  
-  end
-
-  def index
-  end
-
-  def select_board
-    @project = Project.new
-    boards_data = GetBoards.new.get_boards(ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
-    boards = JSON.parse(boards_data)
-    boards_id = boards.map{|board| board.values_at("id")}.flatten
-    boards_name = boards.map{|board| board.values_at("name")}.flatten
-    @boards_name_id = boards_name.zip(boards_id)
-  end
-
-  def select_list_cards
-    cards_data = GetCards.new.get_cards($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
-    @cards = JSON.parse(cards_data)
-    @cards_name = @cards.map{|card| card.values_at("name")}.flatten
-    @cards_list_id = @cards.map{|card| card.values_at("idList")}.flatten
-
     lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
-    @lists = JSON.parse(lists_data)
-    @lists_name = @lists.map{|list| list.values_at("name")}.flatten
-    @lists_id = @lists.map{|list| list.values_at("id")}.flatten
+    lists = JSON.parse(lists_data)
+    lists_name = lists.map{|list| list.values_at("name")}.flatten
+    lists_id = lists.map{|list| list.values_at("id")}.flatten
+    @param_list_names = [] #拿到list name
+    lists_name.each{|list| 
+    if params[:"#{list}"] != nil
+      @param_list_names.append(params[:"#{list}"])
+    end
+    }
+    data = @param_list_names.map{|list_name| get_assigned_cards_data( $member_id, $board_id, list_name,  ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)}
+   
+    byebug
   end
-
-  def select_assigned_cards
-    cards_data = GetCards.new.get_cards($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
-    @cards = JSON.parse(cards_data)
-    @cards_name = @cards.map{|card| card.values_at("name")}.flatten
-    @cards_list_id = @cards.map{|card| card.values_at("idList")}.flatten
-
-    lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
-    @lists = JSON.parse(lists_data)
-    @lists_name = @lists.map{|list| list.values_at("name")}.flatten
-    @lists_id = @lists.map{|list| list.values_at("id")}.flatten
-  end
-
-
 
 
   private
-  def config_trelo_public_key
-    Trello.configure do |config|
-      config.developer_public_key = ENV['TRELLO_DEVELOPER_PUBLIC_KEY']
-      config.member_token = $token
-    end
-  end
 
   def generate_tasks_attributes
     i=0
     @tasks_attr_data=[]
 
     while i<@param_list_id.count
-      params = @param_card_name[i].map{ |card| "{title: '#{card}', trello_status: '#{@param_list_name[i]}', user_id: '#{current_user.id}'}"}
+      params = @param_card_name[i].map{ |card| "{title: '#{card}', trello_status: '#{@param_list_names[i]}', user_id: '#{current_user.id}'}"}
       @tasks_attr_data.append(params)
       i += 1
     end
@@ -114,4 +112,8 @@ class TrelloapiController < ApplicationController
     current_user.projects.create!(title: @param_board_name,
                     tasks_attributes:@tasks_attr_data)
   end  
+
+  def get_assigned_cards_data(member_id, board_id, list_name, api_key, token)
+    @assigned_cards = JSON.parse(GetLists.new.get_assigned_cards(member_id, board_id, list_name, api_key, token)).values_at("cards").flatten
+  end
 end

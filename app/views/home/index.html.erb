@@ -35,8 +35,8 @@
       <div class="input-group mb-3">
         <%= f.text_field :title, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
         <input type="hidden" value=<%= current_user.projects.first.id %> id= "task_project_id" name= "task[project_id]">
-        <div class="input-group-append">
-          <%= f.submit "", class: "btn btn-outline-secondary" %>
+        <div class="input-group-append btn-submit">
+          <%= f.submit "送出", class: "btn" %>
         </div>
       </div>
     </div>

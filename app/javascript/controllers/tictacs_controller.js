@@ -215,30 +215,6 @@ startRelaxPromise(){
     }) 
   }
 
-
-  /*
-  breakWorkApiPromise(data){
-    let submitData = {reason: data}
-    const tictac_id = this.stopbtnTarget.dataset.id
-    // debugger
-    return new Promise(function(resolve, reject) {
-      Rails.ajax({
-        url: `/api/v1/tictacs/${tictac_id}/cancel`, 
-        type: 'POST',
-        data: JSON.stringify(submitData),
-        dataType: 'json',
-        contentType: 'application/json; charset=UTF-8',
-        success: resp => {
-          resolve(resp)
-        }, 
-        error: err => {
-          console.log(err);
-        } 
-      })
-    }) 
-  }
-  */
-
 connect(){
   this.clicked = false
   let relax_num = 0

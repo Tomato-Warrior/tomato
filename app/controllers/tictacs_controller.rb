@@ -35,10 +35,10 @@ class TictacsController < ApplicationController
   private 
 
   def last_tictac  
-    if current_user.tictacs.count == 0
-      @tictac = Tictac.new
-    else
+    if current_user.tictacs.any?
       @tictac = current_user.tictacs.last
+    else
+      @tictac = Tictac.new
     end 
   end
 

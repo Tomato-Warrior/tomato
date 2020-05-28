@@ -39,8 +39,12 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.destroy
-    redirect_to root_path, notice: '專案成功刪除喵'
+    if current_user.projects.count == 1
+      redirect_to root_path, alert: '最少要有一個專案！'
+    else
+      @project.destroy
+      redirect_to root_path
+    end
   end
 
   private
@@ -50,7 +54,7 @@ class ProjectsController < ApplicationController
   end
 
   def find_project
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find(params[:id])
   end
 
   def project_expect_time

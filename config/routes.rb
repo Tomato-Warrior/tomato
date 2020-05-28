@@ -3,9 +3,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   
   #counter
-  resources :tictacs, only: [:index, :edit, :update] do
+  resources :tictacs, only: [:index, :update] do
     collection do
       get :list
+    end
+    # tictac list edit
+    member do
+      get :cancelled
+      get :finished
     end
   end
   
@@ -22,6 +27,8 @@ Rails.application.routes.draw do
   resources :tasks, only: [] do
     collection do
       post :today_task
+      post :cancelled_tictac
+      post :finished_tictac
     end
     resource :tictac, only: [:show]
   end
@@ -43,17 +50,23 @@ Rails.application.routes.draw do
   end
   
   #homepage
-  resources :home, only: [:index]
+  resources :home, only: [:index] do
+    collection do
+      get :todo
+    end
+  end
 
   #charts
   resources :charts, only: [:index]
   #trello
   resources :trelloapi, only: [:index] do
     collection do
-      post :get_boards
-      post :get_selection
-      post :get_cards
-      get :import_selection
+      post :get_token
+      post :import_selected_list
+      post :get_board
+      post :import_assigned_cards
+      get :select_assigned_cards_of_list
+      get :select_board
       get :select_list_cards
     end
   end

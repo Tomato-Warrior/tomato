@@ -1,4 +1,5 @@
 
 <div class="container" data-controller="trelloapi">
-    <%= link_to "匯入專案",import_selection_trelloapi_index_path %>
+    <a href="#" data-action="click->trelloapi#get_token">驗證帳號</a>
+    <%= link_to "匯入Trello卡片",select_board_trelloapi_index_path %>
 </div>

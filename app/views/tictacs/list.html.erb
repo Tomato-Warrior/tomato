@@ -1,25 +1,25 @@
 <div class="container">
-	<h1 class="py-3">Tictac list</h1>
+	<h1 class="py-3">Tictacs 列表</h1>
 	<nav>
 	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Cancelled Tictacs</a>
-	    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Finished Tictacs</a>
+	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">中斷的時鐘</a>
+	    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">完成的時鐘</a>
 	  </div>
 	</nav>
 	<div class="tab-content" id="nav-tabContent">
-	  <div class="tab-pane chartbg fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+	  <div class="tab-pane chartbg fade show active border-right border-left border-bottom" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 			<div class="d-flex">
 				<div class="py-2 col-1"></div>
-				<div class="py-2 col-1">Status</div>
-				<div class="py-2 col-2">Task</div>
-				<div class="py-2 col-2">Reason</div>
-				<div class="py-2 col-3">Start time</div>
-				<div class="py-2 col-3">End time</div>
+				<div class="py-2 col-1">狀態</div>
+				<div class="py-2 col-2">任務</div>
+				<div class="py-2 col-2">中斷原因</div>
+				<div class="py-2 col-3">開始時間</div>
+				<div class="py-2 col-3">結束時間</div>
 			</div>
 			<% @tictacs_cancelled.each do |tictac| %>
 				<div class="d-flex">
 					<div class="py-2 col-1 text-center">
-						<%= link_to edit_tictac_path(:id) do %>
+						<%= link_to cancelled_tictac_path(tictac.id) do %>
 							<i class="fas fa-pencil-alt"></i>
 						<% end %>
 					</div>
@@ -45,18 +45,18 @@
 				</div>
 			<% end %>
 		</div>
-	  <div class="tab-pane chartbg fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+	  <div class="tab-pane chartbg fade border-right border-left border-bottom" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 			<div class="d-flex">
 				<div class="py-2 col-1"></div>
-				<div class="py-2 col-2">Status</div>
-				<div class="py-2 col-3">Task</div>
-				<div class="py-2 col-3">Start time</div>
-				<div class="py-2 col-3">End time</div>
+				<div class="py-2 col-2">狀態</div>
+				<div class="py-2 col-3">任務</div>
+				<div class="py-2 col-3">開始時間</div>
+				<div class="py-2 col-3">結束時間</div>
 			</div>
 			<% @tictacs_finished.each do |tictac| %>
 				<div class="d-flex">
 					<div class="py-2 col-1 text-center">
-						<%= link_to edit_tictac_path(:id) do %>
+						<%= link_to finished_tictac_path(tictac.id) do %>
 							<i class="fas fa-pencil-alt"></i>
 						<% end %>
 					</div>

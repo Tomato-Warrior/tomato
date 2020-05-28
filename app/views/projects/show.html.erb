@@ -2,15 +2,19 @@
 
   <div class="show-data">
     <div class="data">
+      <h1 class="tomato-num"><%= @project_expect_time %></h1>
+      <p>預計時間</p>
+    </div>
+    <div class="data">
+      <h1 class="doing-task-num"><%= @project_undo_tasks.count %></h1>
+      <p>待完成任務</p>
+    </div>
+    <div class="data">
       <h1 class="tomato-num"><%= @tictac_count %></h1>
       <p>收集番茄</p>
     </div>
     <div class="data">
-      <h1 class="doing-task-num"><%= @undo_tasks.count %></h1>
-      <p>待完成任務</p>
-    </div>
-    <div class="data">
-      <h1 class="done-data-num"><%= @done_tasks.count %></h1>
+      <h1 class="done-data-num"><%= @project_done_tasks.count %></h1>
       <p>已完成任務</p>
     </div>
   </div>
@@ -42,23 +46,30 @@
     </div>
     <ul class="project_task_container">
       <div data-controller="drag" data-id="<%= @project.id %>" data-target="drag.project_id">
-        <% @undo_tasks.order(position: :asc).each do |task| %>
+        <% @project_undo_tasks.order(position: :asc).each do |task| %>
           <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
-            <div class="col-1 d-flex">
-                <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
-                  <i class="far fa-circle"></i>
-                <% end %>
-                <%= link_to task_tictac_path(task_id: task.id), class: "px-3 play-icon" do %>
-                  <i class="far fa-play-circle"></i>
-                <% end %>
+            <div class="col-1 d-flex align-items-center">
+              <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
+                <i class="far fa-circle"></i>
+              <% end %>
+              <%= link_to task_tictac_path(task_id: task.id), class: "px-3 play-icon" do %>
+                <i class="far fa-play-circle"></i>
+              <% end %>
             </div>
             <div class="col-3 d-flex align-items-center text-center">
               <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
             </div>
-            <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
-              <img src='/expect_tictac.png' class='task_tictac'>
-              <small><%= task.expect_tictacs %></small>
-            </div>
+            <% if task.expect_tictacs? %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small><%= task.expect_tictacs %></small>
+              </div>
+            <% else %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：0">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small>0</small>
+              </div>
+            <% end %>
             <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
               <img src='/finish_tictac.png' class='task_tictac'>
               <small><%= task.tictacs.finished.count %></small>
@@ -93,7 +104,7 @@
   </div>
   <div class="collapse" id="collapseExample">
       <ul class="project_task_container">
-        <% @done_tasks.order(position: :asc).each do |task| %>
+        <% @project_done_tasks.order(position: :asc).each do |task| %>
           <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
             <div class="col-1 d-flex">
                 <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
@@ -104,12 +115,19 @@
                 <% end %>
             </div>
             <div class="col-3 d-flex align-items-center text-center">
-              <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
+              <del><%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %></del>
             </div>
-            <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
-              <img src='/expect_tictac.png' class='task_tictac'>
-              <small><%= task.expect_tictacs %></small>
-            </div>
+            <% if task.expect_tictacs? %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small><%= task.expect_tictacs %></small>
+              </div>
+            <% else %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：0">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small>0</small>
+              </div>
+            <% end %>
             <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
               <img src='/finish_tictac.png' class='task_tictac'>
               <small><%= task.tictacs.finished.count %></small>
@@ -142,3 +160,5 @@
 <script>
   $('.collapse').collapse('hide')
 </script>
+
+

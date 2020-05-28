@@ -1,9 +1,8 @@
-<div class="timer_controler" data-controller="tictacs">
-  <div class="tomato_bg" data-target="tictacs.bgcolor">
-    <div class="task-list" data-id="<%= params[:task_id] %>" data-target="tictacs.task_list">
-    </div>
+<div class="tomato_bg timer_controler" data-target="tictacs.bgcolor" data-controller="tictacs">
+  <div class="task-list" data-id="<%= params[:task_id] %>" data-target="tictacs.task_list">
+  </div>
 
-  <div class="clock d-flex flex-column justify-content-center align-items-center py-5">
+  <div class="clock d-flex flex-column justify-content-center align-items-center pt-5">
     <div class="display d-flex justify-content-center align-items-center">
       <h1 class="display_time_left pending d-flex justify-content-center align-items-center" data-target="tictacs.show_time_left"></h1>
     </div>

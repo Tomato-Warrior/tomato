@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:edit, :update, :destroy, :drag, :show, :toggle_status]
 
   def index
-    if current_user
+    if user_signed_in?
       @tasks = current_user.tasks.includes(:user)
     end
     @projects = current_user.projects
@@ -16,7 +16,7 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
 
     if @task.save
-      redirect_to project_path(params[:project_id]), notice: "任務新增成功喵"
+      redirect_to project_path(params[:project_id])
     else
       render :new
     end
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   
   def update
     if @task.update(task_params)
-      redirect_to project_path(@task.project_id), notice: '任務成功編輯喵'
+      redirect_to project_path(@task.project_id)
     else
       render :edit
     end
@@ -40,19 +40,14 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy   
-    redirect_to project_path(@task.project_id), notice: '任務成功刪除喵'
+    redirect_to project_path(@task.project_id)
   end
 
   # 首頁表單post
   def today_task
     @task = current_user.tasks.build(task_params)
-    @task.position = 0
-    while @task.position <= current_user.projects.first.tasks.count
-      @task.position += 1
-    end
-
     if @task.save
-      redirect_to root_path, notice: "任務新增成功喵"
+      redirect_to root_path
     else
       render :new
     end  
@@ -75,6 +70,18 @@ class TasksController < ApplicationController
     head :ok
   end
 
+  # finished tictac add new task
+  def finished_tictac
+    @task = current_user.tasks.build(task_params)
+    if @task.save
+      @tictac = Tictac.find(params[:tictac_id])
+      @tictac.update(task_id: @task.id)
+      redirect_to list_tictacs_path
+    else
+      render finished_tictac_path(@tictac.id)
+    end
+  end
+
   private
   def task_params
     params.require(:task).permit(:title, 
@@ -87,7 +94,7 @@ class TasksController < ApplicationController
   end
 
   def find_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
 end

@@ -8,14 +8,18 @@
       </h1>
     <% if user_signed_in? %>
       <div>
-        <%= link_to '<i class="far fa-chart-bar"></i>'.html_safe, charts_path %>
-        <%= link_to '<i class="fas fa-clipboard-list"></i>'.html_safe, list_tictacs_path %>
+        <%= link_to charts_path do %>
+          <i class="far fa-chart-bar"></i>
+        <% end %>
+        <%= link_to list_tictacs_path, class: "pl-2" do %>
+          <i class="fas fa-clipboard-list"></i>
+        <% end %>
         <%= link_to current_user.email, edit_user_registration_path, class: 'nav-href' %>
         <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'nav-href' %>
         <%= link_to "trello", trelloapi_index_path, class: 'nav-href'%>
       </div>
     <% else %>
-      <%= link_to 'Sign in', new_user_session_path %>
+      <%= link_to '登入 / 註冊', new_user_session_path %>
     <% end %>
     
   </div>

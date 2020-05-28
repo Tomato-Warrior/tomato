@@ -41,7 +41,7 @@
         });
       });
 
-      $(window).load(function(){
+      $(window).on('load', function(){
         $('a[data-toggle="tab"]').on('shown', function(e) {
           $('.dropdown-menu li a.dropdown-item.active').removeClass('active');
           $(this).parent('li').addClass('active');

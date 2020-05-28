@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.build(project_params)
     if @project.save
-      redirect_to project_path(@project), notice: '專案建立成功喵'
+      redirect_to project_path(@project)
     else
       render :new
     end
@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to project_path(@project), notice: '專案編輯成功喵'
+      redirect_to project_path(@project)
     else
       render :edit
     end
@@ -31,15 +31,20 @@ class ProjectsController < ApplicationController
 
   def show
     @task = Task.new
-    @undo_tasks = @project.tasks.doing
-    @done_tasks = @project.tasks.done
+    @project_undo_tasks = @project.tasks.doing
+    @project_done_tasks = @project.tasks.done
     task_ids = @project.tasks.ids
     @tictac_count = Tictac.where(task_id: task_ids).finished.count
+    @project_expect_time = project_expect_time
   end
 
   def destroy
-    @project.destroy
-    redirect_to root_path, notice: '專案成功刪除喵'
+    if current_user.projects.count == 1
+      redirect_to root_path, alert: '最少要有一個專案！'
+    else
+      @project.destroy
+      redirect_to root_path
+    end
   end
 
   private
@@ -49,8 +54,13 @@ class ProjectsController < ApplicationController
   end
 
   def find_project
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find(params[:id])
   end
 
+  def project_expect_time
+    tictac_hour = Task.where(project_id: @project).sum(:expect_tictacs) * 1500.0 / 3600
+    tictac_hour.round(tictac_hour % 10 == 0 ? 0 : 1)
+  end
+  
 end
 

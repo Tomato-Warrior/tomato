@@ -1,43 +1,34 @@
-<div class="d-flex justify-content-center min-vh-100 align-items-center">
+<div class="d-flex justify-content-center my-2 pt-5 align-items-center">
   <div class="card">
-    <h2 class="text-center py-2">Sign up</h2>
+    <h3 class="text-center pb-2 pt-4">註冊</h3>
     <div class="card-body">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
       
-        <div class="input-group form-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-user"></i></span>
-          </div>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email" %>
+        <div class="form-group">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email", class: "form-control login-form" %>
         </div>
       
-        <div class="input-group form-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-key"></i></span>
-          </div>
-          <%= f.password_field :password, autocomplete: "new-password", placeholder: "password" %>
+        <div class="form-group">
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "password", class: "form-control login-form" %>
 
           <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <small> (<%= @minimum_password_length %> characters minimum)</small>
           <% end %>
         </div>
       
-        <div class="input-group form-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-key"></i></span>
-          </div>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "confirm password" %>
+        <div class="form-group">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "confirm password", class: "form-control login-form" %>
         </div>
     
     
-        <div class="actions d-flex justify-content-center">
-          <%= f.submit "Sign up", class: "badge-pill px-5 py-2 path-color" %>
+        <div class="form-group d-flex justify-content-center">
+          <%= f.submit "註冊", class: "btn btn-lg btn-login-submit login_width py-2" %>
         </div>
       <% end %>
     </div>
 
-    <div class="card-footer">
+    <div class="card-footer text-center pt-1 pb-4">
       <%= render "devise/shared/links" %>
     </div>
   </div>

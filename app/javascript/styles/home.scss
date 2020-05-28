@@ -1,111 +1,21 @@
 @import "_library.scss";
 
+// 清除預設
 * {
   font-family: 微軟正黑體;
+  outline: none;
 }
-
 input{
   border: none;
 }
-
 a{
   text-decoration: none;
 }
-
 a:hover{
     text-decoration: none;
 }
-
 .project-list:focus{
   background-color: #ccc;
-}
-
-.start_timer{
-  position: fixed;
-  background-color: $mainRed;
-  color: $subBackground;
-  padding: 13px 25px;
-  margin-bottom: 30px;
-  border-radius: 5px;
-  bottom: 0;
-  left: 43%;
-  font-size: 18px;
-  z-index: 20;
-  .start_icon{
-    margin-right: 10px;
-    color: $subBackground;
-    span {
-      padding-left: 10px;
-      color: $subBackground;
-    }
-  }
-}
-
-.left-nav{
-  font-size: 15px;
-  box-shadow: 2px 1px 5px 0px rgba(66,66,66,0.08);
-}
-
-.drop-btn{
-  color: $placeholder;
-}
-
-.btn{
-  padding: 0px
-}
-  
-.project_group{
-  background-color: $subBackground;
-  width: 20vw;
-  height: calc(100vh - 66px);
-  position: sticky;
-
-  a{
-    color: $normalFontColor;
-  }
-
-  .todo-container{
-    padding-top: 20px;
-  }
-
-  .project_time{
-    color: $leftNavTime;
-  }
-
-  .project-container{
-    overflow-y: auto;
-    height: calc(100vh - 210px);
-
-    #project_cover{
-      width: 15px;
-      height: 15px;
-    }
-
-    .project_name{
-      width: 60%;
-    }
-  }
-
-  .add_project{
-    color: $mainRed;
-    background-color: $newProjectNav !important;
-    bottom: 0;
-    z-index: 5;
-    position: absolute;
-  }
-
-  .add_project:hover{
-    background-color: $shadowColor;
-  }
-
-  .divider{
-    width: 80%;
-    display: block;
-    border: 1px solid $shadowColor;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
 }
 
 // 顯示番茄數據
@@ -129,7 +39,6 @@ a:hover{
     font-size: 28px;
     color: rgb(72, 141, 118);
   }
-
 
   p{
     font-size: 14px;

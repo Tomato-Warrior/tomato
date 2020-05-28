@@ -5,6 +5,7 @@ require("channels")
 require("select2")
 require("styles")
 require("chartkick")
+require("chart.js")
 require("scripts")
 
 import $ from 'jquery'

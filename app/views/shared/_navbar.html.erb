@@ -1,25 +1,25 @@
-<nav class="navbar navbar-expand-lg navname">
+<nav class="navbar navbar-expand-md navname">
     <h1 class="navbar-brand mb-0 h1"> 
       <%= link_to root_path do %>
         <span class="logo">
         </span>
       <% end %>
     </h1>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-bars nav-hamber"></i>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto align-items-center">
+  <div class="collapse navbar-collapse" id="navbar">
+    <ul class="navbar-nav align-items-center text-center">
     <% if user_signed_in? %>
       <li class="nav-item active pl-2">
         <%= link_to charts_path do %>
-          <i class="far fa-chart-bar"></i>
+          <i class="far fa-chart-bar"></i><span class="nav-font pl-1">圖表紀錄</span>
         <% end %>
       </li>
       <li class="nav-item pl-3">
         <%= link_to list_tictacs_path, class: "pl-2" do %>
-          <i class="fas fa-clipboard-list"></i>
+          <i class="fas fa-clipboard-list"></i><span class="nav-font pl-1">番茄鐘列表</span>
         <% end %>
       </li>
       <li class="nav-item pl-2">

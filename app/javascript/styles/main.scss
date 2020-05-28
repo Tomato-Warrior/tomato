@@ -1,8 +1,39 @@
 @import "~bootstrap/scss/bootstrap";
 @import "_library.scss";
 
+// top_nav
 .navbar {
     padding: 0.5rem 2rem;
+    .nav-font{
+        display: none;
+    }
+    .navbar-nav{
+        margin-left: auto;
+    }
+    .button:focus{
+        outline: none;
+    }
+    .nav-hamber{
+        color: #fff;
+    }
+     @media (max-width: 767px) {
+        .nav-font{
+            display: inline-block;
+        }
+        .navbar-nav{
+            background-color: $mainRed;
+            padding: 10px 0px;
+            margin-left: 0;
+            top: 10px;
+        }
+        li{
+            padding: 5px 0px;
+        }
+        button:focus{
+            outline: 0px;
+        }
+     }
+
 }
 .navname {
     background-color: $mainRed;
@@ -27,6 +58,8 @@
         padding-left: 15px;
     }
 }
+
+// 
 body {
     color: $normalFontColor;
     background-color: $mainBackground;
@@ -38,6 +71,9 @@ body {
     color: $normalFontColor;
     background-color: $mainYellow;
 }
+
+// 登入註冊
+
 .login_width {
     width: 300px;
 }
@@ -127,9 +163,16 @@ p {
 }
 a{
     color: $mainRed;
+    font-size: 15px;
 }
 a:hover{
     color: $redBtnHover;
+}
+.btn:focus, .btn.focus{
+    box-shadow: none;
+}
+.form-control:focus{
+    box-shadow: none;
 }
 
 // left_nav

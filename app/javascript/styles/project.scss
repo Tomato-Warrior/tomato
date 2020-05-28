@@ -1,9 +1,13 @@
 @import '_library.scss';
-
-#project_cover{
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
+.project_cover{
+  h2{
+    font-size: 18px;
+  }
+  #project_cover{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+  }
 }
 .project_color{
   width: 20px;
@@ -18,6 +22,7 @@ ul{
 .project-task-list{
   background-color: #fff;
   box-shadow: -1px 2px 5px -2px rgba(66,66,66,0.10);
+  border-radius: 5px;
 }
 
 .project-title{
@@ -33,7 +38,19 @@ ul{
 .fa-circle, .fa-check-circle{
   color: $leftNavTime;
 }
-
+.btn-submit{
+  padding: 0 30px 0 30px;
+  background-color: $mainRed;
+  border-radius: 5px;
+  input{
+    color: #fff;
+  }
+}
+.input-group{
+  box-shadow: -1px 2px 5px -2px rgba(66, 66, 66, 0.1);
+  background-color: #fff;
+  border-radius: 5px;
+}
 
 .task-hover:hover {
   background-color: #9ADDC6;
@@ -45,13 +62,11 @@ ul{
 .btn-outline-secondary{
   background-color: #fff;
   border: transparent;
-  box-shadow: 0px 4px 4px -2px rgba(66,66,66,0.14);
 }
 .form-control{
   border: none;
   padding: 15px 20px;
   height: 48px;
-  box-shadow: -1px 2px 5px -2px rgba(66,66,66,0.10);
 }
 .list-font{
   color: $normalFontColor;
@@ -61,7 +76,7 @@ ul{
   line-height: 1.5;
   font-size: 20px;
 }
-.done-task{
+.btn.done-task{
   background-color: $placeholder;
   padding: 1px 10px;
   font-size: 13px;
@@ -70,7 +85,7 @@ ul{
   margin-bottom: 5px;
   margin-top: 10px;
 }
-.done-task:hover{
+.btn.done-task:hover{
   color: #fff;
 }
 .task_tictac{

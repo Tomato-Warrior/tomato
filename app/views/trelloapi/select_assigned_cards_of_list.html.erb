@@ -4,12 +4,12 @@
     <ul>
       <% @lists.each do |list| %>
           <li>
-            <%= check_box_tag list.values_at("id"), list.values_at("name"),nil,:name => list.values_at("name"),"data-action"=>"click->trelloapi#select_assigned_cards", "data-target"=>"trelloapi.select_assigned_cards",class:"select_list" %>
+            <%= check_box_tag list.values_at("id"), list.values_at("name"),nil,:name => list.values_at("name"),"data-action"=>"click->trelloapi#select_assigned_cards_of_list", "data-target"=>"trelloapi.select_assigned_cards",class:"select_list" %>
             <%= list.values_at("name").join %>
           </li>
       <% end %>
     </ul>
-    
+    <%= @assigned_cards%>
     <%= submit_tag "Submit" %>
   <% end %>
 </div>

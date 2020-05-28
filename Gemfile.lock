@@ -156,7 +156,6 @@ GEM
       mini_portile2 (~> 2.4.0)
     nokogiri (1.10.9-x86-mingw32)
       mini_portile2 (~> 2.4.0)
-    oauth (0.5.4)
     oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
@@ -249,6 +248,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
 <<<<<<< HEAD
+<<<<<<< HEAD
     ruby-trello (1.6.0)
       activemodel (>= 3.2.0)
       addressable (~> 2.3)
@@ -257,6 +257,8 @@ GEM
       rest-client (>= 1.8.0)
 =======
 >>>>>>> rebase master
+=======
+>>>>>>> fix conflict
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
     sass-rails (6.0.0)

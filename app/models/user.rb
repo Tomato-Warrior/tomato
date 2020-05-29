@@ -7,7 +7,10 @@ class User < ApplicationRecord
   has_many :projects
   has_many :tasks
   has_many :taggings, through: :tasks
-  has_many :tags, through: :tasks 
+  has_many :tags, through: :tasks
+
+  # 產生不會重複的token
+  has_secure_token :auth_token
 
   # callback
   after_create :default_project_create

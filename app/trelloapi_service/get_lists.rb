@@ -25,8 +25,4 @@ class GetLists
       e.response
     end
   end
-
-  def filter_assigned_cards(cards, listid)
-    
-  end
 end

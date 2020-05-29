@@ -1,9 +1,5 @@
 class GetLists
   require 'rest-client'
-  def initialize()
-		
-  end
-
   def get_lists(board_id, api_key, token)
     begin
       RestClient.get "api.trello.com/1/boards/#{board_id}/lists?key=#{api_key}&token=#{token}"

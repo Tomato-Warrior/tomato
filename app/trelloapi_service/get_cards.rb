@@ -1,7 +1,5 @@
 class GetCards
   require 'rest-client'
-  def initialize()
-  end
 
   def get_cards(board_id, api_key, token)
     begin

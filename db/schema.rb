@@ -54,10 +54,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_054811) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
     t.integer "position"
-    t.string "trello_status"
     t.integer "status", default: 0
-    t.string "trello_card_id"
-    t.string "trello_goal_list_id"
     t.index ["deleted_at"], name: "index_tasks_on_deleted_at"
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
@@ -82,7 +79,10 @@ ActiveRecord::Schema.define(version: 2020_06_01_054811) do
     t.bigint "task_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+<<<<<<< HEAD
     t.string "board_id"
+=======
+>>>>>>> add trello model
     t.index ["task_id"], name: "index_trello_infos_on_task_id"
   end
 

@@ -58,14 +58,14 @@ class TrelloapiController < ApplicationController
     param_card_names = []
     param_card_ids = []
     @param_list_id.each{|id| 
-                        param_card_names.append(JSON.parse(GetLists.new.get_list_cards(id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token )).flatten)
-                        param_card_ids.append(JSON.parse(GetLists.new.get_list_cards(id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token )).flatten)
+                        param_card_names.append(JSON.parse(GetLists.new.get_list_cards(id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)).flatten)
+                        param_card_ids.append(JSON.parse(GetLists.new.get_list_cards(id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)).flatten)
                       }
     param_card_names = param_card_names.map{|cards| cards.map{|card| card.values_at("name")}.flatten} #拿到cards name
     param_card_ids = param_card_ids.map{|cards| cards.map{|card| card.values_at("id")}.flatten} #拿到cards id
 
     #製作巢狀參數                  
-    generate_tasks_attributes(param_card_names,param_card_ids, params[:goal_list_id], @param_list_id.count)
+    generate_tasks_attributes(param_card_names, @param_list_id.count)
 
     boards_data = GetBoards.new.get_boards(ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
     boards = JSON.parse(boards_data)
@@ -74,9 +74,12 @@ class TrelloapiController < ApplicationController
     name_index = boards_id.index($board_id)
     @param_board_name = boards_name[name_index] #拿到board name
     #create project and tasks
-
-    import_trello_board(@param_board_name, @tasks_attr_data)
-
+    
+    import_data = import_trello_board(@param_board_name, @tasks_attr_data)
+    list_cards = @param_list_names.map{|list_name| GetCards.new.get_list_card(@param_board_name, "許願池", ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)}
+    
+    
+    #import_data.tasks.map{|task| task.trello_info.create!{card_id: , list_id: }}
     redirect_to root_path
   end
 
@@ -98,20 +101,18 @@ class TrelloapiController < ApplicationController
     board_name = board_name.values_at("name").join
     
     generate_tasks_attributes(assigned_cards_names, @param_list_names.count) 
-    import_trello_board(board_name, @tasks_attr_data)
+    import_trello_board(board_name, @tasks_attr_data) 
     redirect_to root_path
   end
 
 
   private
 
-  def generate_tasks_attributes(card_names, card_id, goal_list_id, lists_num)
+  def generate_tasks_attributes(card_names, lists_num)
     i=0
     @tasks_attr_data=[]
     while i<lists_num
       params = card_names[i].map{ |card| "{title: '#{card}', 
-                                          trello_status: '#{@param_list_names[i]}', 
-                                          trello_card_id: '#{card_id}',
                                           user_id: '#{current_user.id}'}"}
       @tasks_attr_data.append(params)
       i += 1

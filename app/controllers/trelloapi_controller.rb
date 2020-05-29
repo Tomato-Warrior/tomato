@@ -111,8 +111,7 @@ class TrelloapiController < ApplicationController
     while i<lists_num
       params = card_names[i].map{ |card| "{title: '#{card}', 
                                           trello_status: '#{@param_list_names[i]}', 
-                                          trello_card_id: '#{card_id}', 
-                                          trello_goal_list_id: '#{goal_list_id}',
+                                          trello_card_id: '#{card_id}',
                                           user_id: '#{current_user.id}'}"}
       @tasks_attr_data.append(params)
       i += 1

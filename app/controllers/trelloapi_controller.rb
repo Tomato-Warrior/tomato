@@ -76,10 +76,12 @@ class TrelloapiController < ApplicationController
     #create project and tasks
     
     import_data = import_trello_board(@param_board_name, @tasks_attr_data)
-    list_cards = @param_list_names.map{|list_name| GetCards.new.get_list_card(@param_board_name, "許願池", ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)}
-    
-    
-    #import_data.tasks.map{|task| task.trello_info.create!{card_id: , list_id: }}
+    all_cards = GetCards.new.get_cards($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
+    all_cards = JSON.parse(all_cards)
+    lists_id = param_card_ids.flatten.map{|card| GetCards.new.get_card_by_id(card, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)}
+    lists_id = lists_id.map{|list| JSON.parse(list).values_at("idList")}.flatten
+    create_trello_info(import_data, param_card_ids, lists_id)
+
     redirect_to root_path
   end
 
@@ -128,5 +130,13 @@ class TrelloapiController < ApplicationController
 
   def get_assigned_cards_data(member_id, board_id, list_name, api_key, token)
     @assigned_cards = JSON.parse(GetLists.new.get_assigned_cards(member_id, board_id, list_name, api_key, token)).values_at("cards").flatten
+  end
+
+  def create_trello_info(import_data, card_ids, list_ids)
+    i=0
+    while i<import_data.tasks.count
+      import_data.tasks[i].create_trello_info({card_id:card_ids.flatten[i], list_id:list_ids[i]})
+      i += 1
+    end  
   end
 end

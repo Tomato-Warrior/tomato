@@ -1,1 +1,0 @@
-import "./tictacs.scss"

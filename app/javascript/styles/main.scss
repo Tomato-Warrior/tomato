@@ -1,16 +1,48 @@
 @import "~bootstrap/scss/bootstrap";
 @import "_library.scss";
 
+// top_nav
 .navbar {
-    padding: 0.5rem 3rem;
+    padding: 0.5rem 2rem;
+    .nav-font{
+        display: none;
+    }
+    .navbar-nav{
+        margin-left: auto;
+    }
+    .button:focus{
+        outline: none;
+    }
+    .nav-hamber{
+        color: #fff;
+    }
+     @media (max-width: 767px) {
+        .nav-font{
+            display: inline-block;
+        }
+        .navbar-nav{
+            background-color: $mainRed;
+            padding: 10px 0px;
+            margin-left: 0;
+            top: 10px;
+        }
+        li{
+            padding: 5px 0px;
+        }
+        button:focus{
+            outline: 0px;
+        }
+     }
+
 }
 .navname {
     background-color: $mainRed;
     height: 60px;
-    box-shadow: -1px 4px 5px -2px rgba(66,66,66,0.14);
-    z-index: 4;
+    box-shadow: -1px 4px 4px -2px rgba(155, 63, 63, 0.14);
+    z-index: 10;
     a {
         color: #FFF;
+        font-size: 17px;
     }
     a:hover {
         color: #FFF;
@@ -19,7 +51,7 @@
         display: block;
         width: 200px;
         height: 30px;
-        background-image: url(../../../../public/tomato-logo.png);
+        background-image: url(../../../public/tomato-logo.png);
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -27,6 +59,8 @@
         padding-left: 15px;
     }
 }
+
+// 
 body {
     color: $normalFontColor;
     background-color: $mainBackground;
@@ -38,6 +72,9 @@ body {
     color: $normalFontColor;
     background-color: $mainYellow;
 }
+
+// 登入註冊
+
 .login_width {
     width: 300px;
 }
@@ -127,16 +164,23 @@ p {
 }
 a{
     color: $mainRed;
+    font-size: 15px;
 }
 a:hover{
     color: $redBtnHover;
+}
+.btn:focus, .btn.focus{
+    box-shadow: none;
+}
+.form-control:focus{
+    box-shadow: none;
 }
 
 // left_nav
 
 .main-container{
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 66px);
     position: sticky;
     box-sizing: border-box;
     overflow-y: auto;

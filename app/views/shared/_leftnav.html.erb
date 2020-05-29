@@ -10,7 +10,7 @@
   <div class="project_group">
     <div class="todo-container">
 
-      <div class="d-flex align-items-center px-3 py-3">
+      <div class="d-flex align-items-center px-3 py-2">
         <i class="fas fa-sun mr-2"></i>
         <p class="mb-0"><%= link_to "今天", root_path  %></p>
         <div class="ml-auto">
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="d-flex align-items-center px-3 py-3">
+      <div class="d-flex align-items-center px-3 py-2">
         <i class="fas fa-list mr-2"></i>
         <p class="mb-0"><%= link_to "待辦事項", todo_home_index_path %></p>
         <div class="ml-auto">
@@ -27,14 +27,13 @@
           <small class="project_time"><%= @left_todo_undo_tasks %></small>
         </div>
       </div>
-
     </div>
 
   <span class="divider"></span>
   <div class="project-container">
     <% if user_signed_in? %>
       <% @projects.order(id: :desc).each do |project| %>
-        <div class="d-flex align-items-center px-3 py-3"> 
+        <div class="d-flex align-items-center px-3 py-2"> 
           <div class="mr-2" id="project_cover" style="background-color:<%= project.cover %>"s>
           </div>
           <div class="project_name">

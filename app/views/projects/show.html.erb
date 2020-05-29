@@ -32,8 +32,8 @@
       <div class="input-group mb-3">
         <%= f.text_field :title, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
         <input type="hidden" value=<%= params[:id] %> id= "task_project_id" name= "task[project_id]">
-        <div class="input-group-append">
-          <%= f.submit "", class: "btn btn-outline-secondary" %>
+        <div class="input-group-append btn-submit">
+          <%= f.submit "送出", class: "btn" %>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
     <ul class="project_task_container">
       <div data-controller="drag" data-id="<%= @project.id %>" data-target="drag.project_id">
         <% @project_undo_tasks.order(position: :asc).each do |task| %>
-          <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
+          <li class="row p-2 task-hover my-2 d-flex project-task-list data-id="<%= task.id %>">
             <div class="col-1 d-flex align-items-center">
               <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
                 <i class="far fa-circle"></i>
@@ -105,7 +105,7 @@
   <div class="collapse" id="collapseExample">
       <ul class="project_task_container">
         <% @project_done_tasks.order(position: :asc).each do |task| %>
-          <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
+          <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>"  class="project-task-list">
             <div class="col-1 d-flex">
                 <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
                   <i class="far fa-check-circle"></i>

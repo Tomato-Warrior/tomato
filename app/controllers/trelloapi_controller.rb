@@ -87,7 +87,7 @@ class TrelloapiController < ApplicationController
     param_card_ids = param_card_ids.map{|cards| cards.map{|card| card.values_at("id")}.flatten} #拿到cards id
 
     #製作巢狀參數                  
-    generate_tasks_attributes(param_card_names,param_card_ids, params[:goal_list_id], @param_list_id.count)
+    generate_tasks_attributes(param_card_names, @param_list_id.count)
 
     boards_data = GetBoards.new.get_boards(ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     boards = JSON.parse(boards_data)
@@ -136,7 +136,7 @@ class TrelloapiController < ApplicationController
 
   private
 
-  def generate_tasks_attributes(card_names, card_id, goal_list_id, lists_num)
+  def generate_tasks_attributes(card_names, lists_num)
     i=0
     @tasks_attr_data=[]
     while i<lists_num

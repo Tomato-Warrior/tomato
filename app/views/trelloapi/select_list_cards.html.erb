@@ -10,6 +10,8 @@
       <% end %>
     </ul>
     
+      <option selected="selected" disabled="disabled">請選擇</option>
+      <%= select_tag(:goal_list_id, options_for_select(@name_id_chart)) %>  
     <%= submit_tag "Submit" %>
   <% end %>
 </div>

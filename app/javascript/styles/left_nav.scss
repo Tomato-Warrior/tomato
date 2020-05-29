@@ -25,26 +25,31 @@
 // left_nav
 
 .left-nav{
-    font-size: 15px;
-    box-shadow: 2px 1px 5px 0px rgba(66,66,66,0.08);
+    z-index: 11;
+    box-shadow: -1px 2px 22px -4px rgba(217,132,132,0.6);
   }
-  
-  .drop-btn{
-    color: $placeholder;
-  }
-  
+
   .btn{
     padding: 0px
   }
+
+  .drop-btn{
+    color: #fff;
+  }
+  .drop-btn:hover{
+    color: #fff;
+  }
   
   .project_group{
-    background-color: $subBackground;
-    width: 20vw;
-    height: calc(100vh - 66px);
+    background-color: $mainRed;
+    height: calc(100vh - 60px);
     position: sticky;
   
     a{
-      color: $normalFontColor;
+      color: #fff;
+    }
+    a:hover{
+      color: #fff;
     }
   
     .todo-container{
@@ -52,7 +57,15 @@
     }
   
     .project_time{
-      color: $leftNavTime;
+      color: #fff;
+    }
+
+    .dropdown-menu{
+      a{
+        color: #383838;
+        margin-top: 2px;
+        border: none;
+      }
     }
   
     .project-container{
@@ -65,28 +78,27 @@
       }
   
       .project_name{
-        width: 60%;
+        width: 120px;
+        padding: 0 5px;
       }
     }
   
     .add_project{
-      color: $mainRed;
-      background-color: $newProjectNav !important;
+      color: #fff;
+      background-color: #FFC7BE;
       bottom: 0;
+      left: 0;
       z-index: 5;
       position: absolute;
-    }
-  
-    .add_project:hover{
-      background-color: $shadowColor;
+      padding: 10px;
     }
   
     .divider{
       width: 80%;
       display: block;
-      border-top: 1px solid $shadowColor;
+      border-top: 1px solid #fff;
       margin: auto;
-      margin-top: 20px;
-      margin-bottom: 20px;
+      margin-top: 8px;
+      margin-bottom: 8px;
     }
   }

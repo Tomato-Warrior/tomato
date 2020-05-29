@@ -1,163 +1,157 @@
-  <div class="main_container">
-    <div class="task_group">
-      <div class=" task_list">
-        <div class="show-data">
-          <div class="data">
-            <h1 class="tomato-num"><%= @expect_time %></h1>
-            <p>預計完成時間</p>
-          </div>
-          <div class="data">
-            <h1 class="doing-task-num"><%= @undo_today_tasks.count %></h1>
-            <p>待完成任務</p>
-          </div>
-          <div class="data">
-            <h1 class="tomato-num"><%= @tictacs.count %></h1>
-            <p>收集番茄</p>
-          </div>
-          <div class="data">
-            <h1 class="done-data-num"><%= @done_today_tasks.count %></h1>
-            <p>已完成任務</p>
-          </div>
-        </div>
+<div class="task_group">
+  <div class=" task_list">
+    <div class="show-data">
+      <div class="data">
+        <h1 class="tomato-num"><%= @expect_time %></h1>
+        <p>預計完成時間</p>
+      </div>
+      <div class="data">
+        <h1 class="doing-task-num"><%= @undo_today_tasks.count %></h1>
+        <p>待完成任務</p>
+      </div>
+      <div class="data">
+        <h1 class="tomato-num"><%= @tictacs.count %></h1>
+        <p>收集番茄</p>
+      </div>
+      <div class="data">
+        <h1 class="done-data-num"><%= @done_today_tasks.count %></h1>
+        <p>已完成任務</p>
       </div>
     </div>
-
-  <%= form_for @task, url: today_task_tasks_path, method: 'post' do |f| %>
-    <% if @task.errors.any? %>
-      <ul>
-        <% @task.errors.full_messages.each do |message|%>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
-
-    <div class="add_task">
-      <div class="input-group mb-3">
-        <%= f.text_field :title, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
-        <input type="hidden" value=<%= current_user.projects.first.id %> id= "task_project_id" name= "task[project_id]">
-        <div class="input-group-append btn-submit">
-          <%= f.submit "送出", class: "btn" %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="project_cover d-flex align-items-center pl-3">
-    <h2 class="py-2 project-title"> <i class="fas fa-sun sun"></i> 今天</h2>
   </div>
+</div>
 
-  <div>
-    <ul class="project_task_container">
-      <div data-controller="drag" data-drag-url="/tasks/:id/drag">
-        <% @undo_today_tasks.each do |task| %>
-          <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
-            <div class="col-1 d-flex align-items-center">
-              <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
-                <i class="far fa-circle"></i>
-              <% end %>
-              <%= link_to task_tictac_path(task_id: task.id), class: "px-3 play-icon" do %>
-                <i class="far fa-play-circle"></i>
-              <% end %>
-            </div>
-            <div class="col-2 d-flex align-items-center text-center">
-              <span class="list-font"><%= task.project.title %></span>
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
-            </div>
-            <% if task.expect_tictacs? %>
-              <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
-                <img src='/expect_tictac.png' class='task_tictac'>
-                <small><%= task.expect_tictacs %></small>
-              </div>
-            <% else %>
-              <div class="col-1 d-flex align-items-center"  title="預期時鐘：0">
-                <img src='/expect_tictac.png' class='task_tictac'>
-                <small>0</small>
-              </div>
-            <% end %>
-            <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
-              <img src='/finish_tictac.png' class='task_tictac'>
-              <small><%= task.tictacs.finished.count %></small>
-            </div>
-            <div class="col-1 d-flex align-items-center"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
-              <img src='/cancel_tictac.png' class='task_tictac'>
-              <small><%= task.tictacs.cancelled.count %></small>
-            </div>
-            <div class="col-3 d-flex align-items-center">
-              <%= display_tag task.tag_items %>
-            </div>
-            <div class="col-1 d-flex align-items-center">
-              <%= link_to edit_project_task_path(task.project_id, task.id), class: "mx-1" do %>
-                <i class="fas fa-pencil-alt"></i>
-              <% end %>  
-              <%= link_to project_task_path(task.project_id, task.id), class: "mx-1", method: 'delete', data: {confirm: '真的要刪除喵?'} do %>
-                <i class="fas fa-trash-alt"></i>
-              <% end %>
-            </div>
-          </li>
-        <% end %>
-      </div>
+<%= form_for @task, url: today_task_tasks_path, method: 'post' do |f| %>
+  <% if @task.errors.any? %>
+    <ul>
+      <% @task.errors.full_messages.each do |message|%>
+        <li><%= message %></li>
+      <% end %>
     </ul>
-  </div>
-
-  <div class="d-flex justify-content-center">  
-    <button class="btn done-task" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      <i class="fas fa-caret-down"></i> 顯示已完成任務
-    </button>
-  </div>
-  <div class="collapse" id="collapseExample">
-      <ul class="project_task_container">
-        <% @done_today_tasks.each do |task| %>
-          <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
-            <div class="col-1 d-flex align-items-center">
-              <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
-                <i class="far fa-check-circle"></i>
-              <% end %>
-              <%= link_to task_tictac_path(task_id: task.id), class: "px-3 play-icon" do %>
-                <i class="far fa-play-circle"></i>
-              <% end %>
-            </div>
-            <div class="col-2 d-flex align-items-center text-center">
-              <span class="list-font"><del><%= task.project.title %></del></span>
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              <del><%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %></del>
-            </div>
-            <% if task.expect_tictacs? %>
-              <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
-                <img src='/expect_tictac.png' class='task_tictac'>
-                <small><%= task.expect_tictacs %></small>
-              </div>
-            <% else %>
-              <div class="col-1 d-flex align-items-center"  title="預期時鐘：0">
-                <img src='/expect_tictac.png' class='task_tictac'>
-                <small>0</small>
-              </div>
-            <% end %>
-            <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
-              <img src='/finish_tictac.png' class='task_tictac'>
-              <small><%= task.tictacs.finished.count %></small>
-            </div>
-            <div class="col-1 d-flex align-items-center"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
-              <img src='/cancel_tictac.png' class='task_tictac'>
-              <small><%= task.tictacs.cancelled.count %></small>
-            </div>
-            <div class="col-3 d-flex align-items-center">
-              <%= display_tag task.tag_items %>
-            </div>
-            <div class="col-1 d-flex align-items-center">
-              <%= link_to edit_project_task_path(task.project_id, task.id), class: "mx-1" do %>
-                <i class="fas fa-pencil-alt"></i>
-              <% end %>  
-              <%= link_to project_task_path(task.project_id, task.id), class: "mx-1", method: 'delete', data: {confirm: '真的要刪除喵?'} do %>
-                <i class="fas fa-trash-alt"></i>
-              <% end %>
-            </div>
-          </li>
-        <% end %>
-      </ul>
+  <% end %>
+  <div class="add_task">
+    <div class="input-group mb-3">
+      <%= f.text_field :title, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
+      <input type="hidden" value=<%= current_user.projects.first.id %> id= "task_project_id" name= "task[project_id]">
+      <div class="input-group-append btn-submit">
+        <%= f.submit "送出", class: "btn" %>
+      </div>
     </div>
+  </div>
+<% end %>
+<div class="project_cover d-flex align-items-center pl-3">
+  <h2 class="py-2 project-title"> <i class="fas fa-sun sun"></i> 今天</h2>
+</div>
+<div>
+  <ul class="project_task_container">
+    <div data-controller="drag" data-drag-url="/tasks/:id/drag">
+      <% @undo_today_tasks.each do |task| %>
+        <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
+          <div class="col-1 d-flex align-items-center">
+            <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
+              <i class="far fa-circle"></i>
+            <% end %>
+            <%= link_to task_tictac_path(task_id: task.id), class: "px-3 play-icon" do %>
+              <i class="far fa-play-circle"></i>
+            <% end %>
+          </div>
+          <div class="col-2 d-flex align-items-center text-center">
+            <span class="list-font"><%= task.project.title %></span>
+          </div>
+          <div class="col-2 d-flex align-items-center">
+            <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
+          </div>
+          <% if task.expect_tictacs? %>
+            <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
+              <img src='/expect_tictac.png' class='task_tictac'>
+              <small><%= task.expect_tictacs %></small>
+            </div>
+          <% else %>
+            <div class="col-1 d-flex align-items-center"  title="預期時鐘：0">
+              <img src='/expect_tictac.png' class='task_tictac'>
+              <small>0</small>
+            </div>
+          <% end %>
+          <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
+            <img src='/finish_tictac.png' class='task_tictac'>
+            <small><%= task.tictacs.finished.count %></small>
+          </div>
+          <div class="col-1 d-flex align-items-center"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
+            <img src='/cancel_tictac.png' class='task_tictac'>
+            <small><%= task.tictacs.cancelled.count %></small>
+          </div>
+          <div class="col-3 d-flex align-items-center">
+            <%= display_tag task.tag_items %>
+          </div>
+          <div class="col-1 d-flex align-items-center">
+            <%= link_to edit_project_task_path(task.project_id, task.id), class: "mx-1" do %>
+              <i class="fas fa-pencil-alt"></i>
+            <% end %>  
+            <%= link_to project_task_path(task.project_id, task.id), class: "mx-1", method: 'delete', data: {confirm: '真的要刪除喵?'} do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </div>
+  </ul>
+</div>
+<div class="d-flex justify-content-center">  
+  <button class="btn done-task" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <i class="fas fa-caret-down"></i> 顯示已完成任務
+  </button>
+</div>
+<div class="collapse" id="collapseExample">
+    <ul class="project_task_container">
+      <% @done_today_tasks.each do |task| %>
+        <li class="row p-2 task-hover project-task-list my-2 d-flex" data-id="<%= task.id %>">
+          <div class="col-1 d-flex align-items-center">
+            <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
+              <i class="far fa-check-circle"></i>
+            <% end %>
+            <%= link_to task_tictac_path(task_id: task.id), class: "px-3 play-icon" do %>
+              <i class="far fa-play-circle"></i>
+            <% end %>
+          </div>
+          <div class="col-2 d-flex align-items-center text-center">
+            <span class="list-font"><del><%= task.project.title %></del></span>
+          </div>
+          <div class="col-2 d-flex align-items-center">
+            <del><%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %></del>
+          </div>
+          <% if task.expect_tictacs? %>
+            <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
+              <img src='/expect_tictac.png' class='task_tictac'>
+              <small><%= task.expect_tictacs %></small>
+            </div>
+          <% else %>
+            <div class="col-1 d-flex align-items-center"  title="預期時鐘：0">
+              <img src='/expect_tictac.png' class='task_tictac'>
+              <small>0</small>
+            </div>
+          <% end %>
+          <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
+            <img src='/finish_tictac.png' class='task_tictac'>
+            <small><%= task.tictacs.finished.count %></small>
+          </div>
+          <div class="col-1 d-flex align-items-center"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
+            <img src='/cancel_tictac.png' class='task_tictac'>
+            <small><%= task.tictacs.cancelled.count %></small>
+          </div>
+          <div class="col-3 d-flex align-items-center">
+            <%= display_tag task.tag_items %>
+          </div>
+          <div class="col-1 d-flex align-items-center">
+            <%= link_to edit_project_task_path(task.project_id, task.id), class: "mx-1" do %>
+              <i class="fas fa-pencil-alt"></i>
+            <% end %>  
+            <%= link_to project_task_path(task.project_id, task.id), class: "mx-1", method: 'delete', data: {confirm: '真的要刪除喵?'} do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>
 

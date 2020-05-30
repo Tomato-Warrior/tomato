@@ -17,5 +17,113 @@ a:hover{
 .project-list:focus{
   background-color: #ccc;
 }
+ul,li{
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+h1,h2,h3{
+  text-align: left;
+}
 
 // 顯示番茄數據
+
+.info-contain{
+  .col-7{
+    padding-left: 0px;
+  }
+  h3{
+    font-size: 18px;
+    padding: 16px 24px 10px 24px;
+  }
+  .divider{
+    width: 95%;
+    display: block;
+    border-top: 1px solid #F0F0F0;
+    margin: auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  .tomato-garden{
+    height: 310px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 3px 5px 10px -8px rgba(217,132,132,0.48);
+  }
+  .information{
+    height: 310px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 3px 5px 10px -8px rgba(217,132,132,0.48);
+  }
+  .data-list{
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    padding: 5px 0px;
+    position: relative;
+    text-align: center;
+    p{
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 13px;
+    }
+    span{
+      font-size: 40px;
+      color: $mainRed;
+    }
+  }
+  .col-6:nth-child(even){
+    padding-left: 0px ;
+  }
+  .info-list{
+    li{
+      margin: 4px 24px 4px 24px;
+      .info-trello{
+        background-color: #55A3FF;
+        color: #fff;
+        border-radius: 10px;
+        font-size: 14px;
+        padding: 0px 8px;
+        height: 25px;
+        line-height: 1.8;
+        font-weight: 500;
+      }
+    }
+    p{
+      font-size: 15px;
+      margin: 4px 10px;
+      line-height: 1.2;
+    }
+  }
+  
+}
+h2.project-title{
+  font-size: 20px;
+}
+.form-control{
+  border: none;
+  height: 45px;
+  border-radius: 10px;
+}
+::-webkit-input-placeholder {
+  color: #F0F0F0;
+  font-size: 16px;
+}
+
+.delete-icon{
+  width: 80px;
+}
+.tag-icon{
+  width: 300px;
+}
+.tictac-icon{
+  width: 100px;
+}
+.task-project{
+  border-left: 1px solid #F0F0F0;
+  border-right: 1px solid #F0F0F0;
+  padding: 0 16px;
+  white-space:nowrap;
+}

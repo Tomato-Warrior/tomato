@@ -15,17 +15,12 @@
   width: 20px;
 }
 
-ul{
-    margin: 0px 15px 10px 15px;
-    padding-inline-start: 0px;
-    overflow: hidden;
-}
-
 .project-task-list{
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 10px;
+  height: 45px;
+  box-shadow: 3px 5px 10px -8px rgba(217,132,132,0.48);
 }
-
 .project-title{
   text-align: left;
   padding-top: 20px;
@@ -37,24 +32,38 @@ ul{
   color: #FFF8A5;
 }
 .fa-circle, .fa-check-circle{
-  color: $leftNavTime;
+  color: #C6C5C5;
+  background-color: #fff;
+  border-radius: 100%;
 }
+.fa-play-circle{
+  color: $mainRed;
+  background-color: #fff;
+  border-radius: 100%;
+}
+.fa-play-circle:hover{
+  color: $redBtnHover;
+  background-color: #fff;
+  border-radius: 100%;
+}
+
 .btn-submit{
-  padding: 0 30px 0 30px;
+  padding: 0 40px 0 40px;
   background-color: $mainRed;
-  border-radius: 5px;
+  border-radius: 0px 10px 10px 0;
   input{
     color: #fff;
   }
 }
 .input-group{
-  box-shadow: 3px 14px 39px -17px rgba(217,132,132,0.58);
+  box-shadow: 3px 5px 10px -8px rgba(217,132,132,0.48);
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .task-hover:hover {
-  background-color: #9ADDC6;
+  background-color: #F6E5E3;
+  transition: 0.2s;
 }
 
 .add_task{
@@ -72,6 +81,7 @@ ul{
 .list-font{
   color: $normalFontColor;
   line-height: 2;
+  font-size: 16px;
 }
 .play-icon{
   line-height: 1.5;
@@ -91,4 +101,7 @@ ul{
 }
 .task_tictac{
   max-width: 20px;
+}
+.play-icon{
+  color: #000;
 }

@@ -135,3 +135,32 @@ h2.project-title{
   padding: 0 16px;
   white-space:nowrap;
 }
+
+// 
+.tomato-garden{
+  text-align: center;
+  background-image: url(../../../public/plant_bg.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.input-group-text{
+  border: none;
+  background-color: #fff;
+  border-radius: 10px 10px 10px 10px;
+  .icon-circle{
+    border: 2px solid $mainRed;
+    border-radius: 100%;
+    width: 26px;
+    height: 26px;
+    position: relative;
+    .fa-plus{
+      font-size: 13px;
+      color: $mainRed;
+      position: absolute;
+      top: 4px;
+      left: 5px;
+    }
+  }
+}

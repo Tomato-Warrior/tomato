@@ -15,7 +15,9 @@
     <%= render "shared/flash" %>
     <section class="container-fluid overflow-hidden">
       <div class="row flex-nowrap">
-        <%= render "shared/leftnav" %>
+        <% if user_signed_in? %>
+         <%= render "shared/leftnav" %>
+        <% end %>
         <div class="main-container">
           <%= yield %>
         </div>

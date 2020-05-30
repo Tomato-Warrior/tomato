@@ -3,21 +3,30 @@
 // 番茄鐘
 .start_timer{
     position: fixed;
-    background-color: $mainRed;
     color: $subBackground;
     padding: 13px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     bottom: 0;
-    left: 43%;
+    right: 10px;
     font-size: 18px;
     z-index: 20;
     .start_icon{
-      margin-right: 10px;
-      color: $subBackground;
-      span {
-        padding-left: 10px;
-        color: $subBackground;
+      div{
+        width: 80px;
+        height: 80px;
+        background-image: url(../../../public/tomato_tictac_plus.png);
+        background-position: center;
+        background-size: cover;
+        transition: .5s;
+      }
+      div:hover{
+        width: 120px;
+        height: 120px;
+        background-image: url(../../../public/tomato_tictac.png);
+        background-position: center;
+        background-size: cover;
+        transition: .5s;
       }
     }
   }
@@ -27,6 +36,13 @@
 .left-nav{
     z-index: 11;
     box-shadow: -1px 2px 22px -4px rgba(217,132,132,0.6);
+  }
+
+  .fa-sun{
+    color: #fff;
+  }
+  .fa-list{
+    color: #fff;
   }
 
   .btn{

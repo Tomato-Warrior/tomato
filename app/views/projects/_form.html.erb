@@ -1,11 +1,4 @@
 <%= form_for(project) do |f| %>
-  <% if project.errors.any? %>
-    <ul>
-      <% project.errors.full_messages.each do |message|%>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
   <div class="form-group">
     <%= f.label :cover %>
     <%= color_field(:project, :cover) %>
@@ -13,6 +6,12 @@
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title %>
+
+    <% if project.errors.any? %>
+      <% project.errors.full_messages.each do |message|%>
+        <div><%= message %></div> 
+      <% end %>
+    <% end %>
   </div>
   <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
 <% end %>

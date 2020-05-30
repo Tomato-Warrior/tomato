@@ -44,10 +44,10 @@
       <div id="project_cover" class="project_color" style="background-color:<%= @project.cover %>"></div>
       <h2 class="py-2 project-title"> <%= @project.title %> </h2>
     </div>
-    <ul class="project_task_container">
+    <ul class="project_task_container mx-3">
       <div data-controller="drag" data-id="<%= @project.id %>" data-target="drag.project_id">
         <% @project_undo_tasks.order(position: :asc).each do |task| %>
-          <li class="row p-2 task-hover my-2 d-flex project-task-list data-id="<%= task.id %>">
+          <li class="row p-2 task-hover my-2 d-flex project-task-list" data-id="<%= task.id %>">
             <div class="col-1 d-flex align-items-center">
               <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-3 play-icon" do %>
                 <i class="far fa-circle"></i>

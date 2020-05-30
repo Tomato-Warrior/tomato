@@ -50,7 +50,10 @@
 
     <div class="add_task">
       <div class="input-group mb-3">
-        <%= f.text_field :title, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"><span class="icon-circle ml-3"><i class="fas fa-plus"></i></span></span>
+        </div>
+        <%= f.text_field :title, class: 'form-control', placeholder: "建立任務給自己一個目標吧 ! " %>
         <input type="hidden" value=<%= params[:id] %> id= "task_project_id" name= "task[project_id]">
         <div class="input-group-append btn-submit">
           <%= f.submit "送出", class: "btn" %>
@@ -162,5 +165,7 @@
 </div>
 
 <script>
-  $('.collapse').collapse('show')
+  $('#myCollapsible').collapse({
+    toggle: false
+  })
 </script>

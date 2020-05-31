@@ -31,7 +31,6 @@ class TictacsController < ApplicationController
     @task = Task.new
   end
 
-
   private 
 
   def last_tictac  

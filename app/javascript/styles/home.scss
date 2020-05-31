@@ -49,6 +49,40 @@ h1,h2,h3{
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 3px 5px 10px -8px rgba(217,132,132,0.48);
+    text-align: center;
+    background-image: url(../../../public/plant_bg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    .plant_bg{
+      height: 280px;
+      width: 100px;
+      .tomato_first{
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        height: 90px;
+      }
+      .tomato_sec{
+        position: absolute;
+        height: 180px;
+        bottom: 40px;
+        left: calc(50% - 70px);
+      }
+      .tomato_third{
+        position: absolute;
+        height: 230px;
+        bottom: 40px;
+        left: calc(50% - 69px);
+      }
+      .tomato_forth{
+        position: absolute;
+        height: 240px;
+        bottom: 40px;
+        left: calc(50% - 67px);
+      }
+    }
   }
   .information{
     height: 290px;
@@ -136,14 +170,7 @@ h2.project-title{
   white-space:nowrap;
 }
 
-// 
-.tomato-garden{
-  text-align: center;
-  background-image: url(../../../public/plant_bg.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+//
 
 .input-group-text{
   border: none;

@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   def index
     if user_signed_in?
-      @tasks = current_user.tasks.includes(:user)
+      @tasks = current_user.tasks
     end
     @projects = current_user.projects
   end
@@ -23,8 +23,8 @@ class TasksController < ApplicationController
   end
 
   def show
-    @finished_tictac = Tictac.where('task_id = ?', params[:id] ).finished.count
-    @cancel_tictac = Tictac.where('task_id = ?', params[:id] ).cancelled.count
+    @finished_tictac = @task.tictacs.finished.count
+    @cancel_tictac = @task.tictacs.cancelled.count
   end
   
   def edit
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy   
-    redirect_to project_path(@task.project_id)
+    redirect_to project_path(@task.project)
   end
 
   # 首頁表單post
@@ -57,10 +57,10 @@ class TasksController < ApplicationController
   def toggle_status
     if @task.doing?
       @task.done!
-      redirect_to project_path(@task.project_id)
+      redirect_to project_path(@task.project)
     else
       @task.doing!
-      redirect_to project_path(@task.project_id)
+      redirect_to project_path(@task.project)
     end
   end
 
@@ -75,10 +75,10 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
     if @task.save
       @tictac = Tictac.find(params[:tictac_id])
-      @tictac.update(task_id: @task.id)
+      @tictac.update(task: @task)
       redirect_to list_tictacs_path
     else
-      render finished_tictac_path(@tictac.id)
+      render finished_tictac_path(@tictac)
     end
   end
 

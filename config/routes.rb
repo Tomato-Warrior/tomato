@@ -33,8 +33,7 @@ Rails.application.routes.draw do
     resource :tictac, only: [:show]
   end
 
-
-  #Api
+  #API
   namespace :api do
     namespace :v1 do
       resources :tictacs, only: [] do

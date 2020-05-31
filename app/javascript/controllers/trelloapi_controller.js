@@ -36,6 +36,7 @@ export default class extends Controller {
   }
 
   connect(){
+    console.log("123")
   }
 
   get_token(e){
@@ -138,7 +139,7 @@ export default class extends Controller {
     console.log("123")
     let list_id = this.change_listTarget.value
     let card_id = this.change_listTarget.id
-    fetch(`https://api.trello.com/1/cards/${card_id}?idList=${list_id}&key=${this.api_key}&token=${this.trello_token}`, {
+    fetch(`https://api.trello.com/1/cards/${card_id}?idList=${list_id}&key=${this.api_key}&token=${localStorage.trello_token}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json'
@@ -152,5 +153,6 @@ export default class extends Controller {
     })
     .then(text => console.log(text))
     .catch(err => console.error(err))
+
   }
 }

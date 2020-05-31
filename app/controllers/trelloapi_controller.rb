@@ -108,7 +108,7 @@ class TrelloapiController < ApplicationController
     generate_tasks_attributes(assigned_cards_names, @param_list_names.count) 
     import_data = import_trello_board(board_name, @tasks_attr_data) 
     create_trello_info(import_data, assigned_cards_ids, assigned_cards_list_ids,$board_id)
-
+                      
     redirect_to root_path
   end
 

@@ -7,12 +7,6 @@ class HomeController < ApplicationController
     @undo_today_tasks = current_user.tasks.where(created_at: range).doing
     @done_today_tasks = current_user.tasks.where(created_at: range).done
     @task = Task.new
-
-    #lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
-    #@lists = JSON.parse(lists_data)
-    #lists_name = @lists.map{|list| list.values_at("name")}.flatten
-    #lists_id = @lists.map{|list| list.values_at("id")}.flatten
-    #@name_id_chart = Hash[lists_name.zip(lists_id)]
   end
 
   def todo

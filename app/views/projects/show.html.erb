@@ -87,8 +87,8 @@
             </div>
             <% if task.trello_info %>
                 <div class="col-2 d-flex align-items-center">
-                  <select name="select_list" id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
-                    <%= options_for_select(JSON.parse(GetLists.new.get_lists(task.trello_info.board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], ENV['TRELLO_USER_TOKEN']))
+                  <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
+                    <%= options_for_select(JSON.parse(GetLists.new.get_lists(task.trello_info.board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token))
                                           .map{|list| list.values_at("name","id")}, task.trello_info.list_id) %>
                   </select>
                 </div>

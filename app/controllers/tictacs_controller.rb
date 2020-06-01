@@ -12,7 +12,7 @@ class TictacsController < ApplicationController
 
   def update
     if @tictac.update(tictac_params)
-      redirect_to list_tictacs_path, notice: '時鐘成功編輯喵'
+      redirect_to list_tictacs_path
     else
       render list_tictacs_path
     end

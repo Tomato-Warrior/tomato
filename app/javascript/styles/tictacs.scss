@@ -4,11 +4,11 @@ a{
   color: $clockPending;
 }
 .timer_controler{
-  height: 100vh;
   .task_list{
     padding-top: 40px;
     padding-bottom: 20px;
     text-align: center;
+    height: 176px;
     h3{
       margin: auto;
       display: inline-block;
@@ -36,7 +36,9 @@ a{
   background-repeat: no-repeat;
   background-size: cover;
   background-color: $mainGreen;
-  height: 100%;
+  // height: 100%;
+  @media (max-width: 575.98px) { height: 500px }
+  @media (min-width: 576px) { height: 800px }
     
   .display{
     margin: 20px 0px 40px 0px;
@@ -97,7 +99,9 @@ a{
   background-repeat: no-repeat;
   background-size: cover;
   background-color: $mainRed;
-  height: 100%;
+  // height: 100%;
+  @media (max-width: 575.98px) { height: 500px }
+  @media (min-width: 576px) { height: 800px }
 
     .display{
       margin: 20px 0px 40px 0px;

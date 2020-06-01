@@ -35,6 +35,18 @@ class Api::V1::TictacsController < ApplicationController
     end
   end
 
+  def heatmap
+    date_hash = current_user.tictacs.finished.group_by_day(:end_at, format: "%Y,%m,%d").count
+
+    date = date_hash.keys.map {|date_key| date_key.split(',')}.map { |date_key| Time.new(date_key[0], date_key[1], date_key[2]).to_i }
+    
+    tictac_count = date_hash.values 
+
+    chart = Hash[date.zip(tictac_count)]
+
+    render json: chart
+  end
+
   private 
 
   def last_tictac

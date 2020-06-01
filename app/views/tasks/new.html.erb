@@ -8,7 +8,6 @@
         <% end %>
       </ul>
     <% end %>
-    <input type="hidden"  value=<%= params[:project_id] %> id= "task_project_id" name= "task[project_id]">
 
     <div class="form-group">
       <%= f.label :title %>
@@ -24,7 +23,6 @@
       <select name="task[tag_items][]" class='form-control tag-select2' multiple='multiple'>
         <%= options_for_select(f.object.tag_items, f.object.tag_items) %>
       </select>
-      
     </div>
     <div class="form-group">
       <%= f.label :description %>

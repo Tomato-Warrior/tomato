@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       resources :tictacs, only: [] do
         collection do
           post :start
+          get :heatmap
         end
         member do
           post :cancel

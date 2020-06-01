@@ -1,6 +1,7 @@
 <div class="container">
   <div class="display_data d-flex text-center flex-wrap chartbg my-4 border">
     <h1 class="col-12 p-2 my-2">Dashboard</h1>
+
     <div class="day_data col-4 p-2">
       <h2>
         <%= @today_tictac %>
@@ -10,7 +11,7 @@
         </small>
       </h2>
     </div>
-    <div class="day_data col-4 p-2">
+    <div class="week_data col-4 p-2">
       <h2>
         <%= @week_tictac %>
         <small class="text-muted">
@@ -29,6 +30,10 @@
       </h2>
     </div>
   </div>
+
+  <div class="chartbg mb-3 p-3 pt-5 justify-content-center d-flex border">
+    <div id="heatmap" class="overflow-auto"></div>
+  </div>
   
   <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -37,6 +42,7 @@
       <a class="nav-item nav-link" id="nav-month-tab" data-toggle="tab" href="#nav-month" role="tab" aria-controls="nav-month" aria-selected="false">Month</a>
     </div>
   </nav>
+
   <div class="tab-content border-right border-left border-bottom" id="nav-tabContent">
     <div class="tab-pane fade show active chartbg p-4" id="nav-day" role="tabpanel" aria-labelledby="nav-day-tab">
       <%= line_chart @daily_tictac %>

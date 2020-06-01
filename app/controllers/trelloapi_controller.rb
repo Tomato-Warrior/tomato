@@ -24,17 +24,10 @@ class TrelloapiController < ApplicationController
     
     render json: {res: response}
     Task.find(task_id).trello_info.update(list_id: list_id)
-    #製作巢狀參數                  
-    generate_tasks_attributes()
+  end
 
-    boards_data = GetBoards.new.get_boards(ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], $token)
-    boards = JSON.parse(boards_data)
-    boards_id = boards.map{|board| board.values_at("id")}.flatten
-    boards_name = boards.map{|board| board.values_at("name")}.flatten
-    name_index = boards_id.index($board_id)
-    @param_board_name = boards_name[name_index] #拿到board name
-    #create project and tasks
-    load_trello_board()
+  def index
+  end
 
   def select_board
     @project = Project.new
@@ -153,6 +146,7 @@ class TrelloapiController < ApplicationController
   def import_trello_board(board_name, tasks_attr_data)
     current_user.projects.create!(title: board_name,
                     tasks_attributes: tasks_attr_data)
+  end  
 
   def get_assigned_cards_data(member_id, board_id, list_name, api_key, token)
     @assigned_cards = JSON.parse(GetLists.new.get_assigned_cards(member_id, board_id, list_name, api_key, token)).values_at("cards").flatten

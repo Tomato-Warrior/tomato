@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2020_06_01_054811) do
 
   # These are extensions that must be enabled in order to support this database
@@ -80,9 +79,13 @@ ActiveRecord::Schema.define(version: 2020_06_01_054811) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
 <<<<<<< HEAD
+<<<<<<< HEAD
     t.string "board_id"
 =======
 >>>>>>> add trello model
+=======
+    t.string "board_id"
+>>>>>>> 3e16de17d46b2d98a54b3096f5559e8a2ea0108c
     t.index ["task_id"], name: "index_trello_infos_on_task_id"
   end
 

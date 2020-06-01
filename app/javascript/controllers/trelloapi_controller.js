@@ -20,7 +20,7 @@ export default class extends Controller {
     let that = this
     return new Promise(function(resolve, reject){
       window.Trello.authorize({
-        type: 'redirect',
+        type: 'popup',
         name: 'TomaTokei',
         scope: {
           read: 'true',
@@ -34,44 +34,6 @@ export default class extends Controller {
         error: that.authenticationFailure
       })
     })
-  }
-
-  get_token(e){
-    e.preventDefault()
-    window.Trello.authorize({
-      type: 'popup',
-      name: 'start',
-      scope: {
-        read: 'true',
-        write: 'true' },
-      expiration: 'never',
-      success:  () => {
-                      this.authenticationSuccess()
-                      this.trello_token = localStorage.trello_token
-                      },
-      error: this.authenticationFailure
-    })
-    .then((text) => {
-      const submitData = {token: this.trello_token}
-      Rails.ajax({
-        url: `/trelloapi/get_boards`, 
-        type: 'POST', 
-        dataType: 'json',
-        beforeSend(xhr, options) {
-          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-          options.data = JSON.stringify(submitData)
-          return true
-        },
-        success: resp => {
-          console.log(resp)
-        }, 
-        error: err => {
-          console.log(err);
-        } 
-      })
-    })
-    .catch(err => console.error(err))    
-    
   }
 
   connect(){

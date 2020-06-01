@@ -46,7 +46,7 @@ h1,h2,h3{
   }
   .tomato-garden{
     height: 290px;
-    background-color: #fff;
+    background-color: $subBackground;
     border-radius: 10px;
     box-shadow: 3px 5px 10px -8px rgba(217,132,132,0.48);
     text-align: center;
@@ -86,7 +86,7 @@ h1,h2,h3{
   }
   .information{
     height: 290px;
-    background-color: #fff;
+    background-color: $subBackground;
     border-radius: 10px;
     box-sizing: border-box;
     box-shadow: 3px 5px 10px -8px rgba(217,132,132,0.48);
@@ -116,7 +116,7 @@ h1,h2,h3{
       margin: 4px 24px 4px 24px;
       .info-trello{
         background-color: #55A3FF;
-        color: #fff;
+        color: $subBackground;
         border-radius: 10px;
         font-size: 14px;
         padding: 0px 8px;
@@ -174,7 +174,7 @@ h2.project-title{
 
 .input-group-text{
   border: none;
-  background-color: #fff;
+  background-color: $subBackground;
   border-radius: 10px 10px 10px 10px;
   .icon-circle{
     border: 2px solid $mainRed;

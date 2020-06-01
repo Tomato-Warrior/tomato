@@ -1,7 +1,6 @@
 <template>
   <div>
     <TaskInput/>
-    <h1>aaaa</h1>
   </div>
 </template>
 

@@ -41,23 +41,7 @@
     <h2 class="py-2 project-title"> <%= @project.title %> </h2>
   </div>
 
-<App>
-  <task-input>
-    <div>
-      <%= form_for @task, url: project_tasks_path(@project) do |f| %>
-        <div class="add_task">
-          <div class="input-group mb-3">
-            <%= f.text_field :title, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
-            <input type="hidden" value=<%= params[:id] %> id= "task_project_id" name= "task[project_id]">
-            <div class="input-group-append btn-submit">
-              <%= f.submit "送出", class: "btn" %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </task-input>
-</App>
+  <App data-project="<%= params[:id]  %>"></App>
 
   <div class="project_task_container mx-3 mt-4 mb-2 pt-2">
       <div data-controller="drag" data-drag-url="/tasks/:id/drag" data-id="<%= @project.id %>" data-target="drag.project_id">

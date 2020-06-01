@@ -39,13 +39,20 @@ export default class extends Controller {
   }
 
   get_token(e){
+    let that = this
     e.preventDefault()
-    this.trelloAuthorize()
-    fetch(`https://api.trello.com/1/members/me?key=${this.api_key}&token=${this.trello_token}`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json'
-      }
+    this.trelloAuthorize().then(()=>{
+      return new Promise(function(resolve, reject){
+        fetch(`https://api.trello.com/1/members/me?key=${that.api_key}&token=${that.trello_token}`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => {
+          resolve(response)
+        })
+      })
     })
     .then(response => {
       console.log(

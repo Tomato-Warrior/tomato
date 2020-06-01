@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="display_data d-flex text-center flex-wrap chartbg my-4 border">
-    <h1 class="col-12 p-2 my-2">Dashboard</h1>
+  <div class="display_data d-flex flex-wrap chartbg my-4 border">
+    <h1 class="col-12 p-2 my-2 text-center">Dashboard</h1>
 
     <div class="day_data col-4 p-2">
       <h2>
@@ -79,12 +79,12 @@
     <div class="tab-content">
       <% if @tags.any? %>
         <div id="Home" class="tab-pane active">
-          <h1><%= @tags.first.name %></h1>
+          <h1 class="text-center"><%= @tags.first.name %></h1>
           <%= column_chart @tags.first.tictacs.finished.group_by_day(:end_at).count %>
         </div>
         <% @tags.each do |tag| %>
           <div id="<%= "tag-chart-#{tag.id}" %>" class="tab-pane">
-            <h1><%= tag.name %></h1>
+            <h1 class="text-center"><%= tag.name %></h1>
             <%= column_chart tag.tictacs.finished.group_by_day(:end_at).count %>
           </div>
         <% end %>
@@ -110,12 +110,12 @@
   
     <div class="tab-content">
       <div id="Home" class="tab-pane active">
-        <h1><%= @tasks.first.title %></h1>
+        <h1 class="text-center"><%= @tasks.first.title %></h1>
         <%= column_chart @tasks.first.tictacs.finished.group_by_day(:end_at).count %>
       </div>
       <% @tasks.each do |task| %>
         <div id="<%= "task-chart-#{task.id}" %>" class="tab-pane">
-          <h1><%= task.title %></h1>
+          <h1 class="text-center"><%= task.title %></h1>
           <%= column_chart task.tictacs.finished.group_by_day(:end_at).count %>
         </div>
       <% end %>

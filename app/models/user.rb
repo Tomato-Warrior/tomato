@@ -22,7 +22,7 @@ class User < ApplicationRecord
   private
 
   def default_project_create
-    project = self.projects.create(title: 'Default Box')
+    project = self.projects.create(title: 'Default Box', cover: "#ffffff")
   end
 
 end

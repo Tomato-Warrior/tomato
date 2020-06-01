@@ -76,7 +76,7 @@
       </div>
       <div class="modal-body">
 
-        <%= form_for @project, url: projects_path  do |f| %>
+        <%= form_for Project.new, url: projects_path  do |f| %>
           <div class="form-group">
             <%= f.label :cover %>
             <%= color_field(:project, :cover) %>
@@ -84,12 +84,6 @@
           <div class="form-group">
             <%= f.label :title %>
             <%= f.text_field :title %>
-
-            <% if @project.errors.any? %>
-              <% @project.errors.full_messages.each do |message|%>
-                <div><%= message %></div> 
-              <% end %>
-            <% end %>
           </div>
           <%= f.submit "建立", class: "badge-pill p-2 path-color" %>
         <% end %>

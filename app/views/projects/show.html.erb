@@ -59,6 +59,14 @@
             <div class="col-3 d-flex align-items-center text-center">
               <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
             </div>
+            <% if task.trello_info %>
+                <div class="col-2 d-flex align-items-center" data-controller="trelloapi">
+                  <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
+                    <%= options_for_select(JSON.parse(GetLists.new.get_lists(task.trello_info.board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token))
+                                          .map{|list| list.values_at("name","id")}, task.trello_info.list_id) %>
+                  </select>
+                </div>
+            <% end %>
             <% if task.expect_tictacs? %>
               <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
                 <img src='/expect_tictac.png' class='task_tictac'>

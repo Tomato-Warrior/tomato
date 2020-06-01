@@ -1,10 +1,7 @@
 <div class="container" data-controller="trelloapi">
-    
-
   <select name="boards" id="boards" data-target="trelloapi.select_board" data-action="change->trelloapi#select_board">
     <option value="" selected="selected" disabled="disabled">請選擇</option>
     <%= options_for_select(@boards_name_id) %>
   </select>
-  
   <%= link_to '下一步', select_list_cards_trelloapi_index_path%>
 </div>

@@ -16,7 +16,7 @@
         <% end %>
         <%= link_to current_user.email, edit_user_registration_path, class: 'nav-href' %>
         <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'nav-href' %>
-        <%= link_to "trello", trelloapi_index_path, class: 'nav-href'%>
+        <%= link_to "trello",select_board_trelloapi_index_path, class: 'nav-href'%>
       </div>
     <% else %>
       <%= link_to '登入 / 註冊', new_user_session_path %>

@@ -41,10 +41,13 @@
     <h2 class="py-2 project-title"> <%= @project.title %> </h2>
   </div>
 
-  <App data-project="<%= params[:id]  %>"></App>
+  <App data-project="<%= params[:id] %>">
+  
+  </App>
 
   <div class="project_task_container mx-3 mt-4 mb-2 pt-2">
       <div data-controller="drag" data-drag-url="/tasks/:id/drag" data-id="<%= @project.id %>" data-target="drag.project_id">
+
         <% @project_undo_tasks.order(position: :asc).each do |task| %>
           <div class="p-2 task-hover project-task-list d-flex flex-nowrap" data-id="<%= task.id %>">
             <div class="d-flex align-items-center">
@@ -119,7 +122,7 @@
             </div>
             <div class="tictac-icon d-flex ml-auto">
                 <% if task.expect_tictacs? %>
-                <div class="d-flex align-items-center ml-2"  title="預期時鐘：<%= task.expect_tictacs %>">
+                  <div class="d-flex align-items-center ml-2"  title="預期時鐘：<%= task.expect_tictacs %>">
                     <img src='/expect_tictac.png' class='task_tictac'>
                     <small><%= task.expect_tictacs %></small>
                   </div>

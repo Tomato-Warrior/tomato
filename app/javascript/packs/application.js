@@ -11,6 +11,7 @@ require("scripts")
 
 
 
+
 import $ from 'jquery'
 window.$ = $
 
@@ -26,6 +27,10 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'tempusdominus-bootstrap-4';
 import 'tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css';
 import "select2/dist/css/select2.min.css";
+
+
+
+
 import "select2/dist/js/select2.full.min.js";
 
 const images = require.context('../images');

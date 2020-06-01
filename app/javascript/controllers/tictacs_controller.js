@@ -162,7 +162,7 @@ export default class extends Controller {
         secondsLeft = Math.round((end_time - Date.now()) / 1000)
         that.displayTimeLeft(secondsLeft)    
       
-        if (secondsLeft < 0) {
+        if (secondsLeft <= 0) {
           clearInterval(setCounter)
           that.stopbtnTarget.removeEventListener('click', stop)  
           resolve("relaxtime over")

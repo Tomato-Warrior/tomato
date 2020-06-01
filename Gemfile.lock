@@ -240,13 +240,6 @@ GEM
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
-    ruby-trello (1.6.0)
-      activemodel (>= 3.2.0)
-      addressable (~> 2.3)
-      json
-      oauth (>= 0.4.5)
-      rest-client (>= 1.8.0)
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
     sass-rails (6.0.0)

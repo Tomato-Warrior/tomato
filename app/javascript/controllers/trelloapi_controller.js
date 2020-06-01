@@ -36,7 +36,6 @@ export default class extends Controller {
   }
 
   connect(){
-    console.log("123")
   }
 
   get_token(e){
@@ -76,43 +75,6 @@ export default class extends Controller {
     .catch(err => console.error(err))    
   }
 
-  add_task(e){
-    e.preventDefault()
-    fetch(`https://api.trello.com/1/members/me/boards?key=${this.api_key}&token=${this.trello_token}`, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-    .then(response => {
-      console.log(
-        `Response: ${response.status} ${response.statusText}`
-      );
-      return response.text();
-    })
-    .then((text) => {
-      const submitData = {token: this.trello_token, boards_data: text}
-      Rails.ajax({
-        url: `/trelloapi/get_boards`, 
-        type: 'POST', 
-        dataType: 'json',
-        beforeSend(xhr, options) {
-          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-          options.data = JSON.stringify(submitData)
-          return true
-        },
-        success: resp => {
-          console.log(resp)
-        }, 
-        error: err => {
-          console.log(err);
-        } 
-      })
-    })
-    .catch(err => console.error(err))    
-    
-  }
-
   select_board(e){
     const submitData = { board_id: this.select_boardTarget.value}
     Rails.ajax({
@@ -132,13 +94,28 @@ export default class extends Controller {
       } 
     })
   } 
-  haha(){
-    console.log("haha")
-  }
   change_list(){
     console.log("123")
     let list_id = this.change_listTarget.value
     let card_id = this.change_listTarget.id
+    let task_id = this.change_listTarget.name
+    const submitData = { list_id: list_id, card_id: card_id, task_id: task_id}
+    Rails.ajax({
+      url: `/trelloapi/change_list`, 
+      type: 'POST', 
+      dataType: 'json',
+      beforeSend(xhr, options) {
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+        options.data = JSON.stringify(submitData)
+        return true
+      },
+      success: resp => {
+        console.log("get card!!!")   
+      }, 
+      error: err => {
+        console.log(err);
+      } 
+    })
     fetch(`https://api.trello.com/1/cards/${card_id}?idList=${list_id}&key=${this.api_key}&token=${localStorage.trello_token}`, {
       method: 'PUT',
       headers: {

@@ -339,10 +339,6 @@ DEPENDENCIES
   puma (~> 4.3)
   rails (~> 6.0.2, >= 6.0.2.2)
   rest-client (~> 2.1.0)
-<<<<<<< HEAD
-  ruby-trello (~> 1.5, >= 1.5.1)
-=======
->>>>>>> 3e16de17d46b2d98a54b3096f5559e8a2ea0108c
   sass-rails (>= 6)
   selenium-webdriver
   spring

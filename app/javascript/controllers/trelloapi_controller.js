@@ -7,7 +7,6 @@ export default class extends Controller {
   api_key = "f91cef06b7d1a94754eac87835224aeb"
   
   
-  
   authenticationSuccess = function() {
     console.log('Successful authentication')
     
@@ -40,20 +39,13 @@ export default class extends Controller {
   }
 
   get_token(e){
-    let that = this
     e.preventDefault()
-    this.trelloAuthorize().then(()=>{
-      return new Promise(function(resolve, reject){
-        fetch(`https://api.trello.com/1/members/me?key=${that.api_key}&token=${that.trello_token}`, {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json'
-          }
-        })
-        .then(response => {
-          resolve(response)
-        })
-      })
+    this.trelloAuthorize()
+    fetch(`https://api.trello.com/1/members/me?key=${this.api_key}&token=${this.trello_token}`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
     })
     .then(response => {
       console.log(
@@ -100,61 +92,6 @@ export default class extends Controller {
       error: err => {
         console.log(err);
       } 
-    })
-    .then((text) => {
-      const submitData = {token: this.trello_token, cards_data: text}
-      Rails.ajax({
-        url: `/trelloapi/get_cards`, 
-        type: 'POST', 
-        dataType: 'json',
-        beforeSend(xhr, options) {
-          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-          options.data = JSON.stringify(submitData)
-          return true
-        },
-        success: resp => {
-          console.log("get card!!!")
-          console.log(resp)
-          
-        }, 
-        error: err => {
-          console.log(err);
-        } 
-      })
-    })
-    .catch(err => console.error(err))
-    fetch(`https://api.trello.com/1/boards/${this.select_boardTarget.value}/lists?key=${this.api_key}&token=${this.trello_token}`, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-    .then(response => {
-      console.log(
-        `Response: ${response.status} ${response.statusText}`
-      );
-      return response.text();
-    }) 
-    .then((text) => {
-      const submitData = {token: this.trello_token, lists_data: text}
-      Rails.ajax({
-        url: `/trelloapi/get_lists`, 
-        type: 'POST', 
-        dataType: 'json',
-        beforeSend(xhr, options) {
-          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-          options.data = JSON.stringify(submitData)
-          return true
-        },
-        success: resp => {
-          console.log("get list!!!")
-          console.log(resp)
-          
-        }, 
-        error: err => {
-          console.log(err);
-        } 
-      })
     })
   } 
   change_list(){

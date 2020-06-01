@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
     @projects = current_user.projects.includes(:user).order(updated_at: :desc) if user_signed_in?
   end
 
+  def add_project
+    @project = Project.new
+  end
 
   def today_expect_time_of_tasks
     if user_signed_in?

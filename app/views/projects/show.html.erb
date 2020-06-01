@@ -34,33 +34,30 @@
       </div>
   </div>
 
+<section id="app">
+
   <div class="project_cover d-flex align-items-center pl-3">
     <div id="project_cover" class="project_color" style="background-color:<%= @project.cover %>"></div>
     <h2 class="py-2 project-title"> <%= @project.title %> </h2>
   </div>
-  
-  <%= form_for @task, url: project_tasks_path(@project) do |f| %>
-    <% if @task.errors.any? %>
-      <ul>
-        <% @task.errors.full_messages.each do |message|%>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
 
-    <div class="add_task">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"><span class="icon-circle ml-3"><i class="fas fa-plus"></i></span></span>
+<App>
+  <task-input>
+    <div>
+      <%= form_for @task, url: project_tasks_path(@project) do |f| %>
+        <div class="add_task">
+          <div class="input-group mb-3">
+            <%= f.text_field :title, class: 'form-control', placeholder: " + 建立任務給自己一個目標吧 ! " %>
+            <input type="hidden" value=<%= params[:id] %> id= "task_project_id" name= "task[project_id]">
+            <div class="input-group-append btn-submit">
+              <%= f.submit "送出", class: "btn" %>
+            </div>
+          </div>
         </div>
-        <%= f.text_field :title, class: 'form-control', placeholder: "建立任務給自己一個目標吧 ! " %>
-        <input type="hidden" value=<%= params[:id] %> id= "task_project_id" name= "task[project_id]">
-        <div class="input-group-append btn-submit">
-          <%= f.submit "送出", class: "btn" %>
-        </div>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+  </task-input>
+</App>
 
   <div class="project_task_container mx-3 mt-4 mb-2 pt-2">
       <div data-controller="drag" data-drag-url="/tasks/:id/drag" data-id="<%= @project.id %>" data-target="drag.project_id">
@@ -115,7 +112,7 @@
         <% end %>
       </div>
   </div>
-
+</section>
 
   <div>  
     <button class="btn done-task ml-3" type="button" data-toggle="collapse" data-target="#collapseTaskDone" aria-expanded="false" aria-controls="collapseTaskDone">

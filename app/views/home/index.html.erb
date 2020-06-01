@@ -4,10 +4,15 @@
         <div class="tomato-garden mt-3">
           <h3>番茄生存日記</h3>
           <div class="plant_bg">
-            <%#= image_pack_tag 'tomato_first.png', class:"tomato_first" %>
-            <%#= image_pack_tag 'tomato_sec.png', class:"tomato_sec" %>
-            <%#= image_pack_tag 'tomato_third.png', class:"tomato_third" %>
-            <%= image_pack_tag 'tomato_forth.png', class:"tomato_forth" %>
+            <% if @tictacs.count < 2 %>
+              <%= image_pack_tag 'tomato_first.png', class:"tomato_first" %>
+            <% elsif @tictacs.count >= 2 && @tictacs.count < 4 %>
+              <%= image_pack_tag 'tomato_sec.png', class:"tomato_sec" %>
+            <% elsif @tictacs.count >= 4 && @tictacs.count < 6 %>
+              <%= image_pack_tag 'tomato_third.png', class:"tomato_third" %>
+            <% else %>
+              <%= image_pack_tag 'tomato_forth.png', class:"tomato_forth" %>
+            <% end %>
           </div>
         </div>
       </div>

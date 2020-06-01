@@ -1,8 +1,16 @@
 class ApplicationController < ActionController::Base
-  before_action :nav_find_projects, :today_expect_time_of_tasks, :undo_tasks, :todo_expect_time_of_tasks, :left_todo_undo_tasks
+  before_action :nav_find_projects, :today_expect_time_of_tasks, :undo_tasks, :todo_expect_time_of_tasks, :left_todo_undo_tasks, :new_project
   
   def nav_find_projects
     @projects = current_user.projects.includes(:user).order(updated_at: :desc) if user_signed_in?
+  end
+
+  def new_project
+    @project = Project.new
+  end
+
+  def edit_project
+    @project = current_user.projects.find(params[:id])
   end
 
   def today_expect_time_of_tasks

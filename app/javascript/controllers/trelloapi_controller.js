@@ -6,15 +6,6 @@ export default class extends Controller {
   trello_token = ""
   api_key = "f91cef06b7d1a94754eac87835224aeb"
   
-  
-  authenticationSuccess = function() {
-    console.log('Successful authentication')
-    
-  }
-  
-  authenticationFailure = function() {
-    console.log('Failed authentication')
-  }
   trelloAuthorize = function() {
     let that = this
     return new Promise(function(resolve, reject){
@@ -28,8 +19,7 @@ export default class extends Controller {
         success:  (data) => {
                         that.trello_token = localStorage.trello_token
                         resolve(data)
-                        },
-        error: that.authenticationFailure
+                        }
       })
     })
   }
@@ -90,8 +80,8 @@ export default class extends Controller {
       } 
     })
   } 
+
   change_list(){
-    console.log("123")
     let list_id = this.change_listTarget.value
     let card_id = this.change_listTarget.id
     let task_id = this.change_listTarget.name
@@ -105,13 +95,6 @@ export default class extends Controller {
         options.data = JSON.stringify(submitData)
         return true
       },
-      success: resp => {
-          
-      }, 
-      error: err => {
-        
-      } 
-    })
-   
+    })  
   }
 }

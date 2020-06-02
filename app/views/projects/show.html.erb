@@ -1,4 +1,7 @@
+
+
 <div class="project-tasks-container">
+<div class="wrap">
 
   <div class="show-data mx-3 my-3">
     <h3>任務資訊</h3>
@@ -62,8 +65,13 @@
     </div>
   <% end %>
 
-  <div class="project_task_container mx-3 mt-4 mb-2 pt-2">
-      <div data-controller="drag" data-drag-url="/tasks/:id/drag" data-id="<%= @project.id %>" data-target="drag.project_id">
+  <div>
+    <div class="project_cover d-flex align-items-center pl-3">
+      <div id="project_cover" class="project_color" style="background-color:<%= @project.cover %>"></div>
+      <h2 class="py-2 project-title"> <%= @project.title %> </h2>
+    </div>
+    <ul class="project_task_container">
+      <div data-controller="drag trelloapi" data-id="<%= @project.id %>" data-target="drag.project_id">
         <% @project_undo_tasks.order(position: :asc).each do |task| %>
           <div class="p-2 task-hover project-task-list d-flex flex-nowrap" data-id="<%= task.id %>">
             <div class="d-flex align-items-center">
@@ -74,8 +82,31 @@
                 <i class="far fa-play-circle"></i>
               <% end %>
             </div>
-            <div class="d-flex align-items-center">
-              <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font mx-3" %>
+            <div class="col-3 d-flex align-items-center text-center">
+              <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
+            </div>
+            <% if task.trello_info %>
+                <div class="col-2 d-flex align-items-center">
+                  <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
+                    <%= options_for_select(JSON.parse(GetLists.new.get_lists(task.trello_info.board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token))
+                                          .map{|list| list.values_at("name","id")}, task.trello_info.list_id) %>
+                  </select>
+                </div>
+              <% end %>
+            <% if task.expect_tictacs? %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small><%= task.expect_tictacs %></small>
+              </div>
+            <% else %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：0">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small>0</small>
+              </div>
+            <% end %>
+            <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
+              <img src='/finish_tictac.png' class='task_tictac'>
+              <small><%= task.tictacs.finished.count %></small>
             </div>
             <div class="tictac-icon d-flex ml-auto">
                 <% if task.expect_tictacs? %>
@@ -165,7 +196,5 @@
 </div>
 
 <script>
-  $('#myCollapsible').collapse({
-    toggle: false
-  })
+  $('.collapse').collapse('hide')
 </script>

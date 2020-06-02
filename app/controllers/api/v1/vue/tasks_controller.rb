@@ -1,7 +1,7 @@
 class Api::V1::Vue::TasksController < ApplicationController
 
-  def create
-    
+  def index
+    @task = current_user.tasks
   end
 
 

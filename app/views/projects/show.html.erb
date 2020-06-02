@@ -45,10 +45,7 @@
   
   </App>
 
-  <div class="project_task_container mx-3 mt-4 mb-2 pt-2">
-      <div data-controller="drag" data-drag-url="/tasks/:id/drag" data-id="<%= @project.id %>" data-target="drag.project_id">
-
-        <% @project_undo_tasks.order(position: :asc).each do |task| %>
+  <% @project_undo_tasks.order(position: :asc).each do |task| %>
           <div class="p-2 task-hover project-task-list d-flex flex-nowrap" data-id="<%= task.id %>">
             <div class="d-flex align-items-center">
               <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-4 play-icon" do %>
@@ -96,9 +93,8 @@
               <% end %>
             </div>
           </div>
-        <% end %>
-      </div>
-  </div>
+     <% end %>
+
 </section>
 
   <div>  

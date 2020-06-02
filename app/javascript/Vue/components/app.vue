@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { TaskInput } from './todo';
+  import { TaskInput, TaskGroup } from './todo';
   export default {
     name: 'App',
     data: function () {
@@ -13,7 +13,8 @@
       }
     },
     components: {
-    TaskInput
+    TaskInput,
+    TaskGroup
     },
   }
 </script>

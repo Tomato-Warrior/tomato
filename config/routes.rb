@@ -45,7 +45,7 @@ Rails.application.routes.draw do
       post 'cancelwork' => 'tasks#cancelwork'
 
       namespace :vue do
-        resource :tasks, only: [:index, :create, :edit]
+        resources :tasks, only: [:index, :create, :edit]
       end
       
       resources :tictacs, only: [] do

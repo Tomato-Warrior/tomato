@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class Api::V1::TasksController < ApiController
   before_action :authenticate_user_token
   
@@ -27,4 +28,21 @@ class Api::V1::TasksController < ApiController
     render json: { message: "tictac finished" }, status: 200
   end
 
+=======
+class Api::V1::TasksController < ApplicationController
+
+  def index
+    @task = current_user.tasks
+    render format: :json
+  end
+
+  def create
+  end
+
+  def update
+    
+  end
+
+
+>>>>>>> task json
 end

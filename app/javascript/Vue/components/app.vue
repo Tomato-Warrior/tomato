@@ -1,6 +1,7 @@
 <template>
   <div>
     <TaskInput/>
+    {{ project }}
   </div>
 </template>
 
@@ -12,6 +13,7 @@
       return {
       }
     },
+    props: ['project'],
     components: {
     TaskInput,
     TaskGroup

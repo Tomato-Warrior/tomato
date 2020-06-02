@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   #API
   namespace :api do
     namespace :v1 do
+      
       # google extension
       post 'login' => 'authentication#login'
       post 'logout' => 'authentication#logout'
@@ -44,10 +45,8 @@ Rails.application.routes.draw do
       post 'finishwork' => 'tasks#finishwork'
       post 'cancelwork' => 'tasks#cancelwork'
 
-      namespace :vue do
-        resources :tasks, only: [:index, :create, :edit]
-      end
-      
+      resources :tasks, only: [:index, :create, :update]
+
       resources :tictacs, only: [] do
         collection do
           post :start

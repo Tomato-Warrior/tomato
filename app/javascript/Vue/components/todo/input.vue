@@ -31,7 +31,6 @@ export default {
 
         const data = new FormData();
         data.append("title", content);
-        const project_id = 
 
         Rails.ajax({
         url: `/projects/${project_id}/tasks`, 

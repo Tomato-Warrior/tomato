@@ -3,7 +3,7 @@ import TaskGroup from './group';
 import TaskList from './list';
 
 export {
-  TaskInput
-  TaskGroup
-  TaskList
+  TaskInput,
+  TaskGroup,
+  TaskList,
 }

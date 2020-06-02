@@ -10,7 +10,7 @@ class Task < ApplicationRecord
   belongs_to :project
   belongs_to :user
   #validates
-  validates :title, presence: true
+  validates :title, presence: true, length: { minimum: 1 }
   enum status: {doing: 0 , done: 1 }
 
   #tag

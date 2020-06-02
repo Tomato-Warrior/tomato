@@ -5,10 +5,6 @@ class UpdateCard
       RestClient::Request.execute(method: :put, url: "api.trello.com/1/cards/#{card_id}?idList=#{list_id}&key=#{api_key}&token=#{token}",:content_type => 'application/json',
                                   max_redirects: 0)
     rescue RestClient::ExceptionWithResponse => err
-      puts err.response.inspect
-      if err.response.code == 301
-        puts err.response.headers[:location]
-      end
     end
   end
 

@@ -26,7 +26,6 @@ export default class extends Controller {
           write: 'true' },
         expiration: 'never',
         success:  (data) => {
-                        that.authenticationSuccess()
                         that.trello_token = localStorage.trello_token
                         resolve(data)
                         },
@@ -51,9 +50,6 @@ export default class extends Controller {
         }))
       })
       .then(response => {
-        console.log(
-          `Response: ${response.status} ${response.statusText}`
-        )
         return response.text();
       }) 
     })
@@ -69,14 +65,12 @@ export default class extends Controller {
           return true
         },
         success: resp => {
-          console.log(resp)
         }, 
         error: err => {
-          console.log(err);
         } 
       })
     })
-    .catch(err => console.error(err))    
+    .catch()    
   }
 
   select_board(e){
@@ -90,11 +84,9 @@ export default class extends Controller {
         options.data = JSON.stringify(submitData)
         return true
       },
-      success: resp => {
-        console.log("get card!!!")   
+      success: resp => {   
       }, 
       error: err => {
-        console.log(err);
       } 
     })
   } 
@@ -114,26 +106,12 @@ export default class extends Controller {
         return true
       },
       success: resp => {
-        console.log("get card!!!")   
+          
       }, 
       error: err => {
-        console.log(err);
+        
       } 
     })
-    fetch(`https://api.trello.com/1/cards/${card_id}?idList=${list_id}&key=${this.api_key}&token=${localStorage.trello_token}`, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
-    .then(response => {
-      console.log(
-        `Response: ${response.status} ${response.statusText}`
-      );
-      return response.text()
-    })
-    .then(text => console.log(text))
-    .catch(err => console.error(err))
-
+   
   }
 }

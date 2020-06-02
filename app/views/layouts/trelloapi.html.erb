@@ -13,7 +13,7 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
 
-  <script src="https://api.trello.com/1/client.js?key=<%=ENV['TRELLO_DEVELOPER_PUBLIC_KEY']%>"></script>
+  <script src="https://api.trello.com/1/client.js?key=<%= ENV['TRELLO_DEVELOPER_PUBLIC_KEY'] %>"></script>
   <body>
     <%= render "shared/navbar" %>
     <%= render "shared/flash" %>

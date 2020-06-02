@@ -1,4 +1,7 @@
 <div class="container" data-controller="trelloapi">
+  <% if current_user.trello_token == false%>
+  <a href="#" data-action="click->trelloapi#get_token" class="btn btn-success btn-lg btn-block">驗證帳號</a>
+  <% end %>
   <select name="boards" id="boards" data-target="trelloapi.select_board" data-action="change->trelloapi#select_board">
     <option value="" selected="selected" disabled="disabled">請選擇</option>
     <%= options_for_select(@boards_name_id) %>

@@ -108,3 +108,4 @@ ActiveRecord::Schema.define(version: 2020_06_01_054811) do
   add_foreign_key "tictacs", "users"
   add_foreign_key "trello_infos", "tasks"
 end
+

@@ -1,5 +1,4 @@
 class TrelloapiController < ApplicationController
-  
   layout "trelloapi"
   #全域變數  
   $token

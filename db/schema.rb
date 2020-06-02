@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2020_06_01_054811) do
-
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +53,6 @@ ActiveRecord::Schema.define(version: 2020_06_01_054811) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
     t.integer "position"
-    t.string "trello_status"
     t.integer "status", default: 0
     t.index ["deleted_at"], name: "index_tasks_on_deleted_at"
     t.index ["project_id"], name: "index_tasks_on_project_id"
@@ -81,7 +78,14 @@ ActiveRecord::Schema.define(version: 2020_06_01_054811) do
     t.bigint "task_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+<<<<<<< HEAD
+<<<<<<< HEAD
     t.string "board_id"
+=======
+>>>>>>> add trello model
+=======
+    t.string "board_id"
+>>>>>>> 3e16de17d46b2d98a54b3096f5559e8a2ea0108c
     t.index ["task_id"], name: "index_trello_infos_on_task_id"
   end
 

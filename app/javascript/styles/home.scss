@@ -69,21 +69,39 @@ h1,h2,h3{
         height: 180px;
         bottom: 40px;
         left: calc(50% - 70px);
+        animation-name: swing;
+        animation-duration: 6s;
+        animation-iteration-count: infinite;
       }
       .tomato_third{
         position: absolute;
         height: 230px;
         bottom: 40px;
         left: calc(50% - 69px);
+        animation-name: swing;
+        animation-duration: 6s;
+        animation-iteration-count: infinite;
       }
       .tomato_forth{
         position: absolute;
         height: 240px;
         bottom: 40px;
         left: calc(50% - 67px);
+        animation-name: swing;
+        animation-duration: 6s;
+        animation-iteration-count: infinite;
       }
     }
   }
+
+  @keyframes swing{
+    0% {transform: rotate(0deg); transform-origin: bottom;}
+    25% {transform: rotate(8deg); transform-origin: bottom;}
+    50% {transform: rotate(0deg); transform-origin: bottom;}
+    75% {transform: rotate(-8deg); transform-origin: bottom;}
+    100% {transform: rotate(0deg); transform-origin: bottom;}
+  }
+
   .information{
     height: 290px;
     background-color: $subBackground;
@@ -141,14 +159,17 @@ h1,h2,h3{
     }
   }
 }
+
 h2.project-title{
   font-size: 20px;
 }
+
 .form-control{
   border: none;
   height: 45px;
   border-radius: 10px;
 }
+
 ::-webkit-input-placeholder {
   color: #F0F0F0;
   font-size: 16px;
@@ -157,20 +178,21 @@ h2.project-title{
 .delete-icon{
   width: 80px;
 }
+
 .tag-icon{
   width: 300px;
 }
+
 .tictac-icon{
   width: 100px;
 }
+
 .task-project{
   border-left: 1px solid #F0F0F0;
   border-right: 1px solid #F0F0F0;
   padding: 0 16px;
   white-space:nowrap;
 }
-
-//
 
 .input-group-text{
   border: none;

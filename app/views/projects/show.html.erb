@@ -71,7 +71,7 @@
       <h2 class="py-2 project-title"> <%= @project.title %> </h2>
     </div>
     <ul class="project_task_container">
-      <div data-controller="drag trelloapi" data-id="<%= @project.id %>" data-target="drag.project_id">
+      <div data-controller="drag" data-id="<%= @project.id %>" data-target="drag.project_id">
         <% @project_undo_tasks.order(position: :asc).each do |task| %>
           <div class="p-2 task-hover project-task-list d-flex flex-nowrap" data-id="<%= task.id %>">
             <div class="d-flex align-items-center">
@@ -86,13 +86,13 @@
               <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font" %>
             </div>
             <% if task.trello_info %>
-                <div class="col-2 d-flex align-items-center">
+                <div class="col-2 d-flex align-items-center" data-controller="trelloapi">
                   <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
                     <%= options_for_select(JSON.parse(GetLists.new.get_lists(task.trello_info.board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token))
                                           .map{|list| list.values_at("name","id")}, task.trello_info.list_id) %>
                   </select>
                 </div>
-              <% end %>
+            <% end %>
             <% if task.expect_tictacs? %>
               <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
                 <img src='/expect_tictac.png' class='task_tictac'>
@@ -108,21 +108,32 @@
               <img src='/finish_tictac.png' class='task_tictac'>
               <small><%= task.tictacs.finished.count %></small>
             </div>
-            <div class="tictac-icon d-flex ml-auto">
-                <% if task.expect_tictacs? %>
-                <div class="d-flex align-items-center ml-2"  title="預期時鐘：<%= task.expect_tictacs %>">
-                    <img src='/expect_tictac.png' class='task_tictac'>
-                    <small><%= task.expect_tictacs %></small>
-                  </div>
-                <% end %>
-                <div class="d-flex align-items-center ml-2"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
-                  <img src='/finish_tictac.png' class='task_tictac'>
-                  <small><%= task.tictacs.finished.count %></small>
+            <% if task.trello_info %>
+                <div class="col-2 d-flex align-items-center" data-controller="trelloapi">
+                  <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
+                    <%= options_for_select(JSON.parse(GetLists.new.get_lists(task.trello_info.board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token))
+                                          .map{|list| list.values_at("name","id")}, task.trello_info.list_id) %>
+                  </select>
                 </div>
-                <div class="d-flex align-items-center ml-2"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
-                  <img src='/cancel_tictac.png' class='task_tictac'>
-                  <small><%= task.tictacs.cancelled.count %></small>
-                </div>
+            <% end %>
+            <% if task.expect_tictacs? %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：<%= task.expect_tictacs %>">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small><%= task.expect_tictacs %></small>
+              </div>
+            <% else %>
+              <div class="col-1 d-flex align-items-center"  title="預期時鐘：0">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small>0</small>
+              </div>
+            <% end %>
+            <div class="col-1 d-flex align-items-center"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
+              <img src='/finish_tictac.png' class='task_tictac'>
+              <small><%= task.tictacs.finished.count %></small>
+            </div>
+            <div class="col-1 d-flex align-items-center"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
+              <img src='/cancel_tictac.png' class='task_tictac'>
+              <small><%= task.tictacs.cancelled.count %></small>
             </div>
             <div class="d-flex align-items-center text-right tag-icon ml-4">
               <%= display_tag task.tag_items %>
@@ -196,5 +207,6 @@
 </div>
 
 <script>
-  $('.collapse').collapse('hide')
+$('.collapse').collapse('show')
 </script>
+

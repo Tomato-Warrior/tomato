@@ -19,7 +19,7 @@ export default class extends Controller {
     let that = this
     return new Promise(function(resolve, reject){
       window.Trello.authorize({
-        type: 'redirect',
+        type: 'popup',
         name: 'TomaTokei',
         scope: {
           read: 'true',
@@ -35,64 +35,30 @@ export default class extends Controller {
     })
   }
 
-  get_token(e){
-    e.preventDefault()
-    window.Trello.authorize({
-      type: 'popup',
-      name: 'start',
-      scope: {
-        read: 'true',
-        write: 'true' },
-      expiration: 'never',
-      success:  () => {
-                      this.authenticationSuccess()
-                      this.trello_token = localStorage.trello_token
-                      },
-      error: this.authenticationFailure
-    })
-    .then((text) => {
-      const submitData = {token: this.trello_token}
-      Rails.ajax({
-        url: `/trelloapi/get_boards`, 
-        type: 'POST', 
-        dataType: 'json',
-        beforeSend(xhr, options) {
-          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-          options.data = JSON.stringify(submitData)
-          return true
-        },
-        success: resp => {
-          console.log(resp)
-        }, 
-        error: err => {
-          console.log(err);
-        } 
-      })
-    })
-    .catch(err => console.error(err))    
-    
-  }
-
   connect(){
   }
 
   get_token(e){
+    let that = this
     e.preventDefault()
-    this.trelloAuthorize()
-    fetch(`https://api.trello.com/1/members/me?key=${this.api_key}&token=${this.trello_token}`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
-    .then(response => {
-      console.log(
-        `Response: ${response.status} ${response.statusText}`
-      )
-      return response.text();
+    this.trelloAuthorize().then((data)=>{
+      return new Promise(function(resolve, reject){
+        resolve(fetch(`https://api.trello.com/1/members/me?key=${that.api_key}&token=${that.trello_token}`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json'
+          }
+        }))
+      })
+      .then(response => {
+        console.log(
+          `Response: ${response.status} ${response.statusText}`
+        )
+        return response.text();
+      }) 
     })
     .then((text) => {
-      const submitData = {token: this.trello_token, boards_data: text}
+      const submitData = {token: this.trello_token, text}
       Rails.ajax({
         url: `/trelloapi/get_token`, 
         type: 'POST', 
@@ -111,7 +77,6 @@ export default class extends Controller {
       })
     })
     .catch(err => console.error(err))    
-  
   }
 
   select_board(e){

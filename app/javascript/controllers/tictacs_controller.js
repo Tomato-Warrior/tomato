@@ -188,8 +188,6 @@ startRelaxPromise(){
   })
 }
 
-
-
  //中斷 api
 breakWorkApiPromise(data){
    let submitData = {reason: data}

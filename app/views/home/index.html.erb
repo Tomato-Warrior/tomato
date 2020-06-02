@@ -65,20 +65,13 @@
   <h2 class="pt-2 pb-1 project-title"> <i class="fas fa-sun sun"></i> 今天</h2>
 </div>
 
-<%= form_for @task, url: today_task_tasks_path, method: 'post' do |f| %>
-  <% if @task.errors.any? %>
-    <ul>
-      <% @task.errors.full_messages.each do |message|%>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
+<%= form_for @task, url: today_task_tasks_path, data:{controller: 'task'}, method: 'post' do |f| %>
   <div class="add_task">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1"><span class="icon-circle ml-3"><i class="fas fa-plus"></i></span></span>
       </div>
-      <%= f.text_field :title, class: 'form-control', placeholder: "建立任務給自己一個目標吧 ! " %>
+      <%= f.text_field :title, class: 'form-control', placeholder: "建立任務給自己一個目標吧 ! ", data: {action: "keydown->task#submit", target: "task.title"} %>
       <input type="hidden" value=<%= current_user.projects.first.id %> id= "task_project_id" name= "task[project_id]">
       <div class="input-group-append btn-submit">
         <%= f.submit "送出", class: "btn" %>
@@ -100,7 +93,7 @@
             <% end %>
           </div>
           <div class="d-flex align-items-center text-center">
-            <span class="list-font ml-3 mr-2 task-project"><%= task.project.title %></span>
+            <span class="ml-3 mr-2 task-project"><%= task.project.title %></span>
           </div>
           <div class="d-flex align-items-center">
             <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font mx-3" %>
@@ -154,7 +147,7 @@
             <span class="play-icon ml-3"><i class="far fa-play-circle"></i></span>
           </div>
           <div class="d-flex align-items-center text-center">
-            <span class="list-font ml-3 mr-2 task-project"><%= task.project.title %></span>
+            <span class="ml-3 mr-2 task-project"><%= task.project.title %></span>
           </div>
           <div class="d-flex align-items-center">
             <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font mx-3" %>

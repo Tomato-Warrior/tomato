@@ -184,8 +184,6 @@ export default class extends Controller {
     })
   }
 
-
-
  //中斷 api
   breakWorkApiPromise(data){
     let submitData = {reason: data}

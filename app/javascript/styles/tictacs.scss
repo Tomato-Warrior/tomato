@@ -1,8 +1,17 @@
 @import '_library.scss';
 
+html, body{
+  height: 100% !important ;
+}
+
+body.swal2-shown.swal2-height-auto{
+  height: 100% !important ;
+}
+
 a{
   color: $clockPending;
 }
+
 .timer_controler{
   .task_list{
     padding-top: 40px;
@@ -35,9 +44,7 @@ a{
   background-repeat: no-repeat;
   background-size: cover;
   background-color: $mainGreen;
-  // height: 100%;
-  @media (max-width: 575.98px) { height: 500px }
-  @media (min-width: 576px) { height: 800px }
+  min-height: 100%;
     
   .display{
     margin: 20px 0px 40px 0px;
@@ -98,10 +105,8 @@ a{
   background-repeat: no-repeat;
   background-size: cover;
   background-color: $mainRed;
-  // height: 100%;
-  @media (max-width: 575.98px) { height: 500px }
-  @media (min-width: 576px) { height: 800px }
-
+  min-height: 100%;
+  
     .display{
       margin: 20px 0px 40px 0px;
       width: 400px;

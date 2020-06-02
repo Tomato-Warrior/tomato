@@ -38,21 +38,27 @@
     box-shadow: -1px 2px 22px -4px rgba(217,132,132,0.6);
   }
   .fa-sun{
-    color: #fff;
+    color: $subBackground;
   }
   .fa-list{
-    color: #fff;
+    color: $subBackground;
   }
 
   .btn{
-    padding: 0px
+    padding: 0px;
+  }
+
+  .right_nav{
+    padding: 10px;
+    background-color: $mainYellow;
+    border-color: $mainYellow;
   }
 
   .drop-btn{
-    color: #fff;
+    color: $subBackground;
   }
   .drop-btn:hover{
-    color: #fff;
+    color: $subBackground;
   }
   
   .project_group{
@@ -61,10 +67,10 @@
     position: sticky;
   
     a{
-      color: #fff;
+      color: $subBackground;
     }
     a:hover{
-      color: #fff;
+      color: $subBackground;
     }
   
     .todo-container{
@@ -72,7 +78,7 @@
     }
   
     .project_time{
-      color: #fff;
+      color: $subBackground;
     }
 
     .dropdown-menu{
@@ -99,8 +105,8 @@
     }
   
     .add_project{
-      color: #fff;
-      background-color: #FFC7BE;
+      color: $subBackground;
+      background-color: #ffc7be;
       bottom: 0;
       left: 0;
       z-index: 5;
@@ -111,7 +117,7 @@
     .divider{
       width: 80%;
       display: block;
-      border-top: 1px solid #fff;
+      border-top: 1px solid $subBackground;
       margin: auto;
       margin-top: 8px;
       margin-bottom: 8px;

@@ -36,9 +36,12 @@ $(window).on('turbolinks:load', function(){
     range: 1,
     data: `/api/v1/tictacs/heatmap`,
     start: new Date(2020, 0),
+    considerMissingDataAsZero: true,
     cellSize: 20,
     legend: [2, 4, 6, 8],
+    legendColors: {
+      min: "#EFF0F1",
+      max: "#EF426F"
+    }
   });
-
 });
-

@@ -6,12 +6,14 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    tasks: []
+    doingTasks: [], 
+    doneTasks: []
   },
 
   mutations: {
-    SET_TASKS(state, tasks){
-      state.tasks = tasks;
+    SET_TASKS(state, resp){
+      state.doingTasks = resp.doingTasks;
+      state.doneTasks = resp.doneTasks;
     }, 
 
     REMOVE_TASK(state, taskId) {
@@ -21,12 +23,6 @@ const store = new Vuex.Store({
       }
     }
   }, 
-
-  getters: {
-    tasks: function(state) {
-      return state.tasks
-    }
-  },
 
   actions: {
     removeTask({ commit }, taskId) {
@@ -49,7 +45,7 @@ const store = new Vuex.Store({
         type: 'GET', 
         dataType: 'json',
         success: resp => {
-          commit('SET_TASKS', resp.tasks)
+          commit('SET_TASKS', resp)
         }, 
         error: err => {
           console.log(err);

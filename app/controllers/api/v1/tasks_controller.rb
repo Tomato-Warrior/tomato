@@ -29,7 +29,7 @@ class Api::V1::TasksController < ApiController
 
   # Vue API
   def index
-    @task = current_user.tasks
+    @task = current_user.projects.find(params[:project_id]).tasks
     render format: :json
   end
 

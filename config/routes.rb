@@ -45,7 +45,9 @@ Rails.application.routes.draw do
       post 'finishwork' => 'tasks#finishwork'
       post 'cancelwork' => 'tasks#cancelwork'
 
-      resources :tasks, only: [:index, :create, :update]
+      resources :projects, only: [] do
+        resources :tasks, only: [:index, :create, :update]
+      end
 
       resources :tictacs, only: [] do
         collection do

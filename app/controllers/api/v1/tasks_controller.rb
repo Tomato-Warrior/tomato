@@ -37,12 +37,30 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def create
+    @task = current_user.tasks.build(task_params)
+
+    if @task.save
+      render json: { state: 'ok', task: @task }
+    else
+      render json: { state: 'create error' }
+    end
   end
 
   def update
-    
+    render json: { state: 'update ok' }
   end
 
+  private
+
+  def task_params
+    params.require(:task).permit(:title, 
+                                 :description,
+                                 :expect_tictacs,
+                                 :date,
+                                 :project_id,
+                                 tag_items: []
+   )
+  end
 
 >>>>>>> task json
 end

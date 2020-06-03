@@ -1,7 +1,6 @@
 <template>
   <div>
-    <TaskInput/>
-    {{ project }}
+    <TaskInput :project-id="project"/>
   </div>
 </template>
 

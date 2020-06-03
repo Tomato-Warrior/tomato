@@ -40,8 +40,8 @@
     <div id="project_cover" class="project_color" style="background-color:<%= @project.cover %>"></div>
     <h2 class="py-2 project-title"> <%= @project.title %> </h2>
   </div>
-
-  <App project="<%= params[:id] %>">
+           <%# 包成 helper就不行？ %>
+  <App project="<%= params[:id] %>"> 
   
   </App>
 

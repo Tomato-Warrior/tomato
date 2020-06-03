@@ -1,5 +1,9 @@
 module TasksHelper
 
+  def project
+    @project = current_user.projects.find(params[:id])
+  end
+
   def display_tag( tag_names )
     tag_names.map{|tag|"<span class='badge tag-color mx-1'>#{tag}</span>"}.join(' ').html_safe
   end

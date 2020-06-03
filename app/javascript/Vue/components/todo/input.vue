@@ -25,16 +25,19 @@ export default {
       content: ''
     }
   },
+  props: ['projectId'],
   methods: {
     submit: function () {
       if(this.content.length != 0){
 
         const data = new FormData();
-        data.append("title", content);
+        data.append('task[title]', this.content);
+        data.append('task[project_id]',this.projectId);
 
         Rails.ajax({
-        url: `/projects/${project_id}/tasks`, 
+        url: `/api/v1/projects/${this.projectId}/tasks`, 
         type: 'POST', 
+        data,
         dataType: 'json',
         success: resp => {
           console.log(resp);

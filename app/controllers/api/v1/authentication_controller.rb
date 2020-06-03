@@ -3,7 +3,8 @@ class Api::V1::AuthenticationController < ApiController
   
   def login
     if valid_user?
-      render json: { message: 'ok', auth_token: @user.auth_token }, status: 200
+      tasks = @user.tasks
+      render json: { user_id: @user.id, message: 'ok', auth_token: @user.auth_token, tasks: tasks}, status: 200
     else
       render json: { message: 'invalid user email or password' }, status: 401
     end

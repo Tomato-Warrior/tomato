@@ -35,16 +35,16 @@ export default {
         data.append('task[project_id]',this.projectId);
 
         Rails.ajax({
-        url: `/api/v1/projects/${this.projectId}/tasks`, 
-        type: 'POST', 
-        data,
-        dataType: 'json',
-        success: resp => {
-          console.log(resp);
-        }, 
-        error: err => {
-          console.log(err);
-        } 
+          url: `/api/v1/projects/${this.projectId}/tasks`, 
+          type: 'POST', 
+          data,
+          dataType: 'json',
+          success: resp => {
+            console.log(resp);
+          }, 
+          error: err => {
+            console.log(err);
+          } 
         });
       }
     }

@@ -19,7 +19,7 @@
       TaskGroup
     },
     beforeMount: function() {
-      this.loadTasks();
+      this.loadTasks(this.project);
     }
   }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2 task-hover project-task-list d-flex flex-nowrap">
+  <div class="p-2 task-hover project-task-list d-flex flex-nowrap" :data-task-id="task.id">
     <div class="d-flex align-items-center">
       <a href="#" class="pl-4 play-icon"><i class="far fa-circle"></i></a>
       <a href="#" class="ml-3 mr-2 play-icon"><i class="far fa-play-circle"></i></a>
@@ -20,17 +20,28 @@
     </div>
     <div class="d-flex align-items-center text-right delete-icon">
       <a href="#" class="mx-1"><i class="fas fa-pencil-alt"></i></a>
-      <a href="#" method="delete" class="mx-4"><i class="fas fa-trash-alt"></i></a>
+      <a href="#" @click="confirmToRemoveTask" class="mx-4"><i class="fas fa-trash-alt"></i></a>
     </div>
   </div>
 </template>
 
 <script>
 import TaskTag from './tag';
+import { mapActions } from 'vuex'
 
 export default {
   name: 'TaskList',
   props: ['task'],
+  methods: {
+    ...mapActions(['removeTask']), 
+    confirmToRemoveTask: function (evt) {
+      evt.preventDefault();
+      
+      if (confirm('confirm to delete?!')) {
+        this.removeTask(this.$el.dataset.taskId);
+      }
+    }
+  },
   components: {
     TaskTag
   }

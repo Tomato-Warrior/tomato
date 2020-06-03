@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       resources :projects, only: [] do
         resources :tasks, only: [:index, :create, :update]
       end
+      resources :tasks, only: [:destroy]
 
       resources :tictacs, only: [] do
         collection do

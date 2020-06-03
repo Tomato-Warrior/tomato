@@ -6,17 +6,21 @@
 
 <script>
   import { TaskInput, TaskGroup } from './todo';
+  import { mapActions } from 'vuex';
+
   export default {
     name: 'App',
-    data: function () {
-      return {
-      }
-    },
     props: ['project'],
-    components: {
-    TaskInput,
-    TaskGroup
+    methods: {
+      ...mapActions(['loadTasks'])
     },
+    components: {
+      TaskInput,
+      TaskGroup
+    },
+    beforeMount: function() {
+      this.loadTasks();
+    }
   }
 </script>
 

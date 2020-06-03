@@ -22,7 +22,8 @@
     "vue": "^2.6.11",
     "vue-loader": "^15.9.2",
     "vue-template-compiler": "^2.6.11",
-    "vue-turbolinks": "^2.1.0"
+    "vue-turbolinks": "^2.1.0",
+    "vuex": "^3.4.0"
   },
   "version": "0.1.0",
   "devDependencies": {

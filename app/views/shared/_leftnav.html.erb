@@ -86,8 +86,11 @@
             <%= f.text_field :title, data: {action: "keydown->project#submit", target: "project.title"} %>
           </div>
           <%= f.submit "建立", class: "badge-pill p-2 path-color" %>
-        <% end %>
-
+          <%= link_to_if(current_user.trello_token != nil, "從Trello匯入專案", select_board_trelloapi_index_path,class: "badge-pill p-2 path-color text-dark m-4") do
+              link_to "從Trello匯入專案", trelloapi_index_path, class: "badge-pill p-2 path-color text-dark m-4" 
+            end 
+          %>
+        <% end %> 
       </div>
     </div>
   </div>

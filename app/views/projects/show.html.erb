@@ -77,6 +77,13 @@
             <div class="d-flex align-items-center">
               <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font mx-3" %>
             </div>
+            <% if task.trello_info %>
+            <div class="d-flex align-items-center" data-controller="trelloapi">
+              <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
+                <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
+              </select>
+            </div>
+          <% end %>
             <div class="tictac-icon d-flex ml-auto">
                 <% if task.expect_tictacs? %>
                 <div class="d-flex align-items-center ml-2"  title="預期時鐘：<%= task.expect_tictacs %>">
@@ -167,3 +174,7 @@
 <script>
 $('.collapse').collapse('show')
 </script>
+
+
+
+

@@ -1,3 +1,4 @@
+
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
@@ -8,16 +9,17 @@ require("chartkick")
 require("chart.js")
 require("scripts")
 
+
 import $ from 'jquery'
 window.$ = $
 
-// sewwtalert2
+// seewtalert2
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 window.Swal = Swal
 
 import "bootstrap";
 import "controllers";
-import 'sweetalert2/src/sweetalert2.scss';
 import '@fortawesome/fontawesome-free/js/all';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'tempusdominus-bootstrap-4';

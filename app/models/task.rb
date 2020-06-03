@@ -6,11 +6,11 @@ class Task < ApplicationRecord
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
   has_many :tictacs
-
+  has_one :trello_info
   belongs_to :project
   belongs_to :user
   #validates
-  validates :title, presence: true, length: { minimum: 1 }
+  validates :title, presence: true
   enum status: {doing: 0 , done: 1 }
 
   #tag

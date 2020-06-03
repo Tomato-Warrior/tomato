@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_063043) do
+
+ActiveRecord::Schema.define(version: 2020_06_01_054811) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_063043) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
     t.integer "position"
+    t.string "trello_status"
     t.integer "status", default: 0
     t.index ["deleted_at"], name: "index_tasks_on_deleted_at"
     t.index ["project_id"], name: "index_tasks_on_project_id"
@@ -72,6 +75,16 @@ ActiveRecord::Schema.define(version: 2020_05_25_063043) do
     t.index ["user_id"], name: "index_tictacs_on_user_id"
   end
 
+  create_table "trello_infos", force: :cascade do |t|
+    t.string "list_id"
+    t.string "card_id"
+    t.bigint "task_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "board_id"
+    t.index ["task_id"], name: "index_trello_infos_on_task_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -82,6 +95,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_063043) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider"
     t.string "uid"
+    t.string "trello_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -92,4 +106,6 @@ ActiveRecord::Schema.define(version: 2020_05_25_063043) do
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "users"
   add_foreign_key "tictacs", "users"
+  add_foreign_key "trello_infos", "tasks"
 end
+

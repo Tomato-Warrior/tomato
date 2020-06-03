@@ -1,6 +1,6 @@
 class Api::V1::AuthenticationController < ApiController
-  before_action :authenticate_user_token, only: logout
-
+  before_action :authenticate_user_token, only: :logout
+  
   def login
     if valid_user?
       render json: { message: 'ok', auth_token: @user.auth_token }, status: 200

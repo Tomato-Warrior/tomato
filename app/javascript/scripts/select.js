@@ -38,6 +38,10 @@ $(window).on('turbolinks:load', function(){
     start: new Date(2020, 0),
     cellSize: 20,
     legend: [2, 4, 6, 8],
+    legendColors: {
+      min: "#EFF0F1",
+      max: "#EF426F"
+    }
   });
 
 });

@@ -15,6 +15,12 @@ const store = new Vuex.Store({
     }
   }, 
 
+  getters: {
+    tasks: function(state) {
+      return state.tasks
+    }
+  },
+
   actions: {
     loadTasks({ commit }, projectId) {
       
@@ -30,10 +36,6 @@ const store = new Vuex.Store({
         } 
       });
     }
-  }, 
-
-  getters: {
-
   }
 })
 

@@ -36,15 +36,12 @@
 
 <section id="app">
 
-  <div class="project_cover d-flex align-items-center pl-3">
-    <div id="project_cover" class="project_color" style="background-color:<%= @project.cover %>"></div>
-    <h2 class="py-2 project-title"> <%= @project.title %> </h2>
-  </div>
-           <%# 包成 helper就不行？ %>
   <App project="<%= params[:id] %>"> 
-  
   </App>
 
+</section>
+
+<%# 要對trello 欄位 %>
   <% @project_undo_tasks.order(position: :asc).each do |task| %>
           <div class="p-2 task-hover project-task-list d-flex flex-nowrap" data-id="<%= task.id %>">
             <div class="d-flex align-items-center">
@@ -95,7 +92,6 @@
           </div>
      <% end %>
 
-</section>
 
   <div>  
     <button class="btn done-task ml-3" type="button" data-toggle="collapse" data-target="#collapseTaskDone" aria-expanded="false" aria-controls="collapseTaskDone">

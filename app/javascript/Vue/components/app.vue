@@ -1,6 +1,7 @@
 <template>
   <div>
-    <TaskInput :project-id="project"/>
+    <TaskInput :project-id="project" />
+    <TaskGroup />
   </div>
 </template>
 

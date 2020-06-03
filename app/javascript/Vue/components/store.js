@@ -16,10 +16,14 @@ const store = new Vuex.Store({
       state.doneTasks = resp.doneTasks;
     }, 
 
-    REMOVE_TASK(state, taskId) {
-      const foundTask = state.tasks.findIndex(task => task.id == taskId);
+    REMOVE_TASK(state, resp) {
+      let taskId = resp.task.id;
+      let targetTasks = (resp.task.status == 'doing') ?  state.doingTasks : state.doneTasks;
+
+      let foundTask = targetTasks.findIndex(task => task.id == taskId);
+      
       if (foundTask >= 0) {
-        state.tasks.splice(foundTask, 1);
+        targetTasks.splice(foundTask, 1);
       }
     }
   }, 
@@ -31,7 +35,7 @@ const store = new Vuex.Store({
         type: 'DELETE', 
         dataType: 'JSON', 
         success: resp => {
-          commit('REMOVE_TASK', resp.taskId);
+          commit('REMOVE_TASK', resp);
         }, 
         error: err => {
           console.log(err);

@@ -50,7 +50,7 @@ class Api::V1::TasksController < ApiController
   def destroy 
     task = current_user.tasks.find(params[:id])
     task.destroy
-    render json: { state: 'ok', taskId: task.id }
+    render json: { state: 'ok', task: { id: task.id, status: task.status }}
   end
 
   private

@@ -1,5 +1,5 @@
 class TrelloapiController < ApplicationController
-  
+  require 'rest-client'
   layout "trelloapi"
   #全域變數  
   $token
@@ -22,7 +22,6 @@ class TrelloapiController < ApplicationController
     list_id = params[:list_id]
     task_id = params[:task_id]
     response = UpdateCard.new.move_to_list(card_id, list_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
-    
     render json: {res: response}
     Task.find(task_id).trello_info.update(list_id: list_id)
   end

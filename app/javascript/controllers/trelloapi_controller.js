@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["select_board", "select_card", "select_list", "change_list"]
+  static targets = ["select_board", "select_card", "select_list", "change_list", "import_method"]
   trello_token = ""
   api_key = "f91cef06b7d1a94754eac87835224aeb"
   
@@ -59,11 +59,11 @@ export default class extends Controller {
         error: err => {
         } 
       })
-    })
-    .catch()    
+    })   
   }
 
   select_board(e){
+    let that = this
     const submitData = { board_id: this.select_boardTarget.value}
     Rails.ajax({
       url: `/trelloapi/get_board`, 
@@ -79,6 +79,10 @@ export default class extends Controller {
       error: err => {
       } 
     })
+    if (this.select_boardTarget.value != "none")
+      that.import_methodTarget.classList.remove("d-none")
+    else
+      that.import_methodTarget.classList.add("d-none")
   } 
 
   change_list(){
@@ -94,7 +98,7 @@ export default class extends Controller {
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
         options.data = JSON.stringify(submitData)
         return true
-      },
-    })  
+      }
+    })
   }
 }

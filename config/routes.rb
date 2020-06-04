@@ -36,9 +36,11 @@ Rails.application.routes.draw do
   #API
   namespace :api do
     namespace :v1 do
-      # google extension login/logout
+      # google extension
       post 'login' => 'authentication#login'
       post 'logout' => 'authentication#logout'
+      post 'gettasks' => 'tasks#gettasks'
+      post 'startwork' => 'tasks#startwork'
 
       resources :tictacs, only: [] do
         collection do

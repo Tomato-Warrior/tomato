@@ -17,6 +17,7 @@
 
 <script>
 import Rails from '@rails/ujs'
+import { mapActions } from 'vuex';
 
 export default {
   name: 'TaskInput',
@@ -27,25 +28,12 @@ export default {
   },
   props: ['projectId'],
   methods: {
+    ...mapActions(['addTask']),
+
     submit: function () {
       if(this.content.length != 0){
-
-        const data = new FormData();
-        data.append('task[title]', this.content);
-        data.append('task[project_id]',this.projectId);
-
-        Rails.ajax({
-          url: `/api/v1/projects/${this.projectId}/tasks`, 
-          type: 'POST', 
-          data,
-          dataType: 'json',
-          success: resp => {
-            console.log(resp);
-          }, 
-          error: err => {
-            console.log(err);
-          } 
-        });
+        this.addTask({projectId:this.projectId, content: this.content});
+        this.content = '';
       }
     }
   },

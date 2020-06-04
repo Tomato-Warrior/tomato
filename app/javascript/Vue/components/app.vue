@@ -1,23 +1,27 @@
 <template>
   <div>
+    <ProjectInfo />
+    <TaskProject />
     <TaskInput :project-id="project" />
     <TaskGroup />
   </div>
 </template>
 
 <script>
-  import { TaskInput, TaskGroup } from './todo';
-  import { mapActions } from 'vuex';
+  import { TaskInput, TaskGroup, TaskProject, ProjectInfo } from './todo';
+  import { mapActions, mapState } from 'vuex';
 
   export default {
     name: 'App',
     props: ['project'],
     methods: {
-      ...mapActions(['loadTasks'])
+      ...mapActions(['loadTasks']),
     },
     components: {
       TaskInput,
-      TaskGroup
+      TaskGroup,
+      TaskProject,
+      ProjectInfo
     },
     beforeMount: function() {
       this.loadTasks(this.project);

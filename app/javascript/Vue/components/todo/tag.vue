@@ -14,5 +14,4 @@ export default {
   background-color: aquamarine;
   margin: 2px;
 }
-
 </style>

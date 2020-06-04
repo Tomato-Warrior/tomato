@@ -1,45 +1,11 @@
 <div class="project-tasks-container">
 
-  <div class="show-data mx-3 my-3">
-    <h3>任務資訊</h3>
-    <div class="data-container d-flex">
-      <div class="col-3">
-        <div class="data">
-          <p>預計時間</p>
-          <span class="tomato-num"><%= @project_expect_time %></span>
-          <small>小時</small>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="data">
-          <p>待完成任務</p>
-          <span class="doing-task-num"><%= @project_undo_tasks.count %></span>
-          <small>個</small>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="data">
-          <p>收集番茄</p>
-          <span class="tomato-num"><%= @tictac_count %></span>
-          <small>個</small>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="data">
-          <p>已完成任務</p>
-          <span class="done-data-num"><%= @project_done_tasks.count %></span>
-          <small>個</small>
-        </div>
-      </div>
-      </div>
-  </div>
+  <section id="app">
+    <App project="<%= params[:id] %>"> 
 
-<section id="app">
+    </App>
+  </section>
 
-  <App project="<%= params[:id] %>"> 
-  </App>
-
-</section>
 
 <%# 要對trello 欄位 %>
   <% @project_undo_tasks.order(position: :asc).each do |task| %>
@@ -144,7 +110,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <script>

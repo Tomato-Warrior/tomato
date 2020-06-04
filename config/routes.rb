@@ -48,8 +48,12 @@ Rails.application.routes.draw do
       resources :projects, only: [] do
         resources :tasks, only: [:index, :create, :update]
       end
-      resources :tasks, only: [:destroy]
-
+      resources :tasks, only: [:destroy] do 
+        member do
+          patch :toggle_status
+        end
+      end
+      
       resources :tictacs, only: [] do
         collection do
           post :start

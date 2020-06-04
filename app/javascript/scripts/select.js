@@ -27,7 +27,9 @@ $(window).on('turbolinks:load', function(){
     $('[data-toggle="tooltip"]').tooltip()
   });
 
-  var cal = new CalHeatMap();
+  var heapMapElement = document.querySelector('#heatmap');
+  if (heapMapElement) {
+    var cal = new CalHeatMap();
   
   cal.init({
     itemSelector: "#heatmap",

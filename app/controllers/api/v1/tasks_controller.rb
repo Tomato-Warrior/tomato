@@ -53,6 +53,16 @@ class Api::V1::TasksController < ApiController
     render json: { state: 'ok', task: { id: task.id, status: task.status }}
   end
 
+  def toggle_status
+    task = current_user.tasks.find(params[:id])
+    if task.status == 'doing'
+      task.done!
+    else
+      task.doing!
+    end
+    render json: { state: 'ok', task: { id: task.id, status: task.status }}
+  end
+
   private
 
   def task_params

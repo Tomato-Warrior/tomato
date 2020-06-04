@@ -8,10 +8,11 @@ class User < ApplicationRecord
   has_many :tasks
   has_many :taggings, through: :tasks
   has_many :tags, through: :tasks
-
+  has_many :trello_infos
+  
   # 產生不會重複的token
   has_secure_token :auth_token
-
+  
   # callback
   after_create :default_project_create
 

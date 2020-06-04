@@ -1,5 +1,7 @@
 class TrelloapiController < ApplicationController
+
   require 'rest-client'
+
   #全域變數  
   $token
   $board_id
@@ -91,7 +93,8 @@ class TrelloapiController < ApplicationController
     list_ids = param_card_ids.flatten.map{|card| GetCards.new.get_card_by_id(card, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
     list_ids = list_ids.map{|list| JSON.parse(list).values_at("idList")}.flatten
 
-    create_trello_info(import_data, param_card_ids, list_ids, $board_id)
+    create_trello_info(import_data, param_card_ids, list_ids, $board_id, current_user.id)
+
     res = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     redirect_to root_path
   end
@@ -114,7 +117,6 @@ class TrelloapiController < ApplicationController
 
     board_name = JSON.parse(GetBoards.new.get_board_name($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token))
     board_name = board_name.values_at("name").join
-    
     generate_tasks_attributes(assigned_cards_names, @param_list_names.count) 
     import_data = import_trello_board(board_name, $board_id, @tasks_attr_data) 
     create_trello_info(import_data, assigned_cards_ids, assigned_cards_list_ids,$board_id, current_user.id)

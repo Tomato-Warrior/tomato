@@ -1,5 +1,6 @@
 class TrelloapiController < ApplicationController
   before_action :ajax_render, only: [:select_board, :select_list_cards, :select_assigned_cards_of_list]
+  layout "trelloapi"
   #全域變數  
   $board_id
   def get_token
@@ -86,6 +87,7 @@ class TrelloapiController < ApplicationController
     list_ids = param_card_ids.flatten.map{|card| GetCards.new.get_card_by_id(card, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
     list_ids = list_ids.map{|list| JSON.parse(list).values_at("idList")}.flatten
     create_trello_info(import_data, param_card_ids, list_ids, $board_id, current_user.id)
+    res = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     redirect_to root_path
   end
 

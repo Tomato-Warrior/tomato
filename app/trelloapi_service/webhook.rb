@@ -56,6 +56,7 @@ class Webhook
   def after_list(res)
     res.values_at("action")[0].values_at("data")[0].values_at("listAfter")[0].values_at("id", "name")
   end
+<<<<<<< HEAD
 
   def member_id(res)
     res.values_at("action")[0].values_at("memberCreator")[0].values_at("id").join
@@ -64,4 +65,6 @@ class Webhook
   def assign_member_id(res)
     res.values_at("action")[0].values_at("data")[0].values_at("idMember")[0]
   end
+=======
+>>>>>>> 更新任務WIP
 end

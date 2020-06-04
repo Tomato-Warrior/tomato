@@ -26,10 +26,8 @@ class Tictac < ApplicationRecord
 
   end
 
-  
-
   private
-  
+
   def status_start 
     update(start_at: Time.now)
   end

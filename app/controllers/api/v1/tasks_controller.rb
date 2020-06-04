@@ -29,7 +29,11 @@ class Api::V1::TasksController < ApiController
 
   # Vue API
   def index
-    @task = current_user.projects.find(params[:project_id]).tasks
+    project = current_user.projects.find(params[:project_id])
+    @task = project.tasks
+    task_ids = project.tasks.ids
+    @tictac_count = Tictac.where(task_id: task_ids).finished.count
+    @project_expect_time = project_expect_time
     render format: :json
   end
 
@@ -73,6 +77,12 @@ class Api::V1::TasksController < ApiController
                                  :project_id,
                                  tag_items: []
    )
+  end
+
+  def project_expect_time
+    project = current_user.projects.find(params[:project_id])
+    tictac_hour = project.tasks.sum(:expect_tictacs) * 1500.0 / 3600
+    tictac_hour.round(tictac_hour % 10 == 0 ? 0 : 1)
   end
 
 end

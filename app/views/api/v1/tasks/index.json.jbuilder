@@ -1,8 +1,10 @@
 json.projectTitle do
-  json.array! @task.doing do |task|
-    json.title task.project.title
-    json.cover task.project.cover
-  end
+  json.title @task.first.project.title
+  json.cover @task.first.project.cover
+end
+json.infoList do
+  json.fin_tictac @tictac_count
+  json.expect_time @project_expect_time
 end
 json.doingTasks do
   json.array! @task.doing do |task|

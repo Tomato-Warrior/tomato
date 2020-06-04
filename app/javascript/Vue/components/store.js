@@ -9,6 +9,7 @@ const store = new Vuex.Store({
     doingTasks: [], 
     doneTasks: [],
     projectTitle: [],
+    infoList: [],
   },
 
   mutations: {
@@ -33,6 +34,8 @@ const store = new Vuex.Store({
     SET_TASKS(state, resp){
       state.doingTasks = resp.doingTasks;
       state.doneTasks = resp.doneTasks;
+      state.projectTitle = resp.projectTitle;
+      state.infoList = resp.infoList;
     }, 
 
     REMOVE_TASK(state, resp) {
@@ -101,7 +104,7 @@ const store = new Vuex.Store({
         url: `/api/v1/projects/${projectId}/tasks`, 
         type: 'GET', 
         dataType: 'json',
-        success: resp => {
+        success: resp => { 
           commit('SET_TASKS', resp)
         }, 
         error: err => {

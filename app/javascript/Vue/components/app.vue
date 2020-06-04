@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ProjectInfo />
-    <TaskProject />
+    <ProjectInfo :info="infoList"/>
+    <TaskProject :project="projectTitle" />
     <TaskInput :project-id="project" />
     <TaskGroup />
   </div>
@@ -16,6 +16,10 @@
     props: ['project'],
     methods: {
       ...mapActions(['loadTasks']),
+    },
+    computed: {
+      ...mapState(['projectTitle']),
+      ...mapState(['infoList'])
     },
     components: {
       TaskInput,

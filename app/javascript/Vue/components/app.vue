@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-show="show">
     <ProjectInfo :info="infoList"/>
     <TaskProject :project="projectTitle" />
     <TaskInput :project-id="project" />
@@ -14,6 +14,11 @@
   export default {
     name: 'App',
     props: ['project'],
+    data: function(){
+      return {
+        show: false
+      };
+    },
     methods: {
       ...mapActions(['loadTasks']),
     },
@@ -29,6 +34,9 @@
     },
     beforeMount: function() {
       this.loadTasks(this.project);
+    },
+    mounted: function() {
+      this.show = true
     }
   }
 </script>

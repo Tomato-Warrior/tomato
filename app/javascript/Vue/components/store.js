@@ -10,6 +10,8 @@ const store = new Vuex.Store({
     doneTasks: [],
     projectTitle: [],
     infoList: [],
+    doing_today_task: [],
+    done_today_task: []
   },
 
   mutations: {
@@ -36,6 +38,8 @@ const store = new Vuex.Store({
       state.doneTasks = resp.doneTasks;
       state.projectTitle = resp.projectTitle;
       state.infoList = resp.infoList;
+      state.doing_today_task = resp.doing_today_task;
+      state.done_today_task = resp.done_today_task;
     }, 
 
     REMOVE_TASK(state, resp) {

@@ -30,10 +30,13 @@ class Api::V1::TasksController < ApiController
   # Vue API
   def index
     project = current_user.projects.find(params[:project_id])
-    @task = project.tasks
+    range = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
     task_ids = project.tasks.ids
+    @task = project.tasks
     @tictac_count = Tictac.where(task_id: task_ids).finished.count
     @project_expect_time = project_expect_time
+    @today_tasks = project.tasks.where(created_at: range)
+
     render format: :json
   end
 

@@ -7,12 +7,18 @@ Vue.use(TurbolinksAdapter)
 
 document.addEventListener('turbolinks:load', () => {
   const el = document.querySelector('#app');
+  el.classList.add('d-none')
 
   if (el) {
     const app = new Vue({
       el,
       store,
-      components: { App }
+      components: { App },
+      mounted: function () {
+        setTimeout(() => {
+          this.$el.classList.remove('d-none')
+        }, 150)
+      }
     })
   }
 })

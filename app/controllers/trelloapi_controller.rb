@@ -91,8 +91,9 @@ class TrelloapiController < ApplicationController
     all_cards = JSON.parse(all_cards)
     list_ids = param_card_ids.flatten.map{|card| GetCards.new.get_card_by_id(card, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
     list_ids = list_ids.map{|list| JSON.parse(list).values_at("idList")}.flatten
-    create_trello_info(import_data, param_card_ids, list_ids, $board_id, current_user.id)
 
+    create_trello_info(import_data, param_card_ids, list_ids, $board_id)
+    res = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     redirect_to root_path
   end
 

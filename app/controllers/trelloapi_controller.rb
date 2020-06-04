@@ -1,5 +1,4 @@
 class TrelloapiController < ApplicationController
-  require 'rest-client'
   layout "trelloapi"
   #全域變數  
   $token
@@ -91,9 +90,8 @@ class TrelloapiController < ApplicationController
     all_cards = JSON.parse(all_cards)
     list_ids = param_card_ids.flatten.map{|card| GetCards.new.get_card_by_id(card, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
     list_ids = list_ids.map{|list| JSON.parse(list).values_at("idList")}.flatten
-    create_trello_info(import_data, param_card_ids, list_ids, $board_id)
+    create_trello_info(import_data, param_card_ids, list_ids, $board_id, current_user.id)
     res = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
-    byebug
     redirect_to root_path
   end
 
@@ -118,7 +116,7 @@ class TrelloapiController < ApplicationController
     
     generate_tasks_attributes(assigned_cards_names, @param_list_names.count) 
     import_data = import_trello_board(board_name, @tasks_attr_data) 
-    create_trello_info(import_data, assigned_cards_ids, assigned_cards_list_ids,$board_id)
+    create_trello_info(import_data, assigned_cards_ids, assigned_cards_list_ids,$board_id, current_user.id)
                       
     redirect_to root_path
   end
@@ -148,10 +146,10 @@ class TrelloapiController < ApplicationController
     @assigned_cards = JSON.parse(GetLists.new.get_assigned_cards(member_id, board_id, list_name, api_key, token)).values_at("cards").flatten
   end
 
-  def create_trello_info(import_data, card_ids, list_ids, board_id)
-    i = 0
-    while i < import_data.tasks.count
-      import_data.tasks[i].create_trello_info({card_id:card_ids.flatten[i], list_id:list_ids[i], board_id:board_id })
+  def create_trello_info(import_data, card_ids, list_ids, board_id, user_id)
+    i=0
+    while i<import_data.tasks.count
+      import_data.tasks[i].create_trello_info({card_id:card_ids.flatten[i], list_id:list_ids[i], board_id:board_id, user_id: user_id })
       i += 1
     end  
   end

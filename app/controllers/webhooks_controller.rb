@@ -1,3 +1,4 @@
+
 class WebhooksController < ApplicationController
   protect_from_forgery with: :null_session
 
@@ -41,3 +42,4 @@ class WebhooksController < ApplicationController
     end
   end
 end
+

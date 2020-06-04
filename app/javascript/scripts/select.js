@@ -38,9 +38,9 @@ $(window).on('turbolinks:load', function(){
     start: new Date(2020, 0),
     considerMissingDataAsZero: true,
     cellSize: 20,
-    legend: [2, 4, 6, 8],
+    legend: [1, 2, 4, 6, 8],
     legendColors: {
-      min: "#EFF0F1",
+      min: "#FAF2F2",
       max: "#EF426F"
     }
   });

@@ -93,4 +93,7 @@ Rails.application.routes.draw do
     end
   end
 
+  #webhook
+  get "/webhooks/receive", to: "webhooks#complete"
+  post "/webhooks/receive", to: "webhooks#receive"
 end

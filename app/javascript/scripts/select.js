@@ -28,6 +28,7 @@ $(window).on('turbolinks:load', function(){
   });
 
   var heapMapElement = document.querySelector('#heatmap');
+
   if (heapMapElement) {
     var cal = new CalHeatMap();
   
@@ -46,4 +47,5 @@ $(window).on('turbolinks:load', function(){
       max: "#EF426F"
     }
   });
+  }
 });

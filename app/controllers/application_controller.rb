@@ -42,10 +42,13 @@ class ApplicationController < ActionController::Base
       @left_todo_undo_tasks = 0
     end
   end
+<<<<<<< HEAD
 
   def find_user
     @user = current_user
   end
+=======
+>>>>>>> find current user
   
   private
   def expect_time

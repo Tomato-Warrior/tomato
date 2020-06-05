@@ -1,11 +1,9 @@
 class TrelloapiController < ApplicationController
   layout "trelloapi"
-  #全域變數  
-  $token
+
   $board_id
   $member_id
   def get_token
-    $token = params[:token]
     ENV['TRELLO_USER_TOKEN'] = params[:token]
     current_user.update(trello_token: params[:token])
     $member_id = JSON.parse(params[:text]).values_at("id").join
@@ -91,7 +89,7 @@ class TrelloapiController < ApplicationController
     list_ids = param_card_ids.flatten.map{|card| GetCards.new.get_card_by_id(card, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
     list_ids = list_ids.map{|list| JSON.parse(list).values_at("idList")}.flatten
     create_trello_info(import_data, param_card_ids, list_ids, $board_id, current_user.id)
-    res = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
+    res = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token, params[:authenticity_token])
     redirect_to root_path
   end
 

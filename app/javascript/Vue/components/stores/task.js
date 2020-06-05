@@ -31,8 +31,7 @@ const store = new Vuex.Store({
       if (foundTask >= 0) {
         let removedTask = fromTasks.splice(foundTask, 1)[0];
         toTasks.unshift(removedTask);
-        removedTask.status = "done";
-        
+        removedTask.status == 'doing' ? removedTask.status = 'done' : removedTask.status = 'doing';
       }
     }, 
 

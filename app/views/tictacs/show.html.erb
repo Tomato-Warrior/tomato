@@ -3,8 +3,13 @@
     <h3>任務</h3>
     <p><%= @task.title %></p>
   </div>
-
+  
   <div class="clock d-flex flex-column justify-content-center align-items-center">
+    <a class="startbtn" href="#" data-action="click->tictacs#editTime">
+      <span>
+        <i class="far fa-edit"></i>
+      </span>
+    </a>
     <div class="display d-flex justify-content-center align-items-center">
       <h1 class="display_time_left pending d-flex justify-content-center align-items-center" data-target="tictacs.show_time_left"></h1>
     </div>

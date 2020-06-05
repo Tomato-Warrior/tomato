@@ -324,4 +324,28 @@ export default class extends Controller {
   stop(e){
     e.preventDefault();
   }
+
+  editTime(e){
+    e.preventDefault()
+    let that = this
+    Swal.fire({
+      title: '給個你想要的時間',
+      html: 
+        '<div class="d-flex justify-content-center">' +
+        '  <label for="edit_min">分鐘</label>' +
+        '  <input style="width: 50px" class="border border-dark" id="edit_min" type="text" placeholder="">' +
+        '  <label for="edit_sec">秒數</label>' +
+        '  <input style="width: 50px" class="border border-dark" id="edit_sec" type="text" placeholder="">' +
+        '</div>',
+      position: 'top',
+      showCancelButton: true,
+      preConfirm: ()=>{
+        let min = parseInt($(edit_min).val())
+        let sec = parseInt($(edit_sec).val())
+        $(that.show_time_leftTarget).text(`${min}:${sec}`)
+        that.startbtnTarget.dataset.time = min * 60 + sec
+      }
+    })
+  }
 }
+

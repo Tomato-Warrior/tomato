@@ -340,9 +340,9 @@ export default class extends Controller {
       position: 'top',
       showCancelButton: true,
       preConfirm: ()=>{
-        let min = parseInt($(edit_min).val())
-        let sec = parseInt($(edit_sec).val())
-        $(that.show_time_leftTarget).text(`${min}:${sec}`)
+        let min = parseInt($(edit_min).val()) || 0
+        let sec = parseInt($(edit_sec).val()) || 0
+        $(that.show_time_leftTarget).text(`${min < 10 ? 0 : ''}${min}:${sec < 10 ? 0 : ''}${sec}`)
         that.startbtnTarget.dataset.time = min * 60 + sec
       }
     })

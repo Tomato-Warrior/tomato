@@ -56,7 +56,6 @@ const store = new Vuex.Store({
 
   actions: {
     addTask({ commit }, {projectId, content}){
-
       const data = new FormData();
       data.append('task[title]', content);
       data.append('task[project_id]', projectId);

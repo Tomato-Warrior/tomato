@@ -29,13 +29,13 @@ class Api::V1::TasksController < ApiController
 
   # Vue API
   def index
-    project = current_user.projects.find(params[:project_id])
+    @project = current_user.projects.find(params[:project_id])
     range = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
-    task_ids = project.tasks.ids
-    @task = project.tasks
+    task_ids = @project.tasks.ids
+    @task = @project.tasks
     @tictac_count = Tictac.where(task_id: task_ids).finished.count
     @project_expect_time = project_expect_time
-    @today_tasks = project.tasks.where(created_at: range)
+    @today_tasks = @project.tasks.where(created_at: range)
 
     render format: :json
   end
@@ -84,7 +84,7 @@ class Api::V1::TasksController < ApiController
 
   def project_expect_time
     project = current_user.projects.find(params[:project_id])
-    tictac_hour = project.tasks.sum(:expect_tictacs) * 1500.0 / 3600
+    tictac_hour = project.tasks.doing.sum(:expect_tictacs) * 1500.0 / 3600
     tictac_hour.round(tictac_hour % 10 == 0 ? 0 : 1)
   end
 

@@ -1,6 +1,6 @@
 json.projectTitle do
-  json.title @task.first.project.title
-  json.cover @task.first.project.cover
+  json.title @project.title
+  json.cover @project.cover
 end
 json.infoList do
   json.fin_tictac @tictac_count

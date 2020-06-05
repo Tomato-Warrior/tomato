@@ -1,11 +1,9 @@
 class TrelloapiController < ApplicationController
   layout "trelloapi"
-  #全域變數  
-  $token
+
   $board_id
   $member_id
   def get_token
-    $token = params[:token]
     ENV['TRELLO_USER_TOKEN'] = params[:token]
     current_user.update(trello_token: params[:token])
     $member_id = JSON.parse(params[:text]).values_at("id").join
@@ -94,6 +92,7 @@ class TrelloapiController < ApplicationController
     create_trello_info(import_data, param_card_ids, list_ids, $board_id, current_user.id)
 
     res = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
+
     redirect_to root_path
   end
 
@@ -148,15 +147,9 @@ class TrelloapiController < ApplicationController
   end
 
   def create_trello_info(import_data, card_ids, list_ids, board_id, user_id)
-<<<<<<< HEAD
     i = 0
     while i < import_data.tasks.count
       import_data.tasks[i].create_trello_info({card_id:card_ids.flatten[i], list_id:list_ids[i], board_id:board_id, user_id:user_id})
-=======
-    i=0
-    while i<import_data.tasks.count
-      import_data.tasks[i].create_trello_info({card_id:card_ids.flatten[i], list_id:list_ids[i], board_id:board_id, user_id: user_id })
->>>>>>> 更新任務WIP
       i += 1
     end  
   end

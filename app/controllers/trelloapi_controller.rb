@@ -1,5 +1,4 @@
 class TrelloapiController < ApplicationController
-
   require 'rest-client'
 
   #全域變數  
@@ -7,7 +6,6 @@ class TrelloapiController < ApplicationController
   $board_id
   $member_id
   def get_token
-    $token = params[:token]
     ENV['TRELLO_USER_TOKEN'] = params[:token]
     current_user.update(trello_token: params[:token])
     $member_id = JSON.parse(params[:text]).values_at("id").join
@@ -96,6 +94,7 @@ class TrelloapiController < ApplicationController
     create_trello_info(import_data, param_card_ids, list_ids, $board_id, current_user.id)
 
     res = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
+
     redirect_to root_path
   end
 

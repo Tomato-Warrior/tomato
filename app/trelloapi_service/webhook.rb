@@ -1,19 +1,21 @@
 class Webhook
-  def create(board_id, api_key, token)
+  def create(board_id, api_key, token, auth_token)
     begin
       RestClient::Request.execute(method: :post, url: "api.trello.com/1/tokens/#{token}/webhooks/?key=#{api_key}",
                                   payload: {
+                                  authenticity_token: auth_token,
                                   callbackURL: 'http://89bbaac60e9f.ngrok.io/webhooks/receive',
                                   idModel: board_id,
                                   description: "My webhook"},
-                                  :content_type => 'application/json') do |response|
-                                    case response.code
-                                    when 301, 302, 307
-                                      response.follow_redirection
-                                    else
-                                      response.return!
-                                    end                   
-                                  end                                                     
+                                  headers:{ 'X-CSRF-Token' => auth_token,
+                                            :content_type => 'application/json'}) do |response|
+                                              case response.code
+                                              when 301, 302, 307
+                                                response.follow_redirection
+                                              else
+                                                response.return!
+                                              end                   
+                                            end                                                     
     rescue RestClient::ExceptionWithResponse => err
     end
   end

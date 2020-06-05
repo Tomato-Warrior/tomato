@@ -1,8 +1,8 @@
 <template>
-  <div v-show="show">
-    <ProjectInfo :info="infoList"/>
-    <TaskProject :project="projectTitle" />
-    <TaskInput :project-id="project" />
+  <div>
+    <ProjectInfo />
+    <TaskProject />
+    <TaskInput />
     <TaskGroup />
   </div>
 </template>
@@ -14,17 +14,8 @@
   export default {
     name: 'App',
     props: ['project'],
-    data: function(){
-      return {
-        show: false
-      };
-    },
     methods: {
       ...mapActions(['loadTasks']),
-    },
-    computed: {
-      ...mapState(['projectTitle']),
-      ...mapState(['infoList'])
     },
     components: {
       TaskInput,
@@ -34,9 +25,6 @@
     },
     beforeMount: function() {
       this.loadTasks(this.project);
-    },
-    mounted: function() {
-      this.show = true
     }
   }
 </script>

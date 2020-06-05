@@ -5,7 +5,7 @@
       <div class="col-3">
         <div class="data">
           <p>預計時間</p>
-          <span class="tomato-num">{{ info.expect_time }}</span>
+          <span class="tomato-num">{{ expect_time }}</span>
           <small>小時</small>
         </div>
       </div>
@@ -19,7 +19,7 @@
       <div class="col-3">
         <div class="data">
           <p>收集番茄</p>
-          <span class="tomato-num">{{ info.fin_tictac }}</span>
+          <span class="tomato-num">{{ finish_tictac }}</span>
           <small>個</small>
         </div>
       </div>
@@ -33,13 +33,14 @@
       </div>
   </div>
 </template>
+
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
+
 export default {
   name: 'ProjectInfo',
-  props: ['info'],
   computed: {
-    ...mapState(['doingTasks', 'doneTasks'])
+    ...mapState(['doingTasks', 'doneTasks', 'expect_time', 'finish_tictac'])
   }
 }
 </script>

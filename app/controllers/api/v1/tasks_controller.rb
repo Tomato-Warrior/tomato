@@ -1,5 +1,5 @@
 class Api::V1::TasksController < ApiController
-  before_action :authenticate_user_token
+  before_action :authenticate_user_token, only: [:gettasks, :startwork]
   
   def gettasks
     tasks = current_user.tasks
@@ -32,7 +32,7 @@ class Api::V1::TasksController < ApiController
     @project = current_user.projects.find(params[:project_id])
     range = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
     task_ids = @project.tasks.ids
-    @task = @project.tasks
+    @tasks = @project.tasks
     @tictac_count = Tictac.where(task_id: task_ids).finished.count
     @project_expect_time = project_expect_time
     @today_tasks = @project.tasks.where(created_at: range)

@@ -1,24 +1,18 @@
 import Vue from 'vue/dist/vue.esm'
 import App from './components/app.vue'
 import TurbolinksAdapter from 'vue-turbolinks'
-import store from './components/store'
+import store from './components/stores/task'
 
 Vue.use(TurbolinksAdapter)
 
 document.addEventListener('turbolinks:load', () => {
   const el = document.querySelector('#app');
-  el.classList.add('d-none')
 
   if (el) {
     const app = new Vue({
       el,
       store,
-      components: { App },
-      mounted: function () {
-        setTimeout(() => {
-          this.$el.classList.remove('d-none')
-        }, 150)
-      }
+      components: { App }
     })
   }
 })

@@ -16,8 +16,7 @@
 </template>
 
 <script>
-import Rails from '@rails/ujs'
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'TaskInput',
@@ -26,7 +25,11 @@ export default {
       content: ''
     }
   },
-  props: ['projectId'],
+
+  computed: {
+    ...mapState(['projectId'])
+  },
+
   methods: {
     ...mapActions(['addTask']),
 
@@ -36,7 +39,6 @@ export default {
         this.content = '';
       }
     }
-  },
-
+  }
 }
 </script>

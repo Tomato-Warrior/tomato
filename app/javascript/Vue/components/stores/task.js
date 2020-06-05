@@ -8,10 +8,11 @@ const store = new Vuex.Store({
   state: {
     doingTasks: [], 
     doneTasks: [],
-    projectTitle: [],
-    infoList: [],
-    doing_today_task: [],
-    done_today_task: []
+    projectTitle: '',
+    color: '#ffffff', 
+    expect_time: '', 
+    finish_tictac: 0, 
+    projectId: 0
   },
 
   mutations: {
@@ -28,18 +29,21 @@ const store = new Vuex.Store({
       let foundTask = fromTasks.findIndex(task => task.id == taskId);
       
       if (foundTask >= 0) {
-        let removedTask = fromTasks.splice(foundTask, 1);
-        toTasks.unshift(removedTask[0]);
+        let removedTask = fromTasks.splice(foundTask, 1)[0];
+        toTasks.unshift(removedTask);
+        removedTask.status = "done";
+        
       }
     }, 
 
-    SET_TASKS(state, resp){
-      state.doingTasks = resp.doingTasks;
-      state.doneTasks = resp.doneTasks;
-      state.projectTitle = resp.projectTitle;
-      state.infoList = resp.infoList;
-      state.doing_today_task = resp.doing_today_task;
-      state.done_today_task = resp.done_today_task;
+    SET_TASKS(state, project){
+      state.doingTasks = project.doingTasks;
+      state.doneTasks = project.doneTasks;
+      state.projectTitle = project.title;
+      state.color = project.color;
+      state.expect_time = project.expect_time;
+      state.finish_tictac = project.finish_tictac;
+      state.projectId = project.id;
     }, 
 
     REMOVE_TASK(state, resp) {
@@ -108,7 +112,7 @@ const store = new Vuex.Store({
         type: 'GET', 
         dataType: 'json',
         success: resp => { 
-          commit('SET_TASKS', resp)
+          commit('SET_TASKS', resp.project)
         }, 
         error: err => {
           console.log(err);

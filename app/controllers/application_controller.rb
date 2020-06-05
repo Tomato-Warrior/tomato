@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :nav_find_projects, :today_expect_time_of_tasks, :undo_tasks, :todo_expect_time_of_tasks, :left_todo_undo_tasks, :find_user
-  
+
   def nav_find_projects
     @projects = current_user.projects.includes(:user).order(updated_at: :desc) if user_signed_in?
   end
@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   def find_user
     @user = current_user
   end
-  
+
   private
   def expect_time
     range = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day

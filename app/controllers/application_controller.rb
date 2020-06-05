@@ -47,6 +47,13 @@ class ApplicationController < ActionController::Base
     @user = current_user
   end
   
+  def verified_request?
+    if request.content_type == "application/json"
+      true
+    else
+      super()
+    end 
+  end 
   private
   def expect_time
     range = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day

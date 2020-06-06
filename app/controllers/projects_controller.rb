@@ -44,6 +44,7 @@ class ProjectsController < ApplicationController
       redirect_to root_path, alert: '最少要有一個專案！'
     else
       @project.destroy
+      Webhook.new.delete(@project.webhook_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token) if @project.webhook_id
       redirect_to root_path
     end
   end

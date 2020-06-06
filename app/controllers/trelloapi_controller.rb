@@ -73,10 +73,8 @@ class TrelloapiController < ApplicationController
                       }
     param_card_names = param_card_names.map{|cards| cards.map{|card| card.values_at("name")}.flatten} #拿到cards name
     param_card_ids = param_card_ids.map{|cards| cards.map{|card| card.values_at("id")}.flatten} #拿到cards id
-
     #製作巢狀參數                  
     generate_tasks_attributes(param_card_names, @param_list_id.count)
-
     boards_data = GetBoards.new.get_boards(ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     boards = JSON.parse(boards_data)
     boards_id = boards.map{|board| board.values_at("id")}.flatten
@@ -91,8 +89,9 @@ class TrelloapiController < ApplicationController
     list_ids = param_card_ids.flatten.map{|card| GetCards.new.get_card_by_id(card, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
     list_ids = list_ids.map{|list| JSON.parse(list).values_at("idList")}.flatten
     create_trello_info(import_data, param_card_ids, list_ids, $board_id, current_user.id)
-    res = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
-
+    response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
+    webhook_id = JSON.parse(response).values_at("id")[0]
+    import_data.update(webhook_id:webhook_id)
     redirect_to root_path
   end
 
@@ -116,12 +115,13 @@ class TrelloapiController < ApplicationController
     board_name = board_name.values_at("name").join
     
     generate_tasks_attributes(assigned_cards_names, @param_list_names.count) 
-    import_data = import_trello_board(board_name, $board_id, @tasks_attr_data) 
-    create_trello_info(import_data, assigned_cards_ids, assigned_cards_list_ids,$board_id, current_user.id)
-                      
+    import_data = import_trello_board(board_name, @tasks_attr_data) 
+    create_trello_info(import_data, assigned_cards_ids, assigned_cards_list_ids,$board_id, current_user.id)      
+    response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
+    webhook_id = JSON.parse(response).values_at("id")[0]
+    import_data.update(webhook_id:webhook_id)             
     redirect_to root_path
   end
-
 
   private
 

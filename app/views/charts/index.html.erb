@@ -43,7 +43,7 @@
     </div>
   </nav>
 
-  <div class="tab-content border-right border-left border-bottom" id="nav-tabContent">
+  <div class="mb-3 tab-content border-right border-left border-bottom" id="nav-tabContent">
     <div class="tab-pane fade show active chartbg p-4" id="nav-day" role="tabpanel" aria-labelledby="nav-day-tab">
       <%= line_chart @daily_tictac %>
     </div>
@@ -55,7 +55,49 @@
     </div>
   </div>
 
-  <div class="chartbg p-4 border-right border-left border-bottom">
+  <div class="mb-3 chartbg p-4 border">
+    <div class="btn-group">
+      <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
+        選擇一個專案 <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <% if @projects.any? %>
+          <% @projects.each do |project| %>
+            <li><a href="<%= '#'"project-chart-#{project.id}" %>" data-toggle="tab" class="dropdown-item" ><%= project.title %></a></li>
+          <% end %>
+        <% else %>
+          <li><a href="#" data-toggle="tab" class="dropdown-item">沒有任何專案</a></li>
+        <% end %>
+      </ul>
+    </div>
+  
+    <div class="tab-content">
+      <div class="tab-pane active">
+        <h1 class="text-center"><%= @projects.first.title %></h1>
+        <% @first_finished = 0 %>
+        <% @first_cancelled = 0 %>
+        <% @projects.first.tasks.each do |task| %>
+          <% @first_finished += task.tictacs.finished.count %>
+          <% @first_cancelled += task.tictacs.cancelled.count %>
+        <% end %>
+        <%= pie_chart [["完成的番茄", @first_finished], ["取消的番茄", @first_cancelled]] %>
+      </div>
+      <% @projects.each do |project| %>
+        <% @finished = 0 %>
+        <% @cancelled = 0 %>
+        <% project.tasks.each do |task| %>
+          <% @finished += task.tictacs.finished.count %>
+          <% @cancelled += task.tictacs.cancelled.count %>
+        <% end %>
+        <div id="<%= "project-chart-#{project.id}" %>" class="tab-pane">
+          <h1 class="text-center"><%= project.title %></h1>
+          <%= pie_chart [["完成的番茄", @finished], ["取消的番茄", @cancelled]] %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mb-3 chartbg p-4 border">
     <div class="btn-group">
       <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
         選擇一項標籤 <span class="caret"></span>
@@ -75,7 +117,7 @@
   
     <div class="tab-content">
       <% if @tags.any? %>
-        <div id="Home" class="tab-pane active">
+        <div class="tab-pane active">
           <h1 class="text-center"><%= @tags.first.name %></h1>
           <%= column_chart @tags.first.tictacs.finished.group_by_day(:end_at).count %>
         </div>
@@ -89,7 +131,7 @@
     </div>
   </div>
 
-  <div class="chartbg p-4 border-right border-left border-bottom">
+  <div class="mb-3 chartbg p-4 border">
     <div class="btn-group">
       <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
         選擇一項任務 <span class="caret"></span>
@@ -106,7 +148,7 @@
     </div>
   
     <div class="tab-content">
-      <div id="Home" class="tab-pane active">
+      <div class="tab-pane active">
         <h1 class="text-center"><%= @tasks.first.title %></h1>
         <%= column_chart @tasks.first.tictacs.finished.group_by_day(:end_at).count %>
       </div>
@@ -118,4 +160,5 @@
       <% end %>
     </div>
   </div>
+
 </div>

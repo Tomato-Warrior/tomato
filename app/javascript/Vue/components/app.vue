@@ -1,9 +1,14 @@
 <template>
   <div>
-    <ProjectInfo />
-    <TaskProject />
-    <TaskInput />
-    <TaskGroup />
+    <div v-if="loaded">
+      <ProjectInfo />
+      <TaskProject />
+      <TaskInput />
+      <TaskGroup />
+    </div>
+    <div v-else>
+      aaaaa
+    </div>
   </div>
 </template>
 
@@ -16,6 +21,9 @@
     props: ['project'],
     methods: {
       ...mapActions(['loadTasks']),
+    },
+    computed: {
+      ...mapState(['loaded']),
     },
     components: {
       TaskInput,

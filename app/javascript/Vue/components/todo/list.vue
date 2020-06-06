@@ -10,16 +10,26 @@
     <div class="d-flex align-items-center">
       <a :href="`/projects/${task.project_id}/tasks/${task.id}`" class="list-font mx-3">{{ task.title }}</a>
     </div>
-    <div class="d-flex align-items-center ml-2"  :title="`已完成時鐘：${task.finish_tictac}`">
-      <img src='/finish_tictac.png' class='task_tictac'>
-      <small>{{ task.finish_tictac }}</small>
-    </div>
-    <div class="d-flex align-items-center ml-2"  :title="`${task.cancel_tictac}`">
-      <img src='/cancel_tictac.png' class='task_tictac'>
-      <small>{{ task.cancel_tictac }}</small>
-    </div>
-    <div class="d-flex align-items-center text-right tag-icon ml-4">
-      <TaskTag v-for="tag in task.tags" :tag="tag" :key="tag" />
+    <div class="info-container">
+      <div class="d-flex align-items-center ml-2"  :title="`已完成時鐘：${task.finish_tictac}`">
+        <img src='/finish_tictac.png' class='task_tictac'>
+        <small>{{ task.finish_tictac }}</small>
+      </div>
+      <div class="d-flex align-items-center ml-2"  :title="`已取消時鐘：${task.cancel_tictac}`">
+        <img src='/cancel_tictac.png' class='task_tictac'>
+        <small>{{ task.cancel_tictac }}</small>
+      </div>
+  
+      <!-- <div class="d-flex align-items-center" data-controller="trelloapi">
+         <select :name="`${task.id}`" :id="`${task.trello_info.card_id}`" :data-action="(change->trelloapi#change_list)" data-target="trelloapi.change_list">
+           <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
+         </select>
+      </div> -->
+  
+  
+      <div class="d-flex align-items-center text-right tag-icon ml-4">
+        <TaskTag v-for="tag in task.tags" :tag="tag" :key="tag" />
+      </div>
     </div>
     <div class="d-flex align-items-center text-right delete-icon">
       <a :href="`/projects/${task.project_id}/tasks/${task.id}/edit`" class="mx-1">
@@ -44,7 +54,7 @@ export default {
     confirmToRemoveTask: function(evt) {
       evt.preventDefault();
       
-      if (confirm('confirm to delete?!')) {
+      if (confirm('確定刪除')) {
         this.removeTask(this.$el.dataset.taskId);
       }
     }, 

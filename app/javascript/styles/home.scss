@@ -117,6 +117,7 @@ h1,h2,h3{
     text-align: center;
     p{
       position: absolute;
+      display: block;
       top: 10px;
       left: 15px;
       font-size: 13px;
@@ -125,9 +126,10 @@ h1,h2,h3{
       font-size: 35px;
       color: $mainRed;
     }
+
   }
   .col-6:nth-child(even){
-    padding-left: 0px ;
+    padding-left: 0px;
   }
   .info-list{
     li{

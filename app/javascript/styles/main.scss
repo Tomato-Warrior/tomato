@@ -16,7 +16,7 @@
     .nav-hamber{
         color: #fff;
     }
-     @media (max-width: 767px) {
+     @media (max-width: 991px) {
         .nav-font{
             display: inline-block;
         }
@@ -72,6 +72,16 @@ body {
     color: $normalFontColor;
     background-color: $mainYellow;
 }
+
+// main
+
+
+  @media (max-width: 991px){
+   .info-contain .row{
+     display: flex;
+   }
+ }
+
 
 // 登入註冊
 
@@ -178,10 +188,12 @@ a:hover{
 
 // left_nav
 
-.main-container{
-    width: 100%;
-    height: calc(100vh - 60px);
-    position: sticky;
-    box-sizing: border-box;
-    overflow-y: auto;
+.info-container{
+    display: flex;
+    
 }
+@media (max-width: 991px){
+   .info-container{
+     display: none;
+   }
+ }

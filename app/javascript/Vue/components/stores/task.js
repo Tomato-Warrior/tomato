@@ -12,7 +12,8 @@ const store = new Vuex.Store({
     color: '#ffffff', 
     expect_time: '', 
     finish_tictac: 0, 
-    projectId: 0
+    projectId: 0,
+    loaded: false,
   },
 
   mutations: {
@@ -27,11 +28,21 @@ const store = new Vuex.Store({
       let toTasks = (status == 'done') ? state.doneTasks : state.doingTasks;
 
       let foundTask = fromTasks.findIndex(task => task.id == taskId);
-      
+
       if (foundTask >= 0) {
         let removedTask = fromTasks.splice(foundTask, 1)[0];
         toTasks.unshift(removedTask);
-        removedTask.status == 'doing' ? removedTask.status = 'done' : removedTask.status = 'doing';
+
+        let increase_time = Math.round((state.expect_time - (removedTask.expect_tictac * 1500 / 3600))*100)/100;
+        let decrease_time = Math.round((state.expect_time + (removedTask.expect_tictac * 1500 / 3600))*100)/100;
+
+        if (removedTask.status == 'doing'){
+          removedTask.status = 'done';
+          state.expect_time = increase_time;
+        }else{
+          removedTask.status = 'doing';
+          state.expect_time = decrease_time;
+        }  
       }
     }, 
 
@@ -105,13 +116,15 @@ const store = new Vuex.Store({
       })
     },
 
-    loadTasks({ commit }, projectId) {
+    loadTasks({ commit, state }, projectId) {
+      state.loaded = false;
       Rails.ajax({
         url: `/api/v1/projects/${projectId}/tasks`, 
         type: 'GET', 
         dataType: 'json',
         success: resp => { 
-          commit('SET_TASKS', resp.project)
+          commit('SET_TASKS', resp.project);
+          state.loaded = true;
         }, 
         error: err => {
           console.log(err);

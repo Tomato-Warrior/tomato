@@ -33,6 +33,14 @@
 
 // left_nav
 
+.main-container{
+    width: 100%;
+    height: calc(100vh - 60px);
+    position: sticky;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
 .left-nav{
     z-index: 11;
     box-shadow: -1px 2px 22px -4px rgba(217,132,132,0.6);
@@ -123,3 +131,32 @@
       margin-bottom: 8px;
     }
   }
+
+// left-nav rwd
+  @media screen and (max-width:991px){
+    .row{
+      display: block;
+    }
+
+  .left-nav{
+    box-shadow: none;
+    z-index: 0;
+  }
+  .project_group{
+    height: auto;
+    .project-container{
+    height: auto;
+    }
+  }
+ }
+
+  @media screen and (max-width:767px){
+
+   .main-container{
+    width: 100%;
+    height: auto;
+    position: static;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+ }

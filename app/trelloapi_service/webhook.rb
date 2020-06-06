@@ -1,14 +1,12 @@
 class Webhook
-  def create(board_id, api_key, token, auth_token)
+  def create(board_id, api_key, token)
     begin
       RestClient::Request.execute(method: :post, url: "api.trello.com/1/tokens/#{token}/webhooks/?key=#{api_key}",
                                   payload: {
-                                  authenticity_token: auth_token,
-                                  callbackURL: 'http://89bbaac60e9f.ngrok.io/webhooks/receive',
+                                  callbackURL: 'http://faddc5b026cb.ngrok.io/webhooks/receive',
                                   idModel: board_id,
                                   description: "My webhook"},
-                                  headers:{ 'X-CSRF-Token' => auth_token,
-                                            :content_type => 'application/json'}) do |response|
+                                  headers:{ :content_type => 'application/json'}) do |response|
                                               case response.code
                                               when 301, 302, 307
                                                 response.follow_redirection
@@ -42,5 +40,9 @@ class Webhook
 
   def after_list(res)
     res.values_at("action")[0].values_at("data")[0].values_at("listAfter")[0].values_at("id", "name")
+  end
+
+  def member_id(res)
+    res.values_at("action")[0].values_at("memberCreator")[0].values_at("id").join
   end
 end

@@ -41,6 +41,8 @@ Rails.application.routes.draw do
       post 'logout' => 'authentication#logout'
       post 'gettasks' => 'tasks#gettasks'
       post 'startwork' => 'tasks#startwork'
+      post 'finishwork' => 'tasks#finishwork'
+      post 'cancelwork' => 'tasks#cancelwork'
 
       resources :tictacs, only: [] do
         collection do

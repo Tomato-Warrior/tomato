@@ -49,7 +49,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to root_path
     else
-      render :new
+      redirect_to root_path, alert: "任務至少要有一個字"
     end  
   end
 

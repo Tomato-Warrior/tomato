@@ -30,7 +30,8 @@ gem 'groupdate'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
+# 解決跨域的問題
+gem 'rack-cors'
 # foreman
 gem 'foreman', '~> 0.87.1'
 # devise

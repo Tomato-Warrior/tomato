@@ -127,8 +127,8 @@ class TrelloapiController < ApplicationController
 
   def generate_tasks_attributes(card_names, lists_num)
     i=0
-    @tasks_attr_data=[]
-    while i<lists_num
+    @tasks_attr_data = []
+    while i < lists_num
       params = card_names[i].map{ |card| "{title: '#{card}', 
                                           user_id: '#{current_user.id}'}"}
       @tasks_attr_data.append(params)
@@ -148,8 +148,8 @@ class TrelloapiController < ApplicationController
   end
 
   def create_trello_info(import_data, card_ids, list_ids, board_id)
-    i=0
-    while i<import_data.tasks.count
+    i = 0
+    while i < import_data.tasks.count
       import_data.tasks[i].create_trello_info({card_id:card_ids.flatten[i], list_id:list_ids[i], board_id:board_id })
       i += 1
     end  

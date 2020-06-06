@@ -29,8 +29,8 @@ h1,h2,h3{
 // 顯示番茄數據
 
 .info-contain{
-  .col-7{
-    padding-left: 0px;
+  .col-md-4{
+    padding-right: 0px;
   }
   h3{
     font-size: 18px;
@@ -112,13 +112,13 @@ h1,h2,h3{
   .data-list{
     background-color: #F0F0F0;
     border-radius: 10px;
-    padding: 5px 0px;
+    padding: 13px 0px 0px 0px;
     position: relative;
     text-align: center;
     p{
       position: absolute;
       display: block;
-      top: 10px;
+      top: 7px;
       left: 15px;
       font-size: 13px;
     }
@@ -168,7 +168,7 @@ h2.project-title{
 
 .form-control{
   border: none;
-  height: 45px;
+  height: 53px;
   border-radius: 10px;
 }
 
@@ -179,10 +179,6 @@ h2.project-title{
 
 .delete-icon{
   width: 80px;
-}
-
-.tag-icon{
-  width: 300px;
 }
 
 .tictac-icon{
@@ -224,3 +220,8 @@ h2.project-title{
 .btn-self{
   font-size: 2rem!important;
 }
+@media screen and (max-width:767px){
+  .task-project{
+    display: none;
+  }
+ }

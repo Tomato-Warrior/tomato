@@ -33,8 +33,8 @@ const store = new Vuex.Store({
         let removedTask = fromTasks.splice(foundTask, 1)[0];
         toTasks.unshift(removedTask);
 
-        let increase_time = Math.round((state.expect_time - (removedTask.expect_tictac * 1500 / 3600))*100)/100;
-        let decrease_time = Math.round((state.expect_time + (removedTask.expect_tictac * 1500 / 3600))*100)/100;
+        let increase_time = Math.round((state.expect_time - (removedTask.expect_tictac * 1500 / 3600))*10)/10;
+        let decrease_time = Math.round((state.expect_time + (removedTask.expect_tictac * 1500 / 3600))*10)/10;
 
         if (removedTask.status == 'doing'){
           removedTask.status = 'done';

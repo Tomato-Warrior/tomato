@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2 task-hover project-task-list d-flex flex-nowrap" :data-task-id="task.id">
+  <div class="px-2 task-hover project-task-list d-flex flex-nowrap" :data-task-id="task.id">
     <div class="d-flex align-items-center">
       <a href="#" @click="markComleted" class="pl-4 play-icon">
         <svg v-show="task.status === 'doing'" class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z"></path></svg>
@@ -7,19 +7,21 @@
       </a>
       <a :href="`/tasks/${task.id}/tictac`" class="ml-3 mr-2 play-icon"><i class="far fa-play-circle"></i></a>
     </div>
-    <div class="d-flex align-items-center">
+    <div class="align-items-center font-container">
       <a :href="`/projects/${task.project_id}/tasks/${task.id}`" class="list-font mx-3">{{ task.title }}</a>
+      <div class="d-flex ml-1 tictac_icon">
+        <div class="d-flex align-items-center ml-2"  :title="`已完成時鐘：${task.finish_tictac}`">
+          <img src='/finish_tictac.png' class='task_tictac'>
+          <small>{{ task.finish_tictac }}</small>
+        </div>
+        <div class="d-flex align-items-center ml-1"  :title="`已取消時鐘：${task.cancel_tictac}`">
+          <img src='/cancel_tictac.png' class='task_tictac'>
+          <small>{{ task.cancel_tictac }}</small>
+        </div>
+      </div>
     </div>
     <div class="info-container">
-      <div class="d-flex align-items-center ml-2"  :title="`已完成時鐘：${task.finish_tictac}`">
-        <img src='/finish_tictac.png' class='task_tictac'>
-        <small>{{ task.finish_tictac }}</small>
-      </div>
-      <div class="d-flex align-items-center ml-2"  :title="`已取消時鐘：${task.cancel_tictac}`">
-        <img src='/cancel_tictac.png' class='task_tictac'>
-        <small>{{ task.cancel_tictac }}</small>
-      </div>
-  
+
       <!-- <div class="d-flex align-items-center" data-controller="trelloapi">
          <select :name="`${task.id}`" :id="`${task.trello_info.card_id}`" :data-action="(change->trelloapi#change_list)" data-target="trelloapi.change_list">
            <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
@@ -31,7 +33,7 @@
         <TaskTag v-for="tag in task.tags" :tag="tag" :key="tag" />
       </div>
     </div>
-    <div class="d-flex align-items-center text-right delete-icon">
+    <div class="d-flex align-items-center ml-auto delete-icon">
       <a :href="`/projects/${task.project_id}/tasks/${task.id}/edit`" class="mx-1">
         <i class="fas fa-pencil-alt"></i>
       </a>

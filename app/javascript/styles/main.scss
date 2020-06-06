@@ -72,6 +72,10 @@ body {
     color: $normalFontColor;
     background-color: $mainYellow;
 }
+.badge{
+    font-size: 90%;
+    font-weight: 400;
+}
 
 // main
 
@@ -192,7 +196,7 @@ a:hover{
     display: flex;
     
 }
-@media (max-width: 991px){
+@media (max-width: 767px){
    .info-container{
      display: none;
    }

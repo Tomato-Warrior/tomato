@@ -1,5 +1,5 @@
 <template>
-  <span class="tag">{{ tag }}</span>
+  <span class="badge tag-color mx-1 py-1 px-2">{{ tag }}</span>
 </template>
 
 <script>
@@ -8,10 +8,3 @@ export default {
   props: ['tag']
 }
 </script>
-
-<style scoped>
-.tag {
-  background-color: aquamarine;
-  margin: 2px;
-}
-</style>

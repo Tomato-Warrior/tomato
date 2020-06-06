@@ -5,7 +5,7 @@
       <div class="col-6 col-md-3">
         <div class="data">
           <p>預計時間</p>
-          <div class="">
+          <div>
             <span class="tomato-num">{{ expect_time }}</span>
             <small>小時</small>
           </div>
@@ -23,7 +23,7 @@
       <div class="col-6 col-md-3">
         <div class="data">
           <p>收集番茄</p>
-          <div class="">
+          <div>
             <span class="tomato-num">{{ finish_tictac }}</span>
             <small>個</small>
           </div>

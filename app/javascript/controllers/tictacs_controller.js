@@ -78,7 +78,7 @@ export default class extends Controller {
         if (secondsLeft <= 0) {
           clearInterval(setCounter)
           //===========================================提示聲音(工作結束)
-          that.stopbtnTarget.removeEventListener('click',stop)
+          that.stopbtnTarget.removeEventListener('click', stop)
           that.show_time_leftTarget.classList.remove("start")
           that.show_time_leftTarget.classList.add("relax")
           resolve("timeup")
@@ -88,7 +88,7 @@ export default class extends Controller {
       //中斷事件
       that.stopbtnTarget.addEventListener('click', stop)
 
-      function stop () {
+      function stop() {
         return new Promise(function(yes, no) {
           clearInterval(setCounter);
           const stopTime = Date.now()
@@ -109,7 +109,7 @@ export default class extends Controller {
             } else {
               clearInterval(setCounter);
               that.displayTimeLeft(seconds)
-              that.stopbtnTarget.removeEventListener('click',stop)
+              that.stopbtnTarget.removeEventListener('click', stop)
               that.startbtnTarget.classList.remove("d-none")
               that.stopbtnTarget.classList.add("d-none")
               that.show_time_leftTarget.classList.remove("start")
@@ -173,7 +173,7 @@ export default class extends Controller {
       
       that.stopbtnTarget.addEventListener('click', stop)
 
-      function stop () {
+      function stop() {
         return new Promise(function(yes, no) {
           clearInterval(setCounter)
           that.displayTimeLeft(that.startbtnTarget.dataset.time)
@@ -228,7 +228,7 @@ export default class extends Controller {
   }
 
   connect(){
-    this.clicked = false
+    // this.clicked = false
     let relax_num = 0
 
     //每4次休息一次長休息

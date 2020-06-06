@@ -18,5 +18,8 @@ class ChartsController < ApplicationController
       tag_arr << tag
     end
     @tags = tag_arr.uniq
+
+    @projects = current_user.projects
+
   end
 end

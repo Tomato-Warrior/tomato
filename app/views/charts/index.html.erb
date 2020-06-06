@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="display_data d-flex flex-wrap chartbg my-4 border">
+  <div class="display_data d-flex flex-wrap my-4 border shadow bg-white rounded">
     <h1 class="col-12 p-2 my-2 text-center">Dashboard</h1>
 
     <div class="day_data col-4 p-2 d-flex justify-content-center">
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <div class="chartbg mb-3 p-3 pt-5 justify-content-center d-flex border">
+  <div class="mb-5 p-3 pt-5 justify-content-center d-flex border shadow bg-white rounded">
     <div id="heatmap" class="overflow-auto"></div>
   </div>
   
@@ -43,19 +43,19 @@
     </div>
   </nav>
 
-  <div class="mb-3 tab-content border-right border-left border-bottom" id="nav-tabContent">
-    <div class="tab-pane fade show active chartbg p-4" id="nav-day" role="tabpanel" aria-labelledby="nav-day-tab">
+  <div class="mb-5 tab-content border-right border-left border-bottom shadow bg-white rounded" id="nav-tabContent">
+    <div class="tab-pane fade show active p-4" id="nav-day" role="tabpanel" aria-labelledby="nav-day-tab">
       <%= line_chart @daily_tictac %>
     </div>
-    <div class="tab-pane fade chartbg p-4" id="nav-week" role="tabpanel" aria-labelledby="nav-week-tab">
+    <div class="tab-pane fade p-4" id="nav-week" role="tabpanel" aria-labelledby="nav-week-tab">
       <%= line_chart @weekly_tictac %>
     </div>
-    <div class="tab-pane fade chartbg p-4" id="nav-month" role="tabpanel" aria-labelledby="nav-month-tab">
+    <div class="tab-pane fade p-4" id="nav-month" role="tabpanel" aria-labelledby="nav-month-tab">
       <%= line_chart @monthly_tictac %>
     </div>
   </div>
 
-  <div class="mb-3 chartbg p-4 border">
+  <div class="mb-5 p-4 border shadow bg-white rounded">
     <div class="btn-group">
       <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
         選擇一個專案 <span class="caret"></span>
@@ -73,14 +73,28 @@
   
     <div class="tab-content">
       <div class="tab-pane active">
-        <h1 class="text-center"><%= @projects.first.title %></h1>
+        <h1 class="text-center mb-3"><%= @projects.first.title %></h1>
         <% @first_finished = 0 %>
         <% @first_cancelled = 0 %>
         <% @projects.first.tasks.each do |task| %>
-          <% @first_finished += task.tictacs.finished.count %>
+          <% @first_finished += task.tictacs.finished.count %>        
           <% @first_cancelled += task.tictacs.cancelled.count %>
         <% end %>
-        <%= pie_chart [["完成的番茄", @first_finished], ["取消的番茄", @first_cancelled]] %>
+        <div class="d-flex mr-2">
+          <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
+            <div class="col-6">
+              <img src='/finish_tictac.png' class='big_tictac col-12'>
+              <img src='/cancel_tictac.png' class='big_tictac col-12'>
+            </div>
+            <div class="tictac_num col-6">
+              <div class="py-2"><%= @first_finished %></div>
+              <div class="py-2"><%= @first_cancelled %></div>
+            </div>
+          </div>
+          <div class="col-6 d-flex p-3 shadow bg-white rounded">
+            <%= pie_chart [["完成的番茄", @first_finished], ["取消的番茄", @first_cancelled]] %>
+          </div>
+        </div>
       </div>
       <% @projects.each do |project| %>
         <% @finished = 0 %>
@@ -90,14 +104,28 @@
           <% @cancelled += task.tictacs.cancelled.count %>
         <% end %>
         <div id="<%= "project-chart-#{project.id}" %>" class="tab-pane">
-          <h1 class="text-center"><%= project.title %></h1>
-          <%= pie_chart [["完成的番茄", @finished], ["取消的番茄", @cancelled]] %>
+          <h1 class="text-center mb-3"><%= project.title %></h1>
+          <div class="d-flex mr-2">
+            <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
+              <div class="col-6">
+                <img src='/finish_tictac.png' class='big_tictac col-12'>
+                <img src='/cancel_tictac.png' class='big_tictac col-12'>
+              </div>
+              <div class="tictac_num col-6">
+                <div class="py-2"><%= @finished %></div>
+                <div class="py-2"><%= @cancelled %></div>
+              </div>
+            </div>
+            <div class="col-6 d-flex p-3 shadow bg-white rounded">
+              <%= pie_chart [["完成的番茄", @finished], ["取消的番茄", @cancelled]] %>
+            </div>
+          </div>
         </div>
       <% end %>
     </div>
   </div>
 
-  <div class="mb-3 chartbg p-4 border">
+  <div class="mb-5 p-4 border shadow bg-white rounded">
     <div class="btn-group">
       <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
         選擇一項標籤 <span class="caret"></span>
@@ -131,7 +159,7 @@
     </div>
   </div>
 
-  <div class="mb-3 chartbg p-4 border">
+  <div class="mb-5 p-4 border shadow bg-white rounded">
     <div class="btn-group">
       <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
         選擇一項任務 <span class="caret"></span>

@@ -15,6 +15,9 @@ class User < ApplicationRecord
   # callback
   after_create :default_project_create
 
+  # time_setting
+  enum time_setting: { twentyfive: 0, twenty: 1, fifteen: 2, ten: 3, five: 4 }
+
   def self.create_from_provider_data(provider_data)
     where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do |user|
       user.email = provider_data.info.email

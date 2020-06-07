@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_054811) do
+ActiveRecord::Schema.define(version: 2020_06_07_143546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_054811) do
     t.string "uid"
     t.string "trello_token"
     t.string "auth_token"
+    t.integer "time_setting", default: 0
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

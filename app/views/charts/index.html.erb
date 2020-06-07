@@ -176,9 +176,11 @@
     </div>
   
     <div class="tab-content">
-      <div class="tab-pane active">
-        <h1 class="text-center"><%= @tasks.first.title %></h1>
-        <%= column_chart @tasks.first.tictacs.finished.group_by_day(:end_at).count %>
+      <div id="Home" class="tab-pane active">
+        <% if @tasks.any? %>
+          <h1 class="text-center"><%= @tasks.first.title %></h1>
+          <%= column_chart @tasks.first.tictacs.finished.group_by_day(:end_at).count %>
+        <% end %>
       </div>
       <% @tasks.each do |task| %>
         <div id="<%= "task-chart-#{task.id}" %>" class="tab-pane">

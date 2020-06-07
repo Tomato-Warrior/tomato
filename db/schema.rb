@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_06_173913) do
+ActiveRecord::Schema.define(version: 2020_06_07_075507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_06_06_173913) do
     t.string "cover"
     t.datetime "deleted_at"
     t.string "webhook_id"
+    t.string "trello_import_method"
     t.index ["deleted_at"], name: "index_projects_on_deleted_at"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end

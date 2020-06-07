@@ -82,7 +82,7 @@ class TrelloapiController < ApplicationController
     name_index = boards_id.index($board_id)
     @param_board_name = boards_name[name_index] #拿到board name
     #create project and tasks
-    import_data = import_trello_board(@param_board_name, @tasks_attr_data)
+    import_data = import_trello_board(@param_board_name, "import_all_card", @tasks_attr_data)
     all_cards = GetCards.new.get_cards($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     all_cards = JSON.parse(all_cards)
     list_ids = param_card_ids.flatten.map{|card| GetCards.new.get_card_by_id(card, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
@@ -114,7 +114,7 @@ class TrelloapiController < ApplicationController
     board_name = board_name.values_at("name").join
     
     generate_tasks_attributes(assigned_cards_names, @param_list_names.count) 
-    import_data = import_trello_board(board_name, @tasks_attr_data) 
+    import_data = import_trello_board(board_name, "import_assign_card", @tasks_attr_data) 
     create_trello_info(import_data, assigned_cards_ids, assigned_cards_list_ids,$board_id, current_user.id)      
     response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     webhook_id = JSON.parse(response).values_at("id")[0]
@@ -137,8 +137,8 @@ class TrelloapiController < ApplicationController
     return @tasks_attr_data
   end
 
-  def import_trello_board(board_name, tasks_attr_data)
-    current_user.projects.create(title: board_name,
+  def import_trello_board(board_name, import_way, tasks_attr_data)
+    current_user.projects.create(title: board_name, trello_import_method: import_way,
                                   tasks_attributes: tasks_attr_data)
   end  
 

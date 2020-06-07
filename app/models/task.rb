@@ -6,7 +6,7 @@ class Task < ApplicationRecord
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
   has_many :tictacs
-  has_one :trello_info
+  has_one :trello_info, dependent: :destroy
   belongs_to :project
   belongs_to :user
   #validates

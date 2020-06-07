@@ -48,4 +48,17 @@ $(window).on('turbolinks:load', function(){
     }
   });
   }
+
+  /* 左側欄 nav 收合 */ 
+  window.addEventListener("resize", function(){
+    if(window.innerWidth <= 991){
+      document.querySelector('#collapseNav').classList.remove('show');
+    }else{
+      document.querySelector('#collapseNav').classList.add('show');
+    }
+  });
+
+  /* modal 新增任務 */
+  $('#myModal').modal('toggle')
+
 });

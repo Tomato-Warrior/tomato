@@ -4,7 +4,7 @@
     <% end %>
   </div>
 
-<section class="left-nav">
+<section class="left-nav collapse show" id="collapseNav">
   <div class="project_group">
     <div class="todo-container">
 
@@ -31,13 +31,15 @@
   <div class="project-container">
 
       <% @projects.order(id: :desc).each do |project| %>
-        <div class="d-flex align-items-center mx-4 py-1"> 
-          <div class="mx-1" id="project_cover" style="background-color:<%= project.cover %>">
+        <div class="d-flex align-items-center mx-4 py-1 justify-content-between"> 
+          <div class="d-flex align-items-center">
+            <div class="mx-1" id="project_cover" style="background-color:<%= project.cover %>">
+            </div>
+            <div class="project_name">
+              <%= link_to project.title, project_path(project) %>
+            </div>
           </div>
-          <div class="project_name">
-            <%= link_to project.title, project_path(project) %>
-          </div>
-          <div class="btn-group">
+          <div class="btn-group align-items-center">
             <p class="pr-2 drop-btn btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               ...
             </p>
@@ -49,10 +51,10 @@
                 <i class="fas fa-trash-alt"></i><span class="pl-3">刪除</span>
               <% end %>
             </div>
-          </div>
-          <div class="d-flex">
-            <small class="project_time"><%= expect_time(project) %>h</small>
-            <small class="project_time pl-2"><%= project.tasks.doing.count %></small>
+            <div class="d-flex">
+              <small class="project_time"><%= expect_time(project) %>h</small>
+              <small class="project_time pl-2"><%= project.tasks.doing.count %></small>
+            </div>
           </div>
         </div>               
       <% end %>
@@ -96,7 +98,4 @@
   </div>
   </div>
 
-<script>
-  $('#myModal').modal('toggle')
-</script>
 

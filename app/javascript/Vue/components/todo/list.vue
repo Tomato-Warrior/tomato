@@ -22,16 +22,12 @@
     </div>
     <div class="info-container">
 
-      <!-- <div class="d-flex align-items-center" data-controller="trelloapi">
-         <select :name="`${task.id}`" :id="`${task.trello_info.card_id}`" :data-action="(change->trelloapi#change_list)" data-target="trelloapi.change_list">
+      <!-- <div class="d-flex align-items-center">
+         <select :name="`${task.id}`" :id="`${task.trello_info.card_id}`" @change="change_list">
            <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
          </select>
       </div> -->
   
-  
-      <div class="d-flex align-items-center text-right tag-icon ml-4">
-        <TaskTag v-for="tag in task.tags" :tag="tag" :key="tag" />
-      </div>
     </div>
     <div class="d-flex align-items-center ml-auto delete-icon">
       <a :href="`/projects/${task.project_id}/tasks/${task.id}/edit`" class="mx-1">

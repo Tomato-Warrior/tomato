@@ -73,6 +73,10 @@
     background-color: $mainRed;
     height: calc(100vh - 60px);
     position: sticky;
+
+    .drop-btn{
+
+    }
   
     a{
       color: $subBackground;
@@ -87,6 +91,9 @@
   
     .project_time{
       color: $subBackground;
+      width: 20px;
+      margin: 0px 3px;
+      text-align: right;
     }
 
     .dropdown-menu{
@@ -132,6 +139,11 @@
     }
   }
 
+  button.btn.project-btn{
+    display: none;
+    color: $normalFontColor;
+  }
+
 // left-nav rwd
   @media screen and (max-width:991px){
     .row{
@@ -144,11 +156,32 @@
   }
   .project_group{
     height: auto;
+    justify-content: center;
     .project-container{
     height: auto;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 20px;
     }
+    .add_project{
+    position: relative;
   }
+  .project-list{
+    text-align: center;
+  }
+  .todo-container{
+    margin: auto;
+    width: 70%;
+  }
+  }
+  button.btn.project-btn{
+    display: block;
+    padding: 0 10px 0 10px;
+    margin-left: auto;
+  }
+  
  }
+
 
   @media screen and (max-width:767px){
 

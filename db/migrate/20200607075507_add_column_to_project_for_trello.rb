@@ -3,3 +3,5 @@ class AddColumnToProjectForTrello < ActiveRecord::Migration[6.0]
     add_column :projects, :trello_import_method, :string
   end
 end
+
+

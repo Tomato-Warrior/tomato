@@ -23,11 +23,11 @@
     <div class="info-container">
 
       <!-- <div class="d-flex align-items-center">
-         <select :name="`${task.id}`" :id="`${task.trello_info.card_id}`" @change="change_list">
+         <select :name="`${task.id}`" :id="`${task.trello_info.card_id}`" @change="trello_list">
            <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
          </select>
-      </div> -->
-  
+      </div>
+   -->
     </div>
     <div class="d-flex align-items-center ml-auto delete-icon">
       <a :href="`/projects/${task.project_id}/tasks/${task.id}/edit`" class="mx-1">
@@ -59,7 +59,7 @@ export default {
     markComleted: function(evt) {
       evt.preventDefault();
       this.completeTask(this.$el.dataset.taskId)
-    }
+    },
   },
   components: {
     TaskTag

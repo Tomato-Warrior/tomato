@@ -50,13 +50,16 @@ $(window).on('turbolinks:load', function(){
   }
 
   /* 左側欄 nav 收合 */ 
-  window.addEventListener("resize", function(){
+  const resizeEvent = function() {
     if(window.innerWidth <= 991){
       document.querySelector('#collapseNav').classList.remove('show');
     }else{
       document.querySelector('#collapseNav').classList.add('show');
     }
-  });
+  }
+  window.addEventListener("resize", resizeEvent);
+  // 讓監聽事件在一開始就觸發
+  resizeEvent();
 
   /* modal 新增任務 */
   $('#myModal').modal('toggle')

@@ -182,7 +182,7 @@ h2.project-title{
 }
 
 .delete-icon{
-  width: 80px;
+  width: 40px;
 }
 
 .tictac-icon{
@@ -225,6 +225,21 @@ h2.project-title{
 }
 
 @media screen and (min-width:768px){
+
+.dropdown-menu{
+  transform: translate3d(-160px, 0px, 0px)!important;
+}
+
+.btn-self{
+  font-size: 2rem!important;
+}
+
+.submit-radius{
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+@media screen and (max-width:767px){
   .task-project{
     display: none;
   }
@@ -276,3 +291,4 @@ textarea.form-control{
   background-color: #FFAD9F;
   transition: 0.2s;
 }
+

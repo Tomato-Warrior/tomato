@@ -92,8 +92,8 @@ ActiveRecord::Schema.define(version: 2020_06_01_054811) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider"
     t.string "uid"
-    t.string "auth_token"
     t.string "trello_token"
+    t.string "auth_token"
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

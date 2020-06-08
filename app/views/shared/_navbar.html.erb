@@ -1,14 +1,16 @@
-<nav class="navbar navbar-expand-md navname">
+<nav class="navbar navbar-expand-lg navname">
     <h1 class="navbar-brand mb-0 h1"> 
       <%= link_to root_path do %>
         <span class="logo">
         </span>
       <% end %>
     </h1>
+  <button class="btn project-btn" type="button" data-toggle="collapse" data-target="#collapseNav" aria-expanded="false" aria-controls="collapseNav">
+    專案列表
+  </button>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fas fa-bars nav-hamber"></i>
   </button>
-
   <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav align-items-center text-center">
     <% if user_signed_in? %>

@@ -27,7 +27,10 @@ $(window).on('turbolinks:load', function(){
     $('[data-toggle="tooltip"]').tooltip()
   });
 
-  var cal = new CalHeatMap();
+  var heapMapElement = document.querySelector('#heatmap');
+
+  if (heapMapElement) {
+    var cal = new CalHeatMap();
   
   cal.init({
     itemSelector: "#heatmap",
@@ -44,4 +47,21 @@ $(window).on('turbolinks:load', function(){
       max: "#EF426F"
     }
   });
+  }
+
+  /* 左側欄 nav 收合 */ 
+  const resizeEvent = function() {
+    if(window.innerWidth <= 991){
+      document.querySelector('#collapseNav').classList.remove('show');
+    }else{
+      document.querySelector('#collapseNav').classList.add('show');
+    }
+  }
+  window.addEventListener("resize", resizeEvent);
+  // 讓監聽事件在一開始就觸發
+  resizeEvent();
+
+  /* modal 新增任務 */
+  $('#myModal').modal('toggle')
+
 });

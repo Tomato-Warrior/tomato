@@ -6,13 +6,13 @@
     <div class="display d-flex justify-content-center align-items-center">
       <h1 class="display_time_left pending d-flex justify-content-center align-items-center" data-target="tictacs.show_time_left"></h1>
     </div>
-    <a class='startbtn' data-time="3" data-action="click->tictacs#start" data-target="tictacs.startbtn">
+    <a class='startbtn' data-time="1500" data-action="click->tictacs#start" data-target="tictacs.startbtn">
       <span><i class="fas fa-play startbtn"></i></span>
     <a>
     <a href='#' class="stopbtn d-none" data-action="click->tictacs#stop" data-target="tictacs.stopbtn" data-id="<%= @tictac.id %>">
       <span><i class="fas fa-stop fa-8x stopbtn"></i></span>
     </a>
-    <a href='#' class="relaxbtn d-none" data-action="click->tictacs#relax"  data-time="5" data-target="tictacs.relaxbtn" data-id="<%= @tictac.id %>">
+    <a href='#' class="relaxbtn d-none" data-action="click->tictacs#relax"  data-time="300" data-target="tictacs.relaxbtn" data-id="<%= @tictac.id %>">
       <span><i class="fas fa-play fa-8x relaxbtn"></i></span>
     </a>
     <audio src="/sounds/drop-sound.mp3" class="drop_sound" data-target="tictacs.drop_sound"></audio>

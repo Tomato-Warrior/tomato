@@ -3,31 +3,31 @@
     <h1 class="col-12 p-2 my-2 text-center">Dashboard</h1>
 
     <div class="day_data col-4 p-2 d-flex justify-content-center">
-      <h2>
-        <%= @today_tictac %>
+      <h2><%= @today_tictac %></h2>
+      <h3>
         <small class="text-muted">
           <img src='/finish_tictac.png' class='dashboard_tictac'>
-          / Day
+          /day
         </small>
-      </h2>
+      </h3>
     </div>
     <div class="week_data col-4 p-2 d-flex justify-content-center">
-      <h2>
-        <%= @week_tictac %>
+      <h2><%= @week_tictac %></h2>
+      <h3>
         <small class="text-muted">
           <img src='/finish_tictac.png' class='dashboard_tictac'>
-          / Week
+          /week
         </small>
-      </h2>
+      </h3>
     </div>
     <div class="month_data col-4 p-2 d-flex justify-content-center">
-      <h2>
-        <%= @month_tictac %>
+      <h2><%= @month_tictac %></h2>
+      <h3>
         <small class="text-muted">
           <img src='/finish_tictac.png' class='dashboard_tictac'>
-          / Month
+          /month
         </small>
-      </h2>
+      </h3>
     </div>
   </div>
 
@@ -82,13 +82,13 @@
         <% end %>
         <div class="d-flex mr-2">
           <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
-            <div class="col-6">
+            <div class="col-6 d-flex flex-wrap align-items-center">
               <img src='/finish_tictac.png' class='big_tictac col-12'>
               <img src='/cancel_tictac.png' class='big_tictac col-12'>
             </div>
-            <div class="tictac_num col-6">
-              <div class="py-2"><%= @first_finished %></div>
-              <div class="py-2"><%= @first_cancelled %></div>
+            <div class="tictac_num col-6 d-flex flex-wrap align-items-center">
+              <div class="col-12"><%= @first_finished %></div>
+              <div class="col-12"><%= @first_cancelled %></div>
             </div>
           </div>
           <div class="col-6 d-flex p-3 shadow bg-white rounded">
@@ -107,13 +107,13 @@
           <h1 class="text-center mb-3"><%= project.title %></h1>
           <div class="d-flex mr-2">
             <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
-              <div class="col-6">
+              <div class="col-6 d-flex flex-wrap align-items-center">
                 <img src='/finish_tictac.png' class='big_tictac col-12'>
                 <img src='/cancel_tictac.png' class='big_tictac col-12'>
               </div>
-              <div class="tictac_num col-6">
-                <div class="py-2"><%= @finished %></div>
-                <div class="py-2"><%= @cancelled %></div>
+              <div class="tictac_num col-6 d-flex flex-wrap align-items-center">
+                <div class="col-12"><%= @finished %></div>
+                <div class="col-12"><%= @cancelled %></div>
               </div>
             </div>
             <div class="col-6 d-flex p-3 shadow bg-white rounded">

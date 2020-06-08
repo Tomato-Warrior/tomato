@@ -14,20 +14,20 @@
   <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav align-items-center text-center">
     <% if user_signed_in? %>
-      <li class="nav-item active mr-2">
-        <i class="fas fa-cog" data-toggle="modal" data-target="#timeSetting"></i>
+      <li class="nav-item active ml-2">
+        <i class="fas fa-cog" data-toggle="modal" data-target="#timeSetting"></i><span class="nav-font pl-1">番茄鐘設定</span>
       </li>
-      <li class="nav-item active pl-2">
+      <li class="nav-item active ml-2">
         <%= link_to charts_path do %>
-          <i class="far fa-chart-bar"></i><span class="nav-font pl-1">圖表紀錄</span>
+          <i class="far fa-chart-bar"></i><span class="nav-font pl-1">統計圖紀錄</span>
         <% end %>
       </li>
-      <li class="nav-item pl-3">
-        <%= link_to list_tictacs_path, class: "pl-2" do %>
+      <li class="nav-item ml-2">
+        <%= link_to list_tictacs_path do %>
           <i class="fas fa-clipboard-list"></i><span class="nav-font pl-1">番茄鐘列表</span>
         <% end %>
       </li>
-      <li class="nav-item pl-2">
+      <li class="nav-item ml-2">
         <div class="dropdown">
           <button class="btn  dropdown-toggle nav-href" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= current_user.email %>

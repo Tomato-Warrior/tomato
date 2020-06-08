@@ -18,9 +18,15 @@
 .project-task-list{
   background-color: #fff;
   border-radius: 10px;
-  height: 45px;
+  height: 53px;
   box-shadow: 3px 5px 10px -8px rgba(217,132,132,0.48);
   margin-bottom: 12px;
+  position: relative;
+}
+.tictac_icon{
+  position: absolute;
+  bottom: 5px;
+  opacity: 80%;
 }
 .project-title{
   text-align: left;
@@ -47,12 +53,19 @@
 }
 
 .btn-submit{
-  padding: 0 60px 0 60px;
+  // padding: 0 60px 0 60px;
   background-color: $mainRed;
   border-radius: 0px 10px 10px 0;
   input{
     color: #fff;
   }
+}
+input.btn{
+  padding: 0 50px 0 50px;
+}
+button.btn{
+  padding: 0 50px 0 50px;
+  color: #fff;
 }
 .input-group{
   box-shadow: 3px 5px 10px -8px rgba(217,132,132,0.48);
@@ -82,9 +95,6 @@
   line-height: 2;
   font-size: 16px;
   white-space:nowrap;
-  overflow : hidden;
-  text-overflow : ellipsis;
-  width: 180px;
 }
 .play-icon{
   line-height: 1.5;
@@ -103,7 +113,7 @@
   color: #fff;
 }
 .task_tictac{
-  max-width: 20px;
+  max-width: 18px;
 }
 .play-icon{
   color: #000;
@@ -132,7 +142,7 @@
   }
 }
 
-// task info
+// task 
 .show-data{
   background-color: #fff;
   border-radius: 10px;
@@ -146,18 +156,18 @@
     .data{
       background-color: #F0F0F0;
       border-radius: 10px;
-      padding: 5px 0px;
+      padding: 15px 0px 0px 0px;
       position: relative;
       text-align: center;
       margin-bottom: 16px;
       p{
         position: absolute;
-        top: 10px;
+        top: 7px;
         left: 15px;
         font-size: 13px;
       }
       span{
-        font-size: 40px;
+        font-size: 35px;
         color: $mainRed;
       }
     }
@@ -168,4 +178,16 @@ h2.project-title{
   .fa-list{
     color: $mainGreen;
   }
+}
+
+.font-container{
+  overflow : hidden;
+  text-overflow : ellipsis;
+  width: 330px;
+}
+
+@media screen and (max-width:767px){
+ .font-container{
+     width: 200px;
+ }
 }

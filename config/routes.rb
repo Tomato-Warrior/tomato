@@ -36,12 +36,24 @@ Rails.application.routes.draw do
   #API
   namespace :api do
     namespace :v1 do
+      
       # google extension
       post 'login' => 'authentication#login'
       post 'logout' => 'authentication#logout'
       post 'gettasks' => 'tasks#gettasks'
       post 'startwork' => 'tasks#startwork'
+      post 'finishwork' => 'tasks#finishwork'
+      post 'cancelwork' => 'tasks#cancelwork'
 
+      resources :projects, only: [] do
+        resources :tasks, only: [:index, :create, :update]
+      end
+      resources :tasks, only: [:destroy] do 
+        member do
+          patch :toggle_status
+        end
+      end
+      
       resources :tictacs, only: [] do
         collection do
           post :start

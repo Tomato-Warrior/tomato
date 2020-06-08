@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   
   def update
     if @task.update(task_params)
-      redirect_to project_path(@task.project_id)
+      redirect_to root_path
     else
       render :edit
     end
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy   
-    redirect_to project_path(@task.project)
+    redirect_to root_path
   end
 
   # 首頁表單post
@@ -57,10 +57,10 @@ class TasksController < ApplicationController
   def toggle_status
     if @task.doing?
       @task.done!
-      redirect_to project_path(@task.project)
+      redirect_to root_path
     else
       @task.doing!
-      redirect_to project_path(@task.project)
+      redirect_to root_path
     end
   end
 

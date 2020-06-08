@@ -14,11 +14,16 @@ const store = new Vuex.Store({
     finish_tictac: 0, 
     projectId: 0,
     loaded: false,
+    tasks: []
   },
 
   mutations: {
     ADD_TASK(state, resp){
       state.doingTasks.unshift(resp.task);
+    },
+
+    UPDATE_TASK(state, resp){
+      let taskId = resp.task.id
     },
 
     TOGGLE_COMPLETE(state, resp) {
@@ -49,6 +54,7 @@ const store = new Vuex.Store({
     SET_TASKS(state, project){
       state.doingTasks = project.doingTasks;
       state.doneTasks = project.doneTasks;
+      state.tasks = project.tasks;
       state.projectTitle = project.title;
       state.color = project.color;
       state.expect_time = project.expect_time;
@@ -70,6 +76,7 @@ const store = new Vuex.Store({
 
   actions: {
     addTask({ commit }, {projectId, content}){
+      
       const data = new FormData();
       data.append('task[title]', content);
       data.append('task[project_id]', projectId);
@@ -86,6 +93,23 @@ const store = new Vuex.Store({
           console.log(err);
         } 
       });
+    },
+
+    updatedTask({ commit }, taskId){
+      console.log('aaa');
+      
+      Rails.ajax({
+        url: `/api/v1/tasks/${taskId}`,
+        type: 'PATCH',
+        dataType: 'JSON',
+        success: resp => {
+          commit('UPDATE_TASK', resp)
+        },
+        error: err => {
+          console.log(err);          
+        }
+      })
+
     },
 
     completeTask({ commit }, taskId) {

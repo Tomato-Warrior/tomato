@@ -45,11 +45,13 @@ Rails.application.routes.draw do
       post 'cancelwork' => 'tasks#cancelwork'
 
       resources :projects, only: [] do
-        resources :tasks, only: [:index, :create, :update]
+        resources :tasks, only: [:index, :create]
       end
       resources :tasks, only: [:destroy] do 
         member do
-          patch :toggle_status      
+          patch :update
+          patch :toggle_status
+
         end
       end
 

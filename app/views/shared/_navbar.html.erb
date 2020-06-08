@@ -15,7 +15,9 @@
     <ul class="navbar-nav align-items-center text-center">
     <% if user_signed_in? %>
       <li class="nav-item active ml-2">
-        <i class="fas fa-cog" data-toggle="modal" data-target="#timeSetting"></i><span class="nav-font pl-1">番茄鐘設定</span>
+        <div class="d-flex time-setting align-items-center" data-toggle="modal" data-target="#timeSetting">
+          <i class="fas fa-cog time-setting"></i><span class="nav-font pl-1 time-setting">番茄鐘設定</span>
+        </div>
       </li>
       <li class="nav-item active ml-2">
         <%= link_to charts_path do %>
@@ -51,27 +53,29 @@
   </div>
 </nav>
 
-<div class="modal fade" id="timeSetting" tabindex="0" role="dialog" aria-labelledby="forTimeSetting" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document" >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="forTimeSetting">編輯番茄工作時間</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <%= form_for @user, url: time_setting_api_v1_user_path(@user.id), method: 'PATCH' do |f| %>
-          <div class="form-group">        
-            <%= f.label :time_setting %>
-            <%= f.select :time_setting, User.time_settings.keys, {}%>
-          </div>
-          <%= f.submit "儲存", class: "badge-pill p-2 path-color" %>
-        <% end %>
+<% if user_signed_in? %>
+  <div class="modal fade" id="timeSetting" tabindex="0" role="dialog" aria-labelledby="forTimeSetting" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="forTimeSetting">編輯番茄工作時間</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= form_for @user, url: time_setting_api_v1_user_path(@user.id), method: 'PATCH' do |f| %>
+            <div class="form-group">        
+              <%= f.label :time_setting %>
+              <%= f.select :time_setting, User.time_settings.keys, {}%>
+            </div>
+            <%= f.submit "儲存", class: "badge-pill p-2 path-color" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
 
 <script>
   $('#modal').modal('toggle')

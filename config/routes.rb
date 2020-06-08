@@ -92,6 +92,7 @@ Rails.application.routes.draw do
       post :get_board
       post :import_assigned_cards
       post :change_list
+      post :get_list_data
       get :select_assigned_cards_of_list
       get :select_board
       get :select_list_cards

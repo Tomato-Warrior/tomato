@@ -8,7 +8,7 @@
     <div class="display d-flex justify-content-center align-items-center">
       <h1 class="display_time_left pending d-flex justify-content-center align-items-center" data-target="tictacs.show_time_left"></h1>
     </div>
-    <a class='startbtn' data-time="3" data-action="click->tictacs#start" data-target="tictacs.startbtn">
+    <a class='startbtn' data-time="<%= @time_setting %>" data-action="click->tictacs#start" data-target="tictacs.startbtn">
       <span><i class="fas fa-play startbtn"></i></span>
     <a>
     <a href='#' class="stopbtn d-none" data-action="click->tictacs#stop" data-target="tictacs.stopbtn" data-id="<%= @tictac.id %>">
@@ -39,29 +39,6 @@
           <i class="far fa-chart-bar fa-3x"></i>
         <% end %>
       </div>
-      <div class="text-center my-2">
-        <i class="fas fa-cog" data-toggle="modal" data-target="#timeSetting"></i>
-      </div>
     </div>
   </div>
 </div>
-
-<div class="modal fade" id="timeSetting" tabindex="0" role="dialog" aria-labelledby="forTimeSetting" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document" >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="forTimeSetting">編輯番茄工作時間</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h1>Hello</h1>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-$('#modal').modal('toggle')
-</script>

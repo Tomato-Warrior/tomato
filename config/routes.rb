@@ -64,8 +64,15 @@ Rails.application.routes.draw do
           post :finish
         end
       end
+
+      resources :user, onli: [] do
+        member do
+          patch :time_setting
+        end
+      end
     end
   end
+  
 
   #homepage
   resources :home, only: [:index] do

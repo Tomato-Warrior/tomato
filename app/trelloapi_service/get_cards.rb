@@ -11,7 +11,7 @@ class GetCards
 
   def get_card_by_id(card_id, api_key, token)
     begin
-      RestClient.get "api.trello.com/1/cards/#{card_id}?key=#{api_key}&token=#{token}"
+      RestClient.get "api.trello.com/1/cards/#{card_id}/list?key=#{api_key}&token=#{token}"
     rescue RestClient::ExceptionWithResponse => e
       e.response
     end

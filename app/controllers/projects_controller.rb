@@ -36,6 +36,7 @@ class ProjectsController < ApplicationController
     task_ids = @project.tasks.ids
     @tictac_count = Tictac.where(task_id: task_ids).finished.count
     @project_expect_time = project_expect_time
+    
   end
 
   def destroy

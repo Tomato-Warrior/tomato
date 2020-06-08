@@ -1,5 +1,5 @@
 class Api::V1::TasksController < ApiController
-  before_action :authenticate_user_token, only: [":gettasks, :startwork"]
+  before_action :authenticate_user_token, only: [:gettasks, :startwork, :finishwork, :cancelwork]
   
   def gettasks
     tasks = current_user.tasks

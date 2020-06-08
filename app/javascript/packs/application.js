@@ -26,6 +26,7 @@ import 'tempusdominus-bootstrap-4';
 import 'tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css';
 import "select2/dist/css/select2.min.css";
 import "select2/dist/js/select2.full.min.js";
+// import "vodal/dist/index.js"
 
 import 'Vue/init.js'
 // import { TaskInput } from 'Vue/components/todo';

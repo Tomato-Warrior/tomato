@@ -79,7 +79,7 @@
             </div>
             <% if task.trello_info %>
               <div class="d-flex align-items-center" data-controller="trelloapi">
-                <%= link_to  task.trello_info.list_id,'#'%>
+                <a href="#" class="call_select" id=<%=task.id%> data-action = "trelloapi#call_select_list" data-target="trelloapi.call_select_list"><%= task.trello_info.list_name %></a>
                 <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
                   <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
                 </select>

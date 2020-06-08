@@ -21,13 +21,13 @@
       </div>
     </div>
     <div class="info-container">
+      <div class="d-flex align-items-center text-right tag-icon ml-4">	
+          <TaskTag v-for="tag in task.tags" :tag="tag" :key="tag" />	
+      </div>
     </div>
     <div class="d-flex align-items-center ml-auto delete-icon">
       <a :href="`/projects/${task.project_id}/tasks/${task.id}/edit`" class="mx-1">
         <i class="fas fa-pencil-alt"></i>
-      </a>
-      <a href="#" @click="confirmToRemoveTask" class="mx-4">
-        <i class="fas fa-trash-alt"></i>
       </a>
     </div>
   </div>

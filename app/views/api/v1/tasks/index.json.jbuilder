@@ -14,10 +14,12 @@ json.project do
       json.finish_tictac task.tictacs.finished.count
       json.cancel_tictac task.tictacs.cancelled.count
       json.status task.status
+      json.project_id task.project_id
       if task.trello_info
         json.trello_card task.trello_info.card_id
         json.trello_list task.trello_info.list_id
         json.trello_token current_user.trello_token
+        json.trell0_board task.trello_info.board_id
       end
     end
   end
@@ -31,6 +33,13 @@ json.project do
       json.finish_tictac task.tictacs.finished.count
       json.cancel_tictac task.tictacs.cancelled.count
       json.status task.status
+      json.project_id task.project_id
+      if task.trello_info
+        json.trello_card task.trello_info.card_id
+        json.trello_list task.trello_info.list_id
+        json.trello_token current_user.trello_token
+        json.trell0_board task.trello_info.board_id
+      end
     end
   end
 end

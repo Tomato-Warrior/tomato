@@ -2,7 +2,9 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
+
   static targets = ["select_board", "select_card", "select_list", "change_list", "import_method", "call_options"]
+
   trello_token = ""
   api_key = "f91cef06b7d1a94754eac87835224aeb"
   

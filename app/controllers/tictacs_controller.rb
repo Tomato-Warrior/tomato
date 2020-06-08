@@ -8,6 +8,21 @@ class TictacsController < ApplicationController
 
   def show
     @task = current_user.tasks.find(params[:task_id])
+
+    time_setting = current_user.time_setting
+    if time_setting == "二十五分鐘"
+      @time_setting = 1500
+    elsif time_setting == "二十分鐘"
+      @time_setting = 1200
+    elsif time_setting == "十五分鐘"
+      @time_setting = 900
+    elsif time_setting == "十分鐘"
+      @time_setting = 600
+    elsif time_setting == "十秒鐘"
+      @time_setting = 10
+    else
+      @time_setting = 5
+    end
   end
 
   def update

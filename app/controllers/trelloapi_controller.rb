@@ -106,6 +106,7 @@ class TrelloapiController < ApplicationController
                       end
                     }
     assigned_cards_data = @param_list_names.map{|list_name| get_assigned_cards_data( current_user.trello_member_id, $board_id, list_name,  ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
+    byebug
     assigned_cards_names = assigned_cards_data.map{|list| list.map{|card| card.values_at("name")}.flatten}
     assigned_cards_ids = assigned_cards_data.map{|list| list.map{|card| card.values_at("id")}}.flatten
     assigned_cards_list_ids = assigned_cards_data.map{|list| list.map{|card| card.values_at("idList")}}.flatten

@@ -8,7 +8,7 @@
     <div class="display d-flex justify-content-center align-items-center">
       <h1 class="display_time_left pending d-flex justify-content-center align-items-center" data-target="tictacs.show_time_left"></h1>
     </div>
-    <a class='startbtn' data-time="3" data-action="click->tictacs#start" data-target="tictacs.startbtn">
+    <a class='startbtn' data-time="<%= @time_setting %>" data-action="click->tictacs#start" data-target="tictacs.startbtn">
       <span><i class="fas fa-play startbtn"></i></span>
     <a>
     <a href='#' class="stopbtn d-none" data-action="click->tictacs#stop" data-target="tictacs.stopbtn" data-id="<%= @tictac.id %>">
@@ -21,9 +21,9 @@
     <audio src="/sounds/end-sound.mp3" class="finish_sound" data-target="tictacs.finish_sound"></audio>
   </div>
   <div class="btn-group dropleft right_nav">
-    <button type="button" class="btn dropdown-toggle btn-self" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="btn dropdown-toggle btn-self p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     </button>
-    <div class="dropdown-menu">
+    <div class="dropdown-menu-self dropdown-menu">
       <div class="text-center my-2">
         <%= link_to root_path  do %>
           <i class="fas fa-home fa-3x"></i>

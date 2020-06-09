@@ -3,7 +3,7 @@ class Webhook
     begin
       RestClient::Request.execute(method: :post, url: "api.trello.com/1/tokens/#{token}/webhooks/?key=#{api_key}",
                                   payload: {
-                                  callbackURL: 'http://6cd56975cdb9.ngrok.io/webhooks/receive',
+                                  callbackURL: 'http://ce4a9be33081.ngrok.io/webhooks/receive',
                                   idModel: board_id,
                                   description: "My webhook"},
                                   headers:{ :content_type => 'application/json'}) do |response|

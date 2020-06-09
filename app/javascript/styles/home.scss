@@ -226,3 +226,10 @@ h2.project-title{
     display: none;
   }
  }
+
+.modal, .modal-backdrop{
+  position: absolute !important;
+}
+.time-setting:hover{
+  color: $redBtnHover;
+}

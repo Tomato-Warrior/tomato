@@ -18,6 +18,8 @@ class User < ApplicationRecord
   # time_setting
   enum time_setting: { 二十五分鐘: 0, 二十分鐘: 1, 十五分鐘: 2, 十分鐘: 3, 十秒鐘: 4, 五秒鐘: 5 }
 
+  # enum time_unit: { minutes: 0, seconds: 1 }
+
   def self.create_from_provider_data(provider_data)
     where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do |user|
       user.email = provider_data.info.email

@@ -36,7 +36,8 @@
 .main-container{
     width: 100%;
     height: calc(100vh - 60px);
-    position: sticky;
+    // position: sticky;
+    position: relative;
     box-sizing: border-box;
     overflow-y: auto;
 }
@@ -188,7 +189,8 @@
    .main-container{
     width: 100%;
     height: auto;
-    position: static;
+    // position: static;
+    position: relative;
     box-sizing: border-box;
     overflow-y: auto;
   }

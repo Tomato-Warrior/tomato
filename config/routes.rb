@@ -65,7 +65,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :user, onli: [] do
+      resources :user, only: [] do
         member do
           patch :time_setting
         end

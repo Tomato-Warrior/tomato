@@ -107,9 +107,9 @@ const store = new Vuex.Store({
         url: `/api/v1/tasks/${taskId}`,
         type: 'PATCH',
         dataType: 'JSON',
+        data,
         success: resp => {
-          console.log(resp);
-          
+
           commit('UPDATE_TASK', resp)
         },
         error: err => {

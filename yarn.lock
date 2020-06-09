@@ -3999,7 +3999,11 @@ jest-worker@^25.4.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
+<<<<<<< HEAD
 jquery@>=1.7, jquery@^3.0, jquery@^3.5.1:
+=======
+jquery@^3.0, jquery@^3.3.1, jquery@^3.5.1:
+>>>>>>> tag with select2
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
   integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
@@ -6465,25 +6469,7 @@ select-hose@^2.0.0:
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
   integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
 
-select2-component@^5.9.0:
-  version "5.9.0"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.9.0.tgz#e62837db2a15c2bbd12fb93fb5454bb9280ded61"
-  integrity sha512-W+RmH+aTkYdF+ltc1J08EzAEiHEVAOLc2HRtZesAv9SXMkegKE0sNdTzxzWH7fPUJuNh2wJrTLBHBysH3Zqp8g==
-  dependencies:
-    "@types/node" "*"
-    tslib "1"
-
-select2-vue-component@^5.10.0:
-  version "5.10.0"
-  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-5.10.0.tgz#e67e093a90385e38be70224a89e248b148bb0909"
-  integrity sha512-Ixbwq/WPcz2G3gTbZybQ7m1BYFGf98hzlwPfDiJz1InvWvCZYrmds1uw1eqSJFrb7sORAxfKiQouC+pgNWSeRw==
-  dependencies:
-    "@types/node" "*"
-    select2-component "^5.9.0"
-    vue "2"
-    vue-class-component "7"
-
-select2@^4.0.13:
+select2@^4.0.13, select2@^4.0.6-rc.1:
   version "4.0.13"
   resolved "https://registry.yarnpkg.com/select2/-/select2-4.0.13.tgz#0dbe377df3f96167c4c1626033e924372d8ef44d"
   integrity sha512-1JeB87s6oN/TDxQQYCvS5EFoQyvV6eYMZZ0AeA4tdFDYWN3BAGZ8npr17UBFddU0lgAt3H0yjX3X6/ekOj1yjw==
@@ -7246,11 +7232,6 @@ ts-pnp@^1.1.6:
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
 
-tslib@1:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
-  integrity sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
-
 tslib@^1.9.0:
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.11.1.tgz#eb15d128827fbee2841549e171f45ed338ac7e35"
@@ -7443,6 +7424,14 @@ uuid@^3.3.2, uuid@^3.4.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
+v-select2-multiple-component@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/v-select2-multiple-component/-/v-select2-multiple-component-0.1.1.tgz#da819a0ecce93969920c34a2ac3c7a0f2780799f"
+  integrity sha512-IGfrv91ZckClQrefsC32mDF7Jrw8k1/Ue2mK+L0GNtI7sYTtQwY0FklpGPte3KZiPfCUcJ/Sgye078lQiN8DMw==
+  dependencies:
+    jquery "^3.3.1"
+    select2 "^4.0.6-rc.1"
+
 v8-compile-cache@2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.0.3.tgz#00f7494d2ae2b688cfe2899df6ed2c54bef91dbe"
@@ -7484,11 +7473,6 @@ vodal@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/vodal/-/vodal-2.4.0.tgz#51666f19adc54a57248e4de1fcd8d0e80a96dd66"
   integrity sha512-oUrSy80Y3uE8VSSFv0fSHd7B3BZQzynvf1ZQZf3CFl8bwjDzO5UwjUFj/rEEGMSHXfk7fRjbj+NdHVsZObUkPA==
-
-vue-class-component@7:
-  version "7.2.3"
-  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.2.3.tgz#a5b1abd53513a72ad51098752e2dedd499807cca"
-  integrity sha512-oEqYpXKaFN+TaXU+mRLEx8dX0ah85aAJEe61mpdoUrq0Bhe/6sWhyZX1JjMQLhVsHAkncyhedhmCdDVSasUtDw==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
@@ -7539,7 +7523,7 @@ vue-turbolinks@^2.1.0:
   dependencies:
     vue "^2.2.4"
 
-vue@2, vue@^2.2.4, vue@^2.6.11:
+vue@^2.2.4, vue@^2.6.11:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==

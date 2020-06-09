@@ -102,7 +102,6 @@ class TrelloapiController < ApplicationController
     list_ids = list_data.map{|list| JSON.parse(list).values_at("id")}.flatten
     list_names = list_data.map{|list| JSON.parse(list).values_at("name")}.flatten
     create_trello_info(import_data, param_card_ids, list_ids, list_names, $board_id, current_user.id)
-
     response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     webhook_id = JSON.parse(response).values_at("id")[0]
     import_data.update(webhook_id:webhook_id)
@@ -160,7 +159,6 @@ class TrelloapiController < ApplicationController
   def get_assigned_cards_data(member_id, board_id, list_name, api_key, token)
     @assigned_cards = JSON.parse(GetLists.new.get_assigned_cards(member_id, board_id, list_name, api_key, token)).values_at("cards").flatten
   end
-
 
   def create_trello_info(import_data, card_ids, list_ids, list_names, board_id, user_id)
     i=0

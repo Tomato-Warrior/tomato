@@ -24,7 +24,11 @@ class TrelloapiController < ApplicationController
     render json: {res: response}
     data = JSON.parse(response)
     list_name = data.values_at("name")
+<<<<<<< HEAD
     Task.find(task_id).trello_info.update(list_id: list_id, list_name: list_name)
+=======
+    #Task.find(task_id).trello_info.update(list_id: list_id, list_name: )
+>>>>>>> 2609d5ac6ca52b27d9a988b869a305d91a830858
   end
 
   def get_list_data 

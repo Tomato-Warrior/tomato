@@ -84,7 +84,7 @@ export default class extends Controller {
 
   call_select_list(e){
     e.preventDefault()
-    const submitData = {task_id: this.call_select_listTarget.id}
+    const submitData = {task_id: this.call_select_listTarget.name}
     Rails.ajax({
       url: `/trelloapi/get_list_data`,
       type: 'POST', 
@@ -95,8 +95,13 @@ export default class extends Controller {
         return true
       },
       success: resp => {
-        console.log(resp)
-        this.call_select_listTarget.innerHTML="<select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action='change->trelloapi#change_list' data-target='trelloapi.change_list'><%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %></select>"
+        let data = resp.list_data
+          this.call_select_listTarget.innerHTML=`<select name='${this.call_select_listTarget.name}' id='${this.call_select_listTarget.id}'
+                                                  data-action="change->trelloapi#change_list" data-target="trelloapi.change_list"></select>`
+          for(let i=0;i<=data.length-1;i++){
+            this.change_listTarget.insertAdjacentHTML('beforeend', `<option value=${data[i][1]}>${data[i][0]}</option>`)
+          }
+          
       }, 
       error: err => {
         console.log(err);

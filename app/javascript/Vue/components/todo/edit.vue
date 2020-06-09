@@ -6,22 +6,6 @@
         <input type="text" class="form-control" v-model="task.title">
       </div>
       <div class="form-group">
-        <label>Tag</label>
-        <select class="form-control tag-select2" multiple="multiple">
-          <option v-for="project in task.project_id">
-            {{ project }}
-          </option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Tag</label>
-        <select class="form-control tag-select2" multiple="multiple">
-          <option v-for="tag in task.tags">
-            {{ tag }}
-          </option>
-        </select>
-      </div>
-      <div class="form-group">
         <label>預計番茄鐘</label>
         <input type="number" class="form-control" v-model="task.expect_tictac" min="0" >
       </div>
@@ -41,6 +25,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import Rails from '@rails/ujs';
+import Select from "select2-vue-component";
 
 export default {
   name: 'TaskEdit',
@@ -49,16 +34,15 @@ export default {
     return {
     }
   },
-  computed: {
-    ...mapState(['tasks'])
-  },
   methods: {
     ...mapActions(['updatedTask']),
 
     updateTask: function(evt) {
       evt.preventDefault();
-      // this.updatedTask(this.tasks[0].id); // state是陣列
+      this.updatedTask({ taskId: this.task.id, taskTitle: this.task.title });
+      // ,taskDate: this.task.date, expectTictac: this.task.expect_tictac, taskDesc: this.task.description
     }
   },
+  
 }
 </script>

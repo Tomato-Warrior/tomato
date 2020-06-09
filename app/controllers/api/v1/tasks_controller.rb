@@ -52,8 +52,12 @@ class Api::V1::TasksController < ApiController
 
   def update
     @task = current_user.tasks.find(params[:id])
+    if @task.update(task_params)
+      render json: { state: 'update ok', task: @task }
+    else
+      render json: { state: 'error' }
+    end
 
-    render json: { state: 'update ok', task: @task }
   end
 
   def destroy 

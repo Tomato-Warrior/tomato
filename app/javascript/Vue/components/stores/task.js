@@ -95,14 +95,21 @@ const store = new Vuex.Store({
       });
     },
 
-    updatedTask({ commit }, taskId){
-      console.log('aaa');
+    updatedTask({ commit }, {taskId, taskTitle, taskDate, expectTictac, taskDesc}){
+
+      const data = new FormData();
+      data.append('task[title]', taskTitle);
+      data.append('task[date]', taskDate);
+      data.append('task[expect_tictacs]', expectTictac);
+      data.append('task[description]', taskDesc);
       
       Rails.ajax({
         url: `/api/v1/tasks/${taskId}`,
         type: 'PATCH',
         dataType: 'JSON',
         success: resp => {
+          console.log(resp);
+          
           commit('UPDATE_TASK', resp)
         },
         error: err => {

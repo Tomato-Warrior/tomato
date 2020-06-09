@@ -24,7 +24,10 @@ class TrelloapiController < ApplicationController
     task_id = params[:task_id]
     response = UpdateCard.new.move_to_list(card_id, list_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     render json: {res: response}
-    Task.find(task_id).trello_info.update(list_id: list_id)
+    data = JSON.parse(response)
+    byebug
+    list_name = data.values_at("name")
+    Task.find(task_id).trello_info.update(list_id: list_id, list_name: list_name)
   end
 
   def get_list_data 

@@ -71,7 +71,7 @@ class TrelloapiController < ApplicationController
                     end
                   }
     @name_id_chart = Hash[lists_name.zip(lists_id)]
-    id_name_chart = Hash[list_ids.zip(lists_name)]
+    id_name_chart = Hash[lists_id.zip(lists_name)]
     @param_list_id = @param_list_names.map{|name| @name_id_chart.values_at(name)}.flatten #拿到list name的id
     param_card_names = []
     param_card_ids = []

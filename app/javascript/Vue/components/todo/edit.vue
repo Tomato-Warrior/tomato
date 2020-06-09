@@ -8,7 +8,17 @@
       <div class="form-group">
         <label>Tag</label>
         <select class="form-control tag-select2" multiple="multiple">
-        
+          <option v-for="project in task.project_id">
+            {{ project }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tag</label>
+        <select class="form-control tag-select2" multiple="multiple">
+          <option v-for="tag in task.tags">
+            {{ tag }}
+          </option>
         </select>
       </div>
       <div class="form-group">

@@ -11,7 +11,7 @@ json.project do
       json.title task.title
       json.tags task.tag_items
       json.expect_tictac task.expect_tictacs
-      json.project_id task.project_id
+      json.project_id current_user.projects.ids
       json.date task.date
       json.description task.description
       if task.trello_info

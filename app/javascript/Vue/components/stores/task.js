@@ -43,10 +43,10 @@ const store = new Vuex.Store({
 
         if (removedTask.status == 'doing'){
           removedTask.status = 'done';
-          state.expect_time = increase_time;
+          state.expect_time = ( increase_time >= 0) ? increase_time : 0;
         }else{
           removedTask.status = 'doing';
-          state.expect_time = decrease_time;
+          state.expect_time = ( decrease_time >= 0) ? decrease_time : 0;
         }  
       }
     }, 

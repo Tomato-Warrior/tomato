@@ -1,19 +1,22 @@
 <template>
   <div>
     <form action="#">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="text" class="form-control" name="" aria-describedby="emailHelp" placeholder="Enter email"  v-model="task.title">
-  
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" placeholder="Password">
-  </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" >
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
+      <div class="form-group">
+        <label>任務名稱</label>
+        <input type="text" class="form-control" v-model="task.title">
+      </div>
+      <div class="form-group">
+        <label>預計番茄鐘</label>
+        <input type="number" class="form-control" v-model="task.expect_tictac" min="0" >
+      </div>
+      <div class="form-group">
+        <label>任務筆記</label>
+        <textarea type="number" class="form-control" v-model="task.description" ></textarea>
+      </div>
+      <div class="form-group">
+        <label>任務執行日期</label>
+        <input type="date" class="form-control" v-model="task.expect_date">
+      </div>
       <input type="submit" value="Submit" @click="updateTask">
     </form> 
   </div>
@@ -28,7 +31,7 @@ export default {
   props: ['task', 'show'],
   data: function() {
     return {
-      // task: {}
+      task: [],
     }
   },
   computed: {

@@ -33,6 +33,15 @@
 
 // left_nav
 
+.main-container{
+    width: 100%;
+    height: calc(100vh - 60px);
+    // position: sticky;
+    position: relative;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
 .left-nav{
     z-index: 11;
     box-shadow: -1px 2px 22px -4px rgba(217,132,132,0.6);
@@ -65,6 +74,10 @@
     background-color: $mainRed;
     height: calc(100vh - 60px);
     position: sticky;
+
+    .drop-btn{
+
+    }
   
     a{
       color: $subBackground;
@@ -79,6 +92,9 @@
   
     .project_time{
       color: $subBackground;
+      width: 20px;
+      margin: 0px 3px;
+      text-align: right;
     }
 
     .dropdown-menu{
@@ -123,3 +139,59 @@
       margin-bottom: 8px;
     }
   }
+
+  button.btn.project-btn{
+    display: none;
+    color: $normalFontColor;
+  }
+
+// left-nav rwd
+  @media screen and (max-width:991px){
+    .row{
+      display: block;
+    }
+
+  .left-nav{
+    box-shadow: none;
+    z-index: 0;
+  }
+  .project_group{
+    height: auto;
+    justify-content: center;
+    .project-container{
+    height: auto;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 20px;
+    }
+    .add_project{
+    position: relative;
+  }
+  .project-list{
+    text-align: center;
+  }
+  .todo-container{
+    margin: auto;
+    width: 70%;
+  }
+  }
+  button.btn.project-btn{
+    display: block;
+    padding: 0 10px 0 10px;
+    margin-left: auto;
+  }
+  
+ }
+
+
+  @media screen and (max-width:767px){
+
+   .main-container{
+    width: 100%;
+    height: auto;
+    // position: static;
+    position: relative;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+ }

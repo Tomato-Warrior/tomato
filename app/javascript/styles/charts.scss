@@ -9,3 +9,21 @@
 .dashboard_tictac{
   width: 30px;
 }
+.big_tictac{
+  min-width: 200px;
+}
+.tictac_num{
+  font-size: 100px;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+@media screen and (max-width: 991px){
+  .big_tictac{
+    min-width: 100px;
+  }
+  .tictac_num{
+    font-size: 50px;
+    padding-bottom: 0.25rem;
+    padding-top: 0.25rem;
+  }
+}

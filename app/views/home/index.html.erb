@@ -1,6 +1,6 @@
 <div class="container-fluid info-contain">
     <div class="row">
-      <div class="col-5">
+      <div class="col-12 col-md-4">
         <div class="tomato-garden mt-3">
           <h3>番茄生存日記</h3>
           <div class="plant_bg">
@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-      <div class="col-7">
+      <div class="col-12 col-md-8">
         <div class="information mt-3">
           <h3>個人資訊</h3>
           <div class="info-list">
@@ -30,29 +30,37 @@
             <div class="col-6 my-2">
               <div class="data-list">
                 <p>預計時間</p>
-                <span><%= @expect_time %></span>
-                <small>小時</small>
+                <div>
+                  <span><%= @expect_time %></span>
+                  <small>小時</small>
+                </div>
               </div>
             </div>
-            <div class="col-6 my-2">
+            <div class="col-6 my-2 ">
               <div class="data-list">
                 <p>未完成任務</p>
-                <span><%= @undo_today_tasks.count %></span>
-                <small>個</small>
+                <div>
+                  <span><%= @undo_today_tasks.count %></span>
+                  <small>個</small>
+                </div>
               </div>
             </div>
             <div class="col-6 my-2">
               <div class="data-list">
                 <p>收集番茄</p>
-                <span><%= @tictacs.count %></span>
-                <small>個</small>
+                <div>
+                  <span><%= @tictacs.count %></span>
+                  <small>個</small>
+                </div>
               </div>
             </div>
             <div class="col-6 my-2">
               <div class="data-list">
                 <p>已完成任務</p>
-                <span><%= @done_today_tasks.count %></span>
-                <small>個</small>
+                <div>
+                  <span><%= @done_today_tasks.count %></span>
+                  <small>個</small>
+                </div>
               </div>
             </div>
           </div>
@@ -83,7 +91,7 @@
 <div class="project_task_container mx-3 mt-3 mb-2 pt-3">
   <div data-controller="drag" data-drag-url="/tasks/:id/drag">
     <% @undo_today_tasks.each do |task| %>
-      <div class="p-2 task-hover project-task-list d-flex flex-nowrap" data-id="<%= task.id %>">
+      <div class="px-2 task-hover project-task-list d-flex flex-nowrap" data-id="<%= task.id %>">
         <div class="d-flex align-items-center">
           <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-4 play-icon" do %>
             <i class="far fa-circle"></i>
@@ -95,42 +103,94 @@
         <div class="d-flex align-items-center text-center">
           <span class="ml-3 mr-2 task-project"><%= task.project.title %></span>
         </div>
-        <div class="d-flex align-items-center">
-          <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font mx-3" %>
-        </div>
-        <% if task.trello_info %>
-          <div class="d-flex align-items-center" data-controller="trelloapi">
-            <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
-              <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
-            </select>
+        <div class="align-items-center font-container">
+          <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font mx-3", 'data-target' => "#taskEdit", 'data-toggle' => "modal" %>
+          <div class="d-flex ml-1 tictac_icon">
+            <% if task.expect_tictacs? %> 
+              <div class="d-flex align-items-center ml-2"  title="預期時鐘：<%= task.expect_tictacs %>">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small><%= task.expect_tictacs %></small>
+              </div>
+            <% else %>
+              <div class="d-flex align-items-center ml-2" title="預期時鐘：0">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small>0</small>
+              </div>
+            <% end %>
+            <div class="d-flex align-items-center ml-2"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
+              <img src='/finish_tictac.png' class='task_tictac'>
+              <small><%= task.tictacs.finished.count %></small>
+            </div>
+            <div class="d-flex align-items-center ml-2"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
+              <img src='/cancel_tictac.png' class='task_tictac'>
+              <small><%= task.tictacs.cancelled.count %></small>
+            </div>
           </div>
-        <% end %>
-        <div class="tictac-icon d-flex ml-auto">
-          <% if task.expect_tictacs? %>
-            <div class="d-flex align-items-center ml-2"  title="預期時鐘：<%= task.expect_tictacs %>">
-              <img src='/expect_tictac.png' class='task_tictac'>
-              <small><%= task.expect_tictacs %></small>
+        </div>
+        <div class="info-container">
+          <% if task.trello_info %>
+            <div class="d-flex align-items-center" data-controller="trelloapi">
+              <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
+                <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
+              </select>
             </div>
           <% end %>
-          <div class="d-flex align-items-center ml-2"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
-            <img src='/finish_tictac.png' class='task_tictac'>
-            <small><%= task.tictacs.finished.count %></small>
-          </div>
-          <div class="d-flex align-items-center ml-2"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
-            <img src='/cancel_tictac.png' class='task_tictac'>
-            <small><%= task.tictacs.cancelled.count %></small>
-          </div>
         </div>
-        <div class="d-flex align-items-center text-right tag-icon ml-4">
-          <%= display_tag task.tag_items %>
-        </div>
-        <div class="d-flex align-items-center text-right delete-icon">
-          <%= link_to edit_project_task_path(task.project_id, task.id), class: "mx-1" do %>
+        <div class="d-flex align-items-center ml-auto delete-icon pr-5">
+          <%= link_to edit_project_task_path(task.project_id, task.id), class: "mr-1 ml-3" do %>
             <i class="fas fa-pencil-alt"></i>
           <% end %>  
           <%= link_to project_task_path(task.project_id, task.id), class: "mx-4", method: 'delete', data: {confirm: '真的要刪除喵?'} do %>
             <i class="fas fa-trash-alt"></i>
           <% end %>
+        </div>
+      </div>
+      <div class="modal fade" id="taskEdit" tabindex="0" role="dialog" aria-labelledby="forTaskEdit" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-position" role="document" >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="forTimeSetting">編輯任務</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <%= form_for @task, url: project_task_path(task.project_id, task.id), method: 'PATCH' do |f| %>
+                <div class="form-group">
+                  <%= f.label :title %>
+                  <%= f.text_field :title, class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :project %>
+                  <%= f.collection_select :project_id, current_user.projects, :id, :title, class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :expect_tictacs %>
+                  <%= f.number_field :expect_tictacs, class: 'form-control',min: 0  %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :tag_items %>
+                  <select name="task[tag_items][]" class='form-control tag-select2' multiple='multiple'>
+                    <%= options_for_select(f.object.tag_items, f.object.tag_items) %>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <%= f.label :description %>
+                  <%= f.text_area :description, class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :date %>
+                  <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                    <%= f.text_field( :date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker1"} ) %>
+                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
@@ -146,43 +206,56 @@
 <div class="collapse" id="collapseTaskDone">
   <div class="project_task_container mx-3 mt-2 mb-4 task-done">
     <% @done_today_tasks.each do |task| %>
-      <div class="p-2 task-hover project-task-list d-flex flex-nowrap" data-id="<%= task.id %>">
+      <div class="px-2 task-hover project-task-list d-flex flex-nowrap" data-id="<%= task.id %>">
         <div class="d-flex align-items-center">
           <%= link_to toggle_status_project_task_path(task.project_id, task.id), method: 'patch', class: "pl-4 play-icon" do %>
-            <i class="far fa-check-circle"></i>
+            <i class="far fa-circle"></i>
           <% end %>
-          <span class="play-icon ml-3"><i class="far fa-play-circle"></i></span>
+          <%= link_to task_tictac_path(task_id: task.id), class: "ml-3 mr-2 play-icon" do %>
+            <i class="far fa-play-circle"></i>
+          <% end %>
         </div>
         <div class="d-flex align-items-center text-center">
           <span class="ml-3 mr-2 task-project"><%= task.project.title %></span>
         </div>
-        <div class="d-flex align-items-center">
+        <div class="align-items-center font-container">
           <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font mx-3" %>
+          <div class="d-flex ml-1 tictac_icon">
+            <% if task.expect_tictacs? %>  
+              <div class="d-flex align-items-center ml-2" title="預期時鐘：<%= task.expect_tictacs %>">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small><%= task.expect_tictacs %></small>
+              </div>
+            <% else %>
+              <div class="d-flex align-items-center ml-2" title="預期時鐘：0">
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small>0</small>
+              </div>
+            <% end %>
+            <div class="d-flex align-items-center ml-2" title="已完成時鐘：<%= task.tictacs.finished.count %>">
+              <img src='/finish_tictac.png' class='task_tictac'>
+              <small><%= task.tictacs.finished.count %></small>
+            </div>
+            <div class="d-flex align-items-center ml-2" title="取消時鐘：<%= task.tictacs.cancelled.count %>">
+              <img src='/cancel_tictac.png' class='task_tictac'>
+              <small><%= task.tictacs.cancelled.count %></small>
+            </div>
+          </div>
         </div>
-        <div class="tictac-icon d-flex ml-auto">
-          <% if task.expect_tictacs? %>
-            <div class="d-flex align-items-center ml-2"  title="預期時鐘：<%= task.expect_tictacs %>">
-              <img src='/expect_tictac.png' class='task_tictac'>
-              <small><%= task.expect_tictacs %></small>
+        <div class="info-container">
+          <% if task.trello_info %>
+            <div class="d-flex align-items-center" data-controller="trelloapi">
+              <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
+                <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
+              </select>
             </div>
           <% end %>
-          <div class="d-flex align-items-center ml-2"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
-            <img src='/finish_tictac.png' class='task_tictac'>
-            <small><%= task.tictacs.finished.count %></small>
-          </div>
-          <div class="d-flex align-items-center ml-2"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
-            <img src='/cancel_tictac.png' class='task_tictac'>
-            <small><%= task.tictacs.cancelled.count %></small>
-          </div>
         </div>
-        <div class="d-flex align-items-center text-right tag-icon ml-4">
-          <%= display_tag task.tag_items %>
-        </div>
-        <div class="d-flex align-items-center text-right delete-icon">
-          <%= link_to edit_project_task_path(task.project_id, task.id), class: "mx-1" do %>
+        <div class="d-flex align-items-center ml-auto delete-icon pr-5">
+          <%= link_to edit_project_task_path(task.project_id, task.id), class: "mr-1 ml-3" do %>
             <i class="fas fa-pencil-alt"></i>
           <% end %>  
-          <%= link_to project_task_path(task.project_id, task.id), class: "mx-4", method: 'delete', data: {confirm: '真的要刪除喵?  '} do %>
+          <%= link_to project_task_path(task.project_id, task.id), class: "mx-4", method: 'delete', data: {confirm: '真的要刪除喵?'} do %>
             <i class="fas fa-trash-alt"></i>
           <% end %>
         </div>
@@ -192,7 +265,5 @@
 </div>
 
 <script>
-  $('#myCollapsible').collapse({
-    toggle: false
-  })
+  $('#modal').modal('toggle')
 </script>

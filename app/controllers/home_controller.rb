@@ -7,6 +7,7 @@ class HomeController < ApplicationController
     @undo_today_tasks = current_user.tasks.where(created_at: range).doing
     @done_today_tasks = current_user.tasks.where(created_at: range).done
     @task = Task.new
+    @user = current_user
   end
 
   def todo

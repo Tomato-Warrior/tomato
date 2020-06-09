@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_064903) do
+ActiveRecord::Schema.define(version: 2020_06_09_022210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_06_08_064903) do
     t.datetime "deleted_at"
     t.string "webhook_id"
     t.string "trello_import_method"
+    t.string "trello_board_id"
     t.index ["deleted_at"], name: "index_projects_on_deleted_at"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
@@ -101,6 +102,7 @@ ActiveRecord::Schema.define(version: 2020_06_08_064903) do
     t.string "trello_token"
     t.string "auth_token"
     t.string "trello_member_id"
+    t.integer "time_setting", default: 0
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

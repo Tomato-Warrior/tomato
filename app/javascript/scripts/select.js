@@ -27,21 +27,44 @@ $(window).on('turbolinks:load', function(){
     $('[data-toggle="tooltip"]').tooltip()
   });
 
-  var cal = new CalHeatMap();
+  var heapMapElement = document.querySelector('#heatmap');
+
+  if (heapMapElement) {
+    var cal = new CalHeatMap();
   
-  cal.init({
-    itemSelector: "#heatmap",
-    domain: "year",
-    subDomain: "day",
-    range: 1,
-    data: `/api/v1/tictacs/heatmap`,
-    start: new Date(2020, 0),
-    considerMissingDataAsZero: true,
-    cellSize: 20,
-    legend: [1, 2, 4, 6, 8],
-    legendColors: {
-      min: "#FAF2F2",
-      max: "#EF426F"
+    cal.init({
+      itemSelector: "#heatmap",
+      domain: "year",
+      subDomain: "day",
+      range: 1,
+      data: `/api/v1/tictacs/heatmap`,
+      start: new Date(2020, 0),
+      considerMissingDataAsZero: true,
+      cellSize: 20,
+      legend: [1, 2, 4, 6, 8],
+      legendColors: {
+        min: "#FAF2F2",
+        max: "#EF426F"
+      }
+    });
+  }
+
+  /* 左側欄 nav 收合 */ 
+  var resizeEventElement = document.querySelector('#collapseNav');
+  if (resizeEventElement) {
+    const resizeEvent = function() {
+      if(window.innerWidth <= 991){
+        document.querySelector('#collapseNav').classList.remove('show');
+      }else{
+        document.querySelector('#collapseNav').classList.add('show');
+      }
     }
-  });
+    window.addEventListener("resize", resizeEvent);
+    // 讓監聽事件在一開始就觸發
+    resizeEvent();
+  }
+
+  /* modal 新增任務 */
+  $('#myModal').modal('toggle')
+
 });

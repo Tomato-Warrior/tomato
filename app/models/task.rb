@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   acts_as_paranoid
-  acts_as_list scope: [:project_id]
+  acts_as_list scope: [ :project_id ]
   
   #relationship
   has_many :taggings, dependent: :destroy
@@ -11,7 +11,7 @@ class Task < ApplicationRecord
   belongs_to :user
   #validates
   validates :title, presence: true
-  enum status: {doing: 0 , done: 1 }
+  enum status: { doing: 0 , done: 1 }
 
   #tag
   def self.tagged_with(name)

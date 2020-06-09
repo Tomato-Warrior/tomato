@@ -63,20 +63,20 @@
           </div>
         <% end %>
           <div class="tictac-icon d-flex ml-auto">
-              <% if task.expect_tictacs? %>
+            <% if task.expect_tictacs? %>
               <div class="d-flex align-items-center ml-2"  title="預期時鐘：<%= task.expect_tictacs %>">
-                  <img src='/expect_tictac.png' class='task_tictac'>
-                  <small><%= task.expect_tictacs %></small>
-                </div>
-              <% end %>
-              <div class="d-flex align-items-center ml-2"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
-                <img src='/finish_tictac.png' class='task_tictac'>
-                <small><%= task.tictacs.finished.count %></small>
+                <img src='/expect_tictac.png' class='task_tictac'>
+                <small><%= task.expect_tictacs %></small>
               </div>
-              <div class="d-flex align-items-center ml-2"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
-                <img src='/cancel_tictac.png' class='task_tictac'>
-                <small><%= task.tictacs.cancelled.count %></small>
-              </div>
+            <% end %>
+            <div class="d-flex align-items-center ml-2"  title="已完成時鐘：<%= task.tictacs.finished.count %>">
+              <img src='/finish_tictac.png' class='task_tictac'>
+              <small><%= task.tictacs.finished.count %></small>
+            </div>
+            <div class="d-flex align-items-center ml-2"  title="取消時鐘：<%= task.tictacs.cancelled.count %>">
+              <img src='/cancel_tictac.png' class='task_tictac'>
+              <small><%= task.tictacs.cancelled.count %></small>
+            </div>
           </div>
           <div class="d-flex align-items-center text-right tag-icon ml-4">
             <%= display_tag task.tag_items %>

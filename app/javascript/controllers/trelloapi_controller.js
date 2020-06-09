@@ -25,7 +25,7 @@ export default class extends Controller {
   }
 
   get_token(e){
-    localStorage.clear();
+    localStorage.clear()
     let that = this
     e.preventDefault()
     this.trelloAuthorize().then((data)=>{

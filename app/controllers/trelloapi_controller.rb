@@ -8,9 +8,12 @@ class TrelloapiController < ApplicationController
   def get_token
     data = JSON.parse(params[:data])
     trello_member_id = data.values_at("id").join
-    current_user.update(trello_token: params[:token])
-    current_user.update(trello_member_id: trello_member_id)
-    redirect_to root_path
+    if trello_acount_already_exist?(trello_member_id)
+      redirect_to root_path, alert:"帳號已被其他使用者登入"
+    else
+      current_user.update(trello_token: params[:token], trello_member_id: trello_member_id)
+      redirect_to root_path
+    end
   end
 
   def get_board
@@ -170,5 +173,13 @@ class TrelloapiController < ApplicationController
 
   def list_data_trans(task, token)
     JSON.parse(GetLists.new.get_lists(task.trello_info.board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], token)).map{|list| list.values_at("name","id")}
+  end
+  
+  def trello_acount_already_exist?(trello_member_id)
+    if User.find_by(trello_member_id:trello_member_id) == nil
+      false
+    else
+      true
+    end
   end
 end

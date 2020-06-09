@@ -3,7 +3,7 @@ class Webhook
     begin
       RestClient::Request.execute(method: :post, url: "api.trello.com/1/tokens/#{token}/webhooks/?key=#{api_key}",
                                   payload: {
-                                  callbackURL: 'http://affab37537c6.ngrok.io/webhooks/receive',
+                                  callbackURL: 'http://dcacbffd5eda.ngrok.io/webhooks/receive',
                                   idModel: board_id,
                                   description: "My webhook"},
                                   headers:{ :content_type => 'application/json'}) do |response|
@@ -56,27 +56,13 @@ class Webhook
   def after_list(res)
     res.values_at("action")[0].values_at("data")[0].values_at("listAfter")[0].values_at("id", "name")
   end
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 可以得到trello新建卡片同時新建任務
 
   def member_id(res)
     res.values_at("action")[0].values_at("memberCreator")[0].values_at("id").join
   end
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 可以新增assign任務
 
   def assign_member_id(res)
     res.values_at("action")[0].values_at("data")[0].values_at("idMember")[0]
   end
-<<<<<<< HEAD
-=======
->>>>>>> 更新任務WIP
-=======
->>>>>>> 可以得到trello新建卡片同時新建任務
-=======
->>>>>>> 可以新增assign任務
+
 end

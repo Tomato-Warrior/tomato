@@ -221,7 +221,9 @@ a:hover{
 .form-control:focus{
     box-shadow: none;
 }
-
+.modal-backdrop {
+    position: relative;
+}
 
 // left_nav
 

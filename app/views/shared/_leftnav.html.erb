@@ -80,11 +80,11 @@
 
         <%= form_for Project.new, url: projects_path, data:{controller: 'project'}, remote: true  do |f| %>
           <div class="form-group">
-            <%= f.label :cover %>
+            <%= f.label :cover, '代表顏色' %>
             <%= color_field(:project, :cover) %>
           </div>
           <div class="form-group">
-            <%= f.label :title %>
+            <%= f.label :title, '專案名稱' %>
             <%= f.text_field :title, data: {action: "keydown->project#submit", target: "project.title"} %>
           </div>
           <%= f.submit "建立", class: "badge-pill p-2 path-color" %>

@@ -6,6 +6,12 @@
         <input type="text" class="form-control" v-model="task.title">
       </div>
       <div class="form-group">
+        <label>Tag</label>
+        <select class="form-control tag-select2" multiple="multiple">
+        
+        </select>
+      </div>
+      <div class="form-group">
         <label>預計番茄鐘</label>
         <input type="number" class="form-control" v-model="task.expect_tictac" min="0" >
       </div>
@@ -31,7 +37,6 @@ export default {
   props: ['task', 'show'],
   data: function() {
     return {
-      task: [],
     }
   },
   computed: {

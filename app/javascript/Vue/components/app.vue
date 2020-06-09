@@ -7,7 +7,7 @@
       <TaskGroup />
     </div>
     <div v-else>
-      aaaaa
+      Loading
     </div>
   </div>
 </template>

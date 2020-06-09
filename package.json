@@ -15,6 +15,7 @@
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "select2": "^4.0.13",
+    "select2-vue-component": "^5.10.0",
     "sortablejs": "^1.10.2",
     "stimulus": "^1.1.1",
     "sweetalert2": "^9.10.13",
@@ -23,6 +24,7 @@
     "vodal": "^2.4.0",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.2",
+    "vue-select2": "^0.2.6",
     "vue-template-compiler": "^2.6.11",
     "vue-turbolinks": "^2.1.0",
     "vuex": "^3.4.0"

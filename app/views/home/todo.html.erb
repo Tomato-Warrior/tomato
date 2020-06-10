@@ -120,7 +120,7 @@
                     <%= f.text_area :description, class: 'form-control' %>
                   </div>
                   <div class="form-group">
-                    <%= f.label :date, '期限' %>
+                    <%= f.label :date, '任務期限' %>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                       <%= f.text_field( :date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker1"} ) %>
                       <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
@@ -128,9 +128,9 @@
                       </div>
                     </div>
                   </div>
-                  <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
+                  <%= f.submit "送出", class: "py-2 px-4 btn-login-submit submit-radius" %>
                   <%= link_to project_task_path(task.project_id, task.id), class: "mx-4", method: 'delete', data: {confirm: '真的要刪除嗎?'} do %>
-                  <i class="fas fa-trash-alt"></i>
+                    <span class="py-2 px-4 btn-danger submit-radius">刪除</span>
                   <% end %>
                 <% end %>
               </div>
@@ -230,7 +230,7 @@
                     <%= f.text_area :description, class: 'form-control' %>
                   </div>
                   <div class="form-group">
-                    <%= f.label :date, '期限' %>
+                    <%= f.label :date, '任務期限' %>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                       <%= f.text_field( :date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker1"} ) %>
                       <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
@@ -238,9 +238,9 @@
                       </div>
                     </div>
                   </div>
-                  <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
+                  <%= f.submit "送出", class: "py-2 px-4 btn-login-submit submit-radius" %>
                   <%= link_to project_task_path(task.project_id, task.id), class: "mx-4", method: 'delete', data: {confirm: '真的要刪除嗎?'} do %>
-                  <i class="fas fa-trash-alt"></i>
+                    <span class="py-2 px-4 btn-danger submit-radius">刪除</span>
                   <% end %>
                 <% end %>
               </div>

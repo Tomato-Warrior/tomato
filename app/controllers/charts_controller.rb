@@ -62,26 +62,5 @@ class ChartsController < ApplicationController
       project_hash = { id: project.id, title: project.title, finished_tictacs: @finished, cancelled_tictacs: @cancelled }
       @projects_arr << project_hash
     end
- 
-
-    
-    # trello project chart
-    @trello_projects = []
-    @first_trello_project_finished = 0
-    @first_trello_project_cancelled = 0
-    first_trello_board_projects = []
-    @projects.each do |project|
-      if project.trello_board_id != nil
-        @trello_projects << project
-        first_trello_board_projects = Project.where(trello_board_id: @trello_projects.first.trello_board_id)
-        first_trello_board_projects.each do |project|
-          project.tasks.each do |task|
-            @first_trello_project_finished += task.tictacs.finished.count       
-            @first_trello_project_cancelled += task.tictacs.cancelled.count
-          end
-        end
-      end
-    end
-
   end
 end

@@ -21,8 +21,28 @@
           <h3>個人資訊</h3>
           <div class="info-list">
             <ul>
-              <li class="d-flex"><span class="info-trello">Trello</span><p>今天有 <span>2</span> 個指定任務</p></li>
-              <li class="d-flex"><span class="info-trello">Trello</span><p>今天有 <span>2</span> 個指定任務</p></li>
+              <li class="d-flex">
+                <span class="info-trello text-center">今 日</span>
+                <p>今天有 
+                  <% if @today_new_tasks != 0 %>
+                    <span><%= @today_new_tasks %></span>
+                  <% else %>
+                    <span>0</span>
+                  <% end %>
+                    個指定任務
+                </p>
+              </li>
+              <li class="d-flex">
+                <span class="info-trello text-center">Trello</span>
+                <p>今天有 
+                <% if @today_trello_new_task != 0 %>
+                  <span><%= @today_trello_new_task %></span>
+                <% else %>
+                  <span>0</span>
+                <% end %>
+                個指定任務
+               </p>
+              </li>
             </ul>
           </div>
           <span class="divider"></span>

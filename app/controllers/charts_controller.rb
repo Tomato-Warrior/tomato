@@ -20,10 +20,12 @@ class ChartsController < ApplicationController
     @tags = tag_arr.uniq
 
     @projects = current_user.projects
-
+    
+    @trello_projects = []
     @projects.each do |project|
-      # project_trello_board = project.trello_board_id
-      trello_board_projects = Project.where('trello_board_id ?', project.trello_board_id)
+      if project.trello_board_id != nil
+        @trello_projects << project
+      end
     end
 
   end

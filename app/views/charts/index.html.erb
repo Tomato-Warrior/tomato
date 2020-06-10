@@ -62,7 +62,7 @@
       <ul class="dropdown-menu">
         <% if @trello_projects.count != 0 %>
           <% @trello_projects.each do |project| %>
-            <li><a href="<%= '#'"trello_project-chart-#{project.id}" %>" data-toggle="tab" class="dropdown-item" ><%= project.title %></a></li>
+            <li><a href="<%= '#'"trello-project-chart-#{project.id}" %>" data-toggle="tab" class="dropdown-item" ><%= project.title %></a></li>
           <% end %>
         <% else %>
           <li><a href="#" data-toggle="tab" class="dropdown-item">沒有任何trello專案</a></li>
@@ -73,14 +73,14 @@
     <div class="tab-content">
       <div class="tab-pane active">
         <h1 class="text-center mb-3"><%= @trello_projects.first.title %></h1>
-        <% @first_trello_finished = 0 %>
-        <% @first_trello_cancelled = 0 %>
+        <% @first_trello_project_finished = 0 %>
+        <% @first_trello_project_cancelled = 0 %>
         <% first_trello_board_projects = [] %>
         <% first_trello_board_projects = Project.where(trello_board_id: @trello_projects.first.trello_board_id) %>
         <% first_trello_board_projects.each do |project| %>
           <% project.tasks.each do |task| %>
-            <% @first_trello_finished += task.tictacs.finished.count %>        
-            <% @first_trello_cancelled += task.tictacs.cancelled.count %>
+            <% @first_trello_project_finished += task.tictacs.finished.count %>        
+            <% @first_trello_project_cancelled += task.tictacs.cancelled.count %>
           <% end %>
         <% end %>
         <div class="d-flex mr-2">
@@ -90,27 +90,28 @@
               <img src='/cancel_tictac.png' class='big_tictac col-12'>
             </div>
             <div class="tictac_num col-6 d-flex flex-wrap align-items-center">
-              <div class="col-12"><%= @first_trello_finished %></div>
-              <div class="col-12"><%= @first_trello_cancelled %></div>
+              <div class="col-12"><%= @first_trello_project_finished %></div>
+              <div class="col-12"><%= @first_trello_project_cancelled %></div>
             </div>
           </div>
           <div class="col-6 d-flex p-3 shadow bg-white rounded">
-            <%= pie_chart [["完成的番茄", @first_trello_finished], ["取消的番茄", @first_trello_cancelled]] %>
+            <%= pie_chart [["完成的番茄", @first_trello_project_finished], ["取消的番茄", @first_trello_project_cancelled]] %>
           </div>
         </div>
       </div>
 
       <% @trello_projects.each do |project| %>
+        <% @trello_project_finished = 0 %>
+        <% @trello_project_cancelled = 0 %>
+        <% trello_board_projects = [] %>
         <% trello_board_projects = Project.where(trello_board_id: project.trello_board_id) %>
-        <% @trello_finished = 0 %>
-        <% @trello_cancelled = 0 %>
         <% trello_board_projects.each do |project| %>
           <% project.tasks.each do |task| %>
-            <% @trello_finished += task.tictacs.finished.count %>        
-            <% @trello_cancelled += task.tictacs.cancelled.count %>
+            <% @trello_project_finished += task.tictacs.finished.count %>        
+            <% @trello_project_cancelled += task.tictacs.cancelled.count %>
           <% end %>
         <% end %>
-        <div id="<%= "project-chart-#{project.id}" %>" class="tab-pane">
+        <div id="<%= "trello-project-chart-#{project.id}" %>" class="tab-pane">
           <h1 class="text-center mb-3"><%= project.title %></h1>
           <div class="d-flex mr-2">
             <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
@@ -119,12 +120,12 @@
                 <img src='/cancel_tictac.png' class='big_tictac col-12'>
               </div>
               <div class="tictac_num col-6 d-flex flex-wrap align-items-center">
-                <div class="col-12"><%= @trello_finished %></div>
-                <div class="col-12"><%= @trello_cancelled %></div>
+                <div class="col-12"><%= @trello_project_finished %></div>
+                <div class="col-12"><%= @trello_project_cancelled %></div>
               </div>
             </div>
             <div class="col-6 d-flex p-3 shadow bg-white rounded">
-              <%= pie_chart [["完成的番茄", @trello_finished], ["取消的番茄", @trello_cancelled]] %>
+              <%= pie_chart [["完成的番茄", @trello_project_finished], ["取消的番茄", @trello_project_cancelled]] %>
             </div>
           </div>
         </div>

@@ -130,9 +130,9 @@
         <div class="info-container">
           <% if task.trello_info %>
             <div class="d-flex align-items-center" data-controller="trelloapi">
-              <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
-                <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
-              </select>
+            <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list click->trelloapi#call_options" data-target="trelloapi.change_list">
+                <option value=<%=task.trello_info.list_id%>><%=task.trello_info.list_name%></option>  
+            </select>
             </div>
           <% end %>
         </div>
@@ -243,11 +243,11 @@
           </div>
         </div>
         <div class="info-container">
-          <% if task.trello_info %>
+         <% if task.trello_info %>
             <div class="d-flex align-items-center" data-controller="trelloapi">
-              <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
-                <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
-              </select>
+            <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list click->trelloapi#call_options" data-target="trelloapi.change_list">
+                <option value=<%=task.trello_info.list_id%>><%=task.trello_info.list_name%></option>  
+            </select>
             </div>
           <% end %>
         </div>

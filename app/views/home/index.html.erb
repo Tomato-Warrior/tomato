@@ -104,7 +104,7 @@
           <span class="ml-3 mr-2 task-project"><%= task.project.title %></span>
         </div>
         <div class="align-items-center font-container">
-          <%= link_to task.title, project_task_path(task.project_id, task.id), class: "list-font mx-3", 'data-target' => "#taskEdit", 'data-toggle' => "modal" %>
+          <a href="#" class="list-font mx-3" data-target= "#taskEdit-<%= task.id %>" data-toggle= "modal"><%= task.title %></a>
           <div class="d-flex ml-1 tictac_icon">
             <% if task.expect_tictacs? %> 
               <div class="d-flex align-items-center ml-2"  title="預期時鐘：<%= task.expect_tictacs %>">
@@ -137,7 +137,7 @@
           <% end %>
         </div>
       </div>
-      <div class="modal fade" id="taskEdit" tabindex="0" role="dialog" aria-labelledby="forTaskEdit" aria-hidden="true">
+      <div class="modal fade" id="taskEdit-<%=task.id%>" tabindex="0" role="dialog" aria-labelledby="forTaskEdit" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-position" role="document" >
           <div class="modal-content">
             <div class="modal-header">

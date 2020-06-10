@@ -50,7 +50,7 @@ Rails.application.routes.draw do
       end
       resources :tasks, only: [:destroy] do 
         member do
-          patch :toggle_status
+          patch :toggle_status      
         end
       end
       

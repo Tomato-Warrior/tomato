@@ -76,26 +76,31 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body import-trello">
 
         <%= form_for Project.new, url: projects_path, data:{controller: 'project'}, remote: true  do |f| %>
-          <div class="form-group">
-            <%= f.label :cover, '代表顏色' %>
-            <%= color_field(:project, :cover) %>
-          </div>
           <div class="form-group">
             <%= f.label :title, '專案名稱' %>
             <%= f.text_field :title, data: {action: "keydown->project#submit", target: "project.title"} %>
           </div>
-          <%= f.submit "建立", class: "badge-pill p-2 path-color" %>
-          <%= link_to_if(current_user.trello_token != nil, "從Trello匯入專案", select_board_trelloapi_index_path,class: "badge-pill p-2 path-color text-dark m-4") do
-              link_to "從Trello匯入專案", trelloapi_index_path, class: "badge-pill p-2 path-color text-dark m-4" 
-            end 
-          %>
+          <div class="form-group">
+            <%= f.label :cover, '代表顏色' %>
+            <%= color_field(:project, :cover) %>
+          </div>
+          <div class="d-flex">
+          <div><%= f.submit "建立", class: "p-2 btn-login-submit submit-radius" %></div>
+           <% if current_user.trello_token == nil%>
+              <div class="d-flex" data-controller="trelloapi">
+                <a href="#" data-action="click->trelloapi#get_token" class="btn-login-submit submit-radius ml-4 py-2  px-2">登入Trello匯入專案</a>
+              </div>
+             <% else %>
+               <%= link_to "從Trello匯入專案", select_board_trelloapi_index_path, class: "p-2 btn-login-submit submit-radius ml-4 " %>
+           <% end %>
+          </div>
         <% end %> 
+
+
       </div>
     </div>
   </div>
 </div>
-
-

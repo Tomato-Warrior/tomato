@@ -14,17 +14,17 @@
   <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav align-items-center text-center">
     <% if user_signed_in? %>
-      <li class="nav-item active ml-2">
+      <li class="nav-item active ml-3">
         <div class="d-flex time-setting align-items-center" data-toggle="modal" data-target="#timeSetting">
           <i class="fas fa-cog time-setting"></i><span class="nav-font pl-1 time-setting">番茄鐘設定</span>
         </div>
       </li>
-      <li class="nav-item active ml-2">
+      <li class="nav-item active ml-3">
         <%= link_to charts_path do %>
           <i class="far fa-chart-bar"></i><span class="nav-font pl-1">統計圖紀錄</span>
         <% end %>
       </li>
-      <li class="nav-item ml-2">
+      <li class="nav-item ml-3">
         <%= link_to list_tictacs_path do %>
           <i class="fas fa-clipboard-list"></i><span class="nav-font pl-1">番茄鐘列表</span>
         <% end %>
@@ -34,14 +34,16 @@
           <button class="btn  dropdown-toggle nav-href" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= current_user.email %>
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <div class="dropdown-menu text-center" aria-labelledby="dropdownMenu2">
             <button class="dropdown-item" type="button"><%= link_to "編輯會員資料", edit_user_registration_path, class: 'nav-href' %></button>
             <% if current_user.trello_token == nil%>
-              <button class="dropdown-item" type="button"><%= link_to "登入trello", trelloapi_index_path, class: 'nav-href'%></button>
+             <div class="container d-flex justify-content-center" data-controller="trelloapi">
+               <a href="#" data-action="click->trelloapi#get_token" class="text-center">登入Trello</a>
+             </div>
             <% else %>
               <button class="dropdown-item" type="button" disabled><span class="nav-href">已登入Trello</span></button>
             <% end %>
-            <button class="dropdown-item" type="button"><%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'nav-href' %></button>
+            <button class="dropdown-item" type="button"><%= link_to '登出', destroy_user_session_path, method: 'delete', class: 'nav-href' %></button>
           </div>
         </div>
       </li>
@@ -69,14 +71,10 @@
               <%= f.label :time_setting, '時間設定' %>
               <%= f.select :time_setting, User.time_settings.keys, {}%>
             </div>
-            <%= f.submit "儲存", class: "badge-pill p-2 path-color" %>
+            <%= f.submit "儲存", class: "btn-login-submit submit-radius py-2 px-3" %>
           <% end %>
         </div>
       </div>
     </div>
   </div>
 <% end %>
-
-<script>
-  $('#modal').modal('toggle')
-</script>

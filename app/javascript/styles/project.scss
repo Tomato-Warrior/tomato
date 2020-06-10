@@ -6,8 +6,7 @@
 }
 
 #project_cover{
-  width: 15px;
-  height: 15px;
+  width: 20px;
   border-radius: 50%;
 }
 
@@ -53,7 +52,7 @@
 }
 
 .btn-submit{
-  // padding: 0 60px 0 60px;
+
   background-color: $mainRed;
   border-radius: 0px 10px 10px 0;
   input{
@@ -186,7 +185,7 @@ h2.project-title{
   width: 330px;
 }
 
-@media screen and (max-width:767px){
+@media screen and (min-width:768px){
  .font-container{
      width: 200px;
  }

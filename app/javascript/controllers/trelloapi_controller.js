@@ -11,7 +11,7 @@ export default class extends Controller {
     return new Promise(function(resolve, reject){
       window.Trello.authorize({
         type: 'popup',
-        name: 'TomaTokei',
+        name: 'TomeowTokei',
         scope: {
           read: 'true',
           write: 'true' },
@@ -28,6 +28,7 @@ export default class extends Controller {
   }
 
   get_token(e){
+    localStorage.clear();
     let that = this
     e.preventDefault()
     this.trelloAuthorize().then((data)=>{

@@ -21,5 +21,10 @@ class ChartsController < ApplicationController
 
     @projects = current_user.projects
 
+    @projects.each do |project|
+      # project_trello_board = project.trello_board_id
+      trello_board_projects = Project.where('trello_board_id ?', project.trello_board_id)
+    end
+
   end
 end

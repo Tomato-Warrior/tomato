@@ -11,30 +11,30 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.label :title %>
+      <%= f.label :title, '任務名稱' %>
       <%= f.text_field :title, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :project %>
+      <%= f.label :project, '專案' %>
       <%= f.collection_select :project_id, current_user.projects, :id, :title, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :expect_tictacs %>
+      <%= f.label :expect_tictacs, '預期番茄數' %>
       <%= f.number_field :expect_tictacs, class: 'form-control',min: 0  %>
     </div>
     <div class="form-group">
-      <%= f.label :tag_items %>
+      <%= f.label :tag_items, '標籤' %>
       <select name="task[tag_items][]" class='form-control tag-select2' multiple='multiple'>
         <%= options_for_select(f.object.tag_items, f.object.tag_items) %>
       </select>
       
     </div>
     <div class="form-group">
-      <%= f.label :description %>
+      <%= f.label :description, '備註' %>
       <%= f.text_area :description, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :date %>
+      <%= f.label :date, '期限' %>
       <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
         <%= f.text_field( :date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker1"} ) %>
         <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">

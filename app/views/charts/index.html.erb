@@ -206,12 +206,12 @@
       <% if @tags.any? %>
         <div class="tab-pane active">
           <h1 class="text-center"><%= @tags.first.name %></h1>
-          <%= column_chart @tags.first.tictacs.finished.group_by_day(:end_at).count %>
+          <%= column_chart @first_tag_finish_tictacs %>
         </div>
-        <% @tags.each do |tag| %>
-          <div id="<%= "tag-chart-#{tag.id}" %>" class="tab-pane">
-            <h1 class="text-center"><%= tag.name %></h1>
-            <%= column_chart tag.tictacs.finished.group_by_day(:end_at).count %>
+        <% @tags_arr.each do |tag| %>
+          <div id="<%= "tag-chart-#{tag[:id]}" %>" class="tab-pane">
+            <h1 class="text-center"><%= tag[:name] %></h1>
+            <%= column_chart tag[:tictac] %>
           </div>
         <% end %>
       <% end %>

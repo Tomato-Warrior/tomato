@@ -47,22 +47,24 @@ export default {
 
     updateTask: function(evt) {
       evt.preventDefault();
-      this.updatedTask({ taskId: this.task.id, taskTitle: this.task.title,taskDate: this.task.date, expectTictac: this.task.expect_tictac, taskDesc: this.task.description });
+      this.updatedTask({ taskId: this.task.id, taskTitle: this.task.title,taskDate: this.task.date, expectTictac: this.task.expect_tictac, taskDesc: this.task.description, taskTag: this.task.tags });
     },
 
-    createTag: function (params) {
-    var term = $.trim(params.term);
-
-    if (term === '') {
-      return null;
-    }
-    return {
-      id: term,
-      text: term,
-      newTag: true 
-    }
-  }
+    createTag: function () {
+      console.log('aaa');
+      
+      // var term = $.trim(params.term);
   
+      // if (term === '') {
+      //   return null;
+      // }
+      // return {
+      //   id: term,
+      //   text: term,
+      //   newTag: true 
+      // }
+  },
+
   },
   components: {
     Select

@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root "home#index"
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
-  #counter
   resources :tictacs, only: [:index, :update] do
     collection do
       get :list
@@ -14,7 +13,6 @@ Rails.application.routes.draw do
     end
   end
 
-  #project
   resources :projects do
     resources :tasks, except: [:index] do
       member do
@@ -33,10 +31,8 @@ Rails.application.routes.draw do
     resource :tictac, only: [:show]
   end
 
-  #API
   namespace :api do
     namespace :v1 do
-      
       # google extension
       post 'login' => 'authentication#login'
       post 'logout' => 'authentication#logout'
@@ -53,7 +49,7 @@ Rails.application.routes.draw do
           patch :toggle_status      
         end
       end
-      
+
       resources :tictacs, only: [] do
         collection do
           post :start
@@ -72,19 +68,18 @@ Rails.application.routes.draw do
       end
     end
   end
-  
 
-  #homepage
+  # homepage
   resources :home, only: [:index] do
     collection do
       get :todo
     end
   end
 
-  #charts
+  # charts
   resources :charts, only: [:index]
 
-  #trello
+  # trello
   resources :trelloapi, only: [:index] do
     collection do
       post :get_token

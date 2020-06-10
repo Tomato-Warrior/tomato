@@ -14,22 +14,22 @@
   <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav align-items-center text-center">
     <% if user_signed_in? %>
-      <li class="nav-item active ml-3">
+      <li class="nav-item active ml-4" title="番茄鐘設定">
         <div class="d-flex time-setting align-items-center" data-toggle="modal" data-target="#timeSetting">
-          <i class="fas fa-cog time-setting"></i><span class="nav-font pl-1 time-setting">番茄鐘設定</span>
+          <i class="far fa-clock time-setting fa-lg"></i><span class="nav-font pl-1 time-setting">番茄鐘設定</span>
         </div>
       </li>
-      <li class="nav-item active ml-3">
+      <li class="nav-item active ml-4" title="統計圖紀錄">
         <%= link_to charts_path do %>
-          <i class="far fa-chart-bar"></i><span class="nav-font pl-1">統計圖紀錄</span>
+          <i class="far fa-chart-bar fa-lg"></i><span class="nav-font pl-1">統計圖紀錄</span>
         <% end %>
       </li>
-      <li class="nav-item ml-3">
+      <li class="nav-item ml-4" title="番茄鐘列表">
         <%= link_to list_tictacs_path do %>
-          <i class="fas fa-clipboard-list"></i><span class="nav-font pl-1">番茄鐘列表</span>
+          <i class="fas fa-clipboard-list fa-lg"></i><span class="nav-font pl-1">番茄鐘列表</span>
         <% end %>
       </li>
-      <li class="nav-item ml-2">
+      <li class="nav-item ml-4">
         <div class="dropdown">
           <button class="btn  dropdown-toggle nav-href" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= current_user.email %>
@@ -48,7 +48,7 @@
         </div>
       </li>
     <% else %>
-      <li class="nav-item pl-2">
+      <li class="nav-item">
         <%= link_to '登入 / 註冊', new_user_session_path %>
       </li>
     <% end %>

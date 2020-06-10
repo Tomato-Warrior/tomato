@@ -48,16 +48,12 @@ class ProjectsController < ApplicationController
   end
 
   def chart
-    @project
-
     # pie chart
-    @trello_projects = []
     @trello_project_finished = 0
     @trello_project_cancelled = 0
     trello_board_projects = []
 
     if @project.trello_board_id != nil
-      @trello_projects << project
       trello_board_projects = Project.where(trello_board_id: @project.trello_board_id)
       trello_board_projects.each do |project|
         project.tasks.each do |task|
@@ -67,6 +63,8 @@ class ProjectsController < ApplicationController
       end
     end
 
+    # data table
+    @project
   end
 
   private

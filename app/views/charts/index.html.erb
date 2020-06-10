@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <%# trello project %>
+  <%# trello project chart %>
   <div class="mb-5 p-4 border shadow bg-white rounded">
     <div class="btn-group">
       <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
@@ -71,48 +71,9 @@
     </div>
 
     <div class="tab-content">
-      <div class="tab-pane active">
-        <h1 class="text-center mb-3"><%= @trello_projects.first.title %></h1>
-        <% @first_trello_project_finished = 0 %>
-        <% @first_trello_project_cancelled = 0 %>
-        <% first_trello_board_projects = [] %>
-        <% first_trello_board_projects = Project.where(trello_board_id: @trello_projects.first.trello_board_id) %>
-        <% first_trello_board_projects.each do |project| %>
-          <% project.tasks.each do |task| %>
-            <% @first_trello_project_finished += task.tictacs.finished.count %>        
-            <% @first_trello_project_cancelled += task.tictacs.cancelled.count %>
-          <% end %>
-        <% end %>
-        <div class="d-flex mr-2">
-          <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
-            <div class="col-6 d-flex flex-wrap align-items-center">
-              <img src='/finish_tictac.png' class='big_tictac col-12'>
-              <img src='/cancel_tictac.png' class='big_tictac col-12'>
-            </div>
-            <div class="tictac_num col-6 d-flex flex-wrap align-items-center">
-              <div class="col-12"><%= @first_trello_project_finished %></div>
-              <div class="col-12"><%= @first_trello_project_cancelled %></div>
-            </div>
-          </div>
-          <div class="col-6 d-flex p-3 shadow bg-white rounded">
-            <%= pie_chart [["完成的番茄", @first_trello_project_finished], ["取消的番茄", @first_trello_project_cancelled]] %>
-          </div>
-        </div>
-      </div>
-
-      <% @trello_projects.each do |project| %>
-        <% @trello_project_finished = 0 %>
-        <% @trello_project_cancelled = 0 %>
-        <% trello_board_projects = [] %>
-        <% trello_board_projects = Project.where(trello_board_id: project.trello_board_id) %>
-        <% trello_board_projects.each do |project| %>
-          <% project.tasks.each do |task| %>
-            <% @trello_project_finished += task.tictacs.finished.count %>        
-            <% @trello_project_cancelled += task.tictacs.cancelled.count %>
-          <% end %>
-        <% end %>
-        <div id="<%= "trello-project-chart-#{project.id}" %>" class="tab-pane">
-          <h1 class="text-center mb-3"><%= project.title %></h1>
+      <% if @trello_projects.count != 0 %>
+        <div class="tab-pane active">
+          <h1 class="text-center mb-3"><%= @trello_projects.first.title %></h1>
           <div class="d-flex mr-2">
             <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
               <div class="col-6 d-flex flex-wrap align-items-center">
@@ -120,16 +81,47 @@
                 <img src='/cancel_tictac.png' class='big_tictac col-12'>
               </div>
               <div class="tictac_num col-6 d-flex flex-wrap align-items-center">
-                <div class="col-12"><%= @trello_project_finished %></div>
-                <div class="col-12"><%= @trello_project_cancelled %></div>
+                <div class="col-12"><%= @first_trello_project_finished %></div>
+                <div class="col-12"><%= @first_trello_project_cancelled %></div>
               </div>
             </div>
             <div class="col-6 d-flex p-3 shadow bg-white rounded">
-              <%= pie_chart [["完成的番茄", @trello_project_finished], ["取消的番茄", @trello_project_cancelled]] %>
+              <%= pie_chart [["完成的番茄", @first_trello_project_finished], ["取消的番茄", @first_trello_project_cancelled]] %>
             </div>
           </div>
         </div>
-      <% end %> 
+
+        <% @trello_projects.each do |project| %>
+          <% @trello_project_finished = 0 %>
+          <% @trello_project_cancelled = 0 %>
+          <% trello_board_projects = [] %>
+          <% trello_board_projects = Project.where(trello_board_id: project.trello_board_id) %>
+          <% trello_board_projects.each do |project| %>
+            <% project.tasks.each do |task| %>
+              <% @trello_project_finished += task.tictacs.finished.count %>        
+              <% @trello_project_cancelled += task.tictacs.cancelled.count %>
+            <% end %>
+          <% end %>
+          <div id="<%= "trello-project-chart-#{project.id}" %>" class="tab-pane">
+            <h1 class="text-center mb-3"><%= project.title %></h1>
+            <div class="d-flex mr-2">
+              <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
+                <div class="col-6 d-flex flex-wrap align-items-center">
+                  <img src='/finish_tictac.png' class='big_tictac col-12'>
+                  <img src='/cancel_tictac.png' class='big_tictac col-12'>
+                </div>
+                <div class="tictac_num col-6 d-flex flex-wrap align-items-center">
+                  <div class="col-12"><%= @trello_project_finished %></div>
+                  <div class="col-12"><%= @trello_project_cancelled %></div>
+                </div>
+              </div>
+              <div class="col-6 d-flex p-3 shadow bg-white rounded">
+                <%= pie_chart [["完成的番茄", @trello_project_finished], ["取消的番茄", @trello_project_cancelled]] %>
+              </div>
+            </div>
+          </div>
+        <% end %> 
+      <% end %>
     </div>
   </div>
 
@@ -152,12 +144,6 @@
     <div class="tab-content">
       <div class="tab-pane active">
         <h1 class="text-center mb-3"><%= @projects.first.title %></h1>
-        <% @first_finished = 0 %>
-        <% @first_cancelled = 0 %>
-        <% @projects.first.tasks.each do |task| %>
-          <% @first_finished += task.tictacs.finished.count %>        
-          <% @first_cancelled += task.tictacs.cancelled.count %>
-        <% end %>
         <div class="d-flex mr-2">
           <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
             <div class="col-6 d-flex flex-wrap align-items-center">
@@ -165,25 +151,19 @@
               <img src='/cancel_tictac.png' class='big_tictac col-12'>
             </div>
             <div class="tictac_num col-6 d-flex flex-wrap align-items-center">
-              <div class="col-12"><%= @first_finished %></div>
-              <div class="col-12"><%= @first_cancelled %></div>
+              <div class="col-12"><%= @first_project_finished %></div>
+              <div class="col-12"><%= @first_project_cancelled %></div>
             </div>
           </div>
           <div class="col-6 d-flex p-3 shadow bg-white rounded">
-            <%= pie_chart [["完成的番茄", @first_finished], ["取消的番茄", @first_cancelled]] %>
+            <%= pie_chart [["完成的番茄", @first_project_finished], ["取消的番茄", @first_project_cancelled]] %>
           </div>
         </div>
       </div>
 
-      <% @projects.each do |project| %>
-        <% @finished = 0 %>
-        <% @cancelled = 0 %>
-        <% project.tasks.each do |task| %>
-          <% @finished += task.tictacs.finished.count %>
-          <% @cancelled += task.tictacs.cancelled.count %>
-        <% end %>
-        <div id="<%= "project-chart-#{project.id}" %>" class="tab-pane">
-          <h1 class="text-center mb-3"><%= project.title %></h1>
+      <% @projects_arr.each do |project| %>
+        <div id="<%= "project-chart-#{project[:id]}" %>" class="tab-pane">
+          <h1 class="text-center mb-3"><%= project[:title] %></h1>
           <div class="d-flex mr-2">
             <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
               <div class="col-6 d-flex flex-wrap align-items-center">
@@ -191,12 +171,12 @@
                 <img src='/cancel_tictac.png' class='big_tictac col-12'>
               </div>
               <div class="tictac_num col-6 d-flex flex-wrap align-items-center">
-                <div class="col-12"><%= @finished %></div>
-                <div class="col-12"><%= @cancelled %></div>
+                <div class="col-12"><%= project[:finished_tictacs] %></div>
+                <div class="col-12"><%= project[:cancelled_tictacs] %></div>
               </div>
             </div>
             <div class="col-6 d-flex p-3 shadow bg-white rounded">
-              <%= pie_chart [["完成的番茄", @finished], ["取消的番茄", @cancelled]] %>
+              <%= pie_chart [["完成的番茄", project[:finished_tictacs]], ["取消的番茄", project[:cancelled_tictacs]]] %>
             </div>
           </div>
         </div>
@@ -246,28 +226,27 @@
       <ul class="dropdown-menu">
         <% if @tasks.any? %>
           <% @tasks.each do |task| %>
-            <li><a href="<%= '#'"task-chart-#{task.id}" %>" data-toggle="tab" class="dropdown-item" ><%= task.title %></a></li>
+            <li><a href="<%= '#'"task-chart-#{task.id}" %>" data-toggle="tab" class="dropdown-item" data-id="<%= task.id %>"><%= task.title %></a></li>
           <% end %>
         <% else %>
           <li><a href="#" data-toggle="tab" class="dropdown-item">沒有任何任務</a></li>
         <% end %>
       </ul>
     </div>
-  
+
     <div class="tab-content">
       <div id="Home" class="tab-pane active">
         <% if @tasks.any? %>
           <h1 class="text-center"><%= @tasks.first.title %></h1>
-          <%= column_chart @tasks.first.tictacs.finished.group_by_day(:end_at).count %>
+          <%= column_chart @first_task_finished %>
         <% end %>
       </div>
-      <% @tasks.each do |task| %>
-        <div id="<%= "task-chart-#{task.id}" %>" class="tab-pane">
-          <h1 class="text-center"><%= task.title %></h1>
-          <%= column_chart task.tictacs.finished.group_by_day(:end_at).count %>
+      <% @tasks_arr.each do |task| %>
+        <div id="<%= "task-chart-#{task[:id]}" %>" class="tab-pane">
+          <h1 class="text-center"><%= task[:title] %></h1>
+          <%= column_chart task[:tictac] %>
         </div>
       <% end %>
     </div>
   </div>
-
 </div>

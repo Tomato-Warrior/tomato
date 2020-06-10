@@ -82,6 +82,10 @@ class TasksController < ApplicationController
     end
   end
 
+  def chart
+    
+  end
+
   private
   def task_params
     params.require(:task).permit(:title, 

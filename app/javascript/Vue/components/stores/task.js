@@ -95,21 +95,27 @@ const store = new Vuex.Store({
       });
     },
 
-    updatedTask({ commit }, {taskId, taskTitle, taskDate, expectTictac, taskDesc}){
-
+    updatedTask({ commit }, {taskId, taskTitle, taskDate, expectTictac, taskDesc, taskTag}){
+      debugger
+      console.log(taskTag);
+      
       const data = new FormData();
       data.append('task[title]', taskTitle);
       data.append('task[date]', taskDate);
       data.append('task[expect_tictacs]', expectTictac);
       data.append('task[description]', taskDesc);
-      
+      data.append('task[tag_items][]', taskTag); 
+
+      // 要寫成 for 回圈
+
       Rails.ajax({
         url: `/api/v1/tasks/${taskId}`,
         type: 'PATCH',
         dataType: 'JSON',
         data,
         success: resp => {
-
+          console.log(resp);
+          
           commit('UPDATE_TASK', resp)
         },
         error: err => {

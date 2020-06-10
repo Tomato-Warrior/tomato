@@ -1,5 +1,4 @@
 <div class="container" data-controller="trelloapi"> 
-
   <%= form_tag({controller: "trelloapi", action: "import_selected_list"}, method: "post") do %>
     <ul>
       <% @lists.each do |list| %>

@@ -1,6 +1,5 @@
 class TrelloapiController < ApplicationController
   require 'rest-client'
-  layout "trelloapi"
   #全域變數  
   $token
   $board_id

@@ -126,7 +126,7 @@ body {
     color: #fff;
     background-color: #518CD0;
 }
-.btn-login-submit{
+.form-group input.btn-login-submit{
     background-color: $relaxClock;
     color: #fff;
     font-size: 18px;
@@ -178,6 +178,7 @@ body {
     border-radius: 5px;
     color: #fff;
     font-size: 15px;
+    background-color: $relaxClock;
 }
 
 .form-group{
@@ -227,7 +228,7 @@ a:hover{
     display: flex;
     
 }
-@media (max-width: 767px){
+@media (min-width: 768px){
    .info-container{
      display: none;
    }

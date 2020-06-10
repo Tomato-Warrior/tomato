@@ -1,4 +1,9 @@
 class TrelloapiController < ApplicationController
+<<<<<<< HEAD
+=======
+  layout "trelloapi"
+
+>>>>>>> 291d792f256a53d873b188ae02d298ee8741b1ac
   $board_id
   $member_id
   def get_token
@@ -100,7 +105,11 @@ class TrelloapiController < ApplicationController
     list_data = param_card_ids.flatten.map{|card| GetCards.new.get_card_by_id(card, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
     list_ids = list_data.map{|list| JSON.parse(list).values_at("id")}.flatten
     list_names = list_data.map{|list| JSON.parse(list).values_at("name")}.flatten
+<<<<<<< HEAD
     create_trello_info(import_data, param_card_ids, list_ids, list_names, $board_id, current_user.id)
+=======
+    create_trello_info(import_data, param_card_ids, list_ids, $board_id, current_user.id)
+>>>>>>> 291d792f256a53d873b188ae02d298ee8741b1ac
     response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     webhook_id = JSON.parse(response).values_at("id")[0]
     import_data.update(webhook_id:webhook_id)
@@ -127,7 +136,11 @@ class TrelloapiController < ApplicationController
     board_name = board_name.values_at("name").join
     generate_tasks_attributes(assigned_cards_names, @param_list_names.count) 
     import_data = import_trello_board(board_name, "import_assign_card", @tasks_attr_data) 
+<<<<<<< HEAD
     create_trello_info(import_data, assigned_cards_ids, assigned_cards_list_ids, assigned_cards_list_names, $board_id, current_user.id)      
+=======
+    create_trello_info(import_data, assigned_cards_ids, assigned_cards_list_ids, $board_id, current_user.id)      
+>>>>>>> 291d792f256a53d873b188ae02d298ee8741b1ac
     response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     webhook_id = JSON.parse(response).values_at("id")[0]
     import_data.update(webhook_id:webhook_id)             
@@ -158,10 +171,17 @@ class TrelloapiController < ApplicationController
     @assigned_cards = JSON.parse(GetLists.new.get_assigned_cards(member_id, board_id, list_name, api_key, token)).values_at("cards").flatten
   end
 
+<<<<<<< HEAD
   def create_trello_info(import_data, card_ids, list_ids, list_names, board_id, user_id)
     i=0
     while i<import_data.tasks.count
       import_data.tasks[i].create_trello_info({card_id:card_ids.flatten[i], list_id:list_ids[i], list_name:list_names[i], board_id:board_id, user_id: user_id })
+=======
+  def create_trello_info(import_data, card_ids, list_ids, board_id, user_id)
+    i=0
+    while i<import_data.tasks.count
+      import_data.tasks[i].create_trello_info({card_id:card_ids.flatten[i], list_id:list_ids[i], board_id:board_id, user_id: user_id })
+>>>>>>> 291d792f256a53d873b188ae02d298ee8741b1ac
       i += 1
     end  
   end

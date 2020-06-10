@@ -29,6 +29,17 @@ class ChartsController < ApplicationController
       tag_arr << tag
     end
     @tags = tag_arr.uniq
+    if @tags.count != 0
+      @first_tag_finish_tictacs = @tags.first.tictacs.finished.group_by_day(:end_at).count
+    end
+    
+    @tags_arr = []
+    @tags.each do |tag|
+      tag_hash = {}
+      tag_hash = { id: tag.id, name: tag.name, tictac: tag.tictacs.finished.group_by_day(:end_at).count }
+      @tags_arr << tag_hash
+    end
+
 
     # project chart
     @projects = current_user.projects

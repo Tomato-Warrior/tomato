@@ -136,14 +136,6 @@
             </div>
           <% end %>
         </div>
-        <div class="d-flex align-items-center ml-auto delete-icon pr-5">
-          <%= link_to edit_project_task_path(task.project_id, task.id), class: "mr-1 ml-3" do %>
-            <i class="fas fa-pencil-alt"></i>
-          <% end %>  
-          <%= link_to project_task_path(task.project_id, task.id), class: "mx-4", method: 'delete', data: {confirm: '真的要刪除喵?'} do %>
-            <i class="fas fa-trash-alt"></i>
-          <% end %>
-        </div>
       </div>
       <div class="modal fade" id="taskEdit" tabindex="0" role="dialog" aria-labelledby="forTaskEdit" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-position" role="document" >
@@ -162,7 +154,7 @@
                 </div>
                 <div class="form-group">
                   <%= f.label :project, '專案' %>
-                  <%= f.collection_select :project_id, current_user.projects, :id, :title, class: 'form-control' %>
+                  <%= f.collection_select :project_id, current_user.projects, :id, :title, {:class => 'form-control' }%>
                 </div>
                 <div class="form-group">
                   <%= f.label :expect_tictacs, '預期番茄數' %>
@@ -187,7 +179,10 @@
                     </div>
                   </div>
                 </div>
-                <%= f.submit :Submit, class: "badge-pill p-2 path-color", value: "Submit" %>
+                <%= f.submit "送出", class: "py-2 px-4 btn-login-submit submit-radius" %>
+                <%= link_to project_task_path(task.project_id, task.id), class: "mx-4", method: 'delete', data: {confirm: '真的要刪除喵?'} do %>
+                  <span class="py-2 px-4 btn-danger submit-radius">刪除</span>
+                <% end %>
               <% end %>
             </div>
           </div>

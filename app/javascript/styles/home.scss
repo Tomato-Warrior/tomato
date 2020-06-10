@@ -221,7 +221,9 @@ h2.project-title{
       left: 5px;
     }
   }
-}@media screen and (max-width:767px){
+}
+
+@media screen and (max-width:767px){
   .task-project{
     display: none;
   }
@@ -232,4 +234,36 @@ h2.project-title{
 }
 .time-setting:hover{
   color: $redBtnHover;
+}
+
+.edit_task{
+  .form-control{
+    height: 35px;
+    padding: 5px 10px;
+   }
+  select.task_project_id{
+    background-color: #F0F0F0;
+  }
+}
+.select2-container .select2-selection--multiple{
+  background-color: #F0F0F0;
+  border: none;
+  width:100%;
+  .select2-selection__choice{
+    background-color: $mainYellow;
+    border: none;
+   .select2-selection__choice__remove{
+     color: #434343;
+   }
+ }
+}
+.select2-container--default.select2-container--focus .select2-selection--multiple{
+  border: none;
+}
+span.select2{
+  width: 100% !important;
+}
+textarea.form-control{
+  background-color: #F0F0F0;
+  height: 124px;
 }

@@ -8,10 +8,12 @@ require("styles")
 require("chartkick")
 require("chart.js")
 require("scripts")
+require( 'datatables.net-dt' )();
 
 
 import $ from 'jquery'
 window.$ = $
+import dt from 'datatables.net';
 
 // seewtalert2
 import Swal from 'sweetalert2/dist/sweetalert2.js'

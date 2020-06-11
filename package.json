@@ -11,6 +11,7 @@
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "chartkick": "^3.2.0",
+    "datatables.net-dt": "^1.10.21",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "select2": "^4.0.13",

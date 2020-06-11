@@ -155,10 +155,10 @@
               </select>
             </div>
           <% end %>
-          <div class="d-flex align-items-center ml-auto tag-icon">	
+        </div>
+          <div class="d-flex align-items-center ml-auto text-right tag-icon mr-4">	
             <%= display_tag task.tag_items %>	
           </div>
-        </div>
       </div>
       <div class="modal fade" id="taskEdit-<%=task.id%>" tabindex="0" role="dialog" aria-labelledby="forTaskEdit" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-position" role="document" >
@@ -173,15 +173,15 @@
               <%= form_for task, url: project_task_path(task.project_id, task.id), method: 'PATCH', remote: true do |f| %>
                 <div class="form-group">
                   <%= f.label :title, '任務名稱' %>
-                  <%= f.text_field :title, class: 'form-control' ,id: "title-#{task.id}" %>
+                  <%= f.text_field :title, class: 'form-control' %>
                 </div>
                 <div class="form-group">
                   <%= f.label :project, '專案' %>
-                  <%= f.collection_select :project_id, current_user.projects, :id, :title, {:class => 'form-control' }, id: "select-#{task.id}"%>
+                  <%= f.collection_select :project_id, current_user.projects, :id, :title, {:class => 'form-control' }%>
                 </div>
                 <div class="form-group">
                   <%= f.label :expect_tictacs, '預期番茄數' %>
-                  <%= f.number_field :expect_tictacs, class: 'form-control',min: 0 ,id: "tictac-#{task.id}"  %>
+                  <%= f.number_field :expect_tictacs, class: 'form-control',min: 0  %>
                 </div>
                 <div class="form-group">
                   <%= f.label :tag_items, '標籤' %>
@@ -191,14 +191,12 @@
                 </div>
                 <div class="form-group">
                   <%= f.label :description, '備註' %>
-                  <%= f.text_area :description, class: 'form-control' ,id: "desc-#{task.id}" %>
+                  <%= f.text_area :description, class: 'form-control' %>
                 </div>
                 <div class="form-group">
                   <%= f.label :date, '任務期限' %>
-                  <div class="input-group date" id="datetimepicker1-<%= task.id %>" data-target-input="nearest">
-                    <%= f.text_field( :date, 
-                                      class: "form-control datetimepicker-input", 
-                                      id: "datetimepicker1-#{ task.id }", data: {target:"#datetimepicker1"} ) %>
+                  <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                    <%= f.text_field( :date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker1"} ) %>
                     <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                       <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                     </div>
@@ -239,7 +237,7 @@
           <span class="ml-3 mr-2 task-project"><%= task.project.title %></span>
         </div>
         <div class="align-items-center font-container">
-          <a href="#" class="list-font mx-3" data-target= "#taskdoneEdit-<%= task.id %>" data-toggle= "modal"><%= task.title %></a>
+          <a href="#" class="list-font mx-3" data-target= "#taskEdit-<%= task.id %>" data-toggle= "modal"><%= task.title %></a>
           <div class="d-flex ml-1 tictac_icon">
             <% if task.expect_tictacs? %>  
               <div class="d-flex align-items-center ml-2" title="預期時鐘：<%= task.expect_tictacs %>">
@@ -265,17 +263,17 @@
         <div class="info-container">
           <% if task.trello_info %>
             <div class="d-flex align-items-center" data-controller="trelloapi">
-              <select name=<%= task.id %> id=<%= task.trello_info.card_id %> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
+              <select name=<%=task.id%> id=<%= task.trello_info.card_id%> data-action="change->trelloapi#change_list" data-target="trelloapi.change_list">
                 <%= options_for_select(list_data_trans(task, current_user.trello_token), task.trello_info.list_id) %>
               </select>
             </div>
           <% end %>
-          <div class="d-flex align-items-center ml-auto text-right tag-icon">	
+          <div class="d-flex align-items-center ml-auto text-right tag-icon ml-4">	
             <%= display_tag task.tag_items %>	
           </div>
         </div>
       </div>
-      <div class="modal fade" id="taskdoneEdit-<%=task.id%>" tabindex="0" role="dialog" aria-labelledby="forTaskEdit" aria-hidden="true">
+      <div class="modal fade" id="taskEdit-<%=task.id%>" tabindex="0" role="dialog" aria-labelledby="forTaskEdit" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-position" role="document" >
           <div class="modal-content">
             <div class="modal-header">

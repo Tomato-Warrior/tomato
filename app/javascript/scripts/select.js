@@ -66,5 +66,9 @@ $(window).on('turbolinks:load', function(){
 
   /* modal 新增任務 */
   $('#myModal').modal('toggle')
+  
+  $('.clear').on("click",function() {
+    $('.bootstrap-table .form-control').val("");
+  });
 
 });

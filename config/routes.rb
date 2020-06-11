@@ -46,10 +46,6 @@ Rails.application.routes.draw do
       post 'cancelwork' => 'tasks#cancelwork'
 
       resources :projects, only: [] do
-        member do
-          # project chart
-          get 'trello_project_chart' => 'trello_chart#trello_project_chart'
-        end
         resources :tasks, only: [:index, :create, :update]
       end
       resources :tasks, only: [:destroy] do 

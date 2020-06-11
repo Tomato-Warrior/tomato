@@ -1,5 +1,4 @@
 class TrelloapiController < ApplicationController
-
   before_action :ajax_render, only: [:select_board, :select_list_cards, :select_assigned_cards_of_list]
   layout "trelloapi"
   #全域變數  

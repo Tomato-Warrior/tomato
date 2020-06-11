@@ -6,6 +6,15 @@
         <input type="text" class="form-control" v-model="task.title">
       </div>
       <div class="form-group">
+        <label>專案</label>
+        <select class="form-control" v-model="selectedProjectId">
+          <option v-for="project in projects" :value="project[0]">
+            {{ project[1] }}
+          </option>
+        </select>
+        {{ selectedProjectId }}
+      </div>
+      <div class="form-group">
         <label>預計番茄鐘</label>
         <input type="number" class="form-control" v-model="task.expect_tictac" min="0" >
       </div>
@@ -13,11 +22,13 @@
         <label>任務筆記</label>
         <textarea type="number" class="form-control" v-model="task.description" ></textarea>
       </div>
-      <Select v-model="task.tags" :options="task.tags" @enter="createTag" :setting="{
-      tags: true,
-      multiple: 'true',
-      tokenSeparators: [',', ' ']
-  }" />
+      <div class="form-group">
+        <Select v-model="task.tags" :options="task.tags" @keydown.enter="createTag" :setting="{
+          tags: true,
+          multiple: 'true',
+          tokenSeparators: [',', ' ']
+        }" />
+      </div>
       <!-- {{ task.tags }} -->
       <div class="form-group">
         <label>任務執行日期</label>
@@ -31,16 +42,18 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import Rails from '@rails/ujs';
-import Select from 'v-select2-multiple-component'
+import Select from 'v-select2-multiple-component';
 
 export default {
   name: 'TaskEdit',
-  props: ['task', 'show'],
+  props: ['show', 'task'],
   data: function() {
     return {
-      val: '',
-
+      selectedProjectId: 0
     }
+  },
+  computed: {
+    ...mapState(['projects'])
   },
   methods: {
     ...mapActions(['updatedTask']),

@@ -27,9 +27,8 @@
       <div class="form-group">
         <label>任務執行日期</label>
         <input type="date" class="form-control" v-model="task.date">
-        {{ task }}
       </div>
-      <input type="submit" value="更新" @click="updateTask">
+      <input type="submit" value="更新" @click="updateTask" class="py-2 px-4 btn-login-submit submit-radius">
     </form> 
   </div>
 </template>

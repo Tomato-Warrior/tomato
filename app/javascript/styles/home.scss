@@ -176,6 +176,15 @@ h2.project-title{
   border-radius: 10px;
 }
 
+.project_task_container{
+  .form-control{
+  border: none;
+  height: 35px;
+  padding: 0px 10px;
+  border-radius: 10px;
+}
+}
+
 ::-webkit-input-placeholder {
   color: #F0F0F0;
   font-size: 16px;
@@ -224,7 +233,7 @@ h2.project-title{
   }
 }
 
-@media screen and (min-width:768px){
+@media screen and (max-width:768px){
 
 .dropdown-menu{
   transform: translate3d(-160px, 0px, 0px)!important;
@@ -239,17 +248,16 @@ h2.project-title{
   font-size: 15px;
 }
 
-@media screen and (max-width:767px){
-  .task-project{
-    display: none;
-  }
- }
+.task-project{
+  display: none;
+}
 
 .modal, .modal-backdrop{
   position: fixed !important;
 }
 .time-setting:hover{
   color: $redBtnHover;
+}
 }
 
 .edit_task{
@@ -270,20 +278,18 @@ h2.project-title{
     border: none;
    .select2-selection__choice__remove{
      color: #434343;
-   }
- }
-}
-.select2-container--default.select2-container--focus .select2-selection--multiple{
-  border: none;
-}
+    }
+  }
+  
+
+.select2-container--default.select2-container--focus{
+  border: none;}
 span.select2{
   width: 100% !important;
 }
 textarea.form-control{
   background-color: #F0F0F0;
   height: 124px;
-<<<<<<< HEAD
-
 }
 .form-control.search-input{
   background-color: #F0F0F0;
@@ -292,4 +298,13 @@ textarea.form-control{
 .table-hover> tbody> tr:hover{
   background-color: #FFAD9F;
   transition: 0.2s;
+}
+ }
+  .select2-selection__choice{
+    background-color: $mainYellow;
+    border: none;
+   .select2-selection__choice__remove{
+     color: #434343;
+   }
+  }
 }

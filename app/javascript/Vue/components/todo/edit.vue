@@ -7,12 +7,11 @@
       </div>
       <div class="form-group">
         <label>專案</label>
-        <select class="form-control" v-model="selectedProjectId">
+        <select class="form-control" v-model="selected">
           <option v-for="project in projects" :value="project[0]">
             {{ project[1] }}
           </option>
         </select>
-        {{ selectedProjectId }}
       </div>
       <div class="form-group">
         <label>預計番茄鐘</label>
@@ -34,7 +33,7 @@
         <label>任務執行日期</label>
         <input type="date" class="form-control" v-model="task.expect_date">
       </div>
-      <input type="submit" value="Submit" @click="updateTask">
+      <input type="submit" value="更新" @click="updateTask">
     </form> 
   </div>
 </template>
@@ -53,14 +52,32 @@ export default {
     }
   },
   computed: {
-    ...mapState(['projects'])
+    ...mapState(['projects']), 
+    selected: {
+      get: function() {
+        return this.task.project_id;
+      }, 
+      set: function(newValue) {
+        this.selectedProjectId = newValue;
+      }
+    }
   },
   methods: {
     ...mapActions(['updatedTask']),
 
     updateTask: function(evt) {
       evt.preventDefault();
-      this.updatedTask({ taskId: this.task.id, taskTitle: this.task.title,taskDate: this.task.date, expectTictac: this.task.expect_tictac, taskDesc: this.task.description, taskTag: this.task.tags });
+      this.updatedTask({ 
+        taskId: this.task.id, 
+        taskTitle: this.task.title,
+        taskDate: this.task.date, 
+        expectTictac: this.task.expect_tictac, 
+        taskDesc: this.task.description, 
+        taskTag: this.task.tags, 
+        selectedProjectId: this.selectedProjectId
+      });
+
+      $(`#editVueTask-${this.task.id}`).modal('hide');
     },
 
     createTag: function () {

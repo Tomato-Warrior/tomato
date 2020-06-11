@@ -30,6 +30,7 @@ class WebhooksController < ApplicationController
     elsif action == "addMemberToCard"
       member_id = Webhook.new.assign_member_id(res)
       card_name = Webhook.new.card(res).values_at("name").join  
+      card_id = Webhook.new.card(res).values_at("id").join
       if user.trello_member_id == member_id && target_project.tasks.map{|task| task.title}.include?(card_name) == false
         assign_card = Webhook.new.card(res)
         assign_card_list = JSON.parse(GetCards.new.get_card_by_id(assign_card.values_at("id")[0], ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], user.trello_token))
@@ -37,7 +38,8 @@ class WebhooksController < ApplicationController
         new_task.create_trello_info({card_id:assign_card.values_at("id")[0], 
                                     list_id:assign_card_list.values_at("id")[0], 
                                     board_id:board.values_at("id")[0], 
-                                    user_id:user.id})
+                                    user_id:user.id,
+                                    list_name:assign_card_list.values_at("name")[0]})
       end
     end
   end

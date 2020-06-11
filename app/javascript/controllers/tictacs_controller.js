@@ -209,24 +209,6 @@ export default class extends Controller {
     }) 
   }
 
-  // 中斷 api
-  breakWorkApiPromise(data){
-    const tictac_id = this.stopbtnTarget.dataset.id
-    return new Promise(function(resolve, reject) {
-      Rails.ajax({
-        url: `/api/v1/tictacs/${tictac_id}/cancel`, 
-        type: 'POST',
-        dataType: 'json',
-        success: resp => {
-          resolve(resp)
-        }, 
-        error: err => {
-          console.log(err);
-        } 
-      })
-    }) 
-  }
-
   connect(){
     // this.clicked = false
     let relax_num = 0

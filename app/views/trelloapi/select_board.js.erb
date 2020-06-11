@@ -1,0 +1,2 @@
+view = document.querySelector(".import-trello")
+$(".import-trello").html("<%= escape_javascript(render :partial => 'select_board', 'data-type': 'html') %>")

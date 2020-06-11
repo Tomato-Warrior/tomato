@@ -12,7 +12,6 @@ require("scripts")
 
 import $ from 'jquery'
 window.$ = $
-require( 'datatables.net-dt' )( $, window);
 
 // seewtalert2
 import Swal from 'sweetalert2/dist/sweetalert2.js'

@@ -4,12 +4,16 @@ class TrelloapiController < ApplicationController
   layout "trelloapi"
   #全域變數  
   $board_id
+  $member_id
   def get_token
     data = JSON.parse(params[:data])
     trello_member_id = data.values_at("id").join
-    current_user.update(trello_token: params[:token])
-    current_user.update(trello_member_id: trello_member_id)
-    redirect_to root_path
+    if trello_acount_already_exist?(trello_member_id)
+      redirect_to root_path, alert:"帳號已被其他使用者登入"
+    else
+      current_user.update(trello_token: params[:token], trello_member_id: trello_member_id)
+      redirect_to root_path
+    end
   end
 
   def get_board
@@ -23,13 +27,16 @@ class TrelloapiController < ApplicationController
     task_id = params[:task_id]
     response = UpdateCard.new.move_to_list(card_id, list_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     render json: {res: response}
-    Task.find(task_id).trello_info.update(list_id: list_id)
+    data = JSON.parse(response)
+    list_id = data.values_at("idList")
+    list_info = GetLists.get_list_info(list_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
+    list_name = JSON.parse(list_info).values_at("name")
+    Task.find(task_id).trello_info.update(list_id: list_id, list_name: list_name)
   end
 
   def get_list_data 
     task = Task.find(params[:task_id])
     data = list_data_trans(task, current_user.trello_token)
-
     render json: {list_data: data}
   end
   
@@ -72,7 +79,7 @@ class TrelloapiController < ApplicationController
                     end
                   }
     @name_id_chart = Hash[lists_name.zip(lists_id)]
-    id_name_chart = Hash[list_ids.zip(lists_name)]
+    id_name_chart = Hash[lists_id.zip(lists_name)]
     @param_list_id = @param_list_names.map{|name| @name_id_chart.values_at(name)}.flatten #拿到list name的id
     param_card_names = []
     param_card_ids = []
@@ -107,8 +114,6 @@ class TrelloapiController < ApplicationController
   def import_assigned_cards
     lists_data = GetLists.new.get_lists($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     lists = JSON.parse(lists_data)
-    member_data = GetMember.new.get_member_id(ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
-    member_id = JSON.parse(member_data).values_at("id").join
     lists_name = lists.map{|list| list.values_at("name")}.flatten
     lists_id = lists.map{|list| list.values_at("id")}.flatten
     @param_list_names = [] #拿到list name
@@ -130,7 +135,6 @@ class TrelloapiController < ApplicationController
     response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     webhook_id = JSON.parse(response).values_at("id")[0]
     import_data.update(webhook_id:webhook_id)             
-
     redirect_to root_path
   end
 
@@ -158,7 +162,6 @@ class TrelloapiController < ApplicationController
     @assigned_cards = JSON.parse(GetLists.new.get_assigned_cards(member_id, board_id, list_name, api_key, token)).values_at("cards").flatten
   end
 
-
   def create_trello_info(import_data, card_ids, list_ids, list_names, board_id, user_id)
     i=0
     while i<import_data.tasks.count
@@ -172,8 +175,17 @@ class TrelloapiController < ApplicationController
       format.html
       format.js
     end
-
+  end
+  
   def list_data_trans(task, token)
     JSON.parse(GetLists.new.get_lists(task.trello_info.board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], token)).map{|list| list.values_at("name","id")}
+  end
+  
+  def trello_acount_already_exist?(trello_member_id)
+    if User.find_by(trello_member_id:trello_member_id) == nil
+      false
+    else
+      true
+    end
   end
 end

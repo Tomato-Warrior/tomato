@@ -21,8 +21,8 @@
       </div>
     </div>
     <div class="info-container">
-      <div class="d-flex align-items-center text-right tag-icon ml-4">	
-          <TaskTag v-for="tag in task.tags" :tag="tag" :key="tag" />	
+      <div class="d-flex align-items-center text-right tag-icon ml-4">
+          <TaskTag v-for="tag in task.tags" :tag="tag" :key="tag" />
       </div>
     </div>
     <div class="d-flex align-items-center ml-auto delete-icon">

@@ -105,9 +105,7 @@ const store = new Vuex.Store({
       data.append('task[expect_tictacs]', expectTictac);
       data.append('task[description]', taskDesc);
       data.append('task[tag_items][]', taskTag); 
-      data.append('task[project_id]', selectedProjectId); 
-
-      // 要寫成 for 回圈
+      data.append('task[project_id]', selectedProjectId);
 
       Rails.ajax({
         url: `/api/v1/tasks/${taskId}`,
@@ -115,15 +113,12 @@ const store = new Vuex.Store({
         dataType: 'JSON',
         data,
         success: resp => {
-          console.log(resp);
-          
           commit('UPDATE_TASK', resp)
         },
         error: err => {
           console.log(err);          
         }
       })
-
     },
 
     completeTask({ commit }, taskId) {

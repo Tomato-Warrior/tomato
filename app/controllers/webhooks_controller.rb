@@ -1,6 +1,6 @@
 class WebhooksController < ApplicationController
   protect_from_forgery with: :null_session
-
+  layout 'trelloapi'
   $data
   def complete
     render status: 200

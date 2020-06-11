@@ -71,4 +71,12 @@ $(window).on('turbolinks:load', function(){
     $('.bootstrap-table .form-control').val("");
   });
 
+  var vm = new Vue({
+    el: '#trellobtn',
+    delimiters: ['${', '}'],
+    data: {
+      isTrello: false
+    }
+  });
+
 });

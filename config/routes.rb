@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root "home#index"
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
-
   resources :tictacs, only: [:index, :update] do
     collection do
       get :list

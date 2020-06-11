@@ -1,15 +1,18 @@
 class Webhook
   def create(board_id, api_key, token)
+    byebug
     begin
       RestClient::Request.execute(method: :post, url: "api.trello.com/1/tokens/#{token}/webhooks/?key=#{api_key}",
                                   payload: {
-                                  callbackURL: 'http://d19a09f739f3.ngrok.io/webhooks/receive',
+                                  callbackURL: 'http://036d2d619fdd.ngrok.io/webhooks/receive',
                                   idModel: board_id,
                                   description: "My webhook"},
                                   headers:{ :content_type => 'application/json'}) do |response|
                                               case response.code
                                               when 301, 302, 307
+                                                byebug
                                                 response.follow_redirection
+                                                
                                               else
                                                 response.return!
                                               end                   

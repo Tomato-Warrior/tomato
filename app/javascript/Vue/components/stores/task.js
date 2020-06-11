@@ -14,7 +14,6 @@ const store = new Vuex.Store({
     finish_tictac: 0, 
     projectId: 0,
     loaded: false,
-    tasks: [], 
     projects: []
   },
 
@@ -24,7 +23,7 @@ const store = new Vuex.Store({
     },
 
     UPDATE_TASK(state, resp){
-      let taskId = resp.task.id
+      // let taskId = resp.task.id
     },
 
     TOGGLE_COMPLETE(state, resp) {
@@ -98,7 +97,7 @@ const store = new Vuex.Store({
       });
     },
 
-    updatedTask({ commit }, {taskId, taskTitle, taskDate, expectTictac, taskDesc, taskTag}){
+    updatedTask({ commit }, {taskId, taskTitle, taskDate, expectTictac, taskDesc, taskTag, selectedProjectId}){
 
       const data = new FormData();
       data.append('task[title]', taskTitle);
@@ -106,6 +105,7 @@ const store = new Vuex.Store({
       data.append('task[expect_tictacs]', expectTictac);
       data.append('task[description]', taskDesc);
       data.append('task[tag_items][]', taskTag); 
+      data.append('task[project_id]', selectedProjectId); 
 
       // 要寫成 for 回圈
 

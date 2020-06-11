@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="col-6 d-flex p-3 shadow bg-white rounded">
-          <%= pie_chart [["完成的番茄", @trello_project_finished], ["取消的番茄", @trello_project_cancelled]] %>
+          <%= pie_chart [["完成的番茄", @trello_project_finished], ["取消的番茄", @trello_project_cancelled]], colors: ["#F87660", "#434343"] %>
         </div>
       </div>
     <% end %>

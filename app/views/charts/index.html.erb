@@ -43,19 +43,19 @@
 
   <div class="mb-5 tab-content border-right border-left border-bottom shadow bg-white rounded" id="nav-tabContent">
     <div class="tab-pane fade show active p-4" id="nav-day" role="tabpanel" aria-labelledby="nav-day-tab">
-      <%= line_chart @daily_tictac %>
+      <%= line_chart @daily_tictac, colors: ["#F87660"]%>
     </div>
     <div class="tab-pane fade p-4" id="nav-week" role="tabpanel" aria-labelledby="nav-week-tab">
-      <%= line_chart @weekly_tictac %>
+      <%= line_chart @weekly_tictac, colors: ["#F87660"] %>
     </div>
     <div class="tab-pane fade p-4" id="nav-month" role="tabpanel" aria-labelledby="nav-month-tab">
-      <%= line_chart @monthly_tictac %>
+      <%= line_chart @monthly_tictac, colors: ["#F87660"] %>
     </div>
   </div>
 
   <div class="mb-5 p-4 border shadow bg-white rounded">
     <div class="btn-group">
-      <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
+      <a class="btn submit-radius p-2 dropdown-toggle" data-toggle="dropdown" href="#">
         選擇一個專案 <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
@@ -84,7 +84,7 @@
             </div>
           </div>
           <div class="col-6 d-flex p-3 shadow bg-white rounded">
-            <%= pie_chart [["完成的番茄", @first_project_finished], ["取消的番茄", @first_project_cancelled]] %>
+            <%= pie_chart [["完成的番茄", @first_project_finished], ["取消的番茄", @first_project_cancelled]], colors: ["#F87660", "#434343"] %>
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@
               </div>
             </div>
             <div class="col-6 d-flex p-3 shadow bg-white rounded">
-              <%= pie_chart [["完成的番茄", project[:finished_tictacs]], ["取消的番茄", project[:cancelled_tictacs]]] %>
+              <%= pie_chart [["完成的番茄", project[:finished_tictacs]], ["取消的番茄", project[:cancelled_tictacs]]], colors: ["#F87660", "#434343"] %>
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@
 
   <div class="mb-5 p-4 border shadow bg-white rounded">
     <div class="btn-group">
-      <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
+      <a class="btn submit-radius p-2 dropdown-toggle" data-toggle="dropdown" href="#">
         選擇一項標籤 <span class="caret"></span>
       </a>
       <% if @tags.any? %>
@@ -134,12 +134,12 @@
       <% if @tags.any? %>
         <div class="tab-pane active">
           <h1 class="text-center"><%= @tags.first.name %></h1>
-          <%= column_chart @first_tag_finish_tictacs %>
+          <%= column_chart @first_tag_finish_tictacs, colors: ["#F87660"] %>
         </div>
         <% @tags_arr.each do |tag| %>
           <div id="<%= "tag-chart-#{tag[:id]}" %>" class="tab-pane">
             <h1 class="text-center"><%= tag[:name] %></h1>
-            <%= column_chart tag[:tictac] %>
+            <%= column_chart tag[:tictac], colors: ["#F87660"] %>
           </div>
         <% end %>
       <% end %>
@@ -148,7 +148,7 @@
 
   <div class="mb-5 p-4 border shadow bg-white rounded">
     <div class="btn-group">
-      <a class="btn btn-outline-primary p-2 dropdown-toggle" data-toggle="dropdown" href="#">
+      <a class="btn submit-radius p-2 dropdown-toggle" data-toggle="dropdown" href="#">
         選擇一項任務 <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
@@ -166,13 +166,13 @@
       <div id="Home" class="tab-pane active">
         <% if @tasks.any? %>
           <h1 class="text-center"><%= @tasks.first.title %></h1>
-          <%= column_chart @first_task_finished %>
+          <%= column_chart @first_task_finished, colors: ["#F87660"] %>
         <% end %>
       </div>
       <% @tasks_arr.each do |task| %>
         <div id="<%= "task-chart-#{task[:id]}" %>" class="tab-pane">
           <h1 class="text-center"><%= task[:title] %></h1>
-          <%= column_chart task[:tictac] %>
+          <%= column_chart task[:tictac], colors: ["#F87660"] %>
         </div>
       <% end %>
     </div>

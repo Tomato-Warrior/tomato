@@ -186,6 +186,9 @@ a{
 
 .dropdown-menu-self{
   transform: translate3d(-160px, 0px, 0px)!important;
+    a{
+    color: $mainRed;
+  }
 }
 
 .btn-self{
@@ -198,10 +201,3 @@ a{
 .nav-tabs{
   border: none;
 }
-  a{
-    color: #fff;
-  }
-
-  a:hover{
-    color: #fff;
-  }

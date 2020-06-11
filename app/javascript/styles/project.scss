@@ -94,6 +94,12 @@ button.btn{
   font-size: 16px;
   white-space:nowrap;
 }
+select.form-control{
+  background-color: #F0F0F0;
+}
+a.list_font:hover{
+  color: $mainRed;
+}
 .play-icon{
   line-height: 1.5;
   font-size: 20px;
@@ -126,17 +132,6 @@ button.btn{
   .tag-color{
     background-color: #B1B1B1;
     color: #fff;
-  }
-  .delete-icon{
-    a{
-      color: #B1B1B1;
-    }
-    a.hover{
-      color: #B1B1B1;
-    }
-  }
-  .fa-play-circle{
-    color: #B1B1B1;
   }
 }
 
@@ -184,7 +179,7 @@ h2.project-title{
   width: 330px;
 }
 
-@media screen and (min-width:768px){
+@media screen and (max-width:768px){
  .font-container{
      width: 200px;
  }

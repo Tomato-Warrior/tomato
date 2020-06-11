@@ -25,12 +25,6 @@
           <TaskTag v-for="tag in task.tags" :tag="tag" :key="tag" />
       </div>
     </div>
-    <div class="d-flex align-items-center ml-auto delete-icon">
-      <a :href="`/projects/${task.project_id}/tasks/${task.id}/edit`" class="mx-1">
-        <i class="fas fa-pencil-alt"></i>
-      </a>
-    </div>
-
      <!-- modal -->
       <div class="modal fade" :id="`editVueTask-${task.id}`" tabindex="-1" role="dialog" aria-labelledby="editVueTaskTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

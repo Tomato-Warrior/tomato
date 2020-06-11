@@ -35,7 +35,7 @@ json.project do
       json.cancel_tictac task.tictacs.cancelled.count
       json.status task.status
       json.project_id task.project_id
-      json.date task.date.strftime("%Y-%m-%d")
+      json.date task.date.strftime("%Y-%m-%d") if task.date
 
       if task.trello_info
         json.trello_card task.trello_info.card_id
@@ -56,7 +56,7 @@ json.project do
       json.cancel_tictac task.tictacs.cancelled.count
       json.status task.status
       json.project_id task.project_id
-      json.date task.date
+      json.date task.date.strftime("%Y-%m-%d") if task.date
       if task.trello_info
         json.trello_card task.trello_info.card_id
         json.trello_list task.trello_info.list_id

@@ -246,7 +246,7 @@ h2.project-title{
  }
 
 .modal, .modal-backdrop{
-  position: absolute !important;
+  position: fixed !important;
 }
 .time-setting:hover{
   color: $redBtnHover;
@@ -282,6 +282,7 @@ span.select2{
 textarea.form-control{
   background-color: #F0F0F0;
   height: 124px;
+<<<<<<< HEAD
 
 }
 .form-control.search-input{

@@ -1,18 +1,20 @@
+json.all_projects current_user.projects.pluck(:id, :title)
+
 json.project do
   json.id @project.id
   json.title @project.title
   json.color @project.cover
   json.finish_tictac @tictac_count
   json.expect_time @project_expect_time
-
   json.tasks do
+    
     json.array! @tasks.order(id: :desc) do |task|
       json.id task.id
       json.title task.title
       json.tags task.tag_items
       json.expect_tictac task.expect_tictacs
       # json.project_id current_user.projects.ids
-      json.project_titles current_user.projects.pluck(:id, :title)
+      
       json.date task.date
       json.description task.description
       if task.trello_info

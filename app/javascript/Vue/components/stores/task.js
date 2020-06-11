@@ -14,7 +14,8 @@ const store = new Vuex.Store({
     finish_tictac: 0, 
     projectId: 0,
     loaded: false,
-    tasks: []
+    tasks: [], 
+    projects: []
   },
 
   mutations: {
@@ -51,7 +52,8 @@ const store = new Vuex.Store({
       }
     }, 
 
-    SET_TASKS(state, project){
+    SET_TASKS(state, resp){
+      const project = resp.project;
       state.doingTasks = project.doingTasks;
       state.doneTasks = project.doneTasks;
       state.tasks = project.tasks;
@@ -60,6 +62,7 @@ const store = new Vuex.Store({
       state.expect_time = project.expect_time;
       state.finish_tictac = project.finish_tictac;
       state.projectId = project.id;
+      state.projects = resp.all_projects;
     }, 
 
     REMOVE_TASK(state, resp) {
@@ -96,9 +99,7 @@ const store = new Vuex.Store({
     },
 
     updatedTask({ commit }, {taskId, taskTitle, taskDate, expectTictac, taskDesc, taskTag}){
-      debugger
-      console.log(taskTag);
-      
+
       const data = new FormData();
       data.append('task[title]', taskTitle);
       data.append('task[date]', taskDate);
@@ -160,7 +161,7 @@ const store = new Vuex.Store({
         type: 'GET', 
         dataType: 'json',
         success: resp => { 
-          commit('SET_TASKS', resp.project);
+          commit('SET_TASKS', resp);
           state.loaded = true;
         }, 
         error: err => {

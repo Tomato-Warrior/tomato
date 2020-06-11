@@ -15,7 +15,11 @@ class Webhook
                                                 response.return!
                                               end                   
                                             end                                                     
-    rescue RestClient::ExceptionWithResponse => err
+      rescue RestClient::ExceptionWithResponse => err
+      rescue RestClient::MovedPermanently,
+                         RestClient::Found,
+                         ReswtClient::TemporaryRedirect => err
+        err.response.follow_redirection
     end
   end
 
@@ -31,6 +35,10 @@ class Webhook
                                                                                           end                                                    
       rescue RestClient::ExceptionWithResponse => e
         e.response
+      rescue RestClient::MovedPermanently,
+        RestClient::Found,
+        ReswtClient::TemporaryRedirect => err
+      err.response.follow_redirection
       end
   end
 

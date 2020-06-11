@@ -11,6 +11,6 @@ const webpack = require('webpack');
       $: 'jquery',
       jQuery: 'jquery',
       moment: 'moment',
-      Popper: ['popper.js', 'default']
+      Popper: ['popper.js', 'default'],
     })
 ) 

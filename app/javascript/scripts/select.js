@@ -67,8 +67,4 @@ $(window).on('turbolinks:load', function(){
   /* modal 新增任務 */
   $('#myModal').modal('toggle')
 
-  $(document).ready(function () {
-    $('#projectTable').DataTable();
-  });
-
 });

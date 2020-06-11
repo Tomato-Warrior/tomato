@@ -228,7 +228,7 @@ a:hover{
     display: flex;
     
 }
-@media (min-width: 768px){
+@media (max-width: 768px){
    .info-container{
      display: none;
    }

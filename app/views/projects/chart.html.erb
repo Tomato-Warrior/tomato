@@ -19,28 +19,25 @@
       </div>
     <% end %>
   </div>
-  <div class="container table-container">
+  <div class="container table-container" data-id="<%= params[:id]%>">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <table id="projectTable" class="display">
+        <table class="display">
           <thead>
-          <tr>
-            <th>Column1</th>
-            <th>Column2</th>
-            <th>Column3</th>
-          </tr>
+            <tr>
+              <th>任務名稱</th>
+              <th>完成番茄數</th>
+              <th>取消番茄數</th>
+            </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>Data11</td>
-            <td>Data12</td>
-            <td>Data13</td>
-          </tr>
-          <tr>
-            <td>Data21</td>
-            <td>Data22</td>
-            <td>Data23</td>
-          </tr>
+            <% @tasks_arr.each do |task| %>
+              <tr>
+                <td><%= task[0] %></td>
+                <td><%= task[1] %></td>
+                <td><%= task[2] %></td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>

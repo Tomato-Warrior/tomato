@@ -64,7 +64,44 @@ class ProjectsController < ApplicationController
     end
 
     # data table
-    @project
+    @task_finished_finished = 0
+    @task_cancelled_cancelled = 0
+    trello_infos = []
+    trello_tasks_id = []
+
+    if @project.trello_board_id != nil
+      trello_infos = TrelloInfo.where(board_id: @project.trello_board_id)
+
+      trello_infos.each do |trello_info|
+        trello_tasks_id << trello_info.task_id
+        trello_tasks_id.uniq!
+      end
+
+      @tasks_arr = []
+      trello_tasks_id.each do |trello_task_id|
+        @task_arr = []
+        trello_infos.each do |trello_info|
+          @title_arr = []
+          @finish_arr = []
+          @cancel_arr = []
+
+          if trello_info.task_id == trello_task_id
+            @title_arr << trello_info.task.title
+            @finish_arr << trello_info.task.tictacs.finished.count
+            @cancel_arr << trello_info.task.tictacs.cancelled.count
+          end
+          @title = @title_arr.uniq.join
+          @finished_total = @finish_arr.sum
+          @cancel_total = @cancel_arr.sum
+          
+          if trello_info.task_id == trello_task_id
+            @task_arr.push(@title, @finished_total, @cancel_total)
+          end
+        end
+        @tasks_arr << @task_arr
+      end
+    end
+
   end
 
   private

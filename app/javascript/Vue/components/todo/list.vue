@@ -20,8 +20,8 @@
         </div>
       </div>
     </div>
-    <div class="info-container">
-      <div class="d-flex align-items-center text-right tag-icon ml-4">
+    <div class="info-container ml-auto mr-5">
+      <div class="d-flex align-items-center text-right tag-icon">
           <TaskTag v-for="tag in task.tags" :tag="tag" :key="tag" />
       </div>
     </div>

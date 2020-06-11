@@ -183,6 +183,9 @@ h2.project-title{
   padding: 0px 10px;
   border-radius: 10px;
 }
+ textarea.form-control{
+   background-color: #F0F0F0;
+ }
 }
 
 ::-webkit-input-placeholder {
@@ -268,6 +271,12 @@ h2.project-title{
   select.task_project_id{
     background-color: #F0F0F0;
   }
+  .input-group{
+    box-shadow: none;
+  }
+  .form-control{
+    background-color: #F0F0F0;
+  }
 }
 .select2-container .select2-selection--multiple{
   background-color: #F0F0F0;
@@ -307,4 +316,8 @@ textarea.form-control{
      color: #434343;
    }
   }
+}
+
+.select2-container{
+  display: block;
 }

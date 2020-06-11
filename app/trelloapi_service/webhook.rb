@@ -1,6 +1,5 @@
 class Webhook
   def create(board_id, api_key, token)
-    byebug
     begin
       RestClient::Request.execute(method: :post, url: "api.trello.com/1/tokens/#{token}/webhooks/?key=#{api_key}",
                                   payload: {
@@ -11,7 +10,6 @@ class Webhook
                                               case response.code
                                               when 301, 302, 307
                                                 response.follow_redirection
-                                                byebug
                                               else
                                                 response.return!
                                               end                   

@@ -22,12 +22,12 @@
         <textarea type="number" class="form-control" v-model="task.description" ></textarea>
       </div>
       <div class="form-group">
-        <Select2 v-model="task.tags" :options="task.tags" :settings="{ tags: 'true', multiple: 'true', tokenSeparators: [',', ' ']}">
-        </Select2>
+        <Select2 v-model="task.tags" :options="task.tags" :settings="{ tags: 'true', multiple: 'true', tokenSeparators: [',', ' ']}" />
       </div>
       <div class="form-group">
         <label>任務執行日期</label>
-        <input type="date" class="form-control" v-model="task.expect_date">
+        <input type="date" class="form-control" v-model="task.date">
+        {{ task }}
       </div>
       <input type="submit" value="更新" @click="updateTask">
     </form> 
@@ -44,7 +44,7 @@ export default {
   props: ['show', 'task'],
   data: function() {
     return {
-      selectedProjectId: 0, 
+      selectedProjectId: (this.task.project_id), 
       tags: ''
     }
   },

@@ -20,6 +20,7 @@
     "sweetalert2": "^9.10.13",
     "tempusdominus-bootstrap-4": "^5.1.2",
     "turbolinks": "^5.2.0",
+    "v-select2-component": "^0.4.3",
     "v-select2-multiple-component": "^0.1.1",
     "vodal": "^2.4.0",
     "vue": "^2.6.11",

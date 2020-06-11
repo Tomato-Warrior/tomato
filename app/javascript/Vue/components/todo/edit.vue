@@ -22,13 +22,9 @@
         <textarea type="number" class="form-control" v-model="task.description" ></textarea>
       </div>
       <div class="form-group">
-        <Select v-model="task.tags" :options="task.tags" @keydown.enter="createTag" :setting="{
-          tags: true,
-          multiple: 'true',
-          tokenSeparators: [',', ' ']
-        }" />
+        <Select2 v-model="task.tags" :options="task.tags" :settings="{ tags: 'true', multiple: 'true', tokenSeparators: [',', ' ']}">
+        </Select2>
       </div>
-      <!-- {{ task.tags }} -->
       <div class="form-group">
         <label>任務執行日期</label>
         <input type="date" class="form-control" v-model="task.expect_date">
@@ -41,14 +37,15 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import Rails from '@rails/ujs';
-import Select from 'v-select2-multiple-component';
+import Select2 from 'v-select2-component';
 
 export default {
   name: 'TaskEdit',
   props: ['show', 'task'],
   data: function() {
     return {
-      selectedProjectId: 0
+      selectedProjectId: 0, 
+      tags: ''
     }
   },
   computed: {
@@ -61,6 +58,9 @@ export default {
         this.selectedProjectId = newValue;
       }
     }
+  },
+  components: {
+    Select2
   },
   methods: {
     ...mapActions(['updatedTask']),
@@ -80,24 +80,6 @@ export default {
       $(`#editVueTask-${this.task.id}`).modal('hide');
     },
 
-    createTag: function () {
-      console.log('aaa');
-      
-      // var term = $.trim(params.term);
-  
-      // if (term === '') {
-      //   return null;
-      // }
-      // return {
-      //   id: term,
-      //   text: term,
-      //   newTag: true 
-      // }
-  },
-
-  },
-  components: {
-    Select
   },
   
 }

@@ -19,23 +19,26 @@
       </div>
     <% end %>
   </div>
-  <div class="container table-container" data-id="<%= params[:id]%>">
-    <div class="row">
+  <div class="container table-container">
+    <div class="row my-5 p-4 border shadow bg-white rounded justify-content-center">
       <div class="col-md-8 col-md-offset-2">
-        <table class="display">
+      <div class="d-flex justify-content-end">
+        <a href="#" class="clear"><i class="fas fa-sync-alt"></i></a>
+      </div>
+        <table class="display table table-hover" id="projectTable" data-toggle="table" data-pagination="true" data-search="true" data-reset-search="true">
           <thead>
             <tr>
-              <th>任務名稱</th>
-              <th>完成番茄數</th>
-              <th>取消番茄數</th>
+              <th scope="col" data-sortable="true" data-field="title">任務名稱</th>
+              <th scope="col" data-sortable="true" data-field="finished" class="text-center">完成番茄數</th>
+              <th scope="col" data-sortable="true" data-field="cancelled" class="text-center">取消番茄數</th>
             </tr>
           </thead>
           <tbody>
             <% @tasks_arr.each do |task| %>
               <tr>
                 <td><%= task[0] %></td>
-                <td><%= task[1] %></td>
-                <td><%= task[2] %></td>
+                <td class="text-center"><%= task[1] %></td>
+                <td class="text-center"><%= task[2] %></td>
               </tr>
             <% end %>
           </tbody>

@@ -173,7 +173,7 @@ class TrelloapiController < ApplicationController
   def list_data_trans(task, token)
     JSON.parse(GetLists.new.get_lists(task.trello_info.board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], token)).map{|list| list.values_at("name","id")}
   end
-  
+
   def trello_acount_already_exist?(trello_member_id)
     if User.find_by(trello_member_id:trello_member_id) == nil
       false

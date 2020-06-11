@@ -2,7 +2,7 @@ class Webhook
   def create(board_id, api_key, token)
     begin
       RestClient::Request.execute(method: :post, url: "api.trello.com/1/tokens/#{token}/webhooks/?key=#{api_key}",
-                                  payload: {D
+                                  payload: {
                                   callbackURL: 'http://c2aff2ed5f96.ngrok.io/webhooks/receive',
                                   idModel: board_id,
                                   description: "My webhook"},

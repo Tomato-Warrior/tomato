@@ -24,25 +24,28 @@ export default class extends Controller {
     })
   }
 
+  connect(){
+  }
+
   get_token(e){
     localStorage.clear();
     let that = this
     e.preventDefault()
     this.trelloAuthorize().then((data)=>{
       return new Promise(function(resolve, reject){
-        (fetch(`https://api.trello.com/1/members/me?key=${that.api_key}&token=${that.trello_token}`, {
+        resolve(fetch(`https://api.trello.com/1/members/me?key=${that.api_key}&token=${that.trello_token}`, {
           method: 'GET',
           headers: {
             'Accept': 'application/json'
           }
         }))
-          .then(response => {
-          resolve(response.text())
-          })
+      })
+      .then(response => {
+        return response.text();
       }) 
     })
     .then((text) => {
-      const submitData = {token: this.trello_token, data: text}
+      const submitData = {token: this.trello_token, text}
       Rails.ajax({
         url: `/trelloapi/get_token`, 
         type: 'POST', 

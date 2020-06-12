@@ -4,11 +4,8 @@ class TrelloapiController < ApplicationController
   #全域變數  
   $board_id
   def get_token
-    data = JSON.parse(params[:data])
-    trello_member_id = data.values_at("id").join
+    ENV['TRELLO_USER_TOKEN'] = params[:token]
     current_user.update(trello_token: params[:token])
-    current_user.update(trello_member_id: trello_member_id)
-    redirect_to root_path
   end
 
   def get_board
@@ -108,11 +105,7 @@ class TrelloapiController < ApplicationController
                         @param_list_names.append(params[:"#{list}"])
                       end
                     }
-<<<<<<< HEAD
     assigned_cards_data = @param_list_names.map{|list_name| get_assigned_cards_data(member_id, $board_id, list_name,  ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
-=======
-    assigned_cards_data = @param_list_names.map{|list_name| get_assigned_cards_data( current_user.trello_member_id, $board_id, list_name,  ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
->>>>>>> 可以得到trello新建卡片同時新建任務
     assigned_cards_names = assigned_cards_data.map{|list| list.map{|card| card.values_at("name")}.flatten}
     assigned_cards_ids = assigned_cards_data.map{|list| list.map{|card| card.values_at("id")}}.flatten
     assigned_cards_list_ids = assigned_cards_data.map{|list| list.map{|card| card.values_at("idList")}}.flatten
@@ -140,7 +133,6 @@ class TrelloapiController < ApplicationController
     @tasks_attr_data = @tasks_attr_data.map{|list| list.map{|card| eval(card)}}.flatten 
     return @tasks_attr_data
   end
-
 
   def import_trello_board(board_name, board_id, tasks_attr_data)
     current_user.projects.create!(title: board_name, trello_board_id: board_id,

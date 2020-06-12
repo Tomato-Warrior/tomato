@@ -29,9 +29,8 @@ export default {
   computed: {
     ...mapState(['projectId'])
   },
-
   methods: {
-    ...mapActions(['addTask']),
+    ...mapActions(['addTask', 'trello_board']),
 
     submit: function () {
       if(this.content.length != 0){

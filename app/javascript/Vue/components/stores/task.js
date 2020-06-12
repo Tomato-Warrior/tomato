@@ -101,15 +101,18 @@ const store = new Vuex.Store({
       });
     },
 
-    updatedTask({ commit }, {taskId, taskTitle, taskDate, expectTictac, taskDesc, taskTag, selectedProjectId}){
+    updatedTask({ commit }, {taskId, taskTitle, taskDate, expectTictac, taskDesc, taskTag, selectedProjectId, trelloList}){
 
-      const data = new FormData();
+      const data = new FormData(); 
       data.append('task[title]', taskTitle);
       data.append('task[date]', taskDate);
       data.append('task[expect_tictacs]', expectTictac);
       data.append('task[description]', taskDesc);
       data.append('task[tag_items][]', taskTag); 
       data.append('task[project_id]', selectedProjectId);
+      data.append('trello[trello_list]',trelloList);
+      // console.log(data.getAll());
+     
 
       Rails.ajax({
         url: `/api/v1/tasks/${taskId}`,

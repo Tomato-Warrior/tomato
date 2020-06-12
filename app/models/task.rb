@@ -25,6 +25,10 @@ class Task < ApplicationRecord
     end
   end
 
+  def trello_imported?
+    self.trello_info.present?
+  end
+
   def tag_list
     tags.map(&:name).join(',')
   end

@@ -8,7 +8,7 @@
       <div class="form-group" v-if="trello_board != null">
         <label>Trello</label>
         <select class="form-control" v-model="trello_selected">
-          <option v-for="list in all_trello_lists" :value="list [1]">
+          <option v-for="list in all_trello_lists" :value="list[1]">
             {{ list[0] }}
           </option>
         </select>
@@ -54,7 +54,7 @@ export default {
   data: function() {
     return {
       selectedProjectId: (this.task.project_id), 
-      selectedTelloId:(this.task.trello_list),
+      selectedTrelloId:(this.task.trello_list),
       tags: ''
     }
   },
@@ -73,7 +73,7 @@ export default {
         return this.task.trello_list;
       }, 
       set: function(newValue) {
-        this.selectedTelloId = newValue;
+        this.selectedTrelloId = newValue;
       }
     }
   },
@@ -100,7 +100,8 @@ export default {
         expectTictac: this.task.expect_tictac, 
         taskDesc: this.task.description, 
         taskTag: this.task.tags, 
-        selectedProjectId: this.selectedProjectId
+        selectedProjectId: this.selectedProjectId,
+        trelloList: this.selectedTrelloId
       });
 
       $(`#editVueTask-${this.task.id}`).modal('hide');

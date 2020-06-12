@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 2020_06_09_022210) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "cover"
     t.datetime "deleted_at"
+    t.string "trello_board_id"
     t.string "webhook_id"
     t.string "trello_import_method"
-    t.string "trello_board_id"
     t.index ["deleted_at"], name: "index_projects_on_deleted_at"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 2020_06_09_022210) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
     t.integer "position"
-    t.string "trello_status"
     t.integer "status", default: 0
     t.index ["deleted_at"], name: "index_tasks_on_deleted_at"
     t.index ["project_id"], name: "index_tasks_on_project_id"
@@ -101,8 +100,8 @@ ActiveRecord::Schema.define(version: 2020_06_09_022210) do
     t.string "uid"
     t.string "trello_token"
     t.string "auth_token"
-    t.string "trello_member_id"
     t.integer "time_setting", default: 0
+    t.string "trello_member_id"
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

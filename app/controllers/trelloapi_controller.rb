@@ -105,9 +105,15 @@ class TrelloapiController < ApplicationController
     list_names = list_data.map{|list| JSON.parse(list).values_at("name")}.flatten
     create_trello_info(import_data, param_card_ids, list_ids, list_names, $board_id, current_user.id)
     response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
-    webhook_id = JSON.parse(response).values_at("id")[0]
-    import_data.update(webhook_id:webhook_id)
-    redirect_to root_path
+    if response != nil
+      webhook_id = JSON.parse(response).values_at("id")[0]
+      import_data.update(webhook_id:webhook_id)
+      redirect_to root_path
+    else
+      redirect_to root_path, alert:"訂閱失敗"
+    end
+    
+
   end
 
   def import_assigned_cards
@@ -131,10 +137,14 @@ class TrelloapiController < ApplicationController
     generate_tasks_attributes(assigned_cards_names, @param_list_names.count) 
     import_data = import_trello_board(board_name, $board_id,"import_assign_card", @tasks_attr_data) 
     create_trello_info(import_data ,assigned_cards_ids, assigned_cards_list_ids, assigned_cards_list_names, $board_id, current_user.id)      
-    response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
-    webhook_id = JSON.parse(response).values_at("id")[0]
-    import_data.update(webhook_id:webhook_id)             
-    redirect_to root_path
+    response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token) 
+    if response != nil
+      webhook_id = JSON.parse(response).values_at("id")[0]
+      import_data.update(webhook_id:webhook_id)
+      redirect_to root_path
+    else
+      redirect_to root_path, alert:"訂閱失敗"
+    end           
   end
 
   private

@@ -31,6 +31,7 @@ class TrelloapiController < ApplicationController
     list_info = GetLists.new.get_list_info(list_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     list_name = JSON.parse(list_info).values_at("name").join
     Task.find(task_id).trello_info.update(list_id: list_id, list_name: list_name)
+
   end
 
   def get_list_data 

@@ -10,8 +10,9 @@ class Webhook
                                   headers:{ :content_type => 'application/json'}) do |response|
                                               case response.code
                                               when 301, 302, 307
-                                                response.follow_redirection
                                                 byebug
+                                                response.follow_redirection
+                                                
                                               else
                                                 response.return!
                                               end                   

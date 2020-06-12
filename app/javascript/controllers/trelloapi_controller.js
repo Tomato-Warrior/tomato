@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["select_board", "select_card", "select_list", "change_list", "import_method", "call_options"]
+  static targets = ["select_board", "select_card", "select_list", "change_list", "import_method"]
   trello_token = ""
   api_key = "f91cef06b7d1a94754eac87835224aeb"
   
@@ -24,25 +24,28 @@ export default class extends Controller {
     })
   }
 
+  connect(){
+  }
+
   get_token(e){
     localStorage.clear();
     let that = this
     e.preventDefault()
     this.trelloAuthorize().then((data)=>{
       return new Promise(function(resolve, reject){
-        (fetch(`https://api.trello.com/1/members/me?key=${that.api_key}&token=${that.trello_token}`, {
+        resolve(fetch(`https://api.trello.com/1/members/me?key=${that.api_key}&token=${that.trello_token}`, {
           method: 'GET',
           headers: {
             'Accept': 'application/json'
           }
         }))
-          .then(response => {
-          resolve(response.text())
-          })
+      })
+      .then(response => {
+        return response.text();
       }) 
     })
     .then((text) => {
-      const submitData = {token: this.trello_token, data: text}
+      const submitData = {token: this.trello_token, text}
       Rails.ajax({
         url: `/trelloapi/get_token`, 
         type: 'POST', 
@@ -83,35 +86,6 @@ export default class extends Controller {
       that.import_methodTarget.classList.add("d-none")
   } 
 
-  call_options(e){
-    const submitData = {task_id: this.change_listTarget.name}
-    Rails.ajax({
-      url: `/trelloapi/get_list_data`,
-      type: 'POST', 
-      dataType: 'json',
-      beforeSend(xhr, options) {
-        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-        options.data = JSON.stringify(submitData)
-        return true
-      },
-      success: resp => {
-        let data = resp.list_data
-        let options = []
-          for(let i=0;i<=data.length-1;i++){
-            if(this.change_listTarget.value == data[i][1]){
-              options.push(`<option value=${data[i][1]} selected>${data[i][0]}</option>`)
-            }else{
-              options.push(`<option value=${data[i][1]}>${data[i][0]}</option>`)
-            }
-          }
-          this.change_listTarget.innerHTML=options.join("")
-      }, 
-      error: err => {
-        console.log(err);
-      } 
-    })
-  }
-
   change_list(){
     let list_id = this.change_listTarget.value
     let card_id = this.change_listTarget.id
@@ -127,6 +101,5 @@ export default class extends Controller {
         return true
       }
     })
-    
   }
 }

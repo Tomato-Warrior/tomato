@@ -1,9 +1,0 @@
-<div class="container" data-controller="trelloapi">
-  <% if current_user.trello_token != nil %>
-    <p>帳號已驗證</p>
-    <%= link_to "上一頁", :back %>
-  <% else %>
-    <a href="#" data-action="click->trelloapi#get_token">驗證帳號</a>
-  <% end %>
-  <a href="#" data-action="click->trelloapi#get_token">驗證帳號</a>
-</div>

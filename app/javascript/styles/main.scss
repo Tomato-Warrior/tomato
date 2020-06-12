@@ -279,3 +279,12 @@ a.btn-project-trello:hover{
 .btn-project-trello{
     color: #fff;
 }
+.trello-container{
+    width: 100px;
+}
+.tag-icon{
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

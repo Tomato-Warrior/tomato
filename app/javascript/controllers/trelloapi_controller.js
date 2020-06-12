@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["select_board", "select_card", "select_list", "change_list", "import_method", "call_options"]
+  static targets = ["select_board", "select_card", "select_list", "change_list", "import_method", "call_select_list"]
   trello_token = ""
   api_key = "f91cef06b7d1a94754eac87835224aeb"
   
@@ -83,8 +83,9 @@ export default class extends Controller {
       that.import_methodTarget.classList.add("d-none")
   } 
 
-  call_options(e){
-    const submitData = {task_id: this.change_listTarget.name}
+  call_select_list(e){
+    e.preventDefault()
+    const submitData = {task_id: this.call_select_listTarget.name}
     Rails.ajax({
       url: `/trelloapi/get_list_data`,
       type: 'POST', 
@@ -96,15 +97,12 @@ export default class extends Controller {
       },
       success: resp => {
         let data = resp.list_data
-        let options = []
+          this.call_select_listTarget.innerHTML=`<select name='${this.call_select_listTarget.name}' id='${this.call_select_listTarget.id}'
+                                                  data-action="change->trelloapi#change_list" data-target="trelloapi.change_list"></select>`
           for(let i=0;i<=data.length-1;i++){
-            if(this.change_listTarget.value == data[i][1]){
-              options.push(`<option value=${data[i][1]} selected>${data[i][0]}</option>`)
-            }else{
-              options.push(`<option value=${data[i][1]}>${data[i][0]}</option>`)
-            }
+            this.change_listTarget.insertAdjacentHTML('beforeend', `<option value=${data[i][1]}>${data[i][0]}</option>`)
           }
-          this.change_listTarget.innerHTML=options.join("")
+          
       }, 
       error: err => {
         console.log(err);
@@ -127,6 +125,5 @@ export default class extends Controller {
         return true
       }
     })
-    
   }
 }

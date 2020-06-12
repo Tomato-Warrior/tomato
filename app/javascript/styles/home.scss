@@ -309,14 +309,16 @@ textarea.form-control{
   transition: 0.2s;
 }
  }
-  .select2-selection__choice{
-    background-color: $mainYellow;
-    border: none;
-   .select2-selection__choice__remove{
-     color: #434343;
-   }
+.select2-selection__choice{
+  background-color: $mainYellow;
+  border: none;
+  .select2-selection__choice__remove{
+    color: #434343;
+  }
 }
 
 .select2-container{
   display: block;
+  background-color: #f0f0f0;
+  width: 100%;
 }

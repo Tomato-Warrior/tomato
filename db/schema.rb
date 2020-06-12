@@ -98,8 +98,12 @@ ActiveRecord::Schema.define(version: 2020_06_09_022210) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider"
     t.string "uid"
-    t.string "trello_token"
     t.string "auth_token"
+<<<<<<< HEAD
+=======
+    t.string "trello_token"
+    t.string "trello_member_id"
+>>>>>>> feat/seed
     t.integer "time_setting", default: 0
     t.string "trello_member_id"
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true

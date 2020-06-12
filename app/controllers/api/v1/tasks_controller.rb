@@ -24,7 +24,7 @@ class Api::V1::TasksController < ApiController
     task = current_user.tasks.find(params["task_id"])
     tictac = current_user.tictacs.find(params["tictac_id"])
     tictac.cancel!
-    render json: { message: "tictac finished" }, status: 200
+    render json: { message: "tictac cancelled" }, status: 200
   end
 
   # Vue API

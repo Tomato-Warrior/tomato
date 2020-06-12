@@ -1,5 +1,4 @@
 class TrelloapiController < ApplicationController
-
   before_action :ajax_render, only: [:select_board, :select_list_cards, :select_assigned_cards_of_list]
   layout "trelloapi"
   #全域變數  
@@ -172,7 +171,6 @@ class TrelloapiController < ApplicationController
       format.html
       format.js
     end
-
   def list_data_trans(task, token)
     JSON.parse(GetLists.new.get_lists(task.trello_info.board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], token)).map{|list| list.values_at("name","id")}
   end

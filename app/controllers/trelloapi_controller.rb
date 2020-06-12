@@ -25,13 +25,6 @@ class TrelloapiController < ApplicationController
     Task.find(task_id).trello_info.update(list_id: list_id)
   end
 
-  def get_list_data 
-    task = Task.find(params[:task_id])
-    data = list_data_trans(task, current_user.trello_token)
-
-    render json: {list_data: data}
-  end
-  
   def index
   end
 
@@ -71,7 +64,6 @@ class TrelloapiController < ApplicationController
                     end
                   }
     @name_id_chart = Hash[lists_name.zip(lists_id)]
-    id_name_chart = Hash[list_ids.zip(lists_name)]
     @param_list_id = @param_list_names.map{|name| @name_id_chart.values_at(name)}.flatten #拿到list name的id
     param_card_names = []
     param_card_ids = []
@@ -93,10 +85,9 @@ class TrelloapiController < ApplicationController
     import_data = import_trello_board(@param_board_name, "import_all_card", @tasks_attr_data)
     all_cards = GetCards.new.get_cards($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     all_cards = JSON.parse(all_cards)
-    list_data = param_card_ids.flatten.map{|card| GetCards.new.get_card_by_id(card, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
-    list_ids = list_data.map{|list| JSON.parse(list).values_at("id")}.flatten
-    list_names = list_data.map{|list| JSON.parse(list).values_at("name")}.flatten
-    create_trello_info(import_data, param_card_ids, list_ids, list_names, $board_id, current_user.id)
+    list_ids = param_card_ids.flatten.map{|card| GetCards.new.get_card_by_id(card, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)}
+    list_ids = list_ids.map{|list| JSON.parse(list).values_at("idList")}.flatten
+    create_trello_info(import_data, param_card_ids, list_ids, $board_id, current_user.id)
     response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     webhook_id = JSON.parse(response).values_at("id")[0]
     import_data.update(webhook_id:webhook_id)
@@ -120,12 +111,12 @@ class TrelloapiController < ApplicationController
     assigned_cards_names = assigned_cards_data.map{|list| list.map{|card| card.values_at("name")}.flatten}
     assigned_cards_ids = assigned_cards_data.map{|list| list.map{|card| card.values_at("id")}}.flatten
     assigned_cards_list_ids = assigned_cards_data.map{|list| list.map{|card| card.values_at("idList")}}.flatten
-    assigned_cards_list_names = assigned_cards_ids.map{|id| JSON.parse(GetLists.new.get_list_name(id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)).values_at("name")}.flatten
+
     board_name = JSON.parse(GetBoards.new.get_board_name($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token))
     board_name = board_name.values_at("name").join
     generate_tasks_attributes(assigned_cards_names, @param_list_names.count) 
     import_data = import_trello_board(board_name, "import_assign_card", @tasks_attr_data) 
-    create_trello_info(import_data, assigned_cards_ids, assigned_cards_list_ids, assigned_cards_list_names, $board_id, current_user.id)      
+    create_trello_info(import_data, assigned_cards_ids, assigned_cards_list_ids,$board_id, current_user.id)      
     response = Webhook.new.create($board_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     webhook_id = JSON.parse(response).values_at("id")[0]
     import_data.update(webhook_id:webhook_id)             
@@ -157,11 +148,10 @@ class TrelloapiController < ApplicationController
     @assigned_cards = JSON.parse(GetLists.new.get_assigned_cards(member_id, board_id, list_name, api_key, token)).values_at("cards").flatten
   end
 
-
-  def create_trello_info(import_data, card_ids, list_ids, list_names, board_id, user_id)
-    i=0
-    while i<import_data.tasks.count
-      import_data.tasks[i].create_trello_info({card_id:card_ids.flatten[i], list_id:list_ids[i], list_name:list_names[i], board_id:board_id, user_id: user_id })
+  def create_trello_info(import_data, card_ids, list_ids, board_id, user_id)
+    i = 0
+    while i < import_data.tasks.count
+      import_data.tasks[i].create_trello_info({card_id:card_ids.flatten[i], list_id:list_ids[i], board_id:board_id, user_id:user_id})
       i += 1
     end  
   end
@@ -171,7 +161,5 @@ class TrelloapiController < ApplicationController
       format.html
       format.js
     end
-  def list_data_trans(task, token)
-    JSON.parse(GetLists.new.get_lists(task.trello_info.board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], token)).map{|list| list.values_at("name","id")}
   end
 end

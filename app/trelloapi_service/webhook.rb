@@ -18,14 +18,6 @@ class Webhook
     end
   end
 
-  def delete(id, api_key, token)
-      begin
-        RestClient.delete "api.trello.com/1/webhooks/#{id}?key=#{api_key}&token=#{token}"
-      rescue RestClient::ExceptionWithResponse => e
-        e.response
-      end
-  end
-
   def action(res)
     res.values_at("action")[0].values_at("type")[0]
   end

@@ -5,7 +5,7 @@
         <label>任務名稱</label>
         <input type="text" class="form-control" v-model="task.title">
       </div>
-      <div class="form-group" v-if="trello_board != null">
+      <div class="form-group" v-if="trello_board != null && this.task.trello_card ">
         <label>Trello</label>
         <select class="form-control" v-model="trello_selected">
           <option v-for="list in all_trello_lists" :value="list[1]">
@@ -13,7 +13,7 @@
           </option>
         </select>
       </div>
-      <div class="form-group" v-else>
+      <div class="form-group" >
         <label>專案</label>
         <select class="form-control" v-model="project_selected">
           <option v-for="project in projects" :value="project[0]">

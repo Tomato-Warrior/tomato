@@ -6,6 +6,7 @@ json.project do
   json.color @project.cover
   json.finish_tictac @tictac_count
   json.expect_time @project_expect_time
+  json.trello_board @project.trello_board_id
   json.tasks do
     
     json.array! @tasks.order(id: :desc) do |task|
@@ -13,14 +14,13 @@ json.project do
       json.title task.title
       json.tags task.tag_items
       json.expect_tictac task.expect_tictacs
-      # json.project_id current_user.projects.ids
       json.date task.date
       json.description task.description
       if task.trello_info
         json.trello_card task.trello_info.card_id
         json.trello_list task.trello_info.list_id
         json.trello_token current_user.trello_token
-        json.trell0_board task.trello_info.board_id
+        json.trello_board task.trello_info.board_id
       end
     end
   end

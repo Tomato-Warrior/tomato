@@ -55,7 +55,7 @@ export default {
   name: 'TaskList',
   props: ['task'],
   methods: {
-    ...mapActions(['removeTask', 'completeTask', 'setCurrentTask']), 
+    ...mapActions(['removeTask', 'completeTask']), 
     confirmToRemoveTask: function(evt) {
       evt.preventDefault();
       if (confirm('確定刪除')) {

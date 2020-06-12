@@ -14,7 +14,8 @@ const store = new Vuex.Store({
     finish_tictac: 0, 
     projectId: 0,
     loaded: false,
-    projects: []
+    projects: [],
+    trello_board: ''
   },
 
   mutations: {
@@ -62,6 +63,8 @@ const store = new Vuex.Store({
       state.finish_tictac = project.finish_tictac;
       state.projectId = project.id;
       state.projects = resp.all_projects;
+      state.trello_board = project.trello_board
+      
     }, 
 
     REMOVE_TASK(state, resp) {

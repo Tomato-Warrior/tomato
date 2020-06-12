@@ -7,6 +7,7 @@ json.project do
   json.finish_tictac @tictac_count
   json.expect_time @project_expect_time
   json.trello_board @project.trello_board_id
+  json.all_trello_lists @all_lists if @project.trello_board_id.present?
   json.tasks do
     
     json.array! @tasks.order(id: :desc) do |task|

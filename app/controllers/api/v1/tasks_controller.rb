@@ -36,6 +36,7 @@ class Api::V1::TasksController < ApiController
     @tictac_count = Tictac.where(task_id: task_ids).finished.count
     @project_expect_time = project_expect_time
     @today_tasks = @project.tasks.where(created_at: range)
+    prepare_project_trello_data if trello_imported?
 
     render format: :json
   end
@@ -51,6 +52,7 @@ class Api::V1::TasksController < ApiController
   end
 
   def update
+    # UpdateCard.new.move_to_list(card_id, list_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     @task = current_user.tasks.find(params[:id])
     if @task.update(task_params)
       render json: { state: 'update ok', task: @task }
@@ -83,7 +85,8 @@ class Api::V1::TasksController < ApiController
                                  :expect_tictacs,
                                  :date,
                                  :project_id,
-                                 tag_items: []
+                                 :trello_info_attribute,
+                                 tag_items: [],
    )
   end
 
@@ -91,6 +94,22 @@ class Api::V1::TasksController < ApiController
     project = current_user.projects.find(params[:project_id])
     tictac_hour = project.tasks.doing.sum(:expect_tictacs) * 1500.0 / 3600
     tictac_hour.round(tictac_hour % 10 == 0 ? 0 : 1)
+  end
+
+  def trello_imported?
+    @project.trello_board_id.present?
+  end
+  
+  def prepare_project_trello_data
+    @all_lists = fetch_trello_lists
+  end
+  
+  def fetch_trello_lists
+    JSON.parse(
+    GetLists
+    .new
+    .get_lists(@project.trello_board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token))
+    .map{|list| list.values_at("name","id")}
   end
 
 end

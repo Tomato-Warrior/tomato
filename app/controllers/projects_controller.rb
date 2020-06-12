@@ -36,6 +36,7 @@ class ProjectsController < ApplicationController
     task_ids = @project.tasks.ids
     @tictac_count = Tictac.where(task_id: task_ids).finished.count
     @project_expect_time = project_expect_time
+    prepare_project_trello_data if trello_imported?
   end
 
   def destroy
@@ -122,5 +123,20 @@ class ProjectsController < ApplicationController
     tictac_hour = Task.where(project: @project).sum(:expect_tictacs) * 1500.0 / 3600
     tictac_hour.round(tictac_hour % 10 == 0 ? 0 : 1)
   end
+
+  def trello_imported?
+    @project.trello_board_id.present?
+  end
   
+  def prepare_project_trello_data
+    @all_lists = fetch_trello_lists
+  end
+  
+  def fetch_trello_lists
+    JSON.parse(
+    GetLists
+    .new
+    .get_lists(@project.trello_board_id,ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token))
+    .map{|list| list.values_at("name","id")}
+  end
 end

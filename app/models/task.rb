@@ -12,6 +12,7 @@ class Task < ApplicationRecord
   #validates
   validates :title, presence: true
   enum status: { doing: 0 , done: 1 }
+  accepts_nested_attributes_for :trello_info, reject_if: ->(attributes){ attributes['card_id'].blank? }
 
   #tag
   def self.tagged_with(name)

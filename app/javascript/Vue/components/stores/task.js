@@ -15,7 +15,8 @@ const store = new Vuex.Store({
     projectId: 0,
     loaded: false,
     projects: [],
-    trello_board: ''
+    trello_board: '',
+    all_trello_lists: []
   },
 
   mutations: {
@@ -64,7 +65,7 @@ const store = new Vuex.Store({
       state.projectId = project.id;
       state.projects = resp.all_projects;
       state.trello_board = project.trello_board
-      
+      state.all_trello_lists = project.all_trello_lists      
     }, 
 
     REMOVE_TASK(state, resp) {

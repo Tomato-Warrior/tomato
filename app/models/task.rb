@@ -29,7 +29,7 @@ class Task < ApplicationRecord
   end
 
   def tag_items=(names)
-    current_tags = names.join.split(',').map do |name| 
+    current_tags = names.map do |name| 
       Tag.find_or_create_by(name: name.strip)
     end
     self.tags = current_tags

@@ -20,14 +20,7 @@ class Webhook
 
   def delete(id, api_key, token)
       begin
-        RestClient.delete "api.trello.com/1/webhooks/#{id}?key=#{api_key}&token=#{token}" do |response|
-                                                                                            case response.code
-                                                                                            when 301, 302, 307
-                                                                                              response.follow_redirection
-                                                                                            else
-                                                                                              response.return!
-                                                                                            end                   
-                                                                                          end                                                    
+        RestClient.delete "api.trello.com/1/webhooks/#{id}?key=#{api_key}&token=#{token}"
       rescue RestClient::ExceptionWithResponse => e
         e.response
       end

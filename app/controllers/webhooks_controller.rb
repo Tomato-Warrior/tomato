@@ -16,7 +16,6 @@ class WebhooksController < ApplicationController
       card_id = Webhook.new.card(res).values_at("id").join
       @after_list = Webhook.new.after_list(res)
       target_task = user.trello_infos.where(card_id: card_id)[0].task
-      byebug
       target_task.trello_info.update(list_id: @after_list[0])
     elsif action == "createCard"
       new_card = Webhook.new.card(res)

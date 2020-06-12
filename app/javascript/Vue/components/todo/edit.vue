@@ -14,18 +14,19 @@
         </select>
       </div>
       <div class="form-group">
-        <label>預計番茄鐘</label>
+        <label>預計番茄數</label>
         <input type="number" class="form-control" v-model="task.expect_tictac" min="0" >
       </div>
       <div class="form-group">
-        <label>任務筆記</label>
-        <textarea type="number" class="form-control" v-model="task.description" ></textarea>
-      </div>
-      <div class="form-group">
+        <label>標籤</label>
         <Select2 v-model="task.tags" :options="task.tags" :settings="{ tags: 'true', multiple: 'true', tokenSeparators: [',', ' ']}" />
       </div>
       <div class="form-group">
-        <label>任務執行日期</label>
+        <label>備註</label>
+        <textarea type="number" class="form-control" v-model="task.description" ></textarea>
+      </div>
+      <div class="form-group">
+        <label>任務期限</label>
         <input type="date" class="form-control" v-model="task.date">
       </div>
       <input type="submit" value="更新" @click="updateTask" class="py-2 px-4 btn-login-submit submit-radius">

@@ -9,8 +9,8 @@
 * 任務管理：讓你將一閃而過的靈感隨時記下
 * 提醒功能：時間到了我們提醒你
 * 圖表分析：呈現你的作業時程，紀錄中斷你作業的原因
-
-
+* Chrome extension: 可已登入Chrome extension直接執行專案內的任務不用打開網頁
+* Trello API: 可以匯入Trello Board 並且從頁面操作Trello card，在Trello 上操作卡片也會更新到頁面上
 # 使用技術
 * Ruby  version -- 2.6.5
 * Framework: Ruby on Rails -- 6.0.2

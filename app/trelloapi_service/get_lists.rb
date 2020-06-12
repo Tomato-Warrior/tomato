@@ -25,7 +25,7 @@ class GetLists
     end
   end
   
-  def get_list_info(list_id, api_key_token)
+  def get_list_info(list_id, api_key, token)
     begin
       RestClient.get "api.trello.com/1/lists/#{list_id}?key=#{api_key}&token=#{token}"
     rescue RestClient::ExceptionWithResponse => e

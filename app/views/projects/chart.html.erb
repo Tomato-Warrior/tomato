@@ -1,7 +1,7 @@
 <div class="container">
   <div class="my-5 p-4 border shadow bg-white rounded">
     <% if @project.trello_board_id != nil %>
-      <h2 class="text-center mb-3"><%= @project.title %></h2>    
+      <h1 class="text-center mb-3"><%= @project.title %></h1>    
       <div class="d-flex mr-2">
         <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
           <div class="col-6 d-flex flex-wrap align-items-center">
@@ -25,12 +25,13 @@
       <div class="d-flex justify-content-end">
         <a href="#" class="clear"><i class="fas fa-sync-alt"></i></a>
       </div>
-        <table class="display table table-hover" id="projectTable" data-toggle="table" data-pagination="true" data-search="true" data-reset-search="true">
+        <table class="display table table-hover" id="projectTable" data-pagination="true" data-search="true" data-reset-search="true">
           <thead>
             <tr>
               <th scope="col" data-sortable="true" data-field="title">任務名稱</th>
               <th scope="col" data-sortable="true" data-field="finished" class="text-center">完成番茄數</th>
               <th scope="col" data-sortable="true" data-field="cancelled" class="text-center">取消番茄數</th>
+              <th scope="col" data-sortable="true" data-field="cancelled" class="text-center">Trello列表</th>
             </tr>
           </thead>
           <tbody>
@@ -39,6 +40,7 @@
                 <td><%= task[0] %></td>
                 <td class="text-center"><%= task[1] %></td>
                 <td class="text-center"><%= task[2] %></td>
+                <td class="text-center"><%= task[3] %></td>
               </tr>
             <% end %>
           </tbody>

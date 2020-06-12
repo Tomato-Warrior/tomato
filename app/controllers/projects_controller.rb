@@ -85,18 +85,21 @@ class ProjectsController < ApplicationController
           @title_arr = []
           @finish_arr = []
           @cancel_arr = []
+          @list_name_arr = []
 
           if trello_info.task_id == trello_task_id
             @title_arr << trello_info.task.title
             @finish_arr << trello_info.task.tictacs.finished.count
             @cancel_arr << trello_info.task.tictacs.cancelled.count
+            @list_name_arr << trello_info.list_name
           end
           @title = @title_arr.uniq.join
           @finished_total = @finish_arr.sum
           @cancel_total = @cancel_arr.sum
+          @list_name = @list_name_arr.uniq.join
           
           if trello_info.task_id == trello_task_id
-            @task_arr.push(@title, @finished_total, @cancel_total)
+            @task_arr.push(@title, @finished_total, @cancel_total, @list_name)
           end
         end
         @tasks_arr << @task_arr

@@ -29,6 +29,7 @@
         <input type="date" class="form-control" v-model="task.date">
       </div>
       <input type="submit" value="更新" @click="updateTask" class="py-2 px-4 btn-login-submit submit-radius">
+       <a href="#" @click="confirmToRemoveTask" class="delete-confirm py-2 px-4 btn-login-submit submit-radius">刪除任務</a>
     </form> 
   </div>
 </template>
@@ -62,7 +63,15 @@ export default {
     Select2
   },
   methods: {
-    ...mapActions(['updatedTask']),
+    ...mapActions(['updatedTask', 'removeTask']),
+
+    confirmToRemoveTask: function(evt) {
+      evt.preventDefault();
+      if (confirm('確定刪除')) {
+        this.removeTask(this.task.id);
+      }
+    $('.delete-confirm').modal('hide');
+    }, 
 
     updateTask: function(evt) {
       evt.preventDefault();

@@ -7,38 +7,17 @@ class Webhook
                                   idModel: board_id,
                                   description: "My webhook"},
                                   :content_type => 'application/json') do |response|
+                                    byebug
                                     case response.code
                                     when 301, 302, 307
+                                      byebug
                                       response.follow_redirection
                                     else
                                       response.return!
                                     end                   
+                                   
                                   end                                                     
     rescue RestClient::ExceptionWithResponse => err
     end
-  end
-
-  def action(res)
-    res.values_at("action")[0].values_at("type")[0]
-  end
-
-  def board(res)
-    res.values_at("action")[0].values_at("data")[0].values_at("board")[0]
-  end
-
-  def card(res)
-    res.values_at("action")[0].values_at("data")[0].values_at("card")[0]
-  end
-
-  def current_list(res)
-    res.values_at("action")[0].values_at("data")[0].values_at("list")[0]
-  end
-
-  def before_list(res)
-    res.values_at("action")[0].values_at("data")[0].values_at("listBefore")[0].values_at("id", "name")
-  end
-
-  def after_list(res)
-    res.values_at("action")[0].values_at("data")[0].values_at("listAfter")[0].values_at("id", "name")
   end
 end

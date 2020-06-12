@@ -3,8 +3,8 @@
     <option value="none" selected="selected" disabled="disabled">請選擇</option>
     <%= options_for_select(@boards_name_id) %>
   </select>
-  <div class="d-none" data-target="trelloapi.import_method">
-    <%= link_to '匯入部分trello卡片', select_list_cards_trelloapi_index_path , remote: true, class:"btn btn-primary btn-lg btn-block"%>
-    <%= link_to '匯入被指派的trello卡片', select_assigned_cards_of_list_trelloapi_index_path, remote: true, class:"btn btn-danger btn-lg btn-block"%>
+  <div class="d-none my-3" data-target="trelloapi.import_method">
+    <%= link_to '匯入部分trello卡片', select_list_cards_trelloapi_index_path , remote: true, class:"btn bt-trello-card btn-lg btn-block btn-login-submit"%>
+    <%= link_to '匯入被指派的trello卡片', select_assigned_cards_of_list_trelloapi_index_path, remote: true, class:"btn bt-trello-assign btn-lg btn-block btn-login-submit"%>
   </div>
 </div>

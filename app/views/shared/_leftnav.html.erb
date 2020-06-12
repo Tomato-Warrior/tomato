@@ -91,10 +91,10 @@
           <div><%= f.submit "建立", class: "p-2 btn-login-submit submit-radius" %></div>
            <% if current_user.trello_token == nil%>
               <div class="d-flex" data-controller="trelloapi">
-                <a href="#" data-action="click->trelloapi#get_token" class="btn-login-submit submit-radius ml-4 py-2  px-2">登入Trello匯入專案</a>
+                <a href="#" data-action="click->trelloapi#get_token" class=" submit-radius ml-4 py-2 px-2">登入Trello匯入專案</a>
               </div>
              <% else %>
-               <%= link_to "從Trello匯入專案", select_board_trelloapi_index_path, remote: true, class: "p-2 btn-login-submit submit-radius ml-4 " %>
+               <%= link_to "從Trello匯入專案", select_board_trelloapi_index_path, remote: true, class: "p-2 btn-login-submit trello-radius ml-4 " %>
            <% end %>
           </div>
         <% end %> 

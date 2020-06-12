@@ -27,9 +27,9 @@ class TrelloapiController < ApplicationController
     response = UpdateCard.new.move_to_list(card_id, list_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
     render json: {res: response}
     data = JSON.parse(response)
-    list_id = data.values_at("idList")
-    list_info = GetLists.get_list_info(list_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
-    list_name = JSON.parse(list_info).values_at("name")
+    list_id = data.values_at("idList").join
+    list_info = GetLists.new.get_list_info(list_id, ENV['TRELLO_DEVELOPER_PUBLIC_KEY'], current_user.trello_token)
+    list_name = JSON.parse(list_info).values_at("name").join
     Task.find(task_id).trello_info.update(list_id: list_id, list_name: list_name)
   end
 

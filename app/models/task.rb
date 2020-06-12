@@ -30,8 +30,8 @@ class Task < ApplicationRecord
 
   def tag_items=(names)
     current_tags = names.map do |name| 
-      Tag.find_or_create_by(name: name.strip) if name.present?
-    end.compact
+      Tag.find_or_create_by(name: name.strip)
+    end
     self.tags = current_tags
   end
 

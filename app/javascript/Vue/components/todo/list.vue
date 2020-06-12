@@ -8,7 +8,7 @@
       <a :href="`/tasks/${task.id}/tictac`" class="ml-3 mr-2 play-icon"><i class="far fa-play-circle"></i></a>
     </div>
     <div class="align-items-center font-container">
-      <a :href="`/projects/${task.project_id}/tasks/${task.id}`" class="list-font mx-3">{{ task.title }}</a>
+      <a href="#" class="list-font mx-3"  @click="toggleForm" data-toggle="modal" :data-target="`#editVueTask-${task.id}`">{{ task.title }}</a>
       <div class="d-flex ml-1 tictac_icon">
         <div class="d-flex align-items-center ml-2"  :title="`已完成時鐘：${task.finish_tictac}`">
           <img src='/finish_tictac.png' class='task_tictac'>
@@ -20,22 +20,36 @@
         </div>
       </div>
     </div>
-    <div class="info-container">
+    <div class="info-container ml-auto mr-5">
+      <div class="d-flex align-items-center text-right tag-icon">
+          <TaskTag v-for="tag in task.tags" :tag="tag" :key="tag" />
+      </div>
     </div>
-    <div class="d-flex align-items-center ml-auto delete-icon">
-      <a :href="`/projects/${task.project_id}/tasks/${task.id}/edit`" class="mx-1">
-        <i class="fas fa-pencil-alt"></i>
-      </a>
-      <a href="#" @click="confirmToRemoveTask" class="mx-4">
-        <i class="fas fa-trash-alt"></i>
-      </a>
-    </div>
+     <!-- modal -->
+      <div class="modal fade" :id="`editVueTask-${task.id}`" tabindex="-1" role="dialog" aria-labelledby="editVueTaskTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editVueTaskTitle">編輯任務</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <TaskEdit :task="task" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- modal -->
+
   </div>
 </template>
 
 <script>
 import TaskTag from './tag';
-import { mapActions } from 'vuex'
+import TaskEdit from './edit';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'TaskList',
@@ -44,7 +58,6 @@ export default {
     ...mapActions(['removeTask', 'completeTask']), 
     confirmToRemoveTask: function(evt) {
       evt.preventDefault();
-      
       if (confirm('確定刪除')) {
         this.removeTask(this.$el.dataset.taskId);
       }
@@ -53,9 +66,15 @@ export default {
       evt.preventDefault();
       this.completeTask(this.$el.dataset.taskId)
     },
+    toggleForm: function(evt) {
+      evt.preventDefault();
+    }
+    
   },
   components: {
-    TaskTag
+    TaskTag,
+    TaskEdit,
   }
 }
 </script>
+

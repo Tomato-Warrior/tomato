@@ -221,6 +221,9 @@ a:hover{
 .form-control:focus{
     box-shadow: none;
 }
+.modal-backdrop {
+    position: fixed;
+}
 
 // left_nav
 
@@ -233,3 +236,37 @@ a:hover{
      display: none;
    }
  }
+
+.bt-trello-card{
+    background-color: $mainRed;
+    color: #fff;
+    font-size: 18px;
+}
+.bt-trello-card:hover{
+    background-color: $redBtnHover;
+}
+
+.bt-trello-assign{
+    background-color: #55A3FF;
+    color: #fff;
+    font-size: 18px;
+}
+.bt-trello-assign:hover{
+    background-color: #55A3FF;
+}
+
+.trello-radius{
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+    background-color: #55A3FF;
+}
+.trello-radius:hover{
+    background-color: #55A3FF;
+}
+
+.trello-list-select{
+    li{
+        list-style-type: none;
+    }
+}

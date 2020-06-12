@@ -156,6 +156,9 @@
             </div>
           <% end %>
         </div>
+          <div class="d-flex align-items-center ml-auto text-right tag-icon mr-4">	
+            <%= display_tag task.tag_items %>	
+          </div>
       </div>
       <div class="modal fade" id="taskEdit-<%=task.id%>" tabindex="0" role="dialog" aria-labelledby="forTaskEdit" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-position" role="document" >
@@ -265,6 +268,9 @@
               </select>
             </div>
           <% end %>
+          <div class="d-flex align-items-center ml-auto text-right tag-icon ml-4">	
+            <%= display_tag task.tag_items %>	
+          </div>
         </div>
       </div>
       <div class="modal fade" id="taskEdit-<%=task.id%>" tabindex="0" role="dialog" aria-labelledby="forTaskEdit" aria-hidden="true">
@@ -321,3 +327,4 @@
     <% end %>
   </div>
 </div>
+

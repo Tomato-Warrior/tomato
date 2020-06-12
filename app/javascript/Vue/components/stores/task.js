@@ -14,11 +14,17 @@ const store = new Vuex.Store({
     finish_tictac: 0, 
     projectId: 0,
     loaded: false,
+    projects: [],
+    trello_board: ''
   },
 
   mutations: {
     ADD_TASK(state, resp){
       state.doingTasks.unshift(resp.task);
+    },
+
+    UPDATE_TASK(state, resp){
+      // let taskId = resp.task.id
     },
 
     TOGGLE_COMPLETE(state, resp) {
@@ -38,22 +44,27 @@ const store = new Vuex.Store({
 
         if (removedTask.status == 'doing'){
           removedTask.status = 'done';
-          state.expect_time = increase_time;
+          state.expect_time = ( increase_time >= 0) ? increase_time : 0;
         }else{
           removedTask.status = 'doing';
-          state.expect_time = decrease_time;
+          state.expect_time = ( decrease_time >= 0) ? decrease_time : 0;
         }  
       }
     }, 
 
-    SET_TASKS(state, project){
+    SET_TASKS(state, resp){
+      const project = resp.project;
       state.doingTasks = project.doingTasks;
       state.doneTasks = project.doneTasks;
+      state.tasks = project.tasks;
       state.projectTitle = project.title;
       state.color = project.color;
       state.expect_time = project.expect_time;
       state.finish_tictac = project.finish_tictac;
       state.projectId = project.id;
+      state.projects = resp.all_projects;
+      state.trello_board = project.trello_board
+      
     }, 
 
     REMOVE_TASK(state, resp) {
@@ -70,6 +81,7 @@ const store = new Vuex.Store({
 
   actions: {
     addTask({ commit }, {projectId, content}){
+      
       const data = new FormData();
       data.append('task[title]', content);
       data.append('task[project_id]', projectId);
@@ -86,6 +98,30 @@ const store = new Vuex.Store({
           console.log(err);
         } 
       });
+    },
+
+    updatedTask({ commit }, {taskId, taskTitle, taskDate, expectTictac, taskDesc, taskTag, selectedProjectId}){
+
+      const data = new FormData();
+      data.append('task[title]', taskTitle);
+      data.append('task[date]', taskDate);
+      data.append('task[expect_tictacs]', expectTictac);
+      data.append('task[description]', taskDesc);
+      data.append('task[tag_items][]', taskTag); 
+      data.append('task[project_id]', selectedProjectId);
+
+      Rails.ajax({
+        url: `/api/v1/tasks/${taskId}`,
+        type: 'PATCH',
+        dataType: 'JSON',
+        data,
+        success: resp => {
+          commit('UPDATE_TASK', resp)
+        },
+        error: err => {
+          console.log(err);          
+        }
+      })
     },
 
     completeTask({ commit }, taskId) {
@@ -123,7 +159,7 @@ const store = new Vuex.Store({
         type: 'GET', 
         dataType: 'json',
         success: resp => { 
-          commit('SET_TASKS', resp.project);
+          commit('SET_TASKS', resp);
           state.loaded = true;
         }, 
         error: err => {

@@ -3999,7 +3999,7 @@ jest-worker@^25.4.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
-jquery@>=1.7, jquery@^3.0, jquery@^3.5.1:
+jquery@>=1.7, jquery@^3.0, jquery@^3.3.1, jquery@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
   integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
@@ -6465,7 +6465,7 @@ select-hose@^2.0.0:
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
   integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
 
-select2@^4.0.13:
+select2@^4.0.13, select2@^4.0.6-rc.1, select2@^4.0.7-rc.0:
   version "4.0.13"
   resolved "https://registry.yarnpkg.com/select2/-/select2-4.0.13.tgz#0dbe377df3f96167c4c1626033e924372d8ef44d"
   integrity sha512-1JeB87s6oN/TDxQQYCvS5EFoQyvV6eYMZZ0AeA4tdFDYWN3BAGZ8npr17UBFddU0lgAt3H0yjX3X6/ekOj1yjw==
@@ -7420,6 +7420,22 @@ uuid@^3.3.2, uuid@^3.4.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
+v-select2-component@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/v-select2-component/-/v-select2-component-0.4.3.tgz#c877e81ea5347e4185c29dddb28f8856df951d36"
+  integrity sha512-2IihdR6ZTp53/vjJvSYVC6G5h/9U0x8ovYt1PDXFstWoj1J1TCzV5Zs6coIH/gPNBzYHRiW9LdLKhycaZeAk0w==
+  dependencies:
+    jquery "^3.3.1"
+    select2 "^4.0.7-rc.0"
+
+v-select2-multiple-component@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/v-select2-multiple-component/-/v-select2-multiple-component-0.1.1.tgz#da819a0ecce93969920c34a2ac3c7a0f2780799f"
+  integrity sha512-IGfrv91ZckClQrefsC32mDF7Jrw8k1/Ue2mK+L0GNtI7sYTtQwY0FklpGPte3KZiPfCUcJ/Sgye078lQiN8DMw==
+  dependencies:
+    jquery "^3.3.1"
+    select2 "^4.0.6-rc.1"
+
 v8-compile-cache@2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.0.3.tgz#00f7494d2ae2b688cfe2899df6ed2c54bef91dbe"
@@ -7457,6 +7473,11 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
+vodal@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/vodal/-/vodal-2.4.0.tgz#51666f19adc54a57248e4de1fcd8d0e80a96dd66"
+  integrity sha512-oUrSy80Y3uE8VSSFv0fSHd7B3BZQzynvf1ZQZf3CFl8bwjDzO5UwjUFj/rEEGMSHXfk7fRjbj+NdHVsZObUkPA==
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
@@ -7472,6 +7493,11 @@ vue-loader@^15.9.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-select2@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/vue-select2/-/vue-select2-0.2.6.tgz#d3dbbff656d7ab755b3acee48a725efd1fd0fc1b"
+  integrity sha1-09u/9lbXq3VbOs7kinJe/R/Q/Bs=
 
 vue-style-loader@^4.1.0:
   version "4.1.2"

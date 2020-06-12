@@ -1,4 +1,4 @@
-<div class="container" data-controller="trelloapi"> 
+<div class="container trello-list-select" data-controller="trelloapi"> 
   <%= form_tag({controller: "trelloapi", action: "import_assigned_cards"}, method: "post") do %>
     <ul>
       <% @lists.each do |list| %>
@@ -9,7 +9,6 @@
       <% end %>
     </ul>
     <%= @assigned_cards%>
-    <%= link_to "上一頁", :back %>
-    <%= submit_tag "Submit" %>
+    <%= submit_tag "建立", class: "btn-login-submit submit-radius btn py-1 px-3 my-2"  %>
   <% end %>
 </div>

@@ -19,6 +19,7 @@
           <small>{{ task.cancel_tictac }}</small>
         </div>
       </div>
+      
     </div>
     <div class="info-container ml-auto mr-5">
       <div class="d-flex align-items-center text-right tag-icon">
@@ -54,6 +55,9 @@ import { mapActions, mapState } from 'vuex';
 export default {
   name: 'TaskList',
   props: ['task'],
+  computed: {
+    ...mapState(['all_trello_lists'])
+  },
   methods: {
     ...mapActions(['removeTask', 'completeTask']), 
     confirmToRemoveTask: function(evt) {

@@ -5,9 +5,17 @@
         <label>任務名稱</label>
         <input type="text" class="form-control" v-model="task.title">
       </div>
-      <div class="form-group">
+      <div class="form-group" v-if="trello_board != null && this.task.trello_card ">
+        <label>Trello</label>
+        <select class="form-control" v-model="trello_selected">
+          <option v-for="list in all_trello_lists" :value="list[1]">
+            {{ list[0] }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group" >
         <label>專案</label>
-        <select class="form-control" v-model="selected">
+        <select class="form-control" v-model="project_selected">
           <option v-for="project in projects" :value="project[0]">
             {{ project[1] }}
           </option>
@@ -46,17 +54,26 @@ export default {
   data: function() {
     return {
       selectedProjectId: (this.task.project_id), 
+      selectedTrelloId:(this.task.trello_list),
       tags: ''
     }
   },
   computed: {
-    ...mapState(['projects']), 
-    selected: {
+    ...mapState(['projects', 'all_trello_lists', 'trello_board']), 
+    project_selected: {
       get: function() {
         return this.task.project_id;
       }, 
       set: function(newValue) {
         this.selectedProjectId = newValue;
+      }
+    },
+    trello_selected: {
+      get: function() {
+        return this.task.trello_list;
+      }, 
+      set: function(newValue) {
+        this.selectedTrelloId = newValue;
       }
     }
   },
@@ -83,7 +100,8 @@ export default {
         expectTictac: this.task.expect_tictac, 
         taskDesc: this.task.description, 
         taskTag: this.task.tags, 
-        selectedProjectId: this.selectedProjectId
+        selectedProjectId: this.selectedProjectId,
+        trelloList: this.selectedTrelloId
       });
 
       $(`#editVueTask-${this.task.id}`).modal('hide');

@@ -12,6 +12,7 @@ class Task < ApplicationRecord
   #validates
   validates :title, presence: true
   enum status: { doing: 0 , done: 1 }
+  accepts_nested_attributes_for :trello_info, reject_if: ->(attributes){ attributes['card_id'].blank? }
 
   #tag
   def self.tagged_with(name)
@@ -22,6 +23,10 @@ class Task < ApplicationRecord
     self.tags = names.split(',').map do |name|
       Tag.find_or_create_by(name: name.strip)
     end
+  end
+
+  def trello_imported?
+    self.trello_info.present?
   end
 
   def tag_list

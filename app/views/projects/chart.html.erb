@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="my-5 p-4 border shadow bg-white rounded">
+  <div class="my-5 p-4 border chart-shadow bg-white rounded">
     <% if @project.trello_board_id != nil %>
       <h1 class="text-center mb-3"><%= @project.title %></h1>    
       <div class="d-flex mr-2">
-        <div class="col-6 text-center mr-2 d-flex shadow bg-white rounded">
+        <div class="col-6 text-center mr-2 d-flex chart-shadow bg-white rounded">
           <div class="col-6 d-flex flex-wrap align-items-center">
             <img src='/finish_tictac.png' class='big_tictac col-12'>
             <img src='/cancel_tictac.png' class='big_tictac col-12'>
@@ -13,14 +13,16 @@
             <div class="col-12"><%= @trello_project_cancelled %></div>
           </div>
         </div>
-        <div class="col-6 d-flex p-3 shadow bg-white rounded">
+
+        <div class="col-6 d-flex p-3 chart-shadow bg-white rounded">
           <%= pie_chart [["完成的番茄", @trello_project_finished], ["取消的番茄", @trello_project_cancelled]] %>
+
         </div>
       </div>
     <% end %>
   </div>
   <div class="container table-container">
-    <div class="row my-5 p-4 border shadow bg-white rounded justify-content-center">
+    <div class="row my-5 p-4 border chart-shadow bg-white rounded justify-content-center">
       <div class="col-md-8 col-md-offset-2">
       <div class="d-flex justify-content-end">
         <a href="#" class="clear"><i class="fas fa-sync-alt"></i></a>

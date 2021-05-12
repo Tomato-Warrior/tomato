@@ -9,7 +9,7 @@
     "@rails/webpacker": "4.2.2",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "chartkick": "^3.2.0",
     "datatables.net-dt": "^1.10.21",
     "jquery": "^3.5.1",
